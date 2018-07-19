@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DamageCalculator</title>
+ <style>
+        body {
+            background : #555
+        }
+        .content {
+            width: 1240px;
+            height : auto ;
+            margin: auto;
+            background: white;
+            padding: 10px;
+            font-size :18px;
+            line-height :200%;
+            float:none;
+            overflow:auto ;
+         }
+        .leftbox {
+            width:608px;
+            background: white;
+            float:left;
+            padding: 4px;
+        }
+        .rightbox {
+            width:608px;
+            background: white;
+            float:left;
+            padding: 4px;
+        }
+        .BATK{
+            width :110px;
+            float :left ;
+        }
+    </style>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+    </script>
+</head>
+
+<body onload ="load_html()">
+<div class="content">
+	<h3 style="font-family: 微软雅黑">Damage Calculator</h3>
+    <hr noshade="noshade"/>
+    <div class="leftbox">
+    	<label id="lbl_ATKTYPE">1.选择攻击类型：</label>
+        <select id="CMB_atktype" onchange="CMB_atktype_changed()">
+        </select>
+        <br/><hr/>
+        <label id="2">2.计算基础攻击力：</label>
+        <br/>
+        <div class="BATK">
+        	
+        </div>
+        <div class="BATK">
+        </div>
+        <div class="BATK">
+        </div>
+        <div class="BATK">
+        </div>
+        <div class="BATK">
+        </div>
+        
+    
+    </div>
+  <div class="rightbox">
+    
+    </div>
+</div>
+<script type="text/javascript">
+    
+	var Dict_atktype=new Array("航空战(轰炸机)", "航空战(鱼雷机)", "昼战反潜(轻母航战)", "昼战反潜(驱逐巡洋)", "昼战炮击(航母系)", "昼战炮击(其他)", "昼战雷击", "夜战雷击", "夜战巡洋舰炮雷合击", "夜战巡洋舰炮击", "夜战其他炮击") //攻击类型
+	var Dict_atktype_enable_BATK = new Array[  //决定要启用哪些变量来计算基础攻击力
+            [1, 1, 0, 0, 0], //航空战(轰炸机
+            [1, 1, 0, 0, 0], //航空战(鱼雷机)
+            [1, 0, 0, 0, 0], //昼战反潜(轻母航战)
+            [1, 1, 0, 0, 0], //昼战反潜(驱逐巡洋)
+            [1, 1, 1, 1, 1], //昼战炮击(航母系)
+            [1, 0, 0, 0, 0], //昼战炮击(其他)
+            [1, 0, 0, 0, 0], //昼战雷击
+            [1, 0, 0, 0, 0], //夜战雷击
+            [1, 1, 0, 0, 0], //夜战巡洋舰炮雷合击
+            [1, 0, 0, 0, 0], //夜战巡洋舰炮击
+            [1, 0, 0, 0, 0]  //夜战其他炮击
+        ]
+	
+	
+	for (var i=0;i<Dict_atktype.length;i++){ //加载攻击类型下拉框
+		var getData = Dict_atktype[i];
+		document.getElementById("CMB_atktype").options.add(new Option(getData,getData));
+	}
+	function CMB_atktype_changed(){
+		var index=document.getElementById("CMB_atktype").selectedIndex;
+		select_val_to_cal_BATK(index);
+	}
+	function select_val_to_cal_BATK(CMB_atktype_i){
+		for (var i =0;i<Dict_atktype.length;i++){
+			if (Dict_atktype_enable_BATK[CMB_atktype_i][i] = 0) {
+				
+			}
+			//If Dict_atktype_enable_BATK(ATK_TYPE_INDEX, i) = 0 Then
+            //    Dict_object_BATK_textbox(i).Enabled = False
+            //ElseIf Dict_atktype_enable_BATK(ATK_TYPE_INDEX, i) = 1 Then
+            //    Dict_object_BATK_textbox(i).Enabled = True
+            //End If
+		}
+		alert(CMB_atktype_i);
+	}
+
+</script>
+</body>
+</html>
