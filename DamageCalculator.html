@@ -39,34 +39,47 @@
 </head>
 
 <body>
-<div class="content">
-	<h3 style="font-family: 微软雅黑">Damage Calculator</h3>
-    <hr noshade="noshade"/>
-    <div class="leftbox">
-    	<label id="lbl_ATKTYPE">1.选择攻击类型：</label>
-        <select id="CMB_atktype" onchange="CMB_atktype_changed()">
-        </select>
-        <br/><hr/>
-        <label id="2">2.计算基础攻击力：</label>
-        <br/>
-        <div class="BATK">
-        	
-        </div>
-        <div class="BATK">
-        </div>
-        <div class="BATK">
-        </div>
-        <div class="BATK">
-        </div>
-        <div class="BATK">
-        </div>
+    <form autocomplete="off">
+    <form autocomplete="new-password"> <!--禁用自动填充-->
+    
+	<div class="content"> 
+		<h3 style="font-family: 微软雅黑">Damage Calculator</h3>
+   		<hr noshade="noshade"/>
+
+   		<div class="leftbox">
+    		<label id="lbl_ATKTYPE">1.选择攻击类型：</label>
+        	<select id="CMB_atktype" onchange="CMB_atktype_changed()">
+        	</select>
+        	<br/><hr/>
+        	<label id="2">2.计算基础攻击力：</label>
+        	<br/>
+        	<div class="BATK">
+        		<label id="lbl_BATK_V1">V1:</label>
+            	<input id="TBox_BATK_V1" type="text" style="width:100px"/>
+        	</div>
+        	<div class="BATK">
+        		<label id="lbl_BATK_V2">V2:</label>
+            	<input id="TBox_BATK_V2" type="text" style="width:100px"/>
+        	</div>
+        	<div class="BATK">
+        		<label id="lbl_BATK_V3">V3:</label>
+            	<input id="TBox_BATK_V3" type="text" style="width:100px"/>
+        	</div>
+        	<div class="BATK">
+        		<label id="lbl_BATK_V4">V4:</label>
+            	<input id="TBox_BATK_V4" type="text" style="width:100px"/>
+        	</div>
+        	<div class="BATK">
+        		<label id="lbl_BATK_V5">V5:</label>
+            	<input id="TBox_BATK_V5" type="text" style="width:100px"/>
+        	</div>
         
     
-    </div>
-  <div class="rightbox">
+    	</div>	
+  		<div class="rightbox">
     
-    </div>
-</div>
+    	</div>
+	</div> 
 <script type="text/javascript">
     
 	var Dict_atktype=new Array("航空战(轰炸机)", "航空战(鱼雷机)", "昼战反潜(轻母航战)", "昼战反潜(驱逐巡洋)", "昼战炮击(航母系)", "昼战炮击(其他)", "昼战雷击", "夜战雷击", "夜战巡洋舰炮雷合击", "夜战巡洋舰炮击", "夜战其他炮击") //攻击类型	  
@@ -89,14 +102,20 @@
 		var getData = Dict_atktype[i];
 		document.getElementById("CMB_atktype").options.add(new Option(getData,getData));
 	}
-	function CMB_atktype_changed(){
+	function CMB_atktype_changed(){ //下拉列表选择项改变后
 		var index=document.getElementById("CMB_atktype").selectedIndex;
-		select_val_to_cal_BATK(index);
+		select_val_to_cal_BATK(index); //根据攻击类型来设置要输入的变量V1~V5
 	}
 	function select_val_to_cal_BATK(CMB_atktype_i){
-		for (var i =0;i<Dict_atktype.length;i++){
-			if (Dict_atktype_enable_BATK[CMB_atktype_i][i] = 0) {
-				
+		
+		for (var i =0;i<Dict_atktype_enable_BATK[1].length;i++){
+			var box_id = i + 1
+			var tboxid = "TBox_BATK_V" + box_id
+			if (Dict_atktype_enable_BATK[CMB_atktype_i][i] == 0) {
+				document.getElementById(tboxid).disabled=true;
+			}
+			else if (Dict_atktype_enable_BATK[CMB_atktype_i][i] == 1) {
+				document.getElementById(tboxid).disabled=false;
 			}
 			//If Dict_atktype_enable_BATK(ATK_TYPE_INDEX, i) = 0 Then
             //    Dict_object_BATK_textbox(i).Enabled = False
@@ -104,7 +123,7 @@
             //    Dict_object_BATK_textbox(i).Enabled = True
             //End If
 		}
-		alert(CMB_atktype_i);
+	//	alert(CMB_atktype_i);
 	}
 
 </script>
