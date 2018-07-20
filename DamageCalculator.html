@@ -16,27 +16,67 @@
             font-size :18px;
             line-height :200%;
             float:none;
-            overflow:auto ;
+            overflow:auto;
+			background-color:#F5F4F3;
          }
         .leftbox {
             width:608px;
-            background: white;
             float:left;
             padding: 4px;
+			position:relative;
         }
         .rightbox {
             width:608px;
-            background: white;
             float:left;
             padding: 4px;
         }
         .BATK{
-            width :110px;
-            float :left ;
+            width:110px;
+            float:left;
         }
+		.BATK_input{
+			width:100px;
+		}
 		.cal_batk{
 			clear:left;
-			padding-top:10px;
+			padding-top:10px;			
+		}
+		.cal_I{
+			padding-top:6px;
+			padding-bottom:6px;
+			padding-left:6px;
+			border:solid 1px #D5DFE5;
+			border-radius:5px;
+			overflow:auto;
+			line-height:100%;
+			margin-bottom:6px;
+			box-shadow:inset 0 0 1px #FFF;	
+		}
+		.cal_I_cover{
+			background-color:#f5f5f5;
+			position:absolute;
+			z-index:2;
+			filter:alpha(opacity=70); 
+			opacity:0.7;
+			display: none;
+			width:50%;
+		}
+		.small_label{
+			font-size:14px;
+		}
+		.mini_label{
+			font-size:12px;
+			vertical-align:top;
+		}
+		.cal_I_formation_direction_div{
+			width:95px;
+			float:left;
+			margin-left:12px;
+			
+		}
+		.cal_I_formation_direction_input{
+			width:80px;
+			text-align:center;
 			
 		}
     </style>
@@ -51,7 +91,7 @@
 		<h3 style="font-family: 微软雅黑">Damage Calculator</h3>
    		<hr noshade="noshade"/>
 
-   		<div class="leftbox">
+   		<div class="leftbox" >
     		<label id="lbl_ATKTYPE">1.选择攻击类型：</label>
         	<select id="CMB_atktype" onchange="CMB_atktype_changed()">
         	</select>
@@ -59,32 +99,163 @@
         	<label id="2">2.计算基础攻击力：</label>
         	<br/>
         	<div class="BATK">
-        		<label id="lbl_BATK_V1" style="font-size:14px;">V1:</label>
-            	<input id="TBox_BATK_V1" type="text" style="width:100px;" onchange="check_set_BATK_Vn(1)"/>
+        		<label id="lbl_BATK_V1" class="small_label">V1:</label>
+            	<input id="TBox_BATK_V1" type="text" class="BATK_input" onchange="check_set_BATK_Vn(1)" onkeypress="checkisnum()"/>
         	</div>
         	<div class="BATK">
-        		<label id="lbl_BATK_V2" style="font-size:14px;">V2:</label>
-            	<input id="TBox_BATK_V2" type="text" style="width:100px;" onchange="check_set_BATK_Vn(2)"/>
+        		<label id="lbl_BATK_V2" class="small_label">V2:</label>
+            	<input id="TBox_BATK_V2" type="text" class="BATK_input" onchange="check_set_BATK_Vn(2)" onkeypress="checkisnum()"/>
         	</div>
         	<div class="BATK">
-        		<label id="lbl_BATK_V3" style="font-size:14px;">V3:</label>
-            	<input id="TBox_BATK_V3" type="text" style="width:100px;" onchange="check_set_BATK_Vn(3)"/>
+        		<label id="lbl_BATK_V3" class="small_label">V3:</label>
+            	<input id="TBox_BATK_V3" type="text" class="BATK_input" onchange="check_set_BATK_Vn(3)" onkeypress="checkisnum()"/>
         	</div>
         	<div class="BATK">
-        		<label id="lbl_BATK_V4" style="font-size:14px">V4:</label>
-            	<input id="TBox_BATK_V4" type="text" style="width:100px;" onchange="check_set_BATK_Vn(4)"/>
+        		<label id="lbl_BATK_V4" class="small_label">V4:</label>
+            	<input id="TBox_BATK_V4" type="text" class="BATK_input" onchange="check_set_BATK_Vn(4)" onkeypress="checkisnum()"/>
         	</div>
         	<div class="BATK">
-        		<label id="lbl_BATK_V5" style="font-size:14px">V5:</label>
-            	<input id="TBox_BATK_V5" type="text" style="width:100px;" onchange="check_set_BATK_Vn(5)"/>
+        		<label id="lbl_BATK_V5" class="small_label">V5:</label>
+            	<input id="TBox_BATK_V5" type="text" class="BATK_input" onchange="check_set_BATK_Vn(5)" onkeypress="checkisnum2()"/>
         	</div>
             <div class="cal_batk">
             	<label>计算公式：</label><label id="lbl_formula">aa</label>
                 <br/>
                 <label>计算结果：</label><label id="lbl_BATK_result">00</label>
             </div>
+            <hr/>
+            <label>3.计算乘积系数：</label><br/>
+            <label id="lbl_I_title">计算公式：</label><br/>
+            <label id="lbl_I_formula" style="font-size:16px">xxx</label><br/>
             
+            <div class="cal_I">
+            	<div class="cal_I_cover" id="Gpb_I_formation_cover" style="width:580px; height:60px">
+           		</div>
+            	<label class="small_label">阵形系数：</label><br/>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">单纵阵：</label>
+                    <input id="TBox_I_formation_1" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">复纵阵：</label>
+                    <input id="TBox_I_formation_2" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">轮形阵：</label>
+                    <input id="TBox_I_formation_3" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">梯形阵：</label>
+                    <input id="TBox_I_formation_4" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">单横阵：</label>
+                    <input id="TBox_I_formation_5" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+            </div>
             
+     	 	<div class="cal_I">
+            	<div class="cal_I_cover" id="Gpb_I_direction_cover" style="width:580px; height:60px">
+           		</div>
+            	<label class="small_label">航向系数：</label><br/>
+            	<div class="cal_I_formation_direction_div">
+               		<label class="small_label">T有利：</label>
+                    <input id="TBox_I_direction_1" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">同航战：</label>
+                    <input id="TBox_I_direction_2" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">反航战：</label>
+                    <input id="TBox_I_direction_3" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>
+                <div class="cal_I_formation_direction_div">
+               		<label class="small_label">T不利：</label>
+                    <input id="TBox_I_direction_4" readonly="readonly" type="text" class="cal_I_formation_direction_input"  />
+                </div>   
+            </div>
+            
+            <div class="cal_I">
+            	<div class="cal_I_cover" id="Gpb_I_airdomain_cover" style="width:580px; height:40px">
+           		</div>
+                <label class="small_label">制空系数：</label><br/>
+            	<label for="Rdb_I_airdomain1"class="mini_label"><input type="radio" id="Rdb_I_airdomain1" name="Rdb_I_airdomain_group" style="vertical-align: top"/>制空权占据:1.10</label>
+                <label for="Rdb_I_airdomain2"class="mini_label"><input type="radio" id="Rdb_I_airdomain2" name="Rdb_I_airdomain_group" style="vertical-align: top"/>制空权优势:1.05</label>
+                <label for="Rdb_I_airdomain3"class="mini_label"><input type="radio" id="Rdb_I_airdomain3" name="Rdb_I_airdomain_group" style="vertical-align: top"/>势均力敌:1.0</label>
+                <label for="Rdb_I_airdomain4"class="mini_label"><input type="radio" id="Rdb_I_airdomain4" name="Rdb_I_airdomain_group" style="vertical-align: top"/>制空权劣势:0.95</label>
+                <label for="Rdb_I_airdomain5"class="mini_label"><input type="radio" id="Rdb_I_airdomain5" name="Rdb_I_airdomain_group" style="vertical-align: top"/>制空权丧失:0.90</label>
+                <br/>
+            </div>
+            
+            <div class="cal_I">
+            	<div class="cal_I_cover" id="Gpb_I_sonar_cover" style="width:580px; height:44px">
+           		</div>
+            	<label class="small_label">声纳系数：</label><br/>
+                <label class="small_label">填入声纳装备的反潜值：</label>
+                <input id="TBox_I_sonar" type="text" style="width:137px" onkeypress="checkisnum()" />
+                <label class="small_label">计算公式和结果：</label>
+                <label id="lbl_I_sonar_result" class="small_label">None</label><br/>                          	
+            </div>
+                       
+            <div class="cal_I">
+           		<div class="cal_I_cover" id="Gpb_I_ammo_cover" style="width:580px; height:44px">
+           		</div>
+            	<label class="small_label">弹药系数：</label><br/>
+                <label class="small_label">填入当前弹药百分数(0~120)：</label>
+                <input id="TBox_I_ammo" type="text" style="width:106px" onkeypress="checkisnum()" />
+                <label class="small_label">计算公式和结果：</label>
+                <label id="lbl_I_ammo_result" class="small_label">None</label><br/>           	
+            </div>
+            
+            <div class="cal_I" style="height:42px;width:262px;float:left" >
+            	<div class="cal_I_cover" id="Gpb_I_tb_cover" style="width:254px; height:44px">
+           		</div>
+            	<label class="small_label">输入鱼雷机系数：</label><br/>
+           		<label class="small_label">系数取值范围(0.5~1)：</label>
+            	<input id="TBox_I_tb"  type="text" style="width:84px"/>
+            </div>
+            
+            <div class="cal_I" style="height:42px;width:324px; float:left;margin-left:6px" >
+            	<div class="cal_I_cover" id="Gpb_I_sufferdmg_cover" style="width:322px; height:44px">
+           		</div>
+            	<label class="small_label">舰损系数：</label><br/>
+                <label for="Rdb_I_sufferdmg1"class="mini_label" style=" margin:10px;"><input type="radio" id="Rdb_I_sufferdmg1" name="Rdb_I_sufferdmg_group" style="vertical-align: top;"/>未中破:1.0</label>
+                <label for="Rdb_I_sufferdmg2"class="mini_label" style=" margin:5px;"><input type="radio" id="Rdb_I_sufferdmg2" name="Rdb_I_sufferdmg_group" style="vertical-align: top"/>中破:0.6</label>
+                <label for="Rdb_I_sufferdmg3"class="mini_label" style=" margin:5px;"><input type="radio" id="Rdb_I_sufferdmg3" name="Rdb_I_sufferdmg_group" style="vertical-align: top"/>大破/击沉:0.3</label>
+            </div>
+            
+            <div class="cal_I" style="clear:left">
+            	<div class="cal_I_cover" id="Gpb_I_skill_cover" style="width:580px; height:44px">
+           		</div>
+            	<label class="small_label">技能攻击力系数：</label><br/>
+                <label class="small_label">填入技能加成百分数(如15%则填入15),若无则填入0：</label>
+                <input id="TBox_I_skill"  type="text" style="width:44px"/>
+                <label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
+                <label id="lbl_I_skill_result" class="small_label">0000</label>
+                <br/>
+            </div>
+            
+            <div class="cal_I">
+            	<div class="cal_I_cover" id="Gpb_I_crit_cover" style="width:580px; height:44px">
+           		</div>
+            	<label class="small_label">暴击系数：</label><br/>
+                <label class="small_label">填入技能提供的额外暴击伤害的百分数,若无则填入0：</label>
+                <input id="TBox_I_crit"  type="text" style="width:44px"/>
+                <label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
+                <label id="lbl_I_crit_result" class="small_label">0000</label>
+                <br/>
+            </div>
+            
+            <div class="cal_I">
+            	<div class="cal_I_cover" id="Gpb_I_crit_cover" style="width:580px; height:40px">
+           		</div>
+            	<label class="small_label">浮动系数：</label><br/>
+                <label class="small_label" style="float:left">当前攻击类型下的浮动系数：</label>               
+                <label id="lbl_I_float_result" class="small_label" style="display:block;width:240px; float:left">0000</label>
+                <label for="ChkBox_usesuperhvyshell"class="mini_label" style=" margin:10px;"><input type="checkbox" id="ChkBox_usesuperhvyshell" name="ChkBox_usesuperhvyshell" style="vertical-align: top;"/>装备了超重弹</label>
+                <br/>
+            </div>
             
         
     
@@ -95,16 +266,51 @@
 	</div> 
 <script type="text/javascript">
 	//
-	var D_BATK = 0
-	var D_BATK_V1 = 0
-	var D_BATK_V2 = 0
-	var D_BATK_V3 = 0
-	var D_BATK_V4 = 0
-	var D_BATK_V5 = 0
-	
+	var D_BATK = 0; //基础攻击力
+	var D_BATK_V1 = 0;
+	var D_BATK_V2 = 0;
+	var D_BATK_V3 = 0;
+	var D_BATK_V4 = 0;
+	var D_BATK_V5 = 0; //炮击(航母系)系数α
+	//各种系数
+	var D_I_tmp = 1; //临时存放的系数,是除了阵形、航向和浮动系数以外的系数的乘积
+	var D_I_sonar_raw = 0; //声纳装备的反潜值
+	var D_I_tb = 1; //鱼雷机系数
+	var D_I_ammo = 1; //系数
+	var D_I_ammo_raw = 120; //弹药百分数
+	var D_I_sufferdmg = 1; //战损
+	var D_I_float = 1; //浮动系数
+	var D_I_crit = 1; //暴击系数
+	const C_I_is_crit = 1.5; //默认暴击为1.5
+	var D_I_crit_add = 0; //额外的暴击百分数
+	var D_I_skill = 1; //技能加成系数
+	var D_I_skill_add = 0; //技能加成系数的百分数
+	var D_I_pene = 1; //穿甲系数
+	var D_I_pene_add = 1; //额外的穿甲系数
+	var D_I_usesuperheavyshell = [0.89, 1.18, 1.47]; //使用了超重弹后的浮动系数
 	//
-    
-	var Dict_atktype=new Array("航空战(轰炸机)", "航空战(鱼雷机)", "昼战反潜(轻母航战)", "昼战反潜(驱逐巡洋)", "昼战炮击(航母系)", "昼战炮击(其他)", "昼战雷击", "夜战雷击", "夜战巡洋舰炮雷合击", "夜战巡洋舰炮击", "夜战其他炮击") //攻击类型	  
+	var D_armor = 0; //装甲值
+	var D_skill = 1; //技能伤害倍率
+	var D_skill_add = 0; //额外的技能伤害倍率
+    var D_enemyhp = 0; //敌舰hp
+	//
+	var Dict_atktype= ["航空战(轰炸机)", "航空战(鱼雷机)", "昼战反潜(轻母航战)", "昼战反潜(驱逐巡洋)", "昼战炮击(航母系)", "昼战炮击(其他)", "昼战雷击", "夜战雷击", "夜战巡洋舰炮雷合击", "夜战巡洋舰炮击", "夜战其他炮击"];  //攻击类型	  
+    var Dict_I_sonar = [0.5, 1]; //声纳系数
+    var Dict_I_sufferdmg = [1, 0.6, 0.3]; //舰损系数:非中破,中破,大破/击沉 
+    var Dict_I_airdomain = [1.1, 1.05, 1, 0.95, 0.9]; //制空系数:空占,空优,势均力敌,空劣,空丧
+    var Dict_I_formation = [ //阵形系数：分别是，炮击(非航母)，雷击，夜战和无影响
+            [1.0, 0.8, 0.75, 1.0, 0.8],
+            [1.0, 0.9, 0.8, 1.0, 0.8],
+            [1.1, 0.9, 1.0, 1.0, 1.0],
+            [1.0, 1.0, 1.0, 1.0, 1.0]
+        ];
+    var Dict_I_direction = [ //航向系数:第一组为通常情况，T有利,同航战,反航战,T不利；第二组为无影响的情况
+            [1.15, 1.0, 0.8, 0.65],
+            [1.0, 1.0, 1.0, 1.0]
+        ];
+	var Dict_name_direction = ["T有利", "同航战", "反航战", "T不利"];
+	var Dict_name_condition = ["未暴击下限", "未暴击平均", "未暴击上限", "暴击下限", "暴击平均", "暴击上限", "未暴击", "暴击"];
+	//
 	var Dict_atktype_enable_BATK = [ //决定要启用哪些变量来计算基础攻击力
             [1, 1, 0, 0, 0], //航空战(轰炸机)
             [1, 1, 0, 0, 0], //航空战(鱼雷机)
@@ -117,8 +323,7 @@
             [1, 1, 0, 0, 0], //夜战巡洋舰炮雷合击
             [1, 0, 0, 0, 0], //夜战巡洋舰炮击
             [1, 0, 0, 0, 0]  //夜战其他炮击
-        ]
-	
+        ];
      var Dict_atktype_label = [ //基础攻击力的标签说明
             ["放飞机数：", "该格轰炸：", "不可用", "不可用", "不可用"],
             ["放飞机数：", "该格鱼雷：", "不可用", "不可用", "不可用"],
@@ -131,22 +336,226 @@
             ["火力：", "鱼雷：", "不可用", "不可用", "不可用"],
             ["火力：", "不可用", "不可用", "不可用", "不可用"],
             ["火力：", "不可用", "不可用", "不可用", "不可用"]
-		]
-	
+		];
+	//决定要启用哪些系数
+    //       1  2  3  4  5  6  7  8  9  10
+    var Dict_atktype_enable_I = [
+            [0, 0, 1, 0, 1, 0, 1, 1, 1, 1], //航空战(轰炸机)
+            [0, 0, 0, 0, 1, 1, 1, 1, 1, 1], //航空战(鱼雷机)
+            [0, 0, 0, 1, 1, 0, 0, 1, 1, 1], //昼战反潜(轻母航战
+            [0, 0, 0, 1, 1, 0, 1, 1, 1, 1], //昼战反潜(驱逐巡洋)
+            [0, 0, 1, 0, 1, 0, 0, 1, 1, 1], //昼战炮击(航母系)
+            [1, 1, 0, 0, 1, 0, 1, 1, 1, 1], //昼战炮击(其他)
+            [1, 1, 0, 0, 1, 0, 1, 1, 1, 1], //昼战雷击
+            [1, 0, 0, 0, 1, 0, 1, 1, 1, 1], //夜战雷击
+            [1, 0, 0, 0, 1, 0, 1, 1, 1, 1], //夜战巡洋舰炮雷合击
+            [1, 0, 0, 0, 1, 0, 1, 1, 1, 1], //夜战巡洋舰炮击
+            [1, 0, 0, 0, 1, 0, 1, 1, 1, 1]  //夜战其他炮击
+        ];
+	 //系数的结果表,分别是:未暴击下限,未暴击平均,未暴击上限;暴击下限,暴击平均,暴击上限;横向为阵形,纵向为航向
+     var Dict_I_result = [
+            [ //未暴击下限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //未暴击平均
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //未暴击上限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击下限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击平均
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击上限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
+        ];
+	var Dict_I_result_tmp = [0, 0, 0, 0, 0, 0]; //存放临时系数,是浮动值的上下限和平均值与暴击系数的乘积
+	var Dict_ATK_result = [  //实际攻击力
+            [ //未暴击下限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //未暴击平均
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //未暴击上限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击下限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击平均
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击上限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
+        ];
+	var Dict_penedmg_result = [  //穿甲伤害
+            [ //未暴击下限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //未暴击平均
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //未暴击上限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击下限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击平均
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击上限
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
+        ];
+	var Dict_I_pene = [ //不同攻击类型的穿甲系数表
+            1.0, //航空战(轰炸机)
+            2.0, //航空战(鱼雷机)
+            2.0, //昼战反潜(轻母航战)
+            2.0, //昼战反潜(驱逐巡洋)
+            1.0, //昼战炮击(航母系) 
+            0.6, //昼战炮击(其他)
+            1.0, //昼战雷击
+            1.0, //夜战雷击
+            1.0, //夜战巡洋舰炮雷合击
+            0.6, //夜战巡洋舰炮击
+            0.6  //夜战其他炮击
+        ];
+    var Dict_Percent_cansunk = [ //击沉率结果表
+            [ //未暴击
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
+        ];
+	var Dict_Percent_cansunk = [ //中破率结果表
+            [ //未暴击
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
+        ];
+	var Dict_Percent_hvydmg = [ //大破率结果表
+            [ //未暴击
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ],
+            [ //暴击
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ]
+        ];
 	//页面加载时运行
 	for (var i=0;i<Dict_atktype.length;i++){ //加载攻击类型下拉框
 		var getData = Dict_atktype[i];
 		document.getElementById("CMB_atktype").options.add(new Option(getData,i));
-	}
+	};
 	CMB_atktype_changed();
+	Load_floattable();
 	
+	
+	//
+	function  Load_floattable(){ //加载浮动系数表
+        var Dict_I_float = [ //浮动系数表
+		   //下限,  平均,  上限
+            [0.89, 1.055, 1.22],
+            [0.89, 1.055, 1.22],
+            [0.89, 1.055, 1.22],
+            [0.89, 1.055, 1.22],
+            [0.89, 1.055, 1.22],
+            [0.89, 1.055, 1.22],
+            [0.89, 1.055, 1.22],
+            [2.4, 2.7, 3.0],
+            [1.2, 1.5, 1.8],
+            [2.4, 3.0, 3.6],
+            [1.2, 1.5, 1.8]
+        ];
+	}
 	//
 	
 	function CMB_atktype_changed(){ //下拉列表选择项改变后
 		var index=document.getElementById("CMB_atktype").selectedIndex;
 		select_val_to_cal_BATK(index); //根据攻击类型来设置要输入的变量V1~V5
 		show_BATK_formula_and_calculate(index);//显示基础攻击力计算公式并计算
-	}
+	};
 	function check_set_BATK_Vn(index){ //处理文本框输入
 		var tboxid = "TBox_BATK_V" + index;
 		if ( document.getElementById(tboxid).value != "" ) {
@@ -165,12 +574,29 @@
 					D_BATK_V4 = document.getElementById(tboxid).value;
 					break;
 				case 5:
+					var num = Number(document.getElementById("TBox_BATK_V5").value); //限制系数α的范围为0~1
+					if (num > 1) {
+						document.getElementById("TBox_BATK_V5").value = "1";
+					}
+					if (num < 0) {
+						document.getElementById("TBox_BATK_V5").value = "0";
+					}
 					D_BATK_V5 = document.getElementById(tboxid).value;
 					break;
 			}
 		}
-		show_BATK_formula_and_calculate(document.getElementById("CMB_atktype").selectedIndex)
-	}
+		show_BATK_formula_and_calculate(document.getElementById("CMB_atktype").selectedIndex); //计算基础攻击力
+	};
+	function checkisnum() { //检查是否为数字,只允许输入数字
+		if (event.keyCode < 47 || event.keyCode > 57) {
+			event.returnValue = false;
+		}   
+	};
+	function checkisnum2() { //只允许输入数字和小数点
+		if (event.keyCode < 46 || event.keyCode > 57) {
+			event.returnValue = false;
+		}
+	};
 	
 	//
 	function select_val_to_cal_BATK(CMB_atktype_i){	//根据攻击类型来设置要输入的变量
@@ -179,17 +605,17 @@
 			var tboxid = "TBox_BATK_V" + id;
 			var labelid = "lbl_BATK_V" + id;
 			if (Dict_atktype_enable_BATK[CMB_atktype_i][i] == 0) {
-				document.getElementById(tboxid).disabled=true; //启用相关的input
+				document.getElementById(tboxid).disabled=true; //禁用用不到的input
 			}
 			else if (Dict_atktype_enable_BATK[CMB_atktype_i][i] == 1) {
-				document.getElementById(tboxid).disabled=false; //禁用用不到的input
+				document.getElementById(tboxid).disabled=false; //启用相关的input
 			}
 			//设置label的文字
 			document.getElementById(labelid).innerText = Dict_atktype_label[CMB_atktype_i][i];
 		}
 		clear_val_BATK();//每更换一次攻击类型,就清空变量的值
 	//	alert(CMB_atktype_i);
-	}
+	};
 	function clear_val_BATK(){ //清空变量的值
 		document.getElementById("lbl_BATK_result").innerText = "";
         D_BATK = 0;
@@ -203,7 +629,7 @@
 		document.getElementById("TBox_BATK_V3").value = "0";
 		document.getElementById("TBox_BATK_V4").value = "0";
 		document.getElementById("TBox_BATK_V5").value = "0";
-	}
+	};
 	function show_BATK_formula_and_calculate(CMB_atktype_i){ //计算公式可视化
 		document.getElementById("lbl_formula").innerText = "";
 		switch (CMB_atktype_i)
@@ -259,7 +685,7 @@
 				BATK_Cal(10);
 				break;
 		}
-	}
+	};
 	function BATK_Cal(CMB_atktype_i){ //计算基础攻击力
 		document.getElementById("lbl_BATK_result").innerText = "";
 		switch (CMB_atktype_i)
@@ -280,29 +706,29 @@
 				D_BATK = Number(D_BATK_V1) / 3 + Number(D_BATK_V2) * 1.3 + 30;
 				break;
 			case 4: //炮击(航母系)
-			
+				D_BATK = (Number(D_BATK_V1) + Number(D_BATK_V2) * 2 + Number(D_BATK_V3)) * Math.max(0, (1 - Number(D_BATK_V4) * Number(D_BATK_V5) / 150)) + 35
 				break;
-			case 5:
-			
+			case 5: //炮击(其他)
+				D_BATK = Number(D_BATK_V1) + 5;
 				break;
-			case 6:
-			
+			case 6: //雷击
+				D_BATK = Number(D_BATK_V1) + 5;
 				break;
-			case 7:
-			
+			case 7: //夜战雷击
+				D_BATK = Number(D_BATK_V1) + 10;
 				break;
-			case 8:
-			
+			case 8: //夜战巡洋舰炮雷合击
+				D_BATK = Number(D_BATK_V1) + Number(D_BATK_V2) + 10;
 				break;
-			case 9:
-			
+			case 9: //夜战巡洋舰炮击
+				D_BATK = Number(D_BATK_V1) + 10;
 				break;
-			case 10:
-			
+			case 10: //夜战其他炮击
+				D_BATK = Number(D_BATK_V1) + 10;
 				break;
 		}
 		document.getElementById("lbl_BATK_result").innerText = D_BATK;
-	}
+	};
 	
 	
 
