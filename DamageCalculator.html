@@ -219,9 +219,9 @@
            		</div>
             	<label class="small_label">声纳系数：</label><br/>
                 <label class="small_label">填入声纳装备的反潜值：</label>
-                <input id="TBox_I_sonar" type="text" style="width:137px" onkeypress="checkisnum()" />
-                <label class="small_label">计算公式和结果：</label>
-                <label id="lbl_I_sonar_result" class="small_label">None</label><br/>                          	
+                <input id="TBox_I_sonar" type="text" style="width:137px;" onchange="TBox_I_TextChanged('sonar')" onkeypress="checkisnum()" />
+                <label class="mini_label">计算公式和结果：</label>
+                <label id="lbl_I_sonar_result" class="mini_label">None</label><br/>                          	
             </div>
                        
             <div class="cal_I">
@@ -229,9 +229,9 @@
            		</div>
             	<label class="small_label">弹药系数：</label><br/>
                 <label class="small_label">填入当前弹药百分数(0~120)：</label>
-                <input id="TBox_I_ammo" type="text" style="width:106px" onkeypress="checkisnum()" />
-                <label class="small_label">计算公式和结果：</label>
-                <label id="lbl_I_ammo_result" class="small_label">None</label><br/>           	
+                <input id="TBox_I_ammo" type="text" style="width:56px" onchange="TBox_I_TextChanged('ammo')" onkeypress="checkisnum()" />
+                <label class="mini_label">计算公式和结果：</label>
+                <label id="lbl_I_ammo_result" class="mini_label">None</label><br/>           	
             </div>
             
             <div class="cal_I" style="height:42px;width:262px;float:left" >
@@ -239,7 +239,7 @@
            		</div>
             	<label class="small_label">输入鱼雷机系数：</label><br/>
            		<label class="small_label">系数取值范围(0.5~1)：</label>
-            	<input id="TBox_I_tb"  type="text" style="width:84px" onkeypress="checkisnum2()"/>
+            	<input id="TBox_I_tb"  type="text" style="width:84px" onchange="TBox_I_TextChanged('tb')" onkeypress="checkisnum2()"/>
             </div>
             
             <div class="cal_I" style="height:42px;width:324px; float:left;margin-left:6px" >
@@ -256,7 +256,7 @@
            		</div>
             	<label class="small_label">技能攻击力系数：</label><br/>
                 <label class="small_label">填入技能加成百分数(如15%则填入15),若无则填入0：</label>
-                <input id="TBox_I_skill"  type="text" style="width:44px" onkeypress="checkisnum()"/>
+                <input id="TBox_I_skill"  type="text" style="width:44px" onchange="TBox_I_TextChanged('skill')" onkeypress="checkisnum()"/>
                 <label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
                 <label id="lbl_I_skill_result" class="small_label">0000</label>
                 <br/>
@@ -267,7 +267,7 @@
            		</div>
             	<label class="small_label">暴击系数：</label><br/>
                 <label class="small_label">填入技能提供的额外暴击伤害的百分数,若无则填入0：</label>
-                <input id="TBox_I_crit"  type="text" style="width:44px" onkeypress="checkisnum()"/>
+                <input id="TBox_I_crit"  type="text" style="width:44px" onchange="TBox_I_TextChanged('crit')" onkeypress="checkisnum()"/>
                 <label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
                 <label id="lbl_I_crit_result" class="small_label">0000</label>
                 <br/>
@@ -279,7 +279,7 @@
             	<label class="small_label">浮动系数：</label><br/>
                 <label class="small_label" style="float:left">当前攻击类型下的浮动系数：</label>               
                 <label id="lbl_I_float_result" class="small_label" style="display:block;width:240px; float:left">0000</label>
-                <label for="ChkBox_usesuperhvyshell"class="mini_label" style=" margin:10px;"><input type="checkbox" id="ChkBox_usesuperhvyshell" name="ChkBox_usesuperhvyshell" style="vertical-align: top;"/>装备了超重弹</label>
+                <label for="ChkBox_usesuperhvyshell"class="mini_label" style=" margin:10px;"><input type="checkbox" id="ChkBox_usesuperhvyshell" name="ChkBox_usesuperhvyshell" style="vertical-align: top;" onclick="ChkBox_usesuperhvyshell_CheckedChanged()"/>装备了超重弹</label>
                 <br/>
             </div>
                    
@@ -289,17 +289,17 @@
        		<label>4.输入其它参数：</label><br/>
             <div class="other_I">
         		<div>
-       				<label class="small_label">(1)敌方装甲：</label><input id="TBox_armor"  type="text" style="width:44px" onkeypress="checkisnum()"/>
-                	<label class="small_label">(2)敌方血量：</label><input id="TBox_enemyhp"  type="text" style="width:80px" onkeypress="checkisnum()" />
+       				<label class="small_label">(1)敌方装甲：</label><input id="TBox_armor"  type="text" style="width:44px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('armor')"/>
+                	<label class="small_label">(2)敌方血量：</label><input id="TBox_enemyhp"  type="text" style="width:80px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('enemyhp')"/>
             	</div>
             	<div>
-           			<label class="small_label">(3)输入技能伤害倍率百分数：</label><input id="TBox_skill"  type="text" style="width:44px" onkeypress="checkisnum()"/>
+           			<label class="small_label">(3)输入技能伤害倍率百分数：</label><input id="TBox_skill"  type="text" style="width:44px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('skill')"/>
           	 		<label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
             		<label id="lbl_skill_result" class="small_label">0000</label>
             	</div>
             	<div>
             		<label class="small_label" style="float:left; position:relative; top:2px">(4)额外的穿甲系数百分数，当前值：</label><label id="lbl_pene" class="small_label" style="float:left;display:block;width:40px;text-align:center;position:relative; top:2px">0.6</label>
-            		<input id="TBox_pene"  type="text" style="width:44px" onkeypress="checkisnum()" />
+            		<input id="TBox_pene"  type="text" style="width:44px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('pene')"/>
             		<label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif;">=></label>
             		<label id="lbl_pene_result" class="small_label"  >0000</label> 
     			</div>
@@ -550,7 +550,7 @@
                 [0, 0, 0, 0, 0]
             ]
         ];
-	var Dict_Percent_cansunk = [ //中破率结果表
+	var Dict_Percent_middmg = [ //中破率结果表
             [ //未暴击
                 [0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0],
@@ -586,7 +586,16 @@
 		document.getElementById("CMB_atktype").options.add(new Option(getData,i));
 	};
 	CMB_atktype_changed();
-	
+	TBox_I_TextChanged('ammo');
+	TBox_I_TextChanged('skill');
+	TBox_I_TextChanged('crit');
+	document.getElementById("TBox_armor").value="0";
+	document.getElementById("TBox_skill").value="0";
+	document.getElementById("TBox_enemyhp").value="10";
+	TBox_Other_TextChanged('armor');
+	TBox_Other_TextChanged('enemyhp');
+	TBox_Other_TextChanged('skill');
+	TBox_Other_TextChanged('pene');
 	
 	
 	//
@@ -607,7 +616,6 @@
         ];
 	}
 	//
-	
 	function CMB_atktype_changed(){ //下拉列表选择项改变后
 		var index=document.getElementById("CMB_atktype").selectedIndex;
 		select_val_to_cal_BATK(index); //根据攻击类型来设置要输入的变量V1~V5
@@ -618,7 +626,9 @@
 		select_I_val(index);//根据攻击类型来设置要使用的系数，并初始化系数的值
 		
 	};
-	function check_set_BATK_Vn(index){ //处理文本框输入
+	//
+	////////////////////////////////////////////////////////////////////////////
+	function check_set_BATK_Vn(index){ //处理基础攻击力输入
 		var tboxid = "TBox_BATK_V" + index;
 		if ( document.getElementById(tboxid).value != "" ) {
 			switch (index)
@@ -636,18 +646,95 @@
 					D_BATK_V4 = document.getElementById(tboxid).value;
 					break;
 				case 5:
-					var num = Number(document.getElementById("TBox_BATK_V5").value); //限制系数α的范围为0~1
+					var num = Number(document.getElementById(tboxid).value); //限制系数α的范围为0~1
 					if (num > 1) {
-						document.getElementById("TBox_BATK_V5").value = "1";
+						document.getElementById(tboxid).value = "1";
 					}
 					if (num < 0) {
-						document.getElementById("TBox_BATK_V5").value = "0";
+						document.getElementById(tboxid).value = "0";
 					}
 					D_BATK_V5 = document.getElementById(tboxid).value;
 					break;
 			}
+			show_BATK_formula_and_calculate(document.getElementById("CMB_atktype").selectedIndex); //计算基础攻击力
+		}		
+	};
+	function TBox_I_TextChanged(name){ //处理乘积系数的输入
+		var tboxid = "TBox_I_" + name;
+		if ( document.getElementById(tboxid).value != "" ) {
+			switch (name)
+			{
+				case "sonar":
+					D_I_sonar_raw = document.getElementById(tboxid).value;
+					break;
+				case "ammo":
+					D_I_ammo_raw = document.getElementById(tboxid).value;
+					I_ammo_cal();
+					break;
+				case "tb":
+					var num = Number(document.getElementById(tboxid).value); //限制鱼雷机系数的范围为0.5~1
+					if (num > 1) {
+						document.getElementById(tboxid).value = "1";
+					};
+					if (num < 0.5) {
+						document.getElementById(tboxid).value = "0";
+					};
+					D_I_tb = document.getElementById(tboxid).value;
+					break;
+				case "skill":
+					D_I_skill_add = document.getElementById(tboxid).value;
+					I_skill_cal();
+					break;
+				case "crit":
+					D_I_crit_add = document.getElementById(tboxid).value;
+            		I_crit_cal();
+					break;	
+			}
+			show_I_formula(document.getElementById("CMB_atktype").selectedIndex);
 		}
-		show_BATK_formula_and_calculate(document.getElementById("CMB_atktype").selectedIndex); //计算基础攻击力
+	};
+	function Rdb_I_airdomainN_CheckedChanged(index){ //根据所选radio来设置制空系数变量
+		D_I_airdomain = Dict_I_airdomain[index];
+		show_I_formula(document.getElementById("CMB_atktype").selectedIndex);
+	};
+	function Rdb_I_sufferdmgN_CheckedChanged(index){ //根据所选radio来设置舰损系数
+		D_I_sufferdmg = Dict_I_sufferdmg[index];
+		show_I_formula(document.getElementById("CMB_atktype").selectedIndex);
+	};
+	function ChkBox_usesuperhvyshell_CheckedChanged(){ //使用超重弹后更改浮动系数
+		var index = document.getElementById("CMB_atktype").selectedIndex;
+		if (document.getElementById("ChkBox_usesuperhvyshell").checked==true) {
+			Dict_I_float[index][0] = D_I_usesuperheavyshell[0];
+			Dict_I_float[index][1] = D_I_usesuperheavyshell[1];
+			Dict_I_float[index][2] = D_I_usesuperheavyshell[2];
+            show_I_float(index);
+		}
+		else {
+			Load_floattable();
+			show_I_float(index);
+		}
+	};
+	function TBox_Other_TextChanged(name){ //处理其他参数的输入
+		var tboxid = "TBox_" + name;
+		if ( document.getElementById(tboxid).value != "" ) {
+			switch (name)
+			{
+				case "armor":
+					D_armor = document.getElementById(tboxid).value;
+					break;
+				case "enemyhp":
+					D_enemyhp = document.getElementById(tboxid).value;
+					break;
+				case "skill":
+					D_skill_add = document.getElementById(tboxid).value;
+					skill_cal();
+					break;
+				case "pene":
+					D_I_pene_add = document.getElementById(tboxid).value;
+            		pene_cal(document.getElementById("CMB_atktype").selectedIndex);
+					break;	
+			}
+		}
 	};
 	function checkisnum() { //检查是否为数字,只允许输入数字
 		if (event.keyCode < 47 || event.keyCode > 57) {
@@ -659,10 +746,10 @@
 			event.returnValue = false;
 		}
 	};
-	
+	////////////////////////////////////////////////////////////////////////////
 	//
 	function select_val_to_cal_BATK(CMB_atktype_i){	//根据攻击类型来设置要输入的变量
-		for (var i =0;i<Dict_atktype_enable_BATK[1].length;i++){
+		for (var i =0;i<Dict_atktype_enable_BATK[0].length;i++){
 			var id = i + 1;
 			var tboxid = "TBox_BATK_V" + id;
 			var labelid = "lbl_BATK_V" + id;
@@ -791,6 +878,7 @@
 		}
 		document.getElementById("lbl_BATK_result").innerText = D_BATK;
 	};
+	//////////////////////////////////////////////////////////////////////////////////
 	function show_I_formula(CMB_atktype_i){ //显示系数计算公式,并计算部分系数
 		document.getElementById("lbl_I_formula").innerText = "";
 		switch (CMB_atktype_i)
@@ -806,13 +894,13 @@
             case 2: //反潜(轻母航战)
                 document.getElementById("lbl_I_formula").innerText = "声呐系数 × 弹药系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
                 I_sonar_cal(0);
-                document.getElementById("lbl_I_sonar_result").innerText =  "1 + 声呐反潜值 ÷ 15 = " + D_I_sonar;
+                document.getElementById("lbl_I_sonar_result").innerText =  "1 + 声呐反潜值 ÷ 15 = " + D_I_sonar.toFixed(3);
                 D_I_tmp = Number(D_I_sonar) * Number(D_I_ammo) * Number(D_I_skill);
 				break;
             case 3: //反潜(驱逐巡洋)
                 document.getElementById("lbl_I_formula").innerText = "声呐系数 × 弹药系数 × 舰损系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
                 I_sonar_cal(1);
-                document.getElementById("lbl_I_sonar_result").innerText = "1 + 声呐反潜值 ÷ 10 = " + D_I_sonar;
+                document.getElementById("lbl_I_sonar_result").innerText = "1 + 声呐反潜值 ÷ 10 = " + D_I_sonar.toFixed(3);
                 D_I_tmp = Number(D_I_sonar) * Number(D_I_ammo) * Number(D_I_sufferdmg) * Number(D_I_skill);
 				break;
             case 4: //炮击(航母系)
@@ -855,25 +943,28 @@
 		pene_cal(CMB_atktype_i);
 	};
 	function I_ammo_cal(){ //计算弹药系数
-	
+		D_I_ammo = Math.min(1, (Number(D_I_ammo_raw) / 100 * 2));
+		document.getElementById("lbl_I_ammo_result").innerText = "MIN(1, 当前弹药比例 × 2) = " + D_I_ammo.toFixed(3);
 	};
 	function I_crit_cal(){ //计算暴击伤害系数
-	
+		D_I_crit = C_I_is_crit + Number(D_I_crit_add) / 100;
+		document.getElementById("lbl_I_crit_result").innerText = Math.round(D_I_crit * 100) + "%";
 	};
 	function I_skill_cal() { //计算技能攻击力系数
-		
+		D_I_skill = 1 + Number(D_I_skill_add) / 100;
+		document.getElementById("lbl_I_skill_result").innerText = Math.round(D_I_skill * 100) + "%";
 	};
 	function skill_cal() { //计算技能伤害倍率
-		
+		D_skill = 1 + Number(D_skill_add) / 100;
+		document.getElementById("lbl_skill_result").innerText = D_skill;
 	};
-	
 	function pene_cal(CMB_atktype_i) { //计算穿甲系数
 		D_I_pene = Dict_I_pene[CMB_atktype_i] + Number(D_I_pene_add) / 100;
 		document.getElementById("lbl_pene_result").innerText = D_I_pene;
 	};
-	
+	//////////////////////////////////////////////////////////////////////////////////
 	function select_I_val(CMB_atktype_i) { //根据攻击类型来设置要使用的系数，并初始化系数的值
-		for (var i=0;i<Dict_atktype_enable_I[1].length;i++){
+		for (var i=0;i<Dict_atktype_enable_I[0].length;i++){
 			var divboxid = "Gpb_I_cover_" + i;
 			if (Dict_atktype_enable_I[CMB_atktype_i][i] == 0) {
 				document.getElementById(divboxid).style.display="block"; //禁用用不到系数输入位置
@@ -899,6 +990,16 @@
 		document.getElementById("TBox_I_crit").value = "0";
 		document.getElementById("TBox_pene").value = "0";
 		document.getElementById("TBox_I_tb").value = "0";
+		TBox_I_TextChanged('sonar'); //更新系数和参数
+		TBox_I_TextChanged('ammo');
+		TBox_I_TextChanged('tb');
+		TBox_I_TextChanged('skill');
+		TBox_I_TextChanged('crit');
+		TBox_Other_TextChanged('armor');
+		TBox_Other_TextChanged('enemyhp');
+		TBox_Other_TextChanged('skill');
+		TBox_Other_TextChanged('pene');
+		Load_floattable();
 		//
 		switch (CMB_atktype_i)
 		{
@@ -949,28 +1050,213 @@
 		};	
 	};
 	function I_select_formation(TYPE) { //设置阵形系数的显示
-		for (var i=0;i<Dict_I_formation[1].length;i++) { //传入参数TYPE：0为炮击(非航母),1为雷击,2为夜战和3为无影响,并赋值
+		for (var i=0;i<Dict_I_formation[0].length;i++) { //传入参数TYPE：0为炮击(非航母),1为雷击,2为夜战和3为无影响,并赋值
 			var id = i + 1;
 			var boxid = "TBox_I_formation_" + id;
 			document.getElementById(boxid).value = Dict_I_formation[TYPE][i];
+			D_I_formation[i] =  Dict_I_formation[TYPE][i];
 		}
 	};
 	function I_select_direction(TYPE) { //设置航向系数的显示
-		for (var i=0;i<Dict_I_direction[1].length;i++) { //传入参数TYPE：0为正常情况，1为航向无影响的情况,并赋值
+		for (var i=0;i<Dict_I_direction[0].length;i++) { //传入参数TYPE：0为正常情况，1为航向无影响的情况,并赋值
 			var id = i + 1;
 			var boxid = "TBox_I_direction_" + id;
 			document.getElementById(boxid).value = Dict_I_direction[TYPE][i];
+			D_I_direction[i] = Dict_I_direction[TYPE][i];
 		}
 	};
-	function Rdb_I_airdomainN_CheckedChanged(index){ //根据所选radio来设置制空系数变量
-		D_I_airdomain = Dict_I_airdomain[index];
+	//////////////////////////////////////////////////////////////////////////////////
+	function ICal_tmp(){ //计算出六个临时系数,是浮动值的上下限和平均值与暴击系数的乘积
+		var ATKTYPE = document.getElementById("CMB_atktype").selectedIndex;
+		for (var j=0;j<=1;j++){
+			for (var i=0;i<Dict_I_float[0].length;i++){
+				D_I_float = Dict_I_float[ATKTYPE][i];
+				if (j==0){ //未暴击
+					Dict_I_result_tmp[i] = D_I_float;
+				}
+				else if (j==1){ //暴击
+					Dict_I_result_tmp[j * 3 + i] = D_I_crit * D_I_float;
+				};
+			};
+		};
 	};
-	function Rdb_I_sufferdmgN_CheckedChanged(index){ //根据所选radio来设置舰损系数
-		D_I_sufferdmg = Dict_I_sufferdmg[index];
+	function ICal(){ //计算系数乘积
+		for (var i=0;i<Dict_I_result_tmp.length;i++){ //未暴击0,1,2和暴击3,4,5
+			for (var j=0;j<D_I_direction.length;j++){ //航向
+				for (var k=0;k<D_I_formation.length;k++){ //阵形
+					Dict_I_result[i][j][k] = Dict_I_result_tmp[i] * D_I_direction[j] * D_I_formation[k] * D_I_tmp;
+				};
+			};
+		};
 	};
+	function ATKCal(){ //计算实际攻击力
+		for (var i=0;i<Dict_I_result.length;i++){ //未暴击0,1,2和暴击3,4,5
+			for (var j=0;j<Dict_I_result[0].length;j++){ //航向
+				for (var k=0;k<Dict_I_result[0][0].length;k++){ //阵形
+					Dict_ATK_result[i][j][k] = Dict_I_result[i][j][k] * D_BATK;
+				};
+			};
+		};
+	};
+	function PenedmgCal() { //计算击穿伤害
+		for (var i=0;i<Dict_ATK_result.length;i++){ //未暴击0,1,2和暴击3,4,5
+			for (var j=0;j<Dict_ATK_result[0].length;j++) { //航向
+				for (var k=0;k<Dict_ATK_result[0][0].length;k++) { //阵形
+					//破甲伤害 = CEIL(实际攻击力 * (1 - 对方装甲 / (0.5 * 对方装甲 + 穿甲系数 * 实际攻击力)) * 技能伤害倍率)
+					var temp_result=Math.ceil(Dict_ATK_result[i][j][k] * (1 - D_armor/(Number(0.5 * D_armor) + Number(D_I_pene * Dict_ATK_result[i][j][k]))) * D_skill);
+					//当破甲伤害 > 0时，实际伤害为破甲伤害；当破甲伤害 ≤ 0时，实际伤害为未击穿伤害
+					if (temp_result>0){
+						Dict_penedmg_result[i][j][k] = temp_result;
+					}
+					else { //未击穿伤害 = CEIL(MIN(基础攻击力, 对方当前HP) * 0.1)
+						Dict_penedmg_result[i][j][k] = Math.ceil(Math.min(D_BATK,D_enemyhp) * 0.1);
+					};
+				};
+			};
+		};
+	};
+	function Percent_middmg() { //计算中破率
+		//中破率计算公式：(伤害上限 - Ceil(0.5 * 敌舰hp)) / Abs(伤害上限 - 伤害下限) ,区间为[0,1]
+        //非暴击伤害和暴击伤害分别计算一次中破率
+        for (var i=0;i<Dict_Percent_middmg.length;i++){ //未暴击和暴击
+			for (var j=0;j<Dict_Percent_middmg[0].length;j++){ //航向
+				for (var k=0;k<Dict_Percent_middmg[0][0].length;k++){ //阵形
+					var percent = ReturnInterval_Upanddown(0,100, (((Dict_penedmg_result[3 * i + 2][j][k] - Math.ceil(0.5 * D_enemyhp)) / Math.abs(Dict_penedmg_result[3 * i + 2][j][k] - Dict_penedmg_result[3 * i][j][k])) * 100) );
+					percent = Number(percent);
+					Dict_Percent_middmg[i][j][k] = percent.toPrecision(4);
+				};
+			};
+		};	
+	};
+	function Percent_hvydmg() { //计算大破率
+		//大破率计算公式：(伤害上限 - Ceil(0.75 * 敌舰hp)) / Abs(伤害上限 - 伤害下限) ,区间为[0,1]
+        //非暴击伤害和暴击伤害分别计算一次大破率
+        for (var i=0;i<Dict_Percent_hvydmg.length;i++){ //未暴击和暴击
+			for (var j=0;j<Dict_Percent_hvydmg[0].length;j++){ //航向
+				for (var k=0;k<Dict_Percent_hvydmg[0][0].length;k++){ //阵形
+					var percent = ReturnInterval_Upanddown(0,100, (((Dict_penedmg_result[3 * i + 2][j][k] - Math.ceil(0.75 * D_enemyhp)) / Math.abs(Dict_penedmg_result[3 * i + 2][j][k] - Dict_penedmg_result[3 * i][j][k])) * 100) );
+					percent = Number(percent);
+					Dict_Percent_hvydmg[i][j][k] = percent.toPrecision(4);
+				};
+			};
+		};
+	};
+	function Percent_Cansunk() { //计算击沉率
+		//击沉率计算公式：(伤害上限 - 敌舰hp) / Abs(伤害上限 - 伤害下限) ,区间为[0,1]
+        //非暴击伤害和暴击伤害分别计算一次击沉率
+        for (var i=0;i<Dict_Percent_cansunk.length;i++){ //未暴击和暴击
+			for (var j=0;j<Dict_Percent_cansunk[0].length;j++){ //航向
+				for (var k=0;k<Dict_Percent_cansunk[0][0].length;k++){ //阵形
+					var percent = ReturnInterval_Upanddown(0,100, (((Dict_penedmg_result[3 * i + 2][j][k] - D_enemyhp) / Math.abs(Dict_penedmg_result[3 * i + 2][j][k] - Dict_penedmg_result[3 * i][j][k])) * 100) );
+					percent = Number(percent);
+					Dict_Percent_cansunk[i][j][k] = percent.toPrecision(4);
+				};
+			};
+		};
+	};
+	function ReturnInterval_Upanddown(lower,upper,number){
+		//定义一个函数,接受三个传参,分别是：下界，上界和实数
+        //当实数在上下界构成的区间内时，返回该实数的值
+        //当实数超过上界时，返回上界的值；当实数小于下界时，返回下界的值
+        var i=number
+        i=Math.min(i, upper); //先与上界比较，返回较小的数字的值
+        i=Math.max(i, lower); //然后与下界比较，返回较大的数字的值
+		return i;
+	};
+	//////////////////////////////////////////////////////////////////////////////////
 	//
 	function btn_click() {
-		alert ("制空系数：" + D_I_airdomain + " 置舰损系数: " + D_I_sufferdmg)
+		ICal_tmp(); //计算临时系数
+		ICal(); //计算所有系数的乘积
+		ATKCal(); //计算实际攻击力
+		PenedmgCal(); //计算击穿伤害
+        Percent_middmg(); //计算中破率
+        Percent_hvydmg(); //计算大破率
+        Percent_Cansunk(); //计算击沉率
+		var atktype = document.getElementById("CMB_atktype").options[document.getElementById("CMB_atktype").selectedIndex].text;
+		var str="";
+		str = "伤害计算器v1.1版" + '\n' + "----------------------------------------------------------------------------------------" + '\n';
+        str = str + "攻击类型：" + atktype + '\t' + "基础攻击力：" + D_BATK + '\t' + "舰损系数：" + D_I_sufferdmg + '\t' + "穿甲系数：" + D_I_pene + '\n';
+        str = str + "敌方装甲：" + D_armor + '\t' + "敌方HP：" + D_enemyhp + '\t' + '\n';
+		for (var i=0;i<Dict_penedmg_result.length;i++){ //未暴击0,1,2和暴击3,4,5
+			str = str + "----------------------------------------------------------------------------------------";
+			str = str + '\n';
+			str = str + Dict_name_condition[i] + '\t' + "单纵阵" + '\t' + '\t' + "复纵阵" + '\t' + '\t' + "轮形阵" + '\t' + '\t' + "梯形阵" + '\t' + '\t' + "单横阵" + '\n';
+			for (var j=0;j<Dict_penedmg_result[0].length;j++){ //航向
+				str = str + Dict_name_direction[j] + '\t' + '\t';
+				for (var k=0;k<Dict_penedmg_result[0][0].length;k++){
+					str = str + Dict_penedmg_result[i][j][k] + '\t' + '\t';
+				};
+				str = str + '\n';
+			};
+		};
+        //For i As Byte = 0 To Dict_penedmg_result.GetLength(0) - 1 '未暴击0,1,2和暴击3,4,5
+        //    RTBox_result.Text = RTBox_result.Text & "----------------------------------------------------------------------------------------"
+        //    RTBox_result.Text = RTBox_result.Text & vbCrLf
+        //    RTBox_result.Text = RTBox_result.Text & Dict_name_condition(i) & vbTab & "单纵阵" & vbTab & vbTab & "复纵阵" & vbTab & vbTab & "轮形阵" & vbTab & vbTab & "梯形阵" & vbTab & vbTab & "单横阵" & vbCrLf
+        //    For j As Byte = 0 To Dict_penedmg_result.GetLength(1) - 1 '航向
+        //        RTBox_result.Text = RTBox_result.Text & Dict_name_direction(j) & vbTab & vbTab
+        //        For k As Byte = 0 To Dict_penedmg_result.GetLength(2) - 1 '阵形
+        //            RTBox_result.Text = RTBox_result.Text & CStr(Dict_penedmg_result(i, j, k)) & vbTab & vbTab
+        //        Next
+        //        RTBox_result.Text = RTBox_result.Text & vbCrLf
+        //    Next
+        //Next
+		//
+		//中破率
+		str = str + "----------------------------------------------------------------------------------------";
+        str = str + '\n' + '\n';
+        str = str + "========================================================================================" + '\n';
+        str = str + "中破率：" + '\n';
+		for (var i=0;i<Dict_Percent_middmg.length;i++){
+			str = str + "----------------------------------------------------------------------------------------";
+			str = str + '\n';
+			str = str + Dict_name_condition[i+6] + '\t' + '\t' + "单纵阵" + '\t' + '\t' + "复纵阵" + '\t' + '\t' + "轮形阵" + '\t' + '\t' + "梯形阵" + '\t' + '\t' + "单横阵" + '\n';
+			for (var j=0;j<Dict_Percent_middmg[0].length;j++){
+				str = str + Dict_name_direction[j] + '\t' + '\t';
+				for (var k=0;k<Dict_Percent_middmg[0][0].length;k++) {
+					str = str + Dict_Percent_middmg[i][j][k] + "%" + '\t' + '\t';
+				};
+				str = str + '\n';
+			};
+		};
+		//大破率
+        str = str + "----------------------------------------------------------------------------------------";
+        str = str + '\n' + '\n';
+        str = str + "========================================================================================" + '\n';
+        str = str + "大破率：" + '\n';
+		for (var i=0;i<Dict_Percent_hvydmg.length;i++){
+			str = str + "----------------------------------------------------------------------------------------";
+			str = str + '\n';
+			str = str + Dict_name_condition[i+6] + '\t' + '\t' + "单纵阵" + '\t' + '\t' + "复纵阵" + '\t' + '\t' + "轮形阵" + '\t' + '\t' + "梯形阵" + '\t' + '\t' + "单横阵" + '\n';
+			for (var j=0;j<Dict_Percent_hvydmg[0].length;j++){
+				str = str + Dict_name_direction[j] + '\t' + '\t';
+				for (var k=0;k<Dict_Percent_hvydmg[0][0].length;k++) {
+					str = str + Dict_Percent_hvydmg[i][j][k] + "%" + '\t' + '\t';
+				};
+				str = str + '\n';
+			};
+		};
+		//击沉率
+		str = str + "----------------------------------------------------------------------------------------";
+        str = str + '\n' + '\n';
+        str = str + "========================================================================================" + '\n';
+        str = str + "击沉率：" + '\n';
+		for (var i=0;i<Dict_Percent_cansunk.length;i++){
+			str = str + "----------------------------------------------------------------------------------------";
+			str = str + '\n';
+			str = str + Dict_name_condition[i+6] + '\t' + '\t' + "单纵阵" + '\t' + '\t' + "复纵阵" + '\t' + '\t' + "轮形阵" + '\t' + '\t' + "梯形阵" + '\t' + '\t' + "单横阵" + '\n';
+			for (var j=0;j<Dict_Percent_cansunk[0].length;j++){
+				str = str + Dict_name_direction[j] + '\t' + '\t';
+				for (var k=0;k<Dict_Percent_cansunk[0][0].length;k++) {
+					str = str + Dict_Percent_cansunk[i][j][k] + "%" + '\t' + '\t';
+				};
+				str = str + '\n';
+			};
+		};
+		//
+		str = str + "========================================================================================"
+		document.getElementById("RTBox_result").value = str;
 	};
 	
 
