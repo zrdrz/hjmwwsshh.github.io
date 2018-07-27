@@ -113,9 +113,8 @@
 	<!--禁用自动填充-->
 	
 	<div class="content"> 
-		<h3 style="font-family: 微软雅黑">Damage Calculator</h3>
+		<label style="font: Arial, Helvetica, sans-serifx; font-size: 36px; font-weight: bold; display:block">Damage Calculator for WSGR v1.2-web</label> 
 		<hr noshade="noshade"/>
-
 		<div class="leftbox" >
 			<label id="lbl_ATKTYPE">1.选择攻击类型：</label>
 			<select id="CMB_atktype" onchange="CMB_atktype_changed()">
@@ -310,11 +309,12 @@
 				<button type="button" class="button"  style="width:100%" onclick="btn_click()">开始计算</button>       
 		</div>
 		<div class="rightbox">
-			<textarea id="RTBox_result" style="width:100%;height:675px;" readonly="readonly"></textarea>
+			<textarea id="RTBox_result" style="width:100%;height:675px;word-wrap:normal;" readonly="readonly"></textarea>
 		</div>
 	</div> 
 	</form>
 <script type="text/javascript">
+	var VERSION="v1.2-web"; //版本号
 	//
 	var D_BATK = 0; //基础攻击力
 	var D_BATK_V1 = 0;
@@ -1173,7 +1173,7 @@
 		Percent_Cansunk(); //计算击沉率
 		var atktype = document.getElementById("CMB_atktype").options[document.getElementById("CMB_atktype").selectedIndex].text;
 		var str="";
-		str = "伤害计算器v1.1版" + '\n' + "----------------------------------------------------------------------------------------" + '\n';
+		str = "伤害计算器" + VERSION + "版" + '\n' + "----------------------------------------------------------------------------------------" + '\n';
 		str = str + "攻击类型：" + atktype + '\t' + "基础攻击力：" + D_BATK + '\t' + "舰损系数：" + D_I_sufferdmg + '\t' + "穿甲系数：" + D_I_pene + '\n';
 		str = str + "敌方装甲：" + D_armor + '\t' + "敌方HP：" + D_enemyhp + '\t' + '\n';
 		for (var i=0;i<Dict_penedmg_result.length;i++){ //未暴击0,1,2和暴击3,4,5
