@@ -125,23 +125,23 @@
 			<br/>
 			<div class="BATK">
 				<label id="lbl_BATK_V1" class="small_label">V1:</label>
-				<input id="TBox_BATK_V1" type="text" class="BATK_input" onchange="check_set_BATK_Vn(1)" onkeypress="checkisnum()"/>
+				<input id="TBox_BATK_V1" type="text" class="BATK_input" onpaste="return false;" onchange="check_set_BATK_Vn(1)" onkeypress="checkisnum()"/>
 		</div>
 			<div class="BATK">
 				<label id="lbl_BATK_V2" class="small_label">V2:</label>
-				<input id="TBox_BATK_V2" type="text" class="BATK_input" onchange="check_set_BATK_Vn(2)" onkeypress="checkisnum()"/>
+				<input id="TBox_BATK_V2" type="text" class="BATK_input" onpaste="return false;" onchange="check_set_BATK_Vn(2)" onkeypress="checkisnum()"/>
 			</div>
 			<div class="BATK">
 				<label id="lbl_BATK_V3" class="small_label">V3:</label>
-				<input id="TBox_BATK_V3" type="text" class="BATK_input" onchange="check_set_BATK_Vn(3)" onkeypress="checkisnum()"/>
+				<input id="TBox_BATK_V3" type="text" class="BATK_input" onpaste="return false;" onchange="check_set_BATK_Vn(3)" onkeypress="checkisnum()"/>
 			</div>
 			<div class="BATK">
 				<label id="lbl_BATK_V4" class="small_label">V4:</label>
-				<input id="TBox_BATK_V4" type="text" class="BATK_input" onchange="check_set_BATK_Vn(4)" onkeypress="checkisnum()"/>
+				<input id="TBox_BATK_V4" type="text" class="BATK_input" onpaste="return false;" onchange="check_set_BATK_Vn(4)" onkeypress="checkisnum()"/>
 			</div>
 			<div class="BATK">
 				<label id="lbl_BATK_V5" class="small_label">V5:</label>
-				<input id="TBox_BATK_V5" type="text" class="BATK_input" onchange="check_set_BATK_Vn(5)" onkeypress="checkisnum2()"/>
+				<input id="TBox_BATK_V5" type="text" class="BATK_input" onpaste="return false;" onchange="check_set_BATK_Vn(5)" onkeypress="checkisnum2()"/>
 			</div>
 			<div class="cal_batk">
 				<label>计算公式：</label><label id="lbl_formula">aa</label>
@@ -218,7 +218,7 @@
 				</div>
 				<label class="small_label">声纳系数：</label><br/>
 				<label class="small_label">填入声纳装备的反潜值：</label>
-				<input id="TBox_I_sonar" type="text" style="width:137px;" onchange="TBox_I_TextChanged('sonar')" onkeypress="checkisnum()" />
+				<input id="TBox_I_sonar" type="text" style="width:137px;" onpaste="return false;" onchange="TBox_I_TextChanged('sonar')" onkeypress="checkisnum()" />
 				<label class="mini_label">计算公式和结果：</label>
 				<label id="lbl_I_sonar_result" class="mini_label">None</label><br/>                          	
 			</div>
@@ -228,7 +228,7 @@
 				</div>
 				<label class="small_label">弹药系数：</label><br/>
 				<label class="small_label">填入当前弹药百分数(0~120)：</label>
-				<input id="TBox_I_ammo" type="text" style="width:56px" onchange="TBox_I_TextChanged('ammo')" onkeypress="checkisnum()" />
+				<input id="TBox_I_ammo" type="text" style="width:56px" onchange="TBox_I_TextChanged('ammo')" onpaste="return false;" onkeypress="checkisnum()" />
 				<label class="mini_label">计算公式和结果：</label>
 				<label id="lbl_I_ammo_result" class="mini_label">None</label><br/>           	
 			</div>
@@ -238,7 +238,7 @@
 				</div>
 				<label class="small_label">输入鱼雷机系数：</label><br/>
 				<label class="small_label">系数取值范围(0.5~1)：</label>
-				<input id="TBox_I_tb"  type="text" style="width:84px" onchange="TBox_I_TextChanged('tb')" onkeypress="checkisnum2()"/>
+				<input id="TBox_I_tb"  type="text" style="width:84px" onpaste="return false;" onchange="TBox_I_TextChanged('tb')" onkeypress="checkisnum2()"/>
 			</div>
 
 			<div class="cal_I" style="height:42px;width:324px; float:left;margin-left:6px" >
@@ -255,7 +255,7 @@
 				</div>
 				<label class="small_label">技能攻击力系数：</label><br/>
 				<label class="small_label">填入技能加成百分数(如15%则填入15),若无则填入0：</label>
-				<input id="TBox_I_skill"  type="text" style="width:44px" onchange="TBox_I_TextChanged('skill')" onkeypress="checkisnum()"/>
+				<input id="TBox_I_skill"  type="text" style="width:44px" onpaste="return false;" onchange="TBox_I_TextChanged('skill')" onkeypress="checkisnum()"/>
 				<label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
 				<label id="lbl_I_skill_result" class="small_label">0000</label>
 				<br/>
@@ -266,7 +266,7 @@
 				</div>
 				<label class="small_label">暴击系数：</label><br/>
 				<label class="small_label">填入技能提供的额外暴击伤害的百分数,若无则填入0：</label>
-				<input id="TBox_I_crit"  type="text" style="width:44px" onchange="TBox_I_TextChanged('crit')" onkeypress="checkisnum()"/>
+				<input id="TBox_I_crit"  type="text" style="width:44px" onpaste="return false;" onchange="TBox_I_TextChanged('crit')" onkeypress="checkisnum()"/>
 				<label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
 				<label id="lbl_I_crit_result" class="small_label">0000</label>
 				<br/>
@@ -288,17 +288,17 @@
 			<label>4.输入其它参数：</label><br/>
 			<div class="other_I">
 				<div>
-					<label class="small_label">(1)敌方装甲：</label><input id="TBox_armor"  type="text" style="width:44px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('armor')"/>
-					<label class="small_label">(2)敌方血量：</label><input id="TBox_enemyhp"  type="text" style="width:80px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('enemyhp')"/>
+					<label class="small_label">(1)敌方装甲：</label><input id="TBox_armor"  type="text" style="width:44px" onkeypress="checkisnum()" onpaste="return false;" onchange="TBox_Other_TextChanged('armor')"/>
+					<label class="small_label">(2)敌方血量：</label><input id="TBox_enemyhp"  type="text" style="width:80px" onkeypress="checkisnum()" onpaste="return false;" onchange="TBox_Other_TextChanged('enemyhp')"/>
 				</div>
 				<div>
-					<label class="small_label">(3)输入技能伤害倍率百分数：</label><input id="TBox_skill"  type="text" style="width:44px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('skill')"/>
+					<label class="small_label">(3)输入技能伤害倍率百分数：</label><input id="TBox_skill"  type="text" style="width:44px" onkeypress="checkisnum()" onpaste="return false;" onchange="TBox_Other_TextChanged('skill')"/>
 					<label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif">=></label>
 					<label id="lbl_skill_result" class="small_label">0000</label>
 				</div>
 				<div>
 					<label class="small_label" style="float:left; position:relative; top:2px">(4)额外的穿甲系数百分数，当前值：</label><label id="lbl_pene" class="small_label" style="float:left;display:block;width:40px;text-align:center;position:relative; top:2px">0.6</label>
-					<input id="TBox_pene"  type="text" style="width:44px" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('pene')"/>
+					<input id="TBox_pene"  type="text" style="width:44px" onpaste="return false;" onkeypress="checkisnum()" onchange="TBox_Other_TextChanged('pene')"/>
 					<label class="small_label" style=" font-size:16px;font:'Times New Roman', Times, serif;">=></label>
 					<label id="lbl_pene_result" class="small_label"  >0000</label> 
 				</div>
@@ -595,7 +595,6 @@
 	TBox_Other_TextChanged('enemyhp');
 	TBox_Other_TextChanged('skill');
 	TBox_Other_TextChanged('pene');
-	
 	
 	//
 	function  Load_floattable(){ //加载浮动系数表
