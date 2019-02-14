@@ -343,17 +343,18 @@
 	var D_I_pene = 1; //穿甲系数
 	var D_I_pene_add = 0; //额外的穿甲系数
 	var D_I_usesuperheavyshell = [0.89, 1.18, 1.47]; //使用了超重弹后的浮动系数
+	var D_I_enemyarmordecreasedamage = 0; //敌方装甲减伤系数：该系数只在导弹战（开幕）中生效。
 	//
 	var D_armor = 0; //装甲值
 	var D_skill = 1; //技能伤害倍率
 	var D_skill_add = 0; //额外的技能伤害倍率
 	var D_enemyhp = 0; //敌舰hp
 	//
-	var Dict_atktype= ["航空战(轰炸机)", "航空战(鱼雷机)", "昼战反潜(轻母航战)", "昼战反潜(驱逐巡洋)", "昼战炮击(航母系)", "昼战炮击(其他)", "昼战雷击", "夜战雷击", "夜战巡洋舰炮雷合击", "夜战巡洋舰炮击", "夜战其他炮击"];  //攻击类型	  
+	var Dict_atktype= ["航空战(轰炸机)", "航空战(鱼雷机)", "昼战反潜(轻母航战)", "昼战反潜(驱逐巡洋)", "昼战炮击(航母系)", "昼战炮击(其他)", "昼战雷击", "夜战雷击", "夜战巡洋舰炮雷合击", "夜战巡洋舰炮击", "夜战其他炮击", "导弹战", "夜战导弹"];  //攻击类型	  
 	var Dict_I_sonar = [0.5, 1]; //声纳系数
 	var Dict_I_sufferdmg = [1, 0.6, 0.3]; //舰损系数:非中破,中破,大破/击沉 
 	var Dict_I_airdomain = [1.1, 1.05, 1, 0.95, 0.9]; //制空系数:空占,空优,势均力敌,空劣,空丧
-	var Dict_I_formation = [ //阵形系数：分别是，炮击(非航母)，雷击，夜战和无影响
+	var Dict_I_formation = [ //阵形系数：分别[导弹战（开幕）、炮击(非航母)]，[雷击]，[夜战]和[无影响]
 			[1.0, 0.8, 0.75, 1.0, 0.8],
 			[1.0, 0.9, 0.8, 1.0, 0.8],
 			[1.1, 0.9, 1.0, 1.0, 1.0],
@@ -377,26 +378,31 @@
 			[1, 0, 0, 0, 0], //夜战雷击
 			[1, 1, 0, 0, 0], //夜战巡洋舰炮雷合击
 			[1, 0, 0, 0, 0], //夜战巡洋舰炮击
-			[1, 0, 0, 0, 0]  //夜战其他炮击
+			[1, 0, 0, 0, 0], //夜战其他炮击
+			[1, 1, 1, 0, 0], //导弹战
+			[1, 1, 1, 0, 0] //夜战导弹
 		];
 	var Dict_atktype_label = [ //基础攻击力的标签说明
-			["放飞机数：", "该格轰炸：", "不可用", "不可用", "不可用"],
-			["放飞机数：", "该格鱼雷：", "不可用", "不可用", "不可用"],
-			["舰船对潜：", "不可用", "不可用", "不可用", "不可用"],
-			["舰船对潜：", "深弹对潜：", "不可用", "不可用", "不可用"],
-			["火力：", "轰炸：", "鱼雷：", "对方总对空值：", "系数α(0~1)："],
-			["火力：", "不可用", "不可用", "不可用", "不可用"],
-			["鱼雷：", "不可用", "不可用", "不可用", "不可用"],
-			["鱼雷：", "不可用", "不可用", "不可用", "不可用"],
-			["火力：", "鱼雷：", "不可用", "不可用", "不可用"],
-			["火力：", "不可用", "不可用", "不可用", "不可用"],
-			["火力：", "不可用", "不可用", "不可用", "不可用"]
+			["放飞机数：", "该格轰炸：", "不可用", "不可用", "不可用"],			//航空战(轰炸机)
+			["放飞机数：", "该格鱼雷：", "不可用", "不可用", "不可用"],			//航空战(鱼雷机)
+			["舰船对潜：", "不可用", "不可用", "不可用", "不可用"],				//昼战反潜(轻母航战)
+			["舰船对潜：", "深弹对潜：", "不可用", "不可用", "不可用"],			//昼战反潜(驱逐巡洋)
+			["火力：", "轰炸：", "鱼雷：", "对方总对空值：", "系数α(0~1)："],	//昼战炮击(航母系) 
+			["火力：", "不可用", "不可用", "不可用", "不可用"],					//昼战炮击(其他)
+			["鱼雷：", "不可用", "不可用", "不可用", "不可用"],					//昼战雷击
+			["鱼雷：", "不可用", "不可用", "不可用", "不可用"],					//夜战雷击
+			["火力：", "鱼雷：", "不可用", "不可用", "不可用"],					//夜战巡洋舰炮雷合击
+			["火力：", "不可用", "不可用", "不可用", "不可用"],					//夜战巡洋舰炮击
+			["火力：", "不可用", "不可用", "不可用", "不可用"],					//夜战其他炮击
+			["舰船火力：", "发射器火力：", "单格导弹火力：", "不可用", "不可用"],	//导弹战
+			["舰船火力：", "发射器火力：", "单格导弹火力：", "不可用", "不可用"]	//夜战导弹
 		];
 	//决定要启用哪些系数
+	//1阵形 2航向 3制空 4声纳 5弹药 6鱼雷机 7舰损 8技能攻击力 9暴击 10浮动
 	//       1  2  3  4  5  6  7  8  9  10
 	var Dict_atktype_enable_I = [
 			[0, 0, 1, 0, 1, 0, 1, 1, 1, 1], //航空战(轰炸机)
-			[0, 0, 0, 0, 1, 1, 1, 1, 1, 1], //航空战(鱼雷机)
+			[0, 0, 1, 0, 1, 1, 1, 1, 1, 1], //航空战(鱼雷机)
 			[0, 0, 0, 1, 1, 0, 0, 1, 1, 1], //昼战反潜(轻母航战
 			[0, 0, 0, 1, 1, 0, 1, 1, 1, 1], //昼战反潜(驱逐巡洋)
 			[0, 0, 1, 0, 1, 0, 0, 1, 1, 1], //昼战炮击(航母系)
@@ -405,7 +411,9 @@
 			[1, 0, 0, 0, 1, 0, 1, 1, 1, 1], //夜战雷击
 			[1, 0, 0, 0, 1, 0, 1, 1, 1, 1], //夜战巡洋舰炮雷合击
 			[1, 0, 0, 0, 1, 0, 1, 1, 1, 1], //夜战巡洋舰炮击
-			[1, 0, 0, 0, 1, 0, 1, 1, 1, 1]  //夜战其他炮击
+			[1, 0, 0, 0, 1, 0, 1, 1, 1, 1],  //夜战其他炮击
+			[1, 0, 0, 0, 0, 0, 1, 1, 1, 1], //导弹战
+			[1, 0, 0, 0, 0, 0, 1, 1, 1, 1]  //夜战导弹
 		];
 	//系数的结果表,分别是:未暴击下限,未暴击平均,未暴击上限;暴击下限,暴击平均,暴击上限;横向为阵形,纵向为航向
 	var Dict_I_result = [
@@ -534,7 +542,9 @@
 			1.0, //夜战雷击
 			1.0, //夜战巡洋舰炮雷合击
 			0.6, //夜战巡洋舰炮击
-			0.6  //夜战其他炮击
+			0.6, //夜战其他炮击
+			0.9, //导弹战
+			0.9  //夜战导弹
 		];
 	var Dict_Percent_cansunk = [ //击沉率结果表
 			[ //未暴击
@@ -601,17 +611,19 @@
 	function  Load_floattable(){ //加载浮动系数表
 		Dict_I_float = [ //浮动系数表
 			//下限,  平均,  上限
-			[0.89, 1.055, 1.22],
-			[0.89, 1.055, 1.22],
-			[0.89, 1.055, 1.22],
-			[0.89, 1.055, 1.22],
-			[0.89, 1.055, 1.22],
-			[0.89, 1.055, 1.22],
-			[0.89, 1.055, 1.22],
-			[2.4, 2.7, 3.0],
-			[1.2, 1.5, 1.8],
-			[2.4, 3.0, 3.6],
-			[1.2, 1.5, 1.8]
+			[0.89, 1.055, 1.22], //航空战(轰炸机)
+			[0.89, 1.055, 1.22], //航空战(鱼雷机)
+			[0.89, 1.055, 1.22], //昼战反潜(轻母航战)
+			[0.89, 1.055, 1.22], //昼战反潜(驱逐巡洋)
+			[0.89, 1.055, 1.22], //昼战炮击(航母系) 
+			[0.89, 1.055, 1.22], //昼战炮击(其他)
+			[0.89, 1.055, 1.22], //昼战雷击
+			[2.4, 2.7, 3.0],     //夜战雷击
+			[1.2, 1.5, 1.8],     //夜战巡洋舰炮雷合击
+			[2.4, 3.0, 3.6],     //夜战巡洋舰炮击
+			[1.2, 1.5, 1.8],     //夜战其他炮击
+			[0.89, 1.055, 1.22], //导弹战
+            [1.2, 1.35, 1.5]     //夜战导弹
 		];
 	}
 	//
@@ -832,6 +844,14 @@
 				document.getElementById("lbl_formula").innerText = D_BATK_V1 + " + 10";
 				BATK_Cal(10);
 				break;
+			case 11: //导弹战:舰船裸火力 + 发射器火力 + 导弹火力 * 3	每格导弹单独计算不叠加
+				document.getElementById("lbl_formula").innerText = D_BATK_V1 + " + " + D_BATK_V2 + " + " + D_BATK_V3 + " × 3"
+				BATK_Cal(11);
+				break;
+			case 12: //夜战导弹:舰船裸火力 + 发射器火力 + 导弹火力 * 3	每格导弹单独计算不叠加
+				document.getElementById("lbl_formula").innerText
+				BATK_Cal(12);
+				break;
 		}
 	};
 	function BATK_Cal(CMB_atktype_i){ //计算基础攻击力
@@ -874,6 +894,12 @@
 			case 10: //夜战其他炮击
 				D_BATK = Number(D_BATK_V1) + 10;
 				break;
+			case 11: //导弹战
+				D_BATK = Number(D_BATK_V1) + Number(D_BATK_V2) + Number(D_BATK_V3) * 3;
+				break;
+			case 12: //夜战导弹
+				D_BATK = Number(D_BATK_V1) + Number(D_BATK_V2) + Number(D_BATK_V3) * 3;
+				break;
 		}
 		document.getElementById("lbl_BATK_result").innerText = D_BATK;
 	};
@@ -887,8 +913,8 @@
 				D_I_tmp = Number(D_I_airdomain) * Number(D_I_ammo) * Number(D_I_sufferdmg) * Number(D_I_skill);
 				break;
 			case 1: //航空战(鱼雷机)
-				document.getElementById("lbl_I_formula").innerText = "鱼雷机系数 × 弹药系数 × 舰损系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
-				D_I_tmp = Number(D_I_tb) * Number(D_I_ammo) * Number(D_I_sufferdmg) * Number(D_I_skill);
+				document.getElementById("lbl_I_formula").innerText = "鱼雷机系数 × 制空系数 ×  弹药系数 × 舰损系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
+				D_I_tmp = Number(D_I_tb) * Number(D_I_airdomain) *  Number(D_I_ammo) * Number(D_I_sufferdmg) * Number(D_I_skill);
 				break;
 			case 2: //反潜(轻母航战)
 				document.getElementById("lbl_I_formula").innerText = "声呐系数 × 弹药系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
@@ -920,6 +946,14 @@
 			case 10: //7,8,9,10,夜战
 				document.getElementById("lbl_I_formula").innerText = "阵型系数 × 弹药系数 × 舰损系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
 				D_I_tmp = Number(D_I_ammo) * Number(D_I_sufferdmg) * Number(D_I_skill);
+				break;
+			case 11: //导弹战
+				document.getElementById("lbl_I_formula").innerText = "阵型系数 × 舰损系数 × 浮动系数 × 暴击系数 × 敌方装甲减伤系数 × 技能攻击力系数";
+				D_I_tmp =  Number(D_I_sufferdmg) * Number(D_I_skill);
+				break;
+			case 12: //夜战导弹
+				document.getElementById("lbl_I_formula").innerText = "阵型系数 × 舰损系数 × 浮动系数 × 暴击系数 × 技能攻击力系数";
+				D_I_tmp =  Number(D_I_sufferdmg) * Number(D_I_skill);
 				break;
 		}
 	};
@@ -960,6 +994,9 @@
 	function pene_cal(CMB_atktype_i) { //计算穿甲系数
 		D_I_pene = Dict_I_pene[CMB_atktype_i] + Number(D_I_pene_add) / 100;
 		document.getElementById("lbl_pene_result").innerText = D_I_pene;
+	};
+	function I_enemyarmordecreasedamage_cal() { //计算敌方装甲减伤系数
+		D_I_enemyarmordecreasedamage = 1 / Math.sqrt( 1 + Math.pow( Number(D_armor/(65*D_I_pene)) , 5.4 ));
 	};
 	//////////////////////////////////////////////////////////////////////////////////
 	function select_I_val(CMB_atktype_i) { //根据攻击类型来设置要使用的系数，并初始化系数的值
@@ -1009,6 +1046,7 @@
 				I_select_direction(1); //航向无影响
 				break;
 			case 1: //航空战(鱼雷机)
+				document.getElementById("Rdb_I_airdomain1").click(); //制空系数
 				document.getElementById("Rdb_I_sufferdmg1").click(); //舰损系数
 				I_select_formation(3); //阵形无影响
 				I_select_direction(1); //航向无影响
@@ -1045,6 +1083,16 @@
 				document.getElementById("Rdb_I_sufferdmg1").click(); //舰损系数
 				I_select_formation(2); //阵形
 				I_select_direction(1); //航向无影响
+				break;
+			case 11: //导弹战
+				document.getElementById("Rdb_I_sufferdmg1").click(); //舰损系数
+				I_select_formation(0); //阵形
+				I_select_direction(1); //航向无影响
+				break;
+			case 12: //夜战导弹
+				document.getElementById("Rdb_I_sufferdmg1").click(); //舰损系数
+				I_select_formation(2); //阵形
+				I_select_direction(1); //航向无影
 				break;
 		};	
 	};
@@ -1097,18 +1145,31 @@
 			};
 		};
 	};
-	function PenedmgCal() { //计算击穿伤害
-		for (var i=0;i<Dict_ATK_result.length;i++){ //未暴击0,1,2和暴击3,4,5
-			for (var j=0;j<Dict_ATK_result[0].length;j++) { //航向
-				for (var k=0;k<Dict_ATK_result[0][0].length;k++) { //阵形
-					//破甲伤害 = CEIL(实际攻击力 * (1 - 对方装甲 / (0.5 * 对方装甲 + 穿甲系数 * 实际攻击力)) * 技能伤害倍率)
-					var temp_result=Math.ceil(Dict_ATK_result[i][j][k] * (1 - D_armor/(Number(0.5 * D_armor) + Number(D_I_pene * Dict_ATK_result[i][j][k]))) * D_skill);
-					//当破甲伤害 > 0时，实际伤害为破甲伤害；当破甲伤害 ≤ 0时，实际伤害为未击穿伤害
-					if (temp_result>0){
-						Dict_penedmg_result[i][j][k] = temp_result;
-					}
-					else { //未击穿伤害 = CEIL(MIN(基础攻击力, 对方当前HP) * 0.1)
-						Dict_penedmg_result[i][j][k] = Math.ceil(Math.min(D_BATK,D_enemyhp) * 0.1);
+	function PenedmgCal(TYPE) { //计算击穿伤害
+		if (TYPE==11) { //导弹战（即昼战导弹）必定破甲，在实际攻击力公式中已经计算过敌方装甲的减伤机制，所以实际伤害为：
+			//实际伤害 = CEIL(实际攻击力 * 最终伤害倍率),原本实际攻击力里包含了装甲减伤系数的计算,这里为了方便整合程序逻辑,实际攻击力里并不包含,所以需要再乘以一个敌方装甲减伤系数			
+			I_enemyarmordecreasedamage_cal();	
+			for (var i=0;i<Dict_ATK_result.length;i++){ //未暴击0,1,2和暴击3,4,5
+				for (var j=0;j<Dict_ATK_result[0].length;j++) { //航向
+					for (var k=0;k<Dict_ATK_result[0][0].length;k++) { //阵形
+						//实际伤害 = CEIL(实际攻击力 * 敌方装甲减伤系数 * 技能伤害倍率)
+						Dict_penedmg_result[i][j][k]=Math.ceil(Dict_ATK_result[i][j][k] * D_I_enemyarmordecreasedamage * D_skill);
+					};
+				};
+			};
+		} else { //其他攻击（包括夜战导弹）需要先计算破甲伤害：
+			for (var i=0;i<Dict_ATK_result.length;i++){ //未暴击0,1,2和暴击3,4,5
+				for (var j=0;j<Dict_ATK_result[0].length;j++) { //航向
+					for (var k=0;k<Dict_ATK_result[0][0].length;k++) { //阵形
+						//破甲伤害 = CEIL(实际攻击力 * (1 - 对方装甲 / (0.5 * 对方装甲 + 穿甲系数 * 实际攻击力)) * 技能伤害倍率)
+						var temp_result=Math.ceil(Dict_ATK_result[i][j][k] * (1 - D_armor/(Number(0.5 * D_armor) + Number(D_I_pene * Dict_ATK_result[i][j][k]))) * D_skill);
+						//当破甲伤害 > 0时，实际伤害为破甲伤害；当破甲伤害 ≤ 0时，实际伤害为未击穿伤害
+						if (temp_result>0){
+							Dict_penedmg_result[i][j][k] = temp_result;
+						}
+						else { //未击穿伤害 = CEIL(MIN(基础攻击力, 对方当前HP) * 0.1)
+							Dict_penedmg_result[i][j][k] = Math.ceil(Math.min(D_BATK,D_enemyhp) * 0.1);
+						};
 					};
 				};
 			};
@@ -1168,7 +1229,7 @@
 		ICal_tmp(); //计算临时系数
 		ICal(); //计算所有系数的乘积
 		ATKCal(); //计算实际攻击力
-		PenedmgCal(); //计算击穿伤害
+		PenedmgCal(document.getElementById("CMB_atktype").selectedIndex); //计算击穿伤害
 		Percent_middmg(); //计算中破率
 		Percent_hvydmg(); //计算大破率
 		Percent_Cansunk(); //计算击沉率
