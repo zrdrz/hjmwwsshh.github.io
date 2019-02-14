@@ -114,7 +114,7 @@
 	<!--禁用自动填充-->
 	
 	<div class="content"> 
-		<label style="font: Arial, Helvetica, sans-serifx; font-size: 36px; font-weight: bold; display:block">Damage Calculator for WSGR v1.2-web</label> 
+		<label style="font: Arial, Helvetica, sans-serifx; font-size: 36px; font-weight: bold; display:block">Damage Calculator for WSGR v1.3-web</label> 
 		<hr noshade="noshade"/>
 		<div class="leftbox" >
 			<label id="lbl_ATKTYPE">1.选择攻击类型：</label>
@@ -315,7 +315,7 @@
 	</div> 
 	</form>
 <script type="text/javascript">
-	var VERSION="v1.2-web"; //版本号
+	var VERSION="v1.3-web"; //版本号
 	//
 	var D_BATK = 0; //基础攻击力
 	var D_BATK_V1 = 0;
@@ -791,7 +791,7 @@
 				BATK_Cal(1);
 				break;
 			case 2: //反潜(轻母航战):	舰船对潜 / 3 + 30
-				document.getElementById("lbl_formula").innerText = D_BATK_V1 + " ÷ 3";
+				document.getElementById("lbl_formula").innerText = D_BATK_V1 + " ÷ 3 + 30";
 				BATK_Cal(2);
 				break;
 			case 3: //反潜(驱逐巡洋):舰船对潜 / 3 + 深弹对潜 * 1.3 + 30 (有深弹); 舰船对潜 / 3 (无深弹)
@@ -845,7 +845,7 @@
 				D_BATK = Math.log(Number(D_BATK_V1) + 1) * 2 * Number(D_BATK_V2) + 25;
 				break;
 			case 2: //反潜(轻母航战)
-				D_BATK = Number(D_BATK_V1) / 3;
+				D_BATK = Number(D_BATK_V1) / 3 + 30;
 				break;
 			case 30: //反潜(驱逐巡洋)无深弹
 				D_BATK = Number(D_BATK_V1) / 3;
