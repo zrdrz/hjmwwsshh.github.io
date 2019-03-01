@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>经验计算器</title>
+    <style>
+        .inputslider {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <input id="TBox_EXP_V1" type="range" step="1" min="1" max="80" class="inputslider" onchange="changelabel(1)"/>
+    <label id="lbl_EXP_V1" style="width:100px;height:12px;"></label>
+    </br>
+    <input id="TBox_EXP_V2" type="range" step="1" min="1" max="80" class="inputslider" onchange="changelabel(2)"/>    
+    <label id="lbl_EXP_V2" style="width:100px;height:12px;"></label>
+    </br>
+    <button type="button"  style="width:100%" onclick="btn_click()">开始计算</button> 
+    <script type="text/javascript">
+        var level1 = 0;
+        var level2 = 0;
+        var level_higher = 0;
+        var level_lower = 0;
+        var exp_needed = 0;
+        var Dict_exp_accumulated = [
+        //  x1		x2		x3		x4		x5		x6		x7		x8		x9		x0
+            0,		10,		28,		55,		91,		135,	187,	248,	318,	396,
+            482,	611,	783,	997,	1253,	1552,	1894,	2278,	2704,	3173,
+            3685,	4281,	4963,	5729,	6581,	7517,	8539,	9645,	10837,	12113,
+            13475,	14964,	16580,	18324,	20196,	22195,	24321,	26575,	28957,	31466,
+            34102,	36909,	39885,	43032,	46348,	49835,	53491,	57318,	61314,	65481,
+            69817,	74579,	79765,	85377,	91413,	97875,	104761,	112073,	119809,	127971,
+            136557,	145994,	156280,	167417,	179403,	192240,	205926,	220463,	235849,	252086,
+            270022,	289659,	310995,	334032,	358768,	385205,	413341,	443178,	474714,	507951
+        ];
+        document.getElementById("TBox_EXP_V1").value = "1";
+        document.getElementById("TBox_EXP_V2").value = "2";
+        changelabel(1);
+        changelabel(2);
+        function checkisnum() { //检查是否为数字,只允许输入数字
+            var event =  window.event || arguments.callee.caller.arguments[0];
+            if (event.keyCode < 47 || event.keyCode > 57) {
+                event.returnValue = false;
+            }
+        };
+        function changelabel(id){
+            var lblid = "lbl_EXP_V" + id;
+            var tboxid = "TBox_EXP_V" + id;
+            document.getElementById(lblid).innerText = document.getElementById(tboxid).value;
+        }
+        function btn_click() {
+            level1 = document.getElementById("TBox_EXP_V1").value;
+            level2 = document.getElementById("TBox_EXP_V2").value;
+            if ( Number(level1) > 0 && Number(level2) > 0) {
+                exp_needed = Math.abs(Dict_exp_accumulated[level1 - 1] - Dict_exp_accumulated[level2 - 1]);
+                alert(exp_needed);
+            }
+        };
+    
+    </script>
+</body>
+</html>
