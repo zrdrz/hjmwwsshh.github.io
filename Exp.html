@@ -4,27 +4,75 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>经验计算器</title>
     <style>
+        body {
+            background : #555;
+        }
         .inputslider {
             width: 200px;
+            height: 22px;
+            vertical-align: middle;
+        }
+        .explabel {
+            height: 22px;
+            vertical-align: middle;
+        }
+        .content {
+            width: 800px;
+            height : auto ;
+            margin: auto;
+            background: white;
+            padding: 10px;
+            font-size :18px;
+            line-height :200%;
+            float:none;
+            overflow:auto;
+            background-color:#F5F4F3;
+        }
+        .calbox {
+            width: 320px;
+            margin: 5px;
+            padding: 5px;
+            height: auto;
+            float: left;
+            border: solid;
+            border-width: 1px;
+            border-color: #AAA;
+            border-radius:5px;
         }
     </style>
 </head>
 <body>
-    <input id="TBox_EXP_V1" type="range" step="1" min="1" max="80" class="inputslider" onchange="changelabel(1)"/>
-    <label id="lbl_EXP_V1" style="width:100px;height:12px;"></label>
-    </br>
-    <input id="TBox_EXP_V2" type="range" step="1" min="1" max="80" class="inputslider" onchange="changelabel(2)"/>    
-    <label id="lbl_EXP_V2" style="width:100px;height:12px;"></label>
-    </br>
-    <button type="button"  style="width:100%" onclick="btn_click()">开始计算</button> 
-    <script type="text/javascript">
-        var level1 = 0;
-        var level2 = 0;
-        var level_higher = 0;
-        var level_lower = 0;
-        var exp_needed = 0;
-        var Dict_exp_accumulated = [
-        //  x1		x2		x3		x4		x5		x6		x7		x8		x9		x0
+    <div class="content">
+        <div class="calbox">
+            <label id="title1">ship</label>
+            </br>
+            <label class="explabel">level1:</label>
+            <input id="TBox_ShipEXP_V1" type="range" step="1" min="1" max="80" class="inputslider" oninput="changelabel('TBox_ShipEXP_V1','lbl_ShipEXP_V1')"/>
+            <label id="lbl_ShipEXP_V1" class="explabel"></label>
+            </br>
+            <label class="explabel">level2:</label>
+            <input id="TBox_ShipEXP_V2" type="range" step="1" min="1" max="80" class="inputslider" oninput="changelabel('TBox_ShipEXP_V2','lbl_ShipEXP_V2')"/>    
+            <label id="lbl_ShipEXP_V2" class="explabel"></label>
+            </br>
+            <button type="button"  style="width:100%" onclick="calexp('TBox_ShipEXP_V1','TBox_ShipEXP_V2',Dict_shipexp_accumulated)">开始计算</button> 
+        </div>
+        <div class="calbox">
+            <label id="title1">commander</label>
+            </br>
+            <label class="explabel">level1:</label>
+            <input id="TBox_CommEXP_V1" type="range" step="1" min="1" max="150" class="inputslider" oninput="changelabel('TBox_CommEXP_V1','lbl_CommEXP_V1')"/>
+            <label id="lbl_CommEXP_V1" class="explabel"></label>
+            </br>
+            <label class="explabel">level2:</label>
+            <input id="TBox_CommEXP_V2" type="range" step="1" min="1" max="150" class="inputslider" oninput="changelabel('TBox_CommEXP_V2','lbl_CommEXP_V2')"/>    
+            <label id="lbl_CommEXP_V2" class="explabel"></label>
+            </br>
+            <button type="button"  style="width:100%" onclick="calexp('TBox_CommEXP_V1','TBox_CommEXP_V2',Dict_commexp_accumulated)">开始计算</button> 
+        </div>
+    </div>
+        <script type="text/javascript">
+        var Dict_shipexp_accumulated = [
+        //  x1		x2		x3		x4		x5		x6		x7		x8		x9		x10
             0,		10,		28,		55,		91,		135,	187,	248,	318,	396,
             482,	611,	783,	997,	1253,	1552,	1894,	2278,	2704,	3173,
             3685,	4281,	4963,	5729,	6581,	7517,	8539,	9645,	10837,	12113,
@@ -34,26 +82,46 @@
             136557,	145994,	156280,	167417,	179403,	192240,	205926,	220463,	235849,	252086,
             270022,	289659,	310995,	334032,	358768,	385205,	413341,	443178,	474714,	507951
         ];
-        document.getElementById("TBox_EXP_V1").value = "1";
-        document.getElementById("TBox_EXP_V2").value = "2";
-        changelabel(1);
-        changelabel(2);
+        var Dict_commexp_accumulated = [
+        //  x1		x2		x3		x4		x5		x6		x7		x8		x9		x10
+            0,		10,		30,		60,		100,	150,	210,	280,	360,	450,
+            550,	670,	810,	970,	1150,	1350,	1570,	1810,	2070,	2350,
+            2650,	2980,	3340,	3730,	4150,	4600,	5080,	5590,	6130,	6700,
+            7300,	7940,	8620,	9340,	10100,	10900,	11740,	12620,	13540,	14500,
+            15500,	16550,	17650,	18800,	20000,	21250,	22550,	23900,	25300,	26750,
+            28250,	29810,	31430,	33110,	34850,	36650,	38510,	40430,	42410,	44450,
+            46550,	48720,	50960,	53270,	55650,	58100,	60620,	63210,	65870,	68600,
+            71400,	74280,	77240,	80280,	83400,	86600,	89880,	93240,	96680,	100200,
+            103800,	107490,	111270,	115140,	119100,	123150,	127290,	131520,	135840,	140250,
+            144750,	149350,	154050,	158850,	163750,	168750,	173850,	179050,	184350,	189750,
+            195250,	200850,	206550,	212350,	218250,	224250,	230350,	236550,	242850,	249250,
+            255750,	262350,	269050,	275850,	282750,	289750,	296850,	304050,	311350,	318750,
+            326250,	333850,	341550,	349350,	357250,	365250,	373350,	381550,	389850,	398250,
+            406750,	415350,	424050,	432850,	441750,	450750,	459850,	469050,	478350,	487750,
+            497250,	506850,	516550,	526350,	536250,	546250,	556350,	566550,	576850,	587250
+        ];
+        document.getElementById("TBox_ShipEXP_V1").value = "1";
+        document.getElementById("TBox_ShipEXP_V2").value = "2";
+        document.getElementById("TBox_CommEXP_V1").value = "1";
+        document.getElementById("TBox_CommEXP_V2").value = "2";
+        changelabel("TBox_ShipEXP_V1","lbl_ShipEXP_V1");
+        changelabel("TBox_ShipEXP_V2","lbl_ShipEXP_V2");
+        changelabel("TBox_CommEXP_V1","lbl_CommEXP_V1");
+        changelabel("TBox_CommEXP_V2","lbl_CommEXP_V2");
         function checkisnum() { //检查是否为数字,只允许输入数字
             var event =  window.event || arguments.callee.caller.arguments[0];
             if (event.keyCode < 47 || event.keyCode > 57) {
                 event.returnValue = false;
             }
         };
-        function changelabel(id){
-            var lblid = "lbl_EXP_V" + id;
-            var tboxid = "TBox_EXP_V" + id;
+        function changelabel(tboxid,lblid){
             document.getElementById(lblid).innerText = document.getElementById(tboxid).value;
         }
-        function btn_click() {
-            level1 = document.getElementById("TBox_EXP_V1").value;
-            level2 = document.getElementById("TBox_EXP_V2").value;
+        function calexp(tboxid1,tboxid2,dict) { //向两个html dom对象获取变量值,然后使用指定的数组做计算//通用方法
+            var level1 = document.getElementById(tboxid1).value;
+            var level2 = document.getElementById(tboxid2).value;
             if ( Number(level1) > 0 && Number(level2) > 0) {
-                exp_needed = Math.abs(Dict_exp_accumulated[level1 - 1] - Dict_exp_accumulated[level2 - 1]);
+                var exp_needed = Math.abs(dict[level1 - 1] - dict[level2 - 1]);
                 alert(exp_needed);
             }
         };
