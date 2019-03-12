@@ -7,6 +7,16 @@
         body {
             background : #555;
         }
+        .titlebox {
+            width: 800px;
+            height: 72px;
+            margin: auto;
+            padding: 5px 10px 5px 10px;
+            background-color:#81BEF7;
+        }
+        .titleboxleft {
+            width: 300px;
+        }
         .inputslider {
             width: 200px;
             height: 22px;
@@ -24,7 +34,7 @@
             padding: 10px;
             font-size :18px;
             line-height :200%;
-            float:none;
+            float: none;
             overflow:auto;
             background-color:#F5F4F3;
         }
@@ -39,9 +49,40 @@
             border-color: #AAA;
             border-radius:5px;
         }
+        .returnbtn {
+            height: 42px;
+            width: 200px;
+            display: inline-block;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
     </style>
 </head>
 <body>
+    <div class="titlebox">
+        <div class="titleboxleft">
+            <h1 style="text-align:left; color:#FAFAFA;">经验计算器</h1>
+        </div>
+    </div>
     <div class="content">
         <div class="calbox">
             <label id="title1">ship</label>
@@ -54,7 +95,7 @@
             <input id="TBox_ShipEXP_V2" type="range" step="1" min="1" max="80" class="inputslider" oninput="changelabel('TBox_ShipEXP_V2','lbl_ShipEXP_V2')"/>    
             <label id="lbl_ShipEXP_V2" class="explabel"></label>
             </br>
-            <button type="button"  style="width:100%" onclick="calexp('TBox_ShipEXP_V1','TBox_ShipEXP_V2',Dict_shipexp_accumulated)">开始计算</button> 
+            <button class="button" onclick="calexp('TBox_ShipEXP_V1','TBox_ShipEXP_V2',Dict_shipexp_accumulated)">开始计算</button> 
         </div>
         <div class="calbox">
             <label id="title1">commander</label>
