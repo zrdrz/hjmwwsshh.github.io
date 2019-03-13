@@ -2,20 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>经验计算器</title>
+    <title>经验/COST计算器</title>
     <style>
         body {
             background : #555;
         }
+        .a {
+            text-decoration:none;
+        }
+        .a:visited {
+            color:#FAFAFA;
+        }
         .titlebox {
             width: 800px;
-            height: 72px;
+            height: 82px;
             margin: auto;
             padding: 5px 10px 5px 10px;
             background-color:#81BEF7;
         }
         .titleboxleft {
-            width: 300px;
+            width: 600px;
+            float:left;
+        }
+        .titleboxright {
+            width: 200px;
+            float:left;
         }
         .inputslider {
             width: 200px;
@@ -24,7 +35,11 @@
         }
         .explabel {
             height: 22px;
+            font-size: 16px;
             vertical-align: middle;
+        }
+        .explabel2 {
+            margin-left: 10px;
         }
         .content {
             width: 800px;
@@ -35,11 +50,12 @@
             font-size :18px;
             line-height :200%;
             float: none;
+            clear: both;
             overflow:auto;
             background-color:#F5F4F3;
         }
         .calbox {
-            width: 320px;
+            width: 378px;
             margin: 5px;
             padding: 5px;
             height: auto;
@@ -48,6 +64,9 @@
             border-width: 1px;
             border-color: #AAA;
             border-radius:5px;
+        }
+        .calboxfull {
+            width: 778px;
         }
         .returnbtn {
             height: 42px;
@@ -62,53 +81,80 @@
             transition: all 0.5s;
             cursor: pointer;
         }
-.button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 5px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
+        .button {
+            background-color: #555;
+            width: 100%;
+            color: white;
+            padding: 10px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-bottom: 1px solid #111;
+            cursor: pointer;
+            -webkit-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+        }
+        .button:hover {
+            background-color: #1CA050;
+            color: white;
+        }
+        .h1 {
+            font-size:32px;
+            text-align:left; 
+            color:#FAFAFA;
+        }
+        .h1_right {
+            text-align:right; 
+        }
     </style>
 </head>
 <body>
     <div class="titlebox">
         <div class="titleboxleft">
-            <h1 style="text-align:left; color:#FAFAFA;">经验计算器</h1>
+            <h1 class="h1">经验/COST计算器</h1>
+        </div>
+		<div class="titleboxright">
+            <h1 class="h1 h1_right"><a class="a" href="index.html">返回首页</a></h1>
         </div>
     </div>
     <div class="content">
         <div class="calbox">
-            <label id="title1">ship</label>
+            <label id="title1">舰船经验</label>
             </br>
-            <label class="explabel">level1:</label>
+            <label class="explabel">起始等级:</label>
             <input id="TBox_ShipEXP_V1" type="range" step="1" min="1" max="80" class="inputslider" oninput="changelabel('TBox_ShipEXP_V1','lbl_ShipEXP_V1')"/>
             <label id="lbl_ShipEXP_V1" class="explabel"></label>
             </br>
-            <label class="explabel">level2:</label>
+            <label class="explabel">目标等级:</label>
             <input id="TBox_ShipEXP_V2" type="range" step="1" min="1" max="80" class="inputslider" oninput="changelabel('TBox_ShipEXP_V2','lbl_ShipEXP_V2')"/>    
             <label id="lbl_ShipEXP_V2" class="explabel"></label>
             </br>
-            <button class="button" onclick="calexp('TBox_ShipEXP_V1','TBox_ShipEXP_V2',Dict_shipexp_accumulated)">开始计算</button> 
+            <label class="explabel">选择海域:</label>
+            </br>
+            <label class="explabel">需要经验:</label><label class="explabel explabel2" id="lbl_ShipEXP_needed"></label>
+            </br>
+            <button class="button" onclick="calexp('TBox_ShipEXP_V1','TBox_ShipEXP_V2',Dict_shipexp_accumulated,'lbl_ShipEXP_needed')">开始计算</button> 
         </div>
         <div class="calbox">
-            <label id="title1">commander</label>
+            <label id="title1">提督经验</label>
             </br>
-            <label class="explabel">level1:</label>
+            <label class="explabel">起始等级:</label>
             <input id="TBox_CommEXP_V1" type="range" step="1" min="1" max="150" class="inputslider" oninput="changelabel('TBox_CommEXP_V1','lbl_CommEXP_V1')"/>
             <label id="lbl_CommEXP_V1" class="explabel"></label>
             </br>
-            <label class="explabel">level2:</label>
+            <label class="explabel">目标等级:</label>
             <input id="TBox_CommEXP_V2" type="range" step="1" min="1" max="150" class="inputslider" oninput="changelabel('TBox_CommEXP_V2','lbl_CommEXP_V2')"/>    
             <label id="lbl_CommEXP_V2" class="explabel"></label>
             </br>
-            <button type="button"  style="width:100%" onclick="calexp('TBox_CommEXP_V1','TBox_CommEXP_V2',Dict_commexp_accumulated)">开始计算</button> 
+            <label class="explabel">需要经验:</label><label class="explabel explabel2" id="lbl_CommEXP_needed"></label>
+            </br>
+            <button class="button"  style="width:100%" onclick="calexp('TBox_CommEXP_V1','TBox_CommEXP_V2',Dict_commexp_accumulated,'lbl_CommEXP_needed')">开始计算</button> 
+        </div>
+        <hr style="clear:both" noshade="noshade"/>
+        <div class="calbox calboxfull">
+            <label id="title1">...</label>
+            </br>
         </div>
     </div>
         <script type="text/javascript">
@@ -158,14 +204,30 @@
         function changelabel(tboxid,lblid){
             document.getElementById(lblid).innerText = document.getElementById(tboxid).value;
         }
-        function calexp(tboxid1,tboxid2,dict) { //向两个html dom对象获取变量值,然后使用指定的数组做计算//通用方法
+        function calexp(tboxid1,tboxid2,dict,lblid) { //向两个html 对象获取值,然后使用指定的数组做计算,最后将结果返回到另一个对象上//通用方法
             var level1 = document.getElementById(tboxid1).value;
             var level2 = document.getElementById(tboxid2).value;
             if ( Number(level1) > 0 && Number(level2) > 0) {
                 var exp_needed = Math.abs(dict[level1 - 1] - dict[level2 - 1]);
-                alert(exp_needed);
+                document.getElementById(lblid).innerText = exp_needed;
             }
         };
+      //function test(){
+      //    var c = 15000; //剩余经验
+      //    var a = 400; //训练海域
+      //    var b = 187; //普通海域
+      //    var x = Math.floor(c / a);
+      //    var y = Math.ceil(( c - a * x ) / b);
+      //    var str = "训练海域" + '\t' + "普通海域" + '\t' + '总场次' + '\t\t' + "经验溢出值" + '\n';
+      //    for ( var i=x;i>=0;i--) {
+      //        if ( i <= 30 ) {
+      //            var j = Math.ceil(( c - a * i ) / b);
+      //            var waste = a * i + b * j - c; 
+      //            str = str + i + '\t\t' + j + '\t\t' + Number(i+j) + '\t\t' + waste + '\n';
+      //        }
+      //    }
+      //    //document.getElementById("RTBox_result").value = str;
+      //}
     
     </script>
 </body>
