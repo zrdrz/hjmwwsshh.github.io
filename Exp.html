@@ -41,7 +41,6 @@
         }
         .explabel2 {
             margin-right: 10px;
-
         }
         .content {
             width: 900px;
@@ -186,9 +185,18 @@
             <button class="button"  style="width:100%" onclick="calculate('commander')">开始计算</button> 
         </div>
         <hr style="clear:both" noshade="noshade"/>
-        <div class="calbox calboxfull">
-            <label id="title1">...</label>
-            </br>
+        <div class="calbox">
+            <div>
+                <label id="title1">提督等级相关</label>
+            </div>
+            <div>
+                <label class="explabel">提督等级:</label>
+                <input id="TBox_CommLevel" type="range" step="1" min="1" max="150" class="inputslider" oninput="changelabel('TBox_CommLevel','lbl_CommLevel');calcommander(this.value,'lbl_CommData');"/>
+                <label id="lbl_CommLevel" class="explabel explabel2"></label>
+            </div>
+            <div>
+                <label class="explabel explabel2" id="lbl_CommData"></label>
+            </div>
         </div>
     </div>
         <script type="text/javascript">
@@ -250,15 +258,20 @@
             "4-1","4-2","4-3","4-4",
             "5-1","5-2","5-3","5-4"
         ];
+        var Dict_Commander_Cost = [ //只到100
+            //  x1		x2		x3		x4		x5		x6		x7		x8		x9		x10
+                47,		48,		49,		50,		51,		52,		53,		54,		55,		57,
+                58,		59,		60,		61,		62,		63,		64,		65,		66,		68,
+                69,		69,		70,		71,		71,		72,		73,		73,		74,		76,
+                76,		77,		78,		78,		79,		80,		80,		81,		82,		82,
+                83,		84,		84,		85,		86,		86,		87,		88,		88,		89,
+                89,		90,		90,		91,		91,		92,		92,		93,		93,		94,
+                94,		95,		95,		96,		96,		97,		97,		98,		98,		99,
+                99,		99,		99,		99,		100,	100,	100,	100,	100,	101,
+                101,	101,	101,	101,	102,	102,	102,	102,	102,	103,
+                103,	103,	103,	103,	104,	104,	104,	104,	104,	105
+        ];
         //初始化开始
-        document.getElementById("TBox_ShipEXP_V1").value = "1";
-        document.getElementById("TBox_ShipEXP_V2").value = "2";
-        document.getElementById("TBox_CommEXP_V1").value = "1";
-        document.getElementById("TBox_CommEXP_V2").value = "2";
-        changelabel("TBox_ShipEXP_V1","lbl_ShipEXP_V1");
-        changelabel("TBox_ShipEXP_V2","lbl_ShipEXP_V2");
-        changelabel("TBox_CommEXP_V1","lbl_CommEXP_V1");
-        changelabel("TBox_CommEXP_V2","lbl_CommEXP_V2");
         for (var i=0;i<Dict_map_type.length;i++){ //加载海域下拉框 normal/hard
             var getData = Dict_map_type[i];
             document.getElementById("CMB_map_type_ship").options.add(new Option(getData,i));
@@ -269,6 +282,19 @@
             document.getElementById("CMB_map_ship").options.add(new Option(getData,i));
             document.getElementById("CMB_map_comm").options.add(new Option(getData,i));
         };
+        document.getElementById("TBox_ShipEXP_V1").value = "1";
+        document.getElementById("TBox_ShipEXP_V2").value = "2";
+        document.getElementById("TBox_CommEXP_V1").value = "1";
+        document.getElementById("TBox_CommEXP_V2").value = "2";
+        document.getElementById("TBox_CommLevel").value = "1";
+        changelabel("TBox_ShipEXP_V1","lbl_ShipEXP_V1");
+        changelabel("TBox_ShipEXP_V2","lbl_ShipEXP_V2");
+        changelabel("TBox_CommEXP_V1","lbl_CommEXP_V1");
+        changelabel("TBox_CommEXP_V2","lbl_CommEXP_V2");
+        changelabel("TBox_CommLevel","lbl_CommLevel");
+        CMB_map_changed('CMB_map_type_ship','CMB_map_ship','lbl_map_data_ship');
+        CMB_map_changed('CMB_map_type_comm','CMB_map_comm','lbl_map_data_comm');
+        calcommander(document.getElementById("TBox_CommLevel").value,'lbl_CommData');
         //初始化完成
         //
         function changelabel(tboxid,lblid){ //滑动条数字显示绑定
@@ -280,8 +306,6 @@
             this.muon = Dict_map_data[i][j][0];
             this.exp = Dict_map_data[i][j][1];
         };
-        CMB_map_changed('CMB_map_type_ship','CMB_map_ship','lbl_map_data_ship');
-        CMB_map_changed('CMB_map_type_comm','CMB_map_comm','lbl_map_data_comm');
         function CMB_map_changed(selectbox1,selectbox2,lblid) { //海域下拉框变动后显示文字
             mymapdata =new mapdata(selectbox1,selectbox2);
             document.getElementById(lblid).innerText = "消耗电力:" + mymapdata.muon + "点" + "  经验:" + mymapdata.exp + "点" ;
@@ -324,6 +348,20 @@
         function calmuons(rounds,muon) { //计算电力总消耗
             var muons = rounds * muon;
             return muons;
+        };
+        function calcommander(level,outputlabel) {
+            //计算NEO上限
+            var neo = Number(500) + Number(50 * level);
+            //计算Muon上限
+            var muon = Number(375) + Number(20 * level);
+            //计算Cost上限
+            var cost = 0;
+            if ( level <= 100) {
+                cost = Dict_Commander_Cost[level -1];
+            }else{
+                cost = Dict_Commander_Cost[Dict_Commander_Cost.length - 1];
+            };
+            document.getElementById(outputlabel).innerText = "NEO上限:" + neo + '\t\t' + "Muon上限:" + muon + '\t\t' + "Cost上限:" + cost;
         };
       //function test(){
       //    var c = 15000; //剩余经验
