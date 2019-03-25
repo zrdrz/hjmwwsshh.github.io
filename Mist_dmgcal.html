@@ -29,11 +29,132 @@
             width: 200px;
             float:left;
         }
+        .content {
+            width: 900px;
+            height : auto ;
+            margin: auto;
+            background: white;
+            padding: 10px;
+            font-size :18px;
+            line-height :200%;
+            float: none;
+            clear: both;
+            overflow:auto;
+            background-color:#F5F4F3;
+        }
+        .h1 {
+            font-size:32px;
+            text-align:left; 
+            color:#FAFAFA;
+        }
+        .h1_right {
+            text-align:right; 
+        }
+        .calbox {
+            width: 428px;
+            margin: 5px;
+            padding: 5px;
+            height: auto;
+            float: left;
+            border: solid;
+            border-width: 1px;
+            border-color: #AAA;
+            border-radius:5px;
+        }
+        .select1 {
+            width: 80px;
+        }
     </style>
 </head>
 <body>
-
-
-
+    <div class="titlebox">
+        <div class="titleboxleft">
+            <h1 class="h1">伤害计算器</h1>
+        </div>
+        <div class="titleboxright">
+            <h1 class="h1 h1_right"><a class="a" href="index.html">返回首页</a></h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="calbox">
+            <div>
+                <select id="CMB_ship_type" class="select1" onchange=""></select>
+                <select id="CMB_weapon_type" class="select1" onchange=""></select>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const shiptype_text = [ "驱逐舰","轻巡","重巡","战巡","战列","航母" ];
+        const weapon_type = [ "AP_ExBig","HE_ExBig","AP_Big","HE_Big","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo","DiveBomber","TorpedoBomber" ];
+        const weapon_text = [ "超大AP","超大HE","大AP","大HE","中AP","中HE","小AP","小HE","舰载鱼雷","舰爆","舰攻"];
+        const weapon_efficiency = {
+            AP_ExBig: {
+                vsLightArmor: 0.35,
+                vsMediumArmor: 1.00,
+                vsHeavyArmor: 0.75
+            },
+            AP_Big: {
+                vsLightArmor: 1.00,
+                vsMediumArmor: 0.75,
+                vsHeavyArmor: 0.30
+            },
+            AP_Medium: {
+                vsLightArmor: 0.70,
+                vsMediumArmor: 0.50,
+                vsHeavyArmor: 0.25
+            },
+            AP_Small: {
+                vsLightArmor: 0.55,
+                vsMediumArmor: 0.35,
+                vsHeavyArmor: 0.25
+            },
+            HE_ExBig: {
+                vsLightArmor: 0.50,
+                vsMediumArmor: 1.00,
+                vsHeavyArmor: 0.50
+            },
+            HE_Big: {
+                vsLightArmor: 1.00,
+                vsMediumArmor: 0.75,
+                vsHeavyArmor: 0.40
+            },
+            HE_Medium: {
+                vsLightArmor: 0.70,
+                vsMediumArmor: 0.50,
+                vsHeavyArmor: 0.25
+            },
+            HE_Small: {
+                vsLightArmor: 0.55,
+                vsMediumArmor: 0.35,
+                vsHeavyArmor: 0.25
+            },
+            Torpedo: {
+                vsLightArmor: 0.40,
+                vsMediumArmor: 0.75,
+                vsHeavyArmor: 1.50
+            },
+            DiveBomber: {
+                vsLightArmor: 0.75,
+                vsMediumArmor: 0.75,
+                vsHeavyArmor: 0.75
+            },
+            TorpedoBomber: {
+                vsLightArmor: 0.40,
+                vsMediumArmor: 0.75,
+                vsHeavyArmor: 1.00
+            }
+        };
+        const shiptype_efficiency = {
+            
+        };
+        //初始化开始
+        for (var i=0,len=shiptype_text.length;i<len;i++){ //加载weapon_type下拉框 
+            var getData = shiptype_text[i];
+            document.getElementById("CMB_ship_type").options.add(new Option(getData,i));
+        };
+        //
+        function shiptype_change(){
+        };
+    </script>
 </body>
 </html>
