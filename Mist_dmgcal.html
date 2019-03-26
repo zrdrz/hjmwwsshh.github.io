@@ -51,7 +51,7 @@
             text-align:right; 
         }
         .calbox {
-            width: 428px;
+            width: 878px;
             margin: 5px;
             padding: 5px;
             height: auto;
@@ -62,7 +62,37 @@
             border-radius:5px;
         }
         .select1 {
+            width: 180px;
+        }
+        .select2 {
             width: 80px;
+        }
+        .label1 {
+            height: 22px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        .selectbox {
+            width: 180px;
+            padding: 0px 5px 0px 5px;
+            float: left;
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-color: #AAA;
+        }
+        .selectbox2 {
+            width: 80px;
+            padding: 0px 5px 0px 5px;
+        }
+        .input1{
+            width:78px;
+            height: 18px;
+            text-align:center;
+            padding: 0px;
+        }
+        .readonly_input{
+            width:80px;
+            text-align:center;
         }
     </style>
 </head>
@@ -77,84 +107,206 @@
     </div>
     <div class="content">
         <div class="calbox">
-            <div>
-                <select id="CMB_ship_type" class="select1" onchange=""></select>
+            <div class="selectbox">
+                <label class="label1">舰船类型</label>
+                </br>
+                <select id="CMB_ship_type" class="select1" onchange="shiptype_change(this.value)"></select>
+            </div>
+            <div class="selectbox">
+                <label class="label1">可用武器</label>
+                </br>
                 <select id="CMB_weapon_type" class="select1" onchange=""></select>
+            </div>
+            <div class="selectbox selectbox2">
+                <label class="label1">面板火力</label>
+                </br>
+                <input id="firepower" type="text" class="input1"  oninput = "value=value.replace(/[^\d.]/g,'')"/>
+            </div>
+            <div class="selectbox selectbox2">
+                <label class="label1">火力补正(%)</label>
+                </br>
+                <input id="fp_correction" type="text" class="input1"  oninput = "value=value.replace(/[^\d]/g,'')"/>
+            </div>
+            <div class="selectbox selectbox2">
+                <label class="label1">装填时间(s)</label>
+                </br>
+                <input id="reload_time" type="text" class="input1"  oninput = "value=value.replace(/[^\d.]/g,'')"/>
+            </div>
+            <div class="selectbox selectbox2">
+                <label class="label1">联装数</label>
+                </br>
+                <select id="CMB_barrels" class="select1 select2" onchange=""></select>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-        const shiptype_text = [ "驱逐舰","轻巡","重巡","战巡","战列","航母" ];
-        const weapon_type = [ "AP_ExBig","HE_ExBig","AP_Big","HE_Big","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo","DiveBomber","TorpedoBomber" ];
-        const weapon_text = [ "超大AP","超大HE","大AP","大HE","中AP","中HE","小AP","小HE","舰载鱼雷","舰爆","舰攻"];
-        const weapon_efficiency = {
+        const Dict_barrels = [ 1,2,3 ];
+        const Dict_weapon_data = {
             AP_ExBig: {
+                name: "超大AP",
                 vsLightArmor: 0.35,
                 vsMediumArmor: 1.00,
                 vsHeavyArmor: 0.75
             },
             AP_Big: {
+                name: "大AP",
                 vsLightArmor: 1.00,
                 vsMediumArmor: 0.75,
                 vsHeavyArmor: 0.30
             },
             AP_Medium: {
+                name: "中AP",
                 vsLightArmor: 0.70,
                 vsMediumArmor: 0.50,
                 vsHeavyArmor: 0.25
             },
             AP_Small: {
+                name: "小AP",
                 vsLightArmor: 0.55,
                 vsMediumArmor: 0.35,
                 vsHeavyArmor: 0.25
             },
             HE_ExBig: {
+                name: "超大HE",
                 vsLightArmor: 0.50,
                 vsMediumArmor: 1.00,
                 vsHeavyArmor: 0.50
             },
             HE_Big: {
+                name: "大HE",
                 vsLightArmor: 1.00,
                 vsMediumArmor: 0.75,
                 vsHeavyArmor: 0.40
             },
             HE_Medium: {
+                name: "中HE",
                 vsLightArmor: 0.70,
                 vsMediumArmor: 0.50,
                 vsHeavyArmor: 0.25
             },
             HE_Small: {
+                name: "小HE",
                 vsLightArmor: 0.55,
                 vsMediumArmor: 0.35,
                 vsHeavyArmor: 0.25
             },
             Torpedo: {
+                name: "舰载鱼雷",
                 vsLightArmor: 0.40,
                 vsMediumArmor: 0.75,
                 vsHeavyArmor: 1.50
             },
             DiveBomber: {
+                name: "舰爆",
                 vsLightArmor: 0.75,
                 vsMediumArmor: 0.75,
                 vsHeavyArmor: 0.75
             },
             TorpedoBomber: {
+                name: "舰攻",
                 vsLightArmor: 0.40,
                 vsMediumArmor: 0.75,
                 vsHeavyArmor: 1.00
             }
         };
-        const shiptype_efficiency = {
-            
+        const Dict_shiptype_data = {
+            dd: {
+                name: "驱逐舰",
+                can_use_weapon: [ "AP_Small","HE_Small","Torpedo" ],
+                weapon_type_efficiency: {
+                    AP_Small: 1.25,
+                    HE_Small: 1.25,
+                    Torpedo: 0.20
+                }
+            },
+            cl: {
+                name: "轻巡",
+                can_use_weapon: [ "AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
+                weapon_type_efficiency: {
+                    AP_Medium: 1.25,
+                    HE_Medium: 1.25,
+                    AP_Small: 0.80,
+                    HE_Small: 0.80,
+                    Torpedo: 0.25
+                }
+            },
+            ca: {
+                name: "重巡",
+                can_use_weapon: [ "AP_Big","HE_Big","AP_Small","HE_Small","Torpedo" ],
+                weapon_type_efficiency: {
+                    AP_Big: 1.00,
+                    HE_Big: 1.00,
+                    AP_Small: 0.40,
+                    HE_Small: 0.40,
+                    Torpedo: 0.20
+                }
+            },
+            bc: {
+                name: "战巡",
+                can_use_weapon: [ "AP_ExBig","HE_ExBig","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
+                weapon_type_efficiency: {
+                    AP_ExBig: 1.00,
+                    HE_ExBig: 1.00,
+                    AP_Medium: 0.10,
+                    HE_Medium: 0.10,
+                    AP_Small: 0.08,
+                    HE_Small: 0.08,
+                    Torpedo: 0.20
+                }
+            },
+            bb: {
+                name: "战列",
+                can_use_weapon: [ "AP_ExBig","HE_ExBig","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
+                weapon_type_efficiency: {
+                    AP_ExBig: 1.00,
+                    HE_ExBig: 1.00,
+                    AP_Medium: 0.10,
+                    HE_Medium: 0.10,
+                    AP_Small: 0.08,
+                    HE_Small: 0.08,
+                    Torpedo: 0.20
+                }
+            },
+            cv: {
+                name: "航母",
+                can_use_weapon: [ "DiveBomber","TorpedoBomber" ],
+                weapon_type_efficiency: {
+                    DiveBomber: 0.25,
+                    TorpedoBomber: 0.25,
+                }
+            }
         };
         //初始化开始
-        for (var i=0,len=shiptype_text.length;i<len;i++){ //加载weapon_type下拉框 
-            var getData = shiptype_text[i];
-            document.getElementById("CMB_ship_type").options.add(new Option(getData,i));
+        for (type in Dict_shiptype_data){ //加载shiptype下拉框
+            var getData = Dict_shiptype_data[type].name;
+            document.getElementById("CMB_ship_type").options.add(new Option(getData,type));
+        };
+        shiptype_change(getOptionsValue("CMB_ship_type")); //根据shiptype下拉框的内容加载weapontype下拉框
+        for (var i=0;i<Dict_barrels.length;i++){
+            var getData = Dict_barrels[i];
+            document.getElementById("CMB_barrels").options.add(new Option(getData,i));
         };
         //
-        function shiptype_change(){
+        function shiptype_change(id) { //改变shiptype下拉框,对应的改变weapontype下拉框
+            var can_use_wapon = Dict_shiptype_data[id].can_use_weapon //取得can_use_weapon数组
+            document.getElementById("CMB_weapon_type").options.length=0; //先清空weapon下拉框
+            for ( var i=0,len=can_use_wapon.length;i<len;i++){ //根据shiptype的can_use_weapon来加载weapon下拉框
+                var weapon_name = Dict_weapon_data[can_use_wapon[i]].name;
+                var weapon_type = can_use_wapon[i];
+                document.getElementById("CMB_weapon_type").options.add(new Option(weapon_name,weapon_type));
+            };
         };
+        function weapontype_change(id){
+            str = weapon_type[id];
+            alert(str);
+            
+        };
+        function getOptionsValue(selectbox){ //获取下拉框选中的项目的value
+            var id = document.getElementById(selectbox).selectedIndex;
+            var value = document.getElementById(selectbox).options[id].value;
+            return value;
+        };
+
     </script>
 </body>
 </html>
