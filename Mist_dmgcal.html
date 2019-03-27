@@ -199,7 +199,7 @@
                 </div>
             </div>
 			<div style="float:left;height:97px;width:194px;">
-			    <button class="button" onclick="">开始计算</button>
+			    <button class="button" onclick="dmgcal()">开始计算</button>
 			</div>
             <hr style="clear:both;">
             <div style="clear:both;">
@@ -218,24 +218,25 @@
         shiptype_change(getOptionsValue("CMB_ship_type")); //根据shiptype下拉框的内容加载weapontype下拉框
         for (var i=0;i<Dict_barrels.length;i++){ //加载联装数下拉框
             var getData = Dict_barrels[i];
-            document.getElementById("CMB_barrels").options.add(new Option(getData,i));
+            document.getElementById("CMB_barrels").options.add(new Option(getData,i+1));
         };
+        initInputbox();
         //
         function shiptype_change(shiptype) { //改变shiptype下拉框,对应的改变weapontype下拉框
             var can_use_wapon = Dict_shiptype_data[shiptype].can_use_weapon //取得can_use_weapon数组
             document.getElementById("CMB_weapon_type").options.length=0; //先清空weapon下拉框
-            for ( var i=0,len=can_use_wapon.length;i<len;i++){ //根据shiptype的can_use_weapon来加载weapon下拉框
+            for ( var i=0,len=can_use_wapon.length;i<len;i++ ){ //根据shiptype的can_use_weapon来加载weapon下拉框
                 var weapon_name = Dict_weapon_data[can_use_wapon[i]].name;
                 var weapon_type = can_use_wapon[i];
                 document.getElementById("CMB_weapon_type").options.add(new Option(weapon_name,weapon_type));
             };
-            setGlobalVar(shiptype,'shiptype');
+            //setGlobalVar(shiptype,'shiptype');
             weapontype_change(getOptionsValue("CMB_weapon_type")); //改变显示的效率系数
         };
         function weapontype_change(weapontype){ //当weapontype下拉框改变时,对应改变显示的效率系数
             var shiptype = getOptionsValue("CMB_ship_type");
-            setGlobalVar(weapontype,'weapontype');
-            getValuesAndBindElements_weapon(Dict_weapon_data[weapontype].efficiency,Dict_var_element_bind_weapon); //weapon效率
+            //setGlobalVar(weapontype,'weapontype');
+            getValuesAndBindElements_weapon(Dict_weapon_data[weapontype].efficiency,Dict_var_element_bind_inputbox_readonly); //weapon效率
             getValuesAndBindElements_ship(shiptype,weapontype,'equipmentefficiency'); //ship效率
         };
         //
@@ -249,6 +250,7 @@
                 var value = obj[varname];
                 var elementid = bindobj[varname];
                 document.getElementById(elementid).value = value;
+                //setGlobalVar(value,varname);
             };
         };
         function getValuesAndBindElements_ship(shiptype,weapontype,elementid){ //给定shiptype,weapontype,得出对应的shipefficiency值,并对应到相应的elementid上去
@@ -257,6 +259,32 @@
         };
         function setGlobalVar(value,varname){
             global[varname] = value;
+        };
+        function initInputbox () {
+            for ( varname in Dict_var_element_bind_inputbox_readwrite ){
+                var elementid = Dict_var_element_bind_inputbox_readwrite[varname];
+                document.getElementById(elementid).value = 0;
+            };
+        };
+        function getValuesFromElementsAndSetVar(obj) { //从页面元素获取值,并赋值给全局变量
+            for ( varname in obj ){
+                var elementid = obj[varname];
+                global[varname] = document.getElementById(elementid).value;
+            };
+        };
+        //
+        function dmgcal(){
+            getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readwrite); //给计算要用到的变量赋值
+            getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readonly);
+            getValuesFromElementsAndSetVar(Dict_var_element_bind_selectbox);
+            var str = "";
+            for ( varname in result.singledmg ){
+                result.singledmg[varname] = Math.floor(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * global.reload_time / global.barrels / 5 / 100);
+            };
+            for ( varname in result.singledmg ){
+                str = str + varname + ":" + result.singledmg[varname] + '\t'
+            }
+            document.getElementById("RTBox_result").value = str;
         };
     </script>
 </body>

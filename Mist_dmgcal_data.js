@@ -6,21 +6,45 @@ var global = {
     shiptype: "",
     weapontype: "",
     firepower: 0,
-    fp_correction: 0,
-    weaponefficiency: { //存放全局weapon效率系数
+    fp_correction: 0, //百分数
+    reload_time: 0,
+    barrels: 0,
+    vsLightArmor: 0.00,
+    vsMediumArmor: 0.00,
+    vsHeavyArmor: 0.00,
+    equipmentefficiency: 0
+};
+var result = {
+    singledmg: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
         vsHeavyArmor: 0.00
     },
-    equipmentefficiency: 0
+    DPM: {
+        vsLightArmor: 0.00,
+        vsMediumArmor: 0.00,
+        vsHeavyArmor: 0.0
+    }
 };
-
 //
-const Dict_var_element_bind_weapon = { //存放html页面对应元素的id,与Dict_weapon_data[weapontype].efficiency绑定
+//存放html页面对应元素的id
+const Dict_var_element_bind_inputbox_readonly = { //部分与Dict_weapon_data[weapontype].efficiency绑定
     vsLightArmor: "WeaponvsLightArmor",
     vsMediumArmor: "WeaponvsMediumArmor",
     vsHeavyArmor: "WeaponvsHeavyArmor",
+    equipmentefficiency: "equipmentefficiency"
 };
+const Dict_var_element_bind_inputbox_readwrite = {
+    firepower: "firepower",
+    fp_correction: "fp_correction",
+    reload_time: "reload_time"
+};
+const Dict_var_element_bind_selectbox = {
+    barrels: "CMB_barrels",
+    shiptype: "CMB_ship_type",
+    weapontype: "CMB_weapon_type"
+};
+//
 const Dict_barrels = [ 1,2,3 ]; //联装数
 const Dict_weapon_data = { //weapon数据
     AP_ExBig: {
