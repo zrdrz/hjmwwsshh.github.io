@@ -65,8 +65,8 @@
             width: 514px;
         }
         .outputbox1 {
-            width: 76px;
-            padding: 0px 2px 5px 2px;
+            width: 61px;
+            margin: 0px 2px 5px 2px;
             float: left;
         }
         .select1 {
@@ -99,7 +99,7 @@
             padding: 0px;
         }
         .input2{
-            width:66px;
+            width:56px;
         }
         .readonly_input{
             width:80px;
@@ -107,8 +107,8 @@
         }
         .button {
             background-color: #555;
-            width: 194px;
-            height: 92px;
+            width: 100%;
+            height: 52px;
             color: white;
             padding: 10px 0px;
             text-align: center;
@@ -140,7 +140,7 @@
             <div class="selectbox">
                 <label class="label1">1.选择舰船类型</label>
                 </br>
-                <select id="CMB_ship_type" class="select1" onchange="shiptype_change(this.value)"></select>
+                <select id="CMB_ship_type" class="select1" onchange="shiptype_change(this.value,Dict_var_element_bind_selectbox.weapontype)"></select>
             </div>
             <div class="selectbox">
                 <label class="label1">2.选择武器类型</label>
@@ -165,11 +165,16 @@
             <div class="selectbox ">
                 <label class="label1">6.联装数</label>
                 </br>
-                <select id="CMB_barrels" class="select1 select2" onchange=""></select>
+                <select id="CMB_barrels" class="select1 " onchange=""></select>
+            </div>
+            <div class="selectbox ">
+                <label class="label1">7.额外暴伤倍率(%)</label>
+                </br>
+                <input id="additional_crit" type="text" class="input1"  oninput = "value=value.replace(/[^\d]/g,'')"/>
             </div>
         </div>
         <div class="calbox calbox2">
-            <div style="width: 240px;float:left;">
+            <div style="width: 195px;float:left;">
                 <label class="label1">武器效率</label>
                 </br>
                 <div class="outputbox1">
@@ -189,7 +194,7 @@
                 </div>
 
             </div>
-            <div style="width: 80px;float:left;">
+            <div style="width: 70px;float:left;">
                 <label class="label1">舰船效率</label>
                 </br>
                 <div class="outputbox1">
@@ -198,10 +203,19 @@
                     <input id="equipmentefficiency" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
             </div>
-			<div style="float:left;height:97px;width:194px;">
-			    <button class="button" onclick="dmgcal()">开始计算</button>
-			</div>
+            <div style="width: 70px;float:left;">
+                <label class="label1">基础暴伤</label>
+                </br>
+                <div class="outputbox1">
+                    <label class="label1 label2">暴伤系数:</label>
+                    </br>
+                    <input id="critdmg_base" type="text" class="input1 input2" readonly="readonly"/>
+                </div>
+            </div>
             <hr style="clear:both;">
+            <div style="float:left;height:57px;width:100%;">
+                <button class="button" onclick="dmgcal()">开始计算</button>
+            </div>
             <div style="clear:both;">
                 <textarea id="RTBox_result" style="width:508px;height:400px;word-wrap:normal; font-family:宋体;font-size:14px;" readonly="readonly"></textarea>
             </div>
@@ -213,31 +227,26 @@
         //初始化开始
         for (type in Dict_shiptype_data){ //加载shiptype下拉框
             var getData = Dict_shiptype_data[type].name;
-            document.getElementById("CMB_ship_type").options.add(new Option(getData,type));
+            document.getElementById(Dict_var_element_bind_selectbox.shiptype).options.add(new Option(getData,type));
         };
-        shiptype_change(getOptionsValue("CMB_ship_type")); //根据shiptype下拉框的内容加载weapontype下拉框
-        for (var i=0;i<Dict_barrels.length;i++){ //加载联装数下拉框
-            var getData = Dict_barrels[i];
-            document.getElementById("CMB_barrels").options.add(new Option(getData,i+1));
-        };
+        shiptype_change(getOptionsValue(Dict_var_element_bind_selectbox.shiptype),Dict_var_element_bind_selectbox.weapontype); //根据shiptype下拉框的内容加载weapontype下拉框
         initInputbox();
         //
-        function shiptype_change(shiptype) { //改变shiptype下拉框,对应的改变weapontype下拉框
+        function shiptype_change(shiptype,elementid) { //改变shiptype下拉框,对应的改变weapontype下拉框
             var can_use_wapon = Dict_shiptype_data[shiptype].can_use_weapon //取得can_use_weapon数组
-            document.getElementById("CMB_weapon_type").options.length=0; //先清空weapon下拉框
+            document.getElementById(elementid).options.length=0; //先清空weapon下拉框
             for ( var i=0,len=can_use_wapon.length;i<len;i++ ){ //根据shiptype的can_use_weapon来加载weapon下拉框
                 var weapon_name = Dict_weapon_data[can_use_wapon[i]].name;
                 var weapon_type = can_use_wapon[i];
-                document.getElementById("CMB_weapon_type").options.add(new Option(weapon_name,weapon_type));
+                document.getElementById(elementid).options.add(new Option(weapon_name,weapon_type));
             };
-            //setGlobalVar(shiptype,'shiptype');
-            weapontype_change(getOptionsValue("CMB_weapon_type")); //改变显示的效率系数
+            weapontype_change(getOptionsValue(elementid)); //改变显示的效率系数
         };
-        function weapontype_change(weapontype){ //当weapontype下拉框改变时,对应改变显示的效率系数
-            var shiptype = getOptionsValue("CMB_ship_type");
-            //setGlobalVar(weapontype,'weapontype');
+        function weapontype_change(weapontype){ //当weapontype下拉框改变时,对应改变显示的各项系数
+            var shiptype = getOptionsValue(Dict_var_element_bind_selectbox.shiptype);
             getValuesAndBindElements_weapon(Dict_weapon_data[weapontype].efficiency,Dict_var_element_bind_inputbox_readonly); //weapon效率
-            getValuesAndBindElements_ship(shiptype,weapontype,'equipmentefficiency'); //ship效率
+            getValuesAndBindElements_ship(shiptype,weapontype,Dict_var_element_bind_inputbox_readonly.equipmentefficiency); //ship效率
+            changeBarrels(weapontype,Dict_var_element_bind_selectbox.barrels);//改变联装数
         };
         //
         function getOptionsValue(selectbox){ //获取下拉框选中的项目的value
@@ -250,17 +259,25 @@
                 var value = obj[varname];
                 var elementid = bindobj[varname];
                 document.getElementById(elementid).value = value;
-                //setGlobalVar(value,varname);
             };
         };
         function getValuesAndBindElements_ship(shiptype,weapontype,elementid){ //给定shiptype,weapontype,得出对应的shipefficiency值,并对应到相应的elementid上去
             var value = Dict_shiptype_data[shiptype].weapon_type_efficiency[weapontype];
             document.getElementById(elementid).value = value;
         };
-        function setGlobalVar(value,varname){
+        function changeBarrels(weapontype,elementid){ //根据weapontype改变可用的联装数
+            var can_use_barrels = Dict_weapon_data[weapontype].barrels //取得can_use_barrels数组
+            document.getElementById(elementid).options.length=0; //先清空barrels下拉框
+            for ( var i=0,len=can_use_barrels.length;i<len;i++ ){ //加载联装数下拉框
+                var getData = Dict_barrels[can_use_barrels[i]];
+                var barrel = can_use_barrels[i];
+                document.getElementById(elementid).options.add(new Option(getData,barrel));
+            };
+        };
+        function setGlobalVar(value,varname){ //给全局变量赋值
             global[varname] = value;
         };
-        function initInputbox () {
+        function initInputbox () { //初始化inputbox的值为0
             for ( varname in Dict_var_element_bind_inputbox_readwrite ){
                 var elementid = Dict_var_element_bind_inputbox_readwrite[varname];
                 document.getElementById(elementid).value = 0;
@@ -273,19 +290,24 @@
             };
         };
         //
-        function dmgcal(){
-            getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readwrite); //给计算要用到的变量赋值
+        function dmgcal(){ //开始计算
+            //给计算要用到的变量赋值
+            getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readwrite); 
             getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readonly);
             getValuesFromElementsAndSetVar(Dict_var_element_bind_selectbox);
+            //
             var str = "";
-            for ( varname in result.singledmg ){
-                result.singledmg[varname] = Math.floor(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * global.reload_time / global.barrels / 5 / 100);
+            //计算公式模块化
+            for ( funname in Dict_funtions ) {
+                str = str + eval(Dict_funtions[funname]);
             };
-            for ( varname in result.singledmg ){
-                str = str + varname + ":" + result.singledmg[varname] + '\t'
-            }
             document.getElementById("RTBox_result").value = str;
         };
+//obj = { fun: "ale('\t')" , fun2: "ale(' a ')" };
+//for ( funname in obj) {
+//    eval(obj[funname]);
+//};
+//function ale (str){ alert("test2" + str + "test2")};
     </script>
 </body>
 </html>

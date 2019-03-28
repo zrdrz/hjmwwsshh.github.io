@@ -12,32 +12,41 @@ var global = {
     vsLightArmor: 0.00,
     vsMediumArmor: 0.00,
     vsHeavyArmor: 0.00,
-    equipmentefficiency: 0
+    equipmentefficiency: 0,
+    critdmg_base: 0,
+    additional_crit: 0,
 };
-var result = {
+var result = { //计算结果存放处
     singledmg: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
         vsHeavyArmor: 0.00
     },
-    DPM: {
+    singledmgcrit: {
+        vsLightArmor: 0.00,
+        vsMediumArmor: 0.00,
+        vsHeavyArmor: 0.00
+    },
+    dpm: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
         vsHeavyArmor: 0.0
     }
 };
 //
-//存放html页面对应元素的id
+//存放html页面对应元素的id,key值要与global中的key值相同
 const Dict_var_element_bind_inputbox_readonly = { //部分与Dict_weapon_data[weapontype].efficiency绑定
     vsLightArmor: "WeaponvsLightArmor",
     vsMediumArmor: "WeaponvsMediumArmor",
     vsHeavyArmor: "WeaponvsHeavyArmor",
-    equipmentefficiency: "equipmentefficiency"
+    equipmentefficiency: "equipmentefficiency",
+    critdmg_base: "critdmg_base"
 };
 const Dict_var_element_bind_inputbox_readwrite = {
     firepower: "firepower",
     fp_correction: "fp_correction",
-    reload_time: "reload_time"
+    reload_time: "reload_time",
+    additional_crit: "additional_crit",
 };
 const Dict_var_element_bind_selectbox = {
     barrels: "CMB_barrels",
@@ -45,95 +54,121 @@ const Dict_var_element_bind_selectbox = {
     weapontype: "CMB_weapon_type"
 };
 //
-const Dict_barrels = [ 1,2,3 ]; //联装数
+const Dict_barrels = {
+    1: "舰炮:单装/鱼雷管:3联",
+    2: "舰炮:双联/鱼雷管:4联",
+    3: "舰炮:三联/鱼雷管:5联",
+};//联装数
 const Dict_weapon_data = { //weapon数据
     AP_ExBig: {
         name: "超大AP",  //显示名
         efficiency: {
             vsLightArmor: 0.35, //各项效率
             vsMediumArmor: 1.00,
-            vsHeavyArmor: 0.75 
-        }
+            vsHeavyArmor: 0.75,
+            critdmg_base: 2.00, //暴击系数也放在这里面了
+        },
+        barrels: [ "2","3" ] //可用的联装数
     },
     AP_Big: {
         name: "大AP",
         efficiency: {
             vsLightArmor: 1.00,
             vsMediumArmor: 0.75,
-            vsHeavyArmor: 0.30
-        }
+            vsHeavyArmor: 0.30,
+            critdmg_base: 2.00,
+        },
+        barrels: [ "2","3" ] 
     },
     AP_Medium: {
         name: "中AP",
         efficiency: {
             vsLightArmor: 0.70,
             vsMediumArmor: 0.50,
-            vsHeavyArmor: 0.25
-        }
+            vsHeavyArmor: 0.25,
+            critdmg_base: 2.00,
+        },
+        barrels: [ "1","2","3" ] 
     },
     AP_Small: {
         name: "小AP",
         efficiency: {
             vsLightArmor: 0.55,
             vsMediumArmor: 0.35,
-            vsHeavyArmor: 0.25
-        }
+            vsHeavyArmor: 0.25,
+            critdmg_base: 2.00,
+        },
+        barrels: [ "1","2" ] 
     },
     HE_ExBig: {
         name: "超大HE",
         efficiency: {
             vsLightArmor: 0.50,
             vsMediumArmor: 1.00,
-            vsHeavyArmor: 0.50
-        }
+            vsHeavyArmor: 0.50,
+            critdmg_base: 1.50,
+        },
+        barrels: [ "2","3" ] 
     },
     HE_Big: {
         name: "大HE",
         efficiency: {
             vsLightArmor: 1.00,
             vsMediumArmor: 0.75,
-            vsHeavyArmor: 0.40
-        }
+            vsHeavyArmor: 0.40,
+            critdmg_base: 1.50,
+        },
+        barrels: [ "2","3" ] 
     },
     HE_Medium: {
         name: "中HE",
         efficiency: {
             vsLightArmor: 0.70,
             vsMediumArmor: 0.50,
-            vsHeavyArmor: 0.25
-        }
+            vsHeavyArmor: 0.25,
+            critdmg_base: 1.50,
+        },
+        barrels: [ "1","2","3" ] 
     },
     HE_Small: {
         name: "小HE",
         efficiency: {
             vsLightArmor: 0.55,
             vsMediumArmor: 0.35,
-            vsHeavyArmor: 0.25
-        }
+            vsHeavyArmor: 0.25,
+            critdmg_base: 1.50,
+        },
+        barrels: [ "1","2" ] 
     },
     Torpedo: {
         name: "舰载鱼雷",
         efficiency: {
             vsLightArmor: 0.40,
             vsMediumArmor: 0.75,
-            vsHeavyArmor: 1.50
-        }
+            vsHeavyArmor: 1.50,
+            critdmg_base: 2.00,
+        },
+        barrels: [ "1","2","3" ] 
     },
     DiveBomber: {
         name: "舰爆",
         efficiency: {
             vsLightArmor: 0.75,
             vsMediumArmor: 0.75,
-            vsHeavyArmor: 0.75
-        }
+            vsHeavyArmor: 0.75,
+            critdmg_base: 1.50,
+        },
+        barrels: [ "3" ] 
     },
     TorpedoBomber: {
         name: "舰攻",
         efficiency: {
             vsLightArmor: 0.40,
             vsMediumArmor: 0.75,
-            vsHeavyArmor: 1.00
-        }
+            vsHeavyArmor: 1.00,
+            critdmg_base: 2.00,
+        },
+        barrels: [ "3" ] 
     }
 };
 const Dict_shiptype_data = {  //ship数据
@@ -202,4 +237,45 @@ const Dict_shiptype_data = {  //ship数据
             TorpedoBomber: 0.25,
         }
     }
+};
+//存放要调用的计算的函数名:
+Dict_funtions = {
+    init_calinfo: "dmgcal_info()",
+    cal_singledmg: "dmgcal_singledmg()",
+    cal_singledmgcrit: "dmgcal_singdmg_crit()",
+    cal_dpm: "dmgcal_dpm()",
+    
+};
+function dmgcal_info() {
+    var str = "舰船类型:" + Dict_shiptype_data[global.shiptype].name + '\t' + "武器类型:" + Dict_weapon_data[global.weapontype].name + '\n' + "面板总火力:" + global.firepower + '\t' + "火力补正:" + global.fp_correction + '\n' + "装填时间:" + global.reload_time + "s" + '\t' + "联装数:" + global.barrels + '\n'; 
+    str = str + '-------------------------------------------------------' + '\n';
+    str = str + '\t\t' + "vs轻甲" + '\t\t' + "vs中甲" + '\t\t' + "vs重甲" + '\n';
+    return str;
+};
+function dmgcal_singledmg(){
+    var str = "单发标伤" + '\t';
+    for ( varname in result.singledmg ){ //varname即为vsLightArmor,vsMediumArmor和vsHeavyArmor三个效率系数
+        result.singledmg[varname] = Math.ceil(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * global.reload_time / global.barrels / 5 / 100);
+        str = str + result.singledmg[varname] + '\t\t';
+    };
+    str = str + '\n';
+    return str;
+};
+function dmgcal_singdmg_crit(){
+    var str = "单发暴伤" + '\t';
+    for ( varname in result.singledmgcrit ){
+        result.singledmgcrit[varname] = Math.ceil(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * global.reload_time * ( global.critdmg_base * 100 + Number(global.additional_crit)) / global.barrels / 5 / 100 / 100);
+        str = str + result.singledmgcrit[varname] + '\t\t';
+    };
+    str = str + '\n';
+    return str;
+};
+function dmgcal_dpm() {
+    var str = "DPM标伤" + '\t\t' ;
+    for ( varname in result.dpm ){
+        result.dpm[varname] = Math.ceil(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * 12 / 100);
+        str = str + result.dpm[varname] + '\t\t'
+    };
+    str = str + '\n';
+    return str;
 };
