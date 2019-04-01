@@ -222,8 +222,8 @@ const Dict_shiptype_data = {  //ship数据
         name: "驱逐舰", //显示名
         can_use_weapon: [ "AP_Small","HE_Small","Torpedo" ],  //可用weapon
         weapon_type_efficiency: { //使用各项weapon的效率
-            AP_Small: 1.25,
-            HE_Small: 1.25,
+            AP_Small: 1.20,
+            HE_Small: 1.20,
             Torpedo: 0.20
         }
     },
@@ -231,8 +231,8 @@ const Dict_shiptype_data = {  //ship数据
         name: "轻巡",
         can_use_weapon: [ "AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
         weapon_type_efficiency: {
-            AP_Medium: 1.25,
-            HE_Medium: 1.25,
+            AP_Medium: 1.20,
+            HE_Medium: 1.20,
             AP_Small: 0.80,
             HE_Small: 0.80,
             Torpedo: 0.25
