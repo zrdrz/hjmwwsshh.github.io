@@ -70,19 +70,102 @@ const Dict_var_element_bind_inputbox_readwrite = {
     firepower: "firepower",
     fp_correction: "fp_correction",
     reload_time: "reload_time",
-    additional_crit: "additional_crit",
 };
 const Dict_var_element_bind_selectbox = {
     barrels: "CMB_barrels",
     shiptype: "CMB_ship_type",
     weapontype: "CMB_weapon_type"
 };
-//
-const Dict_barrels = {
+////
+const bufferbox_template = {
+    bufferbox1: {
+        parentid: "bufferbox",
+        type: "div",
+        style: "padding-left:5px;",
+        id_prefix: "bufferbox_child",
+        childElements: {
+            element1: { 
+                type: "label",
+                cssclass: "label1",
+                innerText: "类型: ",
+            },
+            element2: { 
+                type: "select",
+                cssclass: "select3",
+                id_prefix: "CMB_buffer",
+                options: {
+                    buff_firepower: "火力类buff",
+                    buff_finaldmg: "终伤类buff",
+                    buff_additionalcritdmg: "额外爆伤类buff"
+                },
+            },
+            element3: {
+                type: "input",
+                cssclass: "input3",
+                id_prefix: "Input_buffer",
+                oninput: "value=value.replace(/[^\\d.]/g,'')",
+                innerText: "0",
+            },
+            element4: { 
+                type: "label",
+                cssclass: "label1",
+                innerText: " %",
+            },
+            element5: { 
+                type: "button",
+                cssclass: "button2",
+                id_prefix: "btn_remove",
+                onclick: "removeChildElement(this.value)",
+                innerText: "移除buff",
+            },
+        },
+    },
+};
+var bufferbox_count = 1;
+var bufferbox_id = { 
+  // 1: {
+  //    mainboxid: "bufferbox_child1",
+  //    childElements:{
+  //        1: {
+  //            type: "select",
+  //            id: "CMB_buffer1",
+  //        },
+  //        2: {
+  //            type: "input",
+  //            id: "Input_buffer1",
+  //        },
+  //    },
+  // },
+  // 2: {
+  //    mainboxid: "bufferbox_child2",
+  //    childElements:{
+  //        1: {
+  //            type: "select",
+  //            id: "CMB_buffer1",
+  //        },
+  //        2: {
+  //            type: "input",
+  //            id: "Input_buffer1",
+  //        },
+  //    },
+  // },
+};
+var bufferbox_data = { 
+  //1: {
+  //    buffer_type: "buff_firepower",
+  //    buffer_value: "24",
+  //  },
+  //2: {
+  //    buffer_type: "buff_finaldmg",
+  //    buffer_value: "15",
+  //},
+};
+////
+const Dict_barrels = {  //联装数
     1: "舰炮:单装/鱼雷管:3联",
     2: "舰炮:双联/鱼雷管:4联",
     3: "舰炮:三联/鱼雷管:5联",
-};//联装数
+};
 const Dict_weapon_data = { //weapon数据
     AP_ExBig: {
         name: "超大AP",  //显示名
@@ -349,4 +432,100 @@ function dmgcal_dpm() {
     };
     str = str + '\n';
     return str;
+};
+//
+//bufferbox相关函数
+Dict_bufferbox_funtions = {
+    insertbufferbox1: "createbufferbox1()",
+};
+function createbufferbox1(){
+    var parentid = bufferbox_template.bufferbox1.parentid;
+    var type = bufferbox_template.bufferbox1.type;
+    //先生成buffbox的主div
+    var mainbox = document.createElement(type);
+    var i = Number(Object.keys(bufferbox_id).length + 1);
+    if ( i <= 7 ) { 
+        var mainboxid = bufferbox_template.bufferbox1.id_prefix + bufferbox_count; //确定id
+
+        var container = document.getElementById(parentid);
+        container.appendChild(mainbox); //添加div
+        mainbox.setAttribute("id",mainboxid); //设置属性
+        mainbox.setAttribute("style",bufferbox_template.bufferbox1.style); //设置属性
+        bufferbox_id[bufferbox_count] = {}; //把元素id添加到bufferbox_id对象中
+        bufferbox_id[bufferbox_count].mainboxid = mainboxid;
+        bufferbox_id[bufferbox_count].childElements = {};
+        bufferbox_data[bufferbox_count] = {}; //初始化数据存放的obj
+        bufferbox_data[bufferbox_count].buffer_type = "";
+        bufferbox_data[bufferbox_count].buffer_value = "";
+        //
+        //然后生成div里面的元素
+        var childtype = "";
+        var childid = "";
+        for ( varname in bufferbox_template.bufferbox1.childElements ){
+            childtype = bufferbox_template.bufferbox1.childElements[varname].type;
+            createChildElement(bufferbox_count,childtype,mainboxid,bufferbox_template.bufferbox1.childElements[varname]);
+        };
+        bufferbox_count = Number(bufferbox_count) + 1;
+    } else { alert("暂时只支持最多7个buff") }
+};
+//function createMainbox()
+function createChildElement(i,type,parentid,obj){
+    var newchild = document.createElement(type);
+    var container = document.getElementById(parentid);
+    var newcssclass = obj.cssclass;
+    newchild.setAttribute("class",newcssclass)
+    var j = Number(Object.keys(bufferbox_id[i].childElements).length + 1);
+
+    switch (type) {
+        case 'label':
+            var newtext = document.createTextNode(obj.innerText);
+            newchild.appendChild(newtext);
+            container.appendChild(newchild);
+            break;
+        case 'select':
+            var childid = obj.id_prefix + i;
+            bufferbox_id[i].childElements[j] = {};
+            bufferbox_id[i].childElements[j].type = "select";
+            bufferbox_id[i].childElements[j].id = childid;
+            newchild.setAttribute("id", childid);
+            container.appendChild(newchild);
+            for ( varname in obj.options ) {
+                var getData = obj.options[varname];
+                document.getElementById(childid).options.add(new Option(getData,varname));
+            };
+            break;
+        case 'input':
+            var newtext = obj.innerText;
+            var childid = obj.id_prefix + i;
+            bufferbox_id[i].childElements[j] = {};
+            bufferbox_id[i].childElements[j].type = "input";
+            bufferbox_id[i].childElements[j].id = childid;
+            newchild.setAttribute("id", childid);
+            newchild.setAttribute("oninput", obj.oninput);
+            container.appendChild(newchild);
+            document.getElementById(childid).value = newtext;
+            break;
+        case 'button':
+            var newtext = document.createTextNode(obj.innerText);
+            newchild.appendChild(newtext);
+            var childid = obj.id_prefix + i;
+            bufferbox_id[i].childElements[j] = {};
+            bufferbox_id[i].childElements[j].type = "button";
+            bufferbox_id[i].childElements[j].id = childid;
+            newchild.setAttribute("id", childid);
+            newchild.setAttribute("value", i);
+            newchild.setAttribute("onclick", obj.onclick);
+            container.appendChild(newchild);
+    };
+};
+function removeChildElement(elementid) {
+    var childid = bufferbox_id[elementid].mainboxid;
+    var childelement = document.getElementById(childid);
+    childelement.remove(); //删除div
+    delete bufferbox_id[elementid]; //删除存放对应元素id的obj
+    delete bufferbox_data[elementid]; //删除存放对应数据的obj
+};
+function getParentNodeId(childId) {
+    var parentid = document.getElementById(childId).parentNode.id;
+    return parentid;
 };
