@@ -77,88 +77,97 @@ const Dict_var_element_bind_selectbox = {
     weapontype: "CMB_weapon_type"
 };
 ////
-const bufferbox_template = {
+var bufferbox_template = { //存放bufferbox的模板
     bufferbox1: {
-        parentid: "bufferbox",
-        type: "div",
-        style: "padding-left:5px;",
-        id_prefix: "bufferbox_child",
+        mainbox: {
+            parentid: "bufferbox", //父元素的id
+            type: "div",
+            id: "bufferbox_child",
+            attributes: {
+                style: "padding-left:5px;",
+            },
+        },
         childElements: {
             element1: { 
                 type: "label",
-                cssclass: "label1",
-                innerText: "类型: ",
+                attributes: {
+                    class: "label1",
+                },
+                innerHTML: "类型: ",
             },
             element2: { 
                 type: "select",
-                cssclass: "select3",
-                id_prefix: "CMB_buffer",
-                options: {
-                    buff_firepower: "火力类buff",
-                    buff_finaldmg: "终伤类buff",
-                    buff_additionalcritdmg: "额外爆伤类buff"
+                id: "CMB_buffer",
+                attributes: {
+                    class: "select3",
                 },
+                options: {
+                    buff_firepower: "火力提升",
+                    buff_finaldmg: "终伤提升",
+                    buff_additionalcritdmg: "额外爆伤",
+                    buff_reloadspeed: "装填速度提升",
+                },
+                innerHTML: "",
             },
             element3: {
                 type: "input",
-                cssclass: "input3",
-                id_prefix: "Input_buffer",
-                oninput: "value=value.replace(/[^\\d.]/g,'')",
-                innerText: "0",
+                id: "Input_buffer",
+                attributes: {
+                    class: "input3",
+                    oninput: "value=value.replace(/[^\\d.]/g,'')",
+                    value: "0",
+                },
+                innerHTML: "",
             },
             element4: { 
                 type: "label",
-                cssclass: "label1",
-                innerText: " %",
+                attributes: {
+                    class: "label1",
+                },
+                innerHTML: " %",
             },
             element5: { 
                 type: "button",
-                cssclass: "button2",
-                id_prefix: "btn_remove",
-                onclick: "removeChildElement(this.value)",
-                innerText: "移除buff",
+                id: "btn_remove",
+                attributes: {
+                    class: "button2",
+                    onclick: "removeChildElement(this.value,this.getAttribute('templatename'))",
+                    templatename: "bufferbox1",
+                },
+                innerHTML: "移除buff",
             },
         },
+        bufferbox_count: 1, //用于给新生成的bufferbox的id后缀添加计数
+        bufferbox_data: {  //存放各个bufferbox的数据
+            //bufferbox_child1: {
+            //    buffer_type: "buff_firepower",
+            //    buffer_value: "24",
+            //  },
+            //bufferbox_child2: {
+            //    buffer_type: "buff_finaldmg",
+            //    buffer_value: "15",
+            //},
+        },
+        bufferbox_id: {  //存放页面里新生成的bufferbox的元素id
+            //bufferbox_child1: {
+            //    childElements:{
+            //        1: {
+            //            type: "select",
+            //            id: "CMB_buffer1",
+            //        },
+            //        2: {
+            //            type: "input",
+            //            id: "Input_buffer1",
+            //        },
+            //    },
+            //},
+            //bufferbox_child2: {
+            //    childElements:{
+            //    
+            //    },
+            //},
+        },
     },
-};
-var bufferbox_count = 1;
-var bufferbox_id = { 
-  // 1: {
-  //    mainboxid: "bufferbox_child1",
-  //    childElements:{
-  //        1: {
-  //            type: "select",
-  //            id: "CMB_buffer1",
-  //        },
-  //        2: {
-  //            type: "input",
-  //            id: "Input_buffer1",
-  //        },
-  //    },
-  // },
-  // 2: {
-  //    mainboxid: "bufferbox_child2",
-  //    childElements:{
-  //        1: {
-  //            type: "select",
-  //            id: "CMB_buffer1",
-  //        },
-  //        2: {
-  //            type: "input",
-  //            id: "Input_buffer1",
-  //        },
-  //    },
-  // },
-};
-var bufferbox_data = { 
-  //1: {
-  //    buffer_type: "buff_firepower",
-  //    buffer_value: "24",
-  //  },
-  //2: {
-  //    buffer_type: "buff_finaldmg",
-  //    buffer_value: "15",
-  //},
 };
 ////
 const Dict_barrels = {  //联装数
@@ -436,96 +445,124 @@ function dmgcal_dpm() {
 //
 //bufferbox相关函数
 Dict_bufferbox_funtions = {
-    insertbufferbox1: "createbufferbox1()",
+    insertbufferbox1: "createbufferbox('bufferbox1')",
 };
-function createbufferbox1(){
-    var parentid = bufferbox_template.bufferbox1.parentid;
-    var type = bufferbox_template.bufferbox1.type;
-    //先生成buffbox的主div
-    var mainbox = document.createElement(type);
-    var i = Number(Object.keys(bufferbox_id).length + 1);
-    if ( i <= 7 ) { 
-        var mainboxid = bufferbox_template.bufferbox1.id_prefix + bufferbox_count; //确定id
-
-        var container = document.getElementById(parentid);
-        container.appendChild(mainbox); //添加div
-        mainbox.setAttribute("id",mainboxid); //设置属性
-        mainbox.setAttribute("style",bufferbox_template.bufferbox1.style); //设置属性
-        bufferbox_id[bufferbox_count] = {}; //把元素id添加到bufferbox_id对象中
-        bufferbox_id[bufferbox_count].mainboxid = mainboxid;
-        bufferbox_id[bufferbox_count].childElements = {};
-        bufferbox_data[bufferbox_count] = {}; //初始化数据存放的obj
-        bufferbox_data[bufferbox_count].buffer_type = "";
-        bufferbox_data[bufferbox_count].buffer_value = "";
-        //
-        //然后生成div里面的元素
-        var childtype = "";
-        var childid = "";
-        for ( varname in bufferbox_template.bufferbox1.childElements ){
-            childtype = bufferbox_template.bufferbox1.childElements[varname].type;
-            createChildElement(bufferbox_count,childtype,mainboxid,bufferbox_template.bufferbox1.childElements[varname]);
-        };
-        bufferbox_count = Number(bufferbox_count) + 1;
-    } else { alert("暂时只支持最多7个buff") }
-};
-//function createMainbox()
-function createChildElement(i,type,parentid,obj){
-    var newchild = document.createElement(type);
-    var container = document.getElementById(parentid);
-    var newcssclass = obj.cssclass;
-    newchild.setAttribute("class",newcssclass)
-    var j = Number(Object.keys(bufferbox_id[i].childElements).length + 1);
-
-    switch (type) {
-        case 'label':
-            var newtext = document.createTextNode(obj.innerText);
-            newchild.appendChild(newtext);
-            container.appendChild(newchild);
-            break;
-        case 'select':
-            var childid = obj.id_prefix + i;
-            bufferbox_id[i].childElements[j] = {};
-            bufferbox_id[i].childElements[j].type = "select";
-            bufferbox_id[i].childElements[j].id = childid;
-            newchild.setAttribute("id", childid);
-            container.appendChild(newchild);
-            for ( varname in obj.options ) {
-                var getData = obj.options[varname];
-                document.getElementById(childid).options.add(new Option(getData,varname));
-            };
-            break;
-        case 'input':
-            var newtext = obj.innerText;
-            var childid = obj.id_prefix + i;
-            bufferbox_id[i].childElements[j] = {};
-            bufferbox_id[i].childElements[j].type = "input";
-            bufferbox_id[i].childElements[j].id = childid;
-            newchild.setAttribute("id", childid);
-            newchild.setAttribute("oninput", obj.oninput);
-            container.appendChild(newchild);
-            document.getElementById(childid).value = newtext;
-            break;
-        case 'button':
-            var newtext = document.createTextNode(obj.innerText);
-            newchild.appendChild(newtext);
-            var childid = obj.id_prefix + i;
-            bufferbox_id[i].childElements[j] = {};
-            bufferbox_id[i].childElements[j].type = "button";
-            bufferbox_id[i].childElements[j].id = childid;
-            newchild.setAttribute("id", childid);
-            newchild.setAttribute("value", i);
-            newchild.setAttribute("onclick", obj.onclick);
-            container.appendChild(newchild);
+function createbufferbox(templateName){
+    var number = getObjectKeysCount(bufferbox_template[templateName].bufferbox_id); //获取页面上bufferbox的数量
+    if ( number <= 7 ) {  //限制bufferbox数量不大于七个
+        var count = bufferbox_template[templateName].bufferbox_count;  //获取bufferbox的id的计数
+        var mainboxid = bufferbox_template[templateName].mainbox.id + bufferbox_template[templateName].bufferbox_count; //确定id
+        createMainbox(bufferbox_template[templateName]);    //生成buffbox的主div
+        createChild(bufferbox_template[templateName]);    //生成子元素
+        count = Number(count) + 1;
+        bufferbox_template[templateName].bufferbox_count = count;
+    } else { 
+        alert("暂时只支持最多7个buff");
     };
 };
-function removeChildElement(elementid) {
-    var childid = bufferbox_id[elementid].mainboxid;
-    var childelement = document.getElementById(childid);
+function createMainbox(obj){
+    var mainbox = document.createElement(obj.mainbox.type); //生成mainbox
+    var mainboxid = obj.mainbox.id + obj.bufferbox_count; //确定id
+    var container = document.getElementById(obj.mainbox.parentid); //确定父元素
+    container.appendChild(mainbox); //添加mainbox
+    mainbox.setAttribute("id",mainboxid); //设置属性
+    for ( attr in obj.mainbox.attributes ){//设置属性
+        mainbox.setAttribute(attr,obj.mainbox.attributes[attr]); 
+    };
+    obj.bufferbox_id[mainboxid] = {}; //把元素id添加到bufferbox_id对象中
+    obj.bufferbox_id[mainboxid].childElements = {};
+    obj.bufferbox_data[mainboxid] = {}; //初始化数据存放的obj
+    obj.bufferbox_data[mainboxid].buffer_type = "";
+    obj.bufferbox_data[mainboxid].buffer_value = "";
+};
+function createChild(obj){
+    var childtype = "";
+    var childid = "";
+    var mainboxid = obj.mainbox.id + obj.bufferbox_count;
+    //
+    for ( childname in obj.childElements ){
+        childtype = obj.childElements[childname].type;
+        childid = obj.childElements[childname].id + obj.bufferbox_count;
+        var j = getObjectKeysCount(obj.bufferbox_id[mainboxid].childElements);
+        switch (childtype){
+            case 'label':
+                createLabel(mainboxid,obj.childElements[childname]);
+                break;
+            case 'select':
+                createSelect(childid,mainboxid,obj.childElements[childname]);
+                logChildElementId(childid,j,mainboxid,childtype,obj);
+                break;
+            case 'input':
+                createInput(childid,mainboxid,obj.childElements[childname]);
+                logChildElementId(childid,j,mainboxid,childtype,obj);
+                break;
+            case 'button':
+                createButton(childid,mainboxid,obj.childElements[childname]);
+                logChildElementId(childid,j,mainboxid,childtype,obj);
+                break;
+        };
+    };
+};
+function createLabel(parentid,obj){
+    var newchild = document.createElement('label');
+    var container = document.getElementById(parentid);
+    newchild.innerHTML = obj.innerHTML
+    container.appendChild(newchild);
+    for ( attr in obj.attributes ){
+        newchild.setAttribute(attr,obj.attributes[attr]);
+    };
+};
+function createSelect(childid,parentid,obj){
+    var newchild = document.createElement('select');
+    var container = document.getElementById(parentid);
+    newchild.setAttribute("id", childid);
+    container.appendChild(newchild);
+    for ( attr in obj.attributes ){
+        newchild.setAttribute(attr,obj.attributes[attr]);
+    };
+    for ( optname in obj.options ) {
+        var getData = obj.options[optname];
+        document.getElementById(childid).options.add(new Option(getData,optname));
+    };
+};
+function createInput(childid,parentid,obj){
+    var newchild = document.createElement('input');
+    var container = document.getElementById(parentid);
+    newchild.setAttribute("id", childid);
+    newchild.innerHTML = obj.innerHTML
+    container.appendChild(newchild);
+    for ( attr in obj.attributes ){
+        newchild.setAttribute(attr,obj.attributes[attr]);
+    };
+};
+function createButton(childid,parentid,obj){
+    var newchild = document.createElement('button');
+    var container = document.getElementById(parentid);
+    newchild.setAttribute("id", childid);
+    newchild.setAttribute("value", parentid);
+    newchild.innerHTML = obj.innerHTML
+    container.appendChild(newchild);
+    for ( attr in obj.attributes ){
+        newchild.setAttribute(attr,obj.attributes[attr]);
+    };
+};
+function logChildElementId(childid,j,parentid,childtype,obj){
+    obj.bufferbox_id[parentid].childElements[j] = {};
+    obj.bufferbox_id[parentid].childElements[j].type = childtype;
+    obj.bufferbox_id[parentid].childElements[j].id = childid;
+};
+
+function removeChildElement(elementid,templatename) {
+    var childelement = document.getElementById(elementid);
     childelement.remove(); //删除div
-    delete bufferbox_id[elementid]; //删除存放对应元素id的obj
-    delete bufferbox_data[elementid]; //删除存放对应数据的obj
+    delete bufferbox_template[templatename].bufferbox_id[elementid]; //删除存放对应元素id的obj
+    delete bufferbox_template[templatename].bufferbox_data[elementid]; //删除存放对应数据的obj
 };
 function getParentNodeId(childId) {
     var parentid = document.getElementById(childId).parentNode.id;
     return parentid;
 };
+function getObjectKeysCount(obj){ //获取一个obj内对象的数量
+    var counts = Number(Object.keys(obj).length + 1);
+    return counts;
+}
