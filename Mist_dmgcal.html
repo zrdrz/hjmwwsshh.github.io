@@ -50,6 +50,7 @@
             </div>
             <div style="clear:both" class="calbox"  id="bufferbox">
                 <button class="button" onclick="addbuffdiv()" id="createbuffdiv">添加buff</button>
+                <button class="button" onclick="readbuff()" id="createbuffdiv">读取buff</button>
                 </br>
                 <hr style="clear:both;">
             </div>
@@ -179,8 +180,13 @@
             };
         };
         function addbuffdiv() { //动态生成buff选项
-            for ( funcname in Dict_bufferbox_funtions ) {
-                eval(Dict_bufferbox_funtions[funcname]);
+            for ( funcname in Dict_bufferbox_funtions.createElement ) {
+                eval(Dict_bufferbox_funtions.createElement[funcname]);
+            };
+        };
+        function readbuff(){ //读取buff数据
+            for ( funcname in Dict_bufferbox_funtions.readElementValue ) {
+                eval(Dict_bufferbox_funtions.readElementValue[funcname]);
             };
         };
         //

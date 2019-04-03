@@ -23,9 +23,14 @@ var global = {
     vsHeavyArmor: 0.00,
     equipmentefficiency: 0,
     critdmg_base: 0,
-    additional_crit: 0,
     overpene_dmg: 0,
     moderate_dmg: 0,
+};
+var global_buff = {  //存放全局buff
+    additional_crit: 0, //额外的暴击伤害系数(百分数); additional_crit = buff1 + buff2 + buff3...
+    additional_firepower: 0, //额外火力百分比(百分数),多个为加法, firepower = firepower * ( 1 + additional_firepower ); additional_firepower = buff1 + buff2 + buff3 ...
+    additional_damage: 100, //终伤系数百分比(百分数),多个为乘法 dmg = dmg * additional_damage; additional_damage =  (100 + buff1)/100 * (100 + buff2)/100 * (1 + buff3)/100
+    additional_reloadspeed: 0, //额外装填速度百分比(百分数): time = t / ( 1 + buff% ); DPM = DPM * (1 + %)
 };
 var result = { //计算结果存放处
     singledmg_overpene: {
@@ -79,15 +84,15 @@ const Dict_var_element_bind_selectbox = {
 ////
 var bufferbox_template = { //存放bufferbox的模板
     bufferbox1: {
-        mainbox: {
+        mainbox: {  //主框架
             parentid: "bufferbox", //父元素的id
             type: "div",
             id: "bufferbox_child",
-            attributes: {
+            attributes: {  //元素的属性
                 style: "padding-left:5px;",
             },
         },
-        childElements: {
+        childElements: { //子元素
             element1: { 
                 type: "label",
                 attributes: {
@@ -166,6 +171,24 @@ var bufferbox_template = { //存放bufferbox的模板
             //    
             //    },
             //},
+        },
+        buff_map: { //与全局变量对应的关系
+            buff_firepower: "additional_firepower",
+            buff_finaldmg: "additional_damage",
+            buff_additionalcritdmg: "additional_crit",
+            buff_reloadspeed: "additional_reloadspeed",
+        },
+        buff_var_tmp:{ //存放临时计算的结果
+            buff_firepower: 0,  //buff1 + buff2 + buff3 ...
+            buff_finaldmg: 0,  //(100+buff1)/100 * (100+buff2)/100)...
+            buff_additionalcritdmg: 0, //buff1 + buff2 + buff3
+            buff_reloadspeed: 0, //buff1 + buff2 + buff3
+        },
+        buff_var_default: { //buff的默认值
+            buff_firepower: 0,
+            buff_finaldmg: 100,
+            buff_additionalcritdmg: 0,
+            buff_reloadspeed: 0,
         },
     },
 };
@@ -382,7 +405,7 @@ Dict_funtions = {
     cal_singledmgoverpene: "dmgcal_singledmg_overpene()",
     cal_singledmgmoderate: "dmgcal_singledmg_moderate()",
     cal_singledmg: "dmgcal_singledmg()",
-    cal_singledmgcrit: "dmgcal_singdmg_crit()",
+    //cal_singledmgcrit: "dmgcal_singdmg_crit()",
     printline: "printSeparateline()",
     cal_dpm: "dmgcal_dpm()",
     
@@ -427,7 +450,7 @@ function dmgcal_singledmg(){
 function dmgcal_singdmg_crit(){
     var str = "单发暴伤" + '\t';
     for ( varname in result.singledmgcrit ){
-        result.singledmgcrit[varname] = Math.ceil(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * global.reload_time * ( global.critdmg_base * 100 + Number(global.additional_crit)) / global.barrels / 5 / 100 / 100);
+        result.singledmgcrit[varname] = Math.ceil(global.firepower * global.fp_correction * global[varname] * global.equipmentefficiency * global.reload_time * ( global.critdmg_base * 100 + Number(global_buff.additional_crit)) / global.barrels / 5 / 100 / 100);
         str = str + result.singledmgcrit[varname] + '\t\t';
     };
     str = str + '\n';
@@ -445,7 +468,14 @@ function dmgcal_dpm() {
 //
 //bufferbox相关函数
 Dict_bufferbox_funtions = {
-    insertbufferbox1: "createbufferbox('bufferbox1')",
+    createElement: {
+        insertbufferbox1: "createbufferbox('bufferbox1')",
+    },
+    readElementValue: {
+        readbufferbox1: "readbufferbox1('bufferbox1')",
+        readbufferbox2: "readbufferbox2('bufferbox1')",
+        readbufferbox3: "readbufferbox3('bufferbox1')",
+    },
 };
 function createbufferbox(templateName){
     var number = getObjectKeysCount(bufferbox_template[templateName].bufferbox_id); //获取页面上bufferbox的数量
@@ -455,9 +485,60 @@ function createbufferbox(templateName){
         createMainbox(bufferbox_template[templateName]);    //生成buffbox的主div
         createChild(bufferbox_template[templateName]);    //生成子元素
         count = Number(count) + 1;
-        bufferbox_template[templateName].bufferbox_count = count;
+        bufferbox_template[templateName].bufferbox_count = count; //bufferbox计数加1
     } else { 
         alert("暂时只支持最多7个buff");
+    };
+};
+function readbufferbox1(templateName) { //从模板创建的bufferbox中读取表单数据,并写入到bufferbox_data里面
+    var obj_readfrom = bufferbox_template[templateName].bufferbox_id;
+    var obj_writeinto = bufferbox_template[templateName].bufferbox_data;
+    for ( boxname in obj_readfrom ){
+        for ( child in obj_readfrom[boxname].childElements ){ //按元素类型读取数据
+            var childtype = obj_readfrom[boxname].childElements[child].type;
+            var childid = obj_readfrom[boxname].childElements[child].id;
+            switch (childtype) {
+                case 'select':  //从select元素读取buff类型数据
+                    obj_writeinto[boxname].buffer_type = document.getElementById(childid).value
+                    break;
+                case 'input':  //从input元素读取数值数据
+                    obj_writeinto[boxname].buffer_value = document.getElementById(childid).value
+                    break;
+            };
+        };
+    };
+};
+function readbufferbox2(templateName) { //从bufferbox_data里读取各个buff数据,然后分类写入到global_buff里面
+    var obj_readfrom = bufferbox_template[templateName].bufferbox_data;
+    var obj_writeinto = bufferbox_template[templateName].buff_var_tmp;
+    for ( buff in obj_writeinto ) { //读取前先还原数值为默认值
+        obj_writeinto[buff] = bufferbox_template[templateName].buff_var_default[buff];
+    };
+    for ( boxname in obj_readfrom ){
+        var buffer_type = obj_readfrom[boxname].buffer_type;
+        var buffer_value = obj_readfrom[boxname].buffer_value;
+        switch (buffer_type) {
+            case 'buff_firepower':
+                obj_writeinto[buffer_type] = Number(obj_writeinto[buffer_type]) + Number(buffer_value);
+                break;
+            case 'buff_finaldmg':
+                obj_writeinto[buffer_type] = Number(obj_writeinto[buffer_type]) * ( 100 + Number(buffer_value)) / 100;
+                break;
+            case 'buff_additionalcritdmg':
+                obj_writeinto[buffer_type] = Number(obj_writeinto[buffer_type]) + Number(buffer_value);
+                break;
+            case 'buff_reloadspeed':
+                obj_writeinto[buffer_type] = Number(obj_writeinto[buffer_type]) + Number(buffer_value);
+                break;
+        };
+    };
+};
+function readbufferbox3(templateName) {
+    var obj_readfrom = bufferbox_template[templateName].buff_var_tmp;
+    var obj_map = bufferbox_template[templateName].buff_map;
+    var obj_writeinto = global_buff;
+    for ( buff in obj_readfrom ) {
+        obj_writeinto[obj_map[buff]] = obj_readfrom[buff];
     };
 };
 function createMainbox(obj){
@@ -475,22 +556,22 @@ function createMainbox(obj){
     obj.bufferbox_data[mainboxid].buffer_type = "";
     obj.bufferbox_data[mainboxid].buffer_value = "";
 };
-function createChild(obj){
-    var childtype = "";
-    var childid = "";
-    var mainboxid = obj.mainbox.id + obj.bufferbox_count;
+function createChild(obj){  //创建子元素
+    var childtype = "";  //子元素类型
+    var childid = "";    //子元素id
+    var mainboxid = obj.mainbox.id + obj.bufferbox_count; //bufferbox的mainbox的id
     //
-    for ( childname in obj.childElements ){
-        childtype = obj.childElements[childname].type;
-        childid = obj.childElements[childname].id + obj.bufferbox_count;
-        var j = getObjectKeysCount(obj.bufferbox_id[mainboxid].childElements);
-        switch (childtype){
+    for ( childname in obj.childElements ){  //遍历模板里的childElements对象
+        childtype = obj.childElements[childname].type; //确定子元素类型
+        childid = obj.childElements[childname].id + obj.bufferbox_count;  //确定子元素id
+        var j = getObjectKeysCount(obj.bufferbox_id[mainboxid].childElements); //确定bufferbox里的子元素的数量
+        switch (childtype){ //根据子元素类型创建子元素
             case 'label':
                 createLabel(mainboxid,obj.childElements[childname]);
                 break;
             case 'select':
                 createSelect(childid,mainboxid,obj.childElements[childname]);
-                logChildElementId(childid,j,mainboxid,childtype,obj);
+                logChildElementId(childid,j,mainboxid,childtype,obj); //存放子元素的id到模板的bufferbox_id对象中
                 break;
             case 'input':
                 createInput(childid,mainboxid,obj.childElements[childname]);
@@ -503,12 +584,12 @@ function createChild(obj){
         };
     };
 };
-function createLabel(parentid,obj){
+function createLabel(parentid,obj){ //创建label类元素
     var newchild = document.createElement('label');
     var container = document.getElementById(parentid);
-    newchild.innerHTML = obj.innerHTML
+    newchild.innerHTML = obj.innerHTML  //设置元素的innerHTML,一般为文字
     container.appendChild(newchild);
-    for ( attr in obj.attributes ){
+    for ( attr in obj.attributes ){  //遍历赋值元素的属性
         newchild.setAttribute(attr,obj.attributes[attr]);
     };
 };
@@ -520,7 +601,7 @@ function createSelect(childid,parentid,obj){
     for ( attr in obj.attributes ){
         newchild.setAttribute(attr,obj.attributes[attr]);
     };
-    for ( optname in obj.options ) {
+    for ( optname in obj.options ) { //select类元素遍历增加下拉框
         var getData = obj.options[optname];
         document.getElementById(childid).options.add(new Option(getData,optname));
     };
@@ -539,14 +620,14 @@ function createButton(childid,parentid,obj){
     var newchild = document.createElement('button');
     var container = document.getElementById(parentid);
     newchild.setAttribute("id", childid);
-    newchild.setAttribute("value", parentid);
+    newchild.setAttribute("value", parentid); //button类元素需增加value属性
     newchild.innerHTML = obj.innerHTML
     container.appendChild(newchild);
     for ( attr in obj.attributes ){
         newchild.setAttribute(attr,obj.attributes[attr]);
     };
 };
-function logChildElementId(childid,j,parentid,childtype,obj){
+function logChildElementId(childid,j,parentid,childtype,obj){ //将子元素的id存放到模板的bufferbox_id对象中
     obj.bufferbox_id[parentid].childElements[j] = {};
     obj.bufferbox_id[parentid].childElements[j].type = childtype;
     obj.bufferbox_id[parentid].childElements[j].id = childid;
@@ -558,8 +639,8 @@ function removeChildElement(elementid,templatename) {
     delete bufferbox_template[templatename].bufferbox_id[elementid]; //删除存放对应元素id的obj
     delete bufferbox_template[templatename].bufferbox_data[elementid]; //删除存放对应数据的obj
 };
-function getParentNodeId(childId) {
-    var parentid = document.getElementById(childId).parentNode.id;
+function getParentNodeId(childid) {
+    var parentid = document.getElementById(childid).parentNode.id;
     return parentid;
 };
 function getObjectKeysCount(obj){ //获取一个obj内对象的数量
