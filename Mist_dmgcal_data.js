@@ -18,10 +18,10 @@ var global = {
     fp_correction: 0, //百分数
     reload_time: 0,
     barrels: 0,
-    vsLightArmor: 0.00,
-    vsMediumArmor: 0.00,
-    vsHeavyArmor: 0.00,
-    equipmentefficiency: 0,
+    vsLightArmor: 0.00,  //作战效率
+    vsMediumArmor: 0.00,  //作战效率
+    vsHeavyArmor: 0.00,  //作战效率
+    equipmentefficiency: 0, //装备效率
     critdmg_base: 0,
     overpene_dmg: 0,
     moderate_dmg: 0,
@@ -57,7 +57,12 @@ var result = { //计算结果存放处
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
         vsHeavyArmor: 0.0
-    }
+    },
+    dpmcrit: {
+        vsLightArmor: 0.00,
+        vsMediumArmor: 0.00,
+        vsHeavyArmor: 0.0
+    },
 };
 //
 //存放html页面对应元素的id,key值要与global中的key值相同
@@ -119,7 +124,7 @@ var bufferbox_template = { //存放bufferbox的模板
                 id: "Input_buffer",
                 attributes: {
                     class: "input3",
-                    oninput: "value=value.replace(/[^\\d.]/g,'')",
+                    oninput: "value=value.replace(/[^\\d.-]/g,'')",
                     value: "0",
                 },
                 innerHTML: "",
@@ -209,7 +214,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50, //半伤系数
             overpene_dmg: 0.25, //过穿伤害系数
         },
-        barrels: [ "2","3" ] //可用的联装数
+        barrels: [ "2","3" ], //可用的联装数
+        specialDamage: { //特殊伤害
+            name: "无", 
+            type: "none", 
+        },
     },
     AP_Big: {
         name: "大AP",
@@ -221,7 +230,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "2","3" ] 
+        barrels: [ "2","3" ], 
+        specialDamage: { 
+            name: "无", 
+            type: "none", 
+        },
     },
     AP_Medium: {
         name: "中AP",
@@ -233,7 +246,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2","3" ] 
+        barrels: [ "1","2","3" ],
+        specialDamage: { 
+            name: "无", 
+            type: "none", 
+        },
     },
     AP_Small: {
         name: "小AP",
@@ -245,7 +262,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2" ] 
+        barrels: [ "1","2" ], 
+        specialDamage: { 
+            name: "无", 
+            type: "none", 
+        },
     },
     HE_ExBig: {
         name: "超大HE",
@@ -257,7 +278,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "2","3" ] 
+        barrels: [ "2","3" ], 
+        specialDamage: { 
+            name: "起火伤害", 
+            type: "firedmg", 
+        },
     },
     HE_Big: {
         name: "大HE",
@@ -269,7 +294,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "2","3" ] 
+        barrels: [ "2","3" ],
+        specialDamage: { 
+            name: "起火伤害", 
+            type: "firedmg", 
+        },
     },
     HE_Medium: {
         name: "中HE",
@@ -281,7 +310,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2","3" ] 
+        barrels: [ "1","2","3" ], 
+        specialDamage: { 
+            name: "起火伤害", 
+            type: "firedmg", 
+        },
     },
     HE_Small: {
         name: "小HE",
@@ -293,7 +326,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2" ] 
+        barrels: [ "1","2" ], 
+        specialDamage: { 
+            name: "起火伤害", 
+            type: "firedmg", 
+        },
     },
     Torpedo: {
         name: "舰载鱼雷",
@@ -305,7 +342,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2","3" ] 
+        barrels: [ "1","2","3" ], 
+        specialDamage: { 
+            name: "进水伤害", 
+            type: "flooddmg", 
+        },
     },
     DiveBomber: {
         name: "舰爆",
@@ -317,7 +358,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "3" ] 
+        barrels: [ "3" ], 
+        specialDamage: { 
+            name: "起火伤害", 
+            type: "firedmg", 
+        },
     },
     TorpedoBomber: {
         name: "舰攻",
@@ -329,7 +374,11 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "3" ] 
+        barrels: [ "3" ], 
+        specialDamage: { 
+            name: "进水伤害", 
+            type: "flooddmg", 
+        },
     }
 };
 const Dict_shiptype_data = {  //ship数据
@@ -399,20 +448,41 @@ const Dict_shiptype_data = {  //ship数据
         }
     }
 };
+
 //存放要调用的计算的函数名:
 Dict_funtions = {
     init_calinfo: "dmgcal_info()",
     printline1: "printSeparateline(40,'-')",
     init_buffinfo: "buff_info()",
     printline2: "printSeparateline(40,'-')",
+    printtxt1: "printTextline('不计buff:')",
     printArmor1: "printArmorTypeline()",
-    cal_singledmgoverpene: "dmgcal_singledmg_overpene(1)",
-    cal_singledmgmoderate: "dmgcal_singledmg_moderate(1)",
-    cal_singledmg: "dmgcal_singledmg(1)",
-    cal_singledmgcrit: "dmgcal_singdmg_crit(1)",
+    cal_singledmgoverpene1: "dmgcal_singledmg_overpene(0)",
+    cal_singledmgmoderate1: "dmgcal_singledmg_moderate(0)",
+    cal_singledmg1: "dmgcal_singledmg(0)",
+    cal_singledmgcrit1: "dmgcal_singdmg_crit(0)",
     printline3: "printSeparateline(8,'-')",
-    cal_dpm: "dmgcal_dpm(1)",
-    cal_dpm_crit: "dmgcal_dpm_crit(1)",
+    cal_dpm1: "dmgcal_dpm(0)",
+    cal_dpm_crit1: "dmgcal_dpm_crit(0)",
+    printline4: "printSeparateline(40,'=')",
+    printtxt2: "printTextline('计入buff:')",
+    printArmor2: "printArmorTypeline()",
+    cal_singledmgoverpene2: "dmgcal_singledmg_overpene(1)",
+    cal_singledmgmoderate2: "dmgcal_singledmg_moderate(1)",
+    cal_singledmg2: "dmgcal_singledmg(1)",
+    cal_singledmgcrit2: "dmgcal_singdmg_crit(1)",
+    printline5: "printSeparateline(8,'-')",
+    cal_dpm2: "dmgcal_dpm(1)",
+    cal_dpm_crit2: "dmgcal_dpm_crit(1)",
+    printline6: "printSeparateline(40,'=')",
+    printtxt3: "printTextline('不计buff:')",
+    cal_sepcialdmg1: "dmgcal_specialdmg(0)",
+    printtxt4: "printTextline('计入buff:')",
+    cal_sepcialdmg2: "dmgcal_specialdmg(1)",
+};
+Dict_specialdmgfunctions = { //特殊伤害计算
+    firedmg: "dmgcal_specialdmg_firedmg()",
+    flooddmg: "dmgcal_specialdmg_flooddmg()",
 };
 function printSeparateline(num,separator) { //插入一行指定数量和字符的分隔线
     var str = "";
@@ -422,9 +492,12 @@ function printSeparateline(num,separator) { //插入一行指定数量和字符�
     str = str + '\n'
     return str;
 };
+function printTextline(strings){  //插入一行文字
+    var str = strings + '\n';
+    return str;
+};
 function printArmorTypeline() {
-    var str = "";
-    var str = str + '\t\t' + "vs轻甲" + '\t\t' + "vs中甲" + '\t\t' + "vs重甲" + '\n';
+    var str = '\t\t' + "vs轻甲" + '\t\t' + "vs中甲" + '\t\t' + "vs重甲" + '\n';
     return str;
 };
 function dmgcal_info() {
@@ -438,7 +511,9 @@ function buff_info() {
 function dmgcal_singledmg_overpene(is_buffed){
     var str = "单发过穿" + '\t';
     for ( varname in result.singledmg_overpene ){ 
-        result.singledmg_overpene[varname] = Math.ceil(global.firepower * ((100 + Number(global_buff.additional_firepower)) / 100) * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.overpene_dmg * global.reload_time * (global_buff.additional_damage / 100) / global.barrels / 5);
+        var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.overpene_dmg * global.reload_time / global.barrels / 5);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100);
+        result.singledmg_overpene[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed));
         str = str + result.singledmg_overpene[varname] + '\t\t';
     };
     str = str + '\n';
@@ -447,7 +522,9 @@ function dmgcal_singledmg_overpene(is_buffed){
 function dmgcal_singledmg_moderate(is_buffed){
     var str = "单发半伤" + '\t';
     for ( varname in result.singledmg_moderate ){ 
-        result.singledmg_moderate[varname] = Math.ceil(global.firepower * ((100 + Number(global_buff.additional_firepower) * is_buffed) / 100) * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.moderate_dmg * global.reload_time * (global_buff.additional_damage / 100 * is_buffed) / global.barrels / 5);
+        var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.moderate_dmg * global.reload_time / global.barrels / 5);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100);
+        result.singledmg_moderate[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed));
         str = str + result.singledmg_moderate[varname] + '\t\t';
     };
     str = str + '\n';
@@ -456,7 +533,9 @@ function dmgcal_singledmg_moderate(is_buffed){
 function dmgcal_singledmg(is_buffed){
     var str = "单发标伤" + '\t';
     for ( varname in result.singledmg ){ //varname即为vsLightArmor,vsMediumArmor和vsHeavyArmor三个效率系数
-        result.singledmg[varname] = Math.ceil(global.firepower * ((100 + Number(global_buff.additional_firepower) * is_buffed) / 100) * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.reload_time * (global_buff.additional_damage / 100 * is_buffed) / global.barrels / 5);
+        var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.reload_time / global.barrels / 5);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100);
+        result.singledmg[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed));
         str = str + result.singledmg[varname] + '\t\t';
     };
     str = str + '\n';
@@ -465,7 +544,10 @@ function dmgcal_singledmg(is_buffed){
 function dmgcal_singdmg_crit(is_buffed){
     var str = "单发暴伤" + '\t';
     for ( varname in result.singledmgcrit ){
-        result.singledmgcrit[varname] = Math.ceil(global.firepower * ((100 + Number(global_buff.additional_firepower) * is_buffed) / 100) * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.reload_time * ((global.critdmg_base * 100 + Number(global_buff.additional_crit) * is_buffed)/100) * (global_buff.additional_damage / 100 * is_buffed) / global.barrels / 5);
+        var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * global.reload_time / global.barrels / 5);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100);
+        var crit = ((global.critdmg_base * 100 + Number(global_buff.additional_crit) * is_buffed) / 100);
+        result.singledmgcrit[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed) * crit);
         str = str + result.singledmgcrit[varname] + '\t\t';
     };
     str = str + '\n';
@@ -474,7 +556,9 @@ function dmgcal_singdmg_crit(is_buffed){
 function dmgcal_dpm(is_buffed) {
     var str = "DPM标伤" + '\t\t' ;
     for ( varname in result.dpm ){
-        result.dpm[varname] = Math.ceil(global.firepower * ((100 + Number(global_buff.additional_firepower) *is_buffed) / 100) * (global.fp_correction / 100) * global[varname] * (global_buff.additional_damage / 100 * is_buffed) * global.equipmentefficiency * 12 * ((100 + Number(global_buff.additional_reloadspeed) * is_buffed) / 100));
+        var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * 12);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100) * ((100 + Number(global_buff.additional_reloadspeed) * is_buffed) / 100);
+        result.dpm[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed));
         str = str + result.dpm[varname] + '\t\t'
     };
     str = str + '\n';
@@ -483,11 +567,33 @@ function dmgcal_dpm(is_buffed) {
 function dmgcal_dpm_crit(is_buffed) {
     var str = "DPM暴伤" + '\t\t' ;
     for ( varname in result.dpm ){
-        result.dpm[varname] = Math.ceil(global.firepower * ((100 + Number(global_buff.additional_firepower) *is_buffed) / 100) * (global.fp_correction / 100) * global[varname] * ((global.critdmg_base * 100 + Number(global_buff.additional_crit) * is_buffed)/100) * (global_buff.additional_damage / 100 * is_buffed) * global.equipmentefficiency * 12 * ((100 + Number(global_buff.additional_reloadspeed) * is_buffed) / 100));
-        str = str + result.dpm[varname] + '\t\t'
+        var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * 12);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100) * ((100 + Number(global_buff.additional_reloadspeed) * is_buffed) / 100);
+        var crit = ((global.critdmg_base * 100 + Number(global_buff.additional_crit) * is_buffed) / 100);
+        result.dpmcrit[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed) * crit);
+        str = str + result.dpmcrit[varname] + '\t\t'
     };
     str = str + '\n';
     return str;
+};
+function dmgcal_specialdmg(is_buffed) {
+    var specialdmgtype = Dict_weapon_data[global.weapontype].specialDamage.type;
+    var specialdmgname = Dict_weapon_data[global.weapontype].specialDamage.name;
+    var str = "特殊伤害类型:" + specialdmgname + '\n';
+    if ( specialdmgtype != "none" ){
+        var dmg = eval(Dict_specialdmgfunctions[specialdmgtype]);
+        var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100);
+        var result = Math.ceil(dmg * (buff * is_buffed + 1 * !is_buffed));
+        str = str + "单次伤害:" + result + '\n';
+    };
+    return str;
+};
+function dmgcal_specialdmg_firedmg() {
+    var result = (global.firepower * global.equipmentefficiency * (global.fp_correction / 100) * global.reload_time)/(global.barrels * 25);
+    return result;
+};
+function dmgcal_specialdmg_flooddmg(){
+    return 0;
 };
 //
 //bufferbox相关函数
