@@ -405,6 +405,7 @@ Dict_funtions = {
     printline1: "printSeparateline(40,'-')",
     init_buffinfo: "buff_info()",
     printline2: "printSeparateline(40,'-')",
+    printArmor1: "printArmorTypeline()",
     cal_singledmgoverpene: "dmgcal_singledmg_overpene(1)",
     cal_singledmgmoderate: "dmgcal_singledmg_moderate(1)",
     cal_singledmg: "dmgcal_singledmg(1)",
@@ -422,6 +423,7 @@ function printSeparateline(num,separator) { //插入一行指定数量和字符�
     return str;
 };
 function printArmorTypeline() {
+    var str = "";
     var str = str + '\t\t' + "vs轻甲" + '\t\t' + "vs中甲" + '\t\t' + "vs重甲" + '\n';
     return str;
 };
