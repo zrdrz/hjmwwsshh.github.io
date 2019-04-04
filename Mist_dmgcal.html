@@ -50,7 +50,6 @@
             </div>
             <div style="clear:both" class="calbox"  id="bufferbox">
                 <button class="button" onclick="addbuffdiv()" id="createbuffdiv">添加buff</button>
-                <button class="button" onclick="readbuff()" id="createbuffdiv">读取buff</button>
                 </br>
                 <hr style="clear:both;">
             </div>
@@ -195,6 +194,8 @@
             getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readwrite); 
             getValuesFromElementsAndSetVar(Dict_var_element_bind_inputbox_readonly);
             getValuesFromElementsAndSetVar(Dict_var_element_bind_selectbox);
+            //
+            readbuff()  //读取buff数据
             //
             var str = "";
             //计算公式模块化
