@@ -8,50 +8,42 @@
 <body>
     <div class="titlebox">
         <div class="titleboxleft">
-            <h1 class="h1">伤害计算器</h1>
+            <h1 class="h1">强化计算器</h1>
         </div>
         <div class="titleboxright">
-            <h1 class="h1 h1_right"><a class="a" href="index.html">返回首页</a></h1>
+            <h1 class="h1 h1_right"><a class="a" href="../../index.html">返回首页</a></h1>
         </div>
     </div>
     <div class="content">
-        <div style="width: 354px;float: left; margin-right: 10px;" id="leftbox1">
+        <div style="width: 424px;float: left; margin-right: 10px;" id="leftbox1">
             <div class="calbox">
                 <div class="selectbox">
-                    <label class="label1">1.选择舰船类型</label>
+                    <label class="label1">搜索方法</label>
                     </br>
-                    <select id="CMB_ship_type" class="select1" onchange="shiptype_change(this.value,Dict_var_element_bind_selectbox.weapontype)"></select>
+                    <select id="CMB_searchtype" class="select1" onchange=""></select>
                 </div>
                 <div class="selectbox">
-                    <label class="label1">2.选择武器类型</label>
+                    <label class="label1">船型筛选</label>
                     </br>
-                    <select id="CMB_weapon_type" class="select1" onchange="weapontype_change(this.value)"></select>
+                    <select id="CMB_shiptypefilter" class="select1" onchange=""></select>
                 </div>
-                <div class="selectbox ">
-                    <label class="label1">3.面板火力</label>
+                <div class="selectbox">
+                    <label class="label1">星级筛选</label>
                     </br>
-                    <input id="firepower" type="text" class="input1"  oninput = "value=value.replace(/[^\d.]/g,'')"/>
+                    <select id="CMB_shipstars" class="select1" onchange=""></select>
                 </div>
-                <div class="selectbox ">
-                    <label class="label1">4.装备火力补正(%)</label>
+                <div class="selectbox selectbox2">
+                    <label class="label1">  </label>
                     </br>
-                    <input id="fp_correction" type="text" class="input1"  oninput = "value=value.replace(/[^\d]/g,'')"/>
+                    <input id="searchinput" type="text" class="input1 "/>
                 </div>
-                <div class="selectbox ">
-                    <label class="label1">5.装备装填时间(s)</label>
-                    </br>
-                    <input id="reload_time" type="text" class="input1"  oninput = "value=value.replace(/[^\d.]/g,'')"/>
-                </div>
-                <div class="selectbox ">
-                    <label class="label1">6.联装数</label>
-                    </br>
-                    <select id="CMB_barrels" class="select1 " onchange=""></select>
+                <div class="selectbox">
+                    <button class="button btn_search" onclick="search()" id="searchbtn">搜索</button>
                 </div>
             </div>
             <div style="clear:both" class="calbox"  id="bufferbox">
-                <button class="button" onclick="addbuffdiv()" id="createbuffdiv">添加buff</button>
-                </br>
-                <hr style="clear:both;">
+
+
             </div>
         </div>
         <div class="calbox calbox2">
@@ -112,6 +104,7 @@
         </div>
     </div>
     <script src="data.js"></script>
+    <script src="Mist_reinforcementCalculator.js"></script>
     <script type="text/javascript">
 
 //obj = { fun: "ale('\t')" , fun2: "ale(' a ')" };
