@@ -13,22 +13,7 @@ var searchcache = {
     //}
 };
 var shipdata = {};
-var shiptypeid = {
-    0: '无',
-    1: '驱逐',
-    2: '轻巡',
-    3: '重巡',
-    4: '战巡',
-    5: '战列',
-    6: '航母',
-};
-var shipstars = {
-    0: '无',
-    2: '2星',
-    3: '3星',
-    4: '4星',
-    5: '5星',
-};
+
 var skilltypeid = {
     1: { typetext: '主动技能' , cost: 'crystal' },
     2: { typetext: '被动技能' , cost: 'NP'},
@@ -37,6 +22,7 @@ shipdata[51] = {
         id: 51,
         name: '法戈',
         shiptypeid: 2,
+        shiptypename: '轻巡',
         shipstars: 5,
         reinforcementGroupNum: 6,
         reinforcementGroups: {
@@ -57,6 +43,7 @@ shipdata[194] = {
         id: 194,
         name: '大凤',
         shiptypeid: 6,
+        shiptypename: '航母',
         shipstars: 5,
         reinforcementGroupNum: 6,
         reinforcementGroups: {
