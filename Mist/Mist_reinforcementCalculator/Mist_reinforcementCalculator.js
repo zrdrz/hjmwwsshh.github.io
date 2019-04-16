@@ -19,7 +19,8 @@ var searchResultBox_template = { //存放模板
         type: "div",
         id: "searchbox_child",
         attributes: {  //元素的属性
-            style: "float:left;border: 1px solid #555;padding: 5px;margin-right: 5px;margin-top: 4px;margin-bottom: 4px; border-radius:5px;",
+            class: "searchbox",
+            //onclick: "alert(this.id)",
         },
     },
     childElements: { //子元素
@@ -29,8 +30,8 @@ var searchResultBox_template = { //存放模板
                 class: "label1 label3",
                 style: "padding-left:0px;"
             },
-            innerHTMLPre: "【",
-            innerHTMLPost: "】",
+            innerHTMLPre: "[",
+            innerHTMLPost: "]",
             bindData: "id", //绑定shipdata里的数据
             bindClass: "shipstars", //根据shipdata里的某个数据来绑定额外的css class样式
         },
@@ -40,8 +41,8 @@ var searchResultBox_template = { //存放模板
                 class: "label1 label3",
                 style: "padding-left:0px;"
             },
-            innerHTMLPre: "【",
-            innerHTMLPost: "】",
+            innerHTMLPre: "[",
+            innerHTMLPost: "]",
             bindData: "shiptypename", 
             bindClass: "shipstars", 
         },
@@ -60,63 +61,189 @@ var searchResultBox_template = { //存放模板
             type: "button",
             id: "btn_add",
             attributes: {
-                class: "button2",
-                onclick: "removeChildElement(this.value,this.getAttribute('templatename'))",
+                class: "button button2",
+                onclick: "createShiplistBox(this.getAttribute('shipid'));removeSearchBox(getParentNodeId(this.id))",
                 templatename: "searchbox1",
             },
             innerHTML: "添加",
         },
     },
-    searchbox_count: 1, //用于给新生成的searchbox的id后缀添加计数
+    box_count: 1, //用于给新生成的searchbox的id后缀添加计数
+};
+var shiplistBox_template = {
+    mainbox: {  //主框架
+        parentid: "shiplistbox", //父元素的id
+        type: "div",
+        id: "shiplistbox_child",
+        attributes: {  //元素的属性
+            class: "shiplistbox",
+            style: "clear:both;border:none;",
+            //onclick: "alert(this.id)",
+        },
+    },
+    childElements: { //子元素
+        element1: { 
+            type: "div", //第一层子元素为div
+            id: "shiplistbox_child_div1_",
+            attributes: {
+                class: "shiplistbox_div",
+                style: "width:50px;"
+            },
+            childElements:{
+                element1: {
+                    type: "label",
+                    attributes: { class: "label1 label3", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "id",
+                    bindClass: "shipstars",
+                },
+            },
+        },
+        element2: { 
+            type: "div", 
+            id: "shiplistbox_child_div2_",
+            attributes: { class: "shiplistbox_div", style: "width:114px;" },
+            childElements:{
+                element1: {
+                    type: "label",
+                    attributes: { class: "label1 label3", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "name",
+                    bindClass: "shipstars",
+                },
+            },
+        },
+        element3: { 
+            type: "div", 
+            id: "shiplistbox_child_div3_",
+            attributes: { class: "shiplistbox_div", style: "width:50px;" },
+            childElements:{
+                element1: {
+                    type: "label",
+                    attributes: { class: "label1 label3", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "shiptypename",
+                    bindClass: "shipstars",
+                },
+            },
+        },
+        element4: { 
+            type: "div", 
+            id: "shiplistbox_child_div4_",
+            attributes: { class: "shiplistbox_div", style: "width:30px;" },
+            childElements:{
+                element1: {
+                    type: "label",
+                    attributes: { class: "label1 label3", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "shipstars",
+                    bindClass: "shipstars",
+                },
+            },
+        },
+        element5: { 
+            type: "div", 
+            id: "shiplistbox_child_div5_",
+            attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
+            childElements:{
+            },
+        },
+        box_count: 1,
+    },
+    box_count: 1,
 };
 loadselectbox('CMB_searchtype',searchtype); //加载搜索方法的下拉框
 loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
 loadshipdataintocache();
 ////////
-function createSearchResultBox(shipid){
-    var count = searchResultBox_template.searchbox_count;  //获取searchbox的id的计数
-    var mainboxid = searchResultBox_template.mainbox.id + searchResultBox_template.searchbox_count; //确定id
-    createSearchResultBox_Mainbox();    //生成的主div
-    createSearchResultBox_Child(shipid);    //生成子元素
+function createShiplistBox(shipid){ //创建强化组box
+    //alert(shipid);
+    var count = shiplistBox_template.box_count;  //获取box的id的计数
+    var mainboxid = shiplistBox_template.mainbox.id + count; //确定id
+    createShiplistBox_Mainbox(shipid,mainboxid,shiplistBox_template);    //生成的主div
+    createShiplistBox_Child(mainboxid,shipid,shiplistBox_template);    //生成子元素//第一层子元素为div
     count = Number(count) + 1;
-    searchResultBox_template.searchbox_count = count; //bufferbox计数加1
+    shiplistBox_template.box_count = count; //box计数加1
 };
-function createSearchResultBox_Mainbox(){
-    var mainbox = document.createElement(searchResultBox_template.mainbox.type); //生成mainbox
-    var mainboxid = searchResultBox_template.mainbox.id + searchResultBox_template.searchbox_count; //确定id
-    var container = document.getElementById(searchResultBox_template.mainbox.parentid); //确定父元素
+function createShiplistBox_Mainbox(shipid,parentid,obj){ //创建强化组的mainbox
+    var mainbox = document.createElement(obj.mainbox.type); //生成mainbox
+    var container = document.getElementById(obj.mainbox.parentid); //确定父元素
     container.appendChild(mainbox); //添加mainbox
-    mainbox.setAttribute("id",mainboxid); //设置属性
-    for ( attr in searchResultBox_template.mainbox.attributes ){//设置属性
-        mainbox.setAttribute(attr,searchResultBox_template.mainbox.attributes[attr]); 
+    mainbox.setAttribute("id",parentid); //设置属性
+    for ( attr in obj.mainbox.attributes ){//设置属性
+        mainbox.setAttribute(attr,obj.mainbox.attributes[attr]); 
     };
 };
-function createSearchResultBox_Child(shipid){  //创建子元素
+function createShiplistBox_Child(parentid,shipid,obj){ 
     var childtype = "";  //子元素类型
     var childid = "";    //子元素id
-    var mainboxid = searchResultBox_template.mainbox.id + searchResultBox_template.searchbox_count; //bufferbox的mainbox的id
-    //
-    for ( childname in searchResultBox_template.childElements ){  //遍历模板里的childElements对象
-        childtype = searchResultBox_template.childElements[childname].type; //确定子元素类型
-        childid = searchResultBox_template.childElements[childname].id + searchResultBox_template.searchbox_count;  //确定子元素id
+    for ( childname in obj.childElements ){  //遍历模板里的childElements对象
+        childtype = obj.childElements[childname].type; //确定子元素类型
         switch (childtype){ //根据子元素类型创建子元素
+            case 'div':
+                var childid = obj.childElements[childname].id + obj.box_count;  //确定子元素id
+                createDiv(parentid,childid,obj.childElements[childname]);
+                createShiplistBox_Child(childid,shipid,obj.childElements[childname])
+                break;
             case 'label':
-                createSearchBoxLabel(mainboxid,shipid,searchResultBox_template.childElements[childname]);
-                break;
-            case 'select':
-                createSelect(childid,mainboxid,searchResultBox_template.childElements[childname]);
-                break;
-            case 'input':
-                createInput(childid,mainboxid,searchResultBox_template.childElements[childname]);
-                break;
-            case 'button':
-                createSearchBoxButton(childid,shipid,mainboxid,searchResultBox_template.childElements[childname]);
+                createLabel(parentid,shipid,obj.childElements[childname]);
                 break;
         };
     };
 };
-function createSearchBoxLabel(parentid,shipid,obj){ //创建label类元素
+function createDiv(parentid,childid,obj){ //创建div类元素
+    var newchild = document.createElement('div');
+    var container = document.getElementById(parentid);
+    newchild.setAttribute("id", childid);
+    container.appendChild(newchild);
+    for ( attr in obj.attributes ){  //遍历赋值元素的属性
+        var attrValue = obj.attributes[attr];
+        newchild.setAttribute(attr,attrValue);
+    };
+};
+////////
+function createSearchBox(shipid,obj){
+    var count = obj.box_count;  //获取box的id的计数
+    var mainboxid = obj.mainbox.id + count; //确定id
+    createSearchBox_Mainbox(obj);    //生成的主div
+    createSearchBox_Child(shipid,obj);    //生成子元素
+    count = Number(count) + 1;
+    obj.box_count = count; //box计数加1
+};
+function createSearchBox_Mainbox(obj){
+    var mainbox = document.createElement(obj.mainbox.type); //生成mainbox
+    var mainboxid = obj.mainbox.id + obj.box_count; //确定id
+    var container = document.getElementById(obj.mainbox.parentid); //确定父元素
+    container.appendChild(mainbox); //添加mainbox
+    mainbox.setAttribute("id",mainboxid); //设置属性
+    for ( attr in obj.mainbox.attributes ){//设置属性
+        mainbox.setAttribute(attr,obj.mainbox.attributes[attr]); 
+    };
+};
+function createSearchBox_Child(shipid,obj){  //创建子元素
+    var childtype = "";  //子元素类型
+    var childid = "";    //子元素id
+    var mainboxid = obj.mainbox.id + obj.box_count; //bufferbox的mainbox的id
+    for ( childname in obj.childElements ){  //遍历模板里的childElements对象
+        childtype = obj.childElements[childname].type; //确定子元素类型
+        childid = obj.childElements[childname].id + obj.box_count;  //确定子元素id
+        switch (childtype){ //根据子元素类型创建子元素
+            case 'label':
+                createLabel(mainboxid,shipid,obj.childElements[childname]);
+                break;
+            case 'button':
+                createButton(childid,shipid,mainboxid,obj.childElements[childname]);
+                break;
+        };
+    };
+};
+////////
+function createLabel(parentid,shipid,obj){ //创建label类元素
     var newchild = document.createElement('label');
     search_shiptypeid = shipid;
     var container = document.getElementById(parentid);
@@ -129,13 +256,11 @@ function createSearchBoxLabel(parentid,shipid,obj){ //创建label类元素
             var classid = shipdata[shipid][obj.bindClass];
             var bindclassname = shipbindclass[classid];
             attrValue = attrValue + ' ' + bindclassname;
-        };
-        //绑定额外的css样式的代码
-        
+        }; //绑定额外的css样式的代码
         newchild.setAttribute(attr,attrValue);
     };
 };
-function createSearchBoxButton(childid,shipid,parentid,obj){
+function createButton(childid,shipid,parentid,obj){
     var newchild = document.createElement('button');
     var container = document.getElementById(parentid);
     newchild.setAttribute("id", childid);
@@ -187,13 +312,14 @@ function search(){
             var filterresult = filter(shipid); //根据过滤器对shipid进行过滤
             if ( filterresult == 1 ) {
                 searchresult[i] = shipid; //如果通过过滤筛选,则返回id值
-                createSearchResultBox(shipid);
                 i = i + 1;
             };
         };
     };
     searchresult.sort(function(a,b){return a-b}); //结果升序排序
-    alert(searchresult);
+    for ( var i=0,len = searchresult.length;i<len;i++ ){
+        createSearchBox(searchresult[i],searchResultBox_template);
+    };
 };
 
 function filter(shipid) { //过滤器,接收ship的id作为参数
@@ -208,4 +334,13 @@ function filter(shipid) { //过滤器,接收ship的id作为参数
         };
     };
     return result; //返回结果值,0为不通过,1为通过
+};
+
+function getParentNodeId(childid) {
+    var parentid = document.getElementById(childid).parentNode.id;
+    return parentid;
+};
+function removeSearchBox(elementid) {
+    var childelement = document.getElementById(elementid);
+    childelement.remove(); //删除div
 };

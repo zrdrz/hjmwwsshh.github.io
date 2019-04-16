@@ -15,26 +15,26 @@
         </div>
     </div>
     <div class="content">
-        <div style="width: 424px;float: left; margin-right: 10px;" id="leftbox1">
+        <div style="width: 404px;float: left; margin-right: 10px;" id="leftbox1">
             <div class="calbox">
                 <div class="selectbox">
                     <label class="label1">搜索方法</label>
-                    </br>
+                    <br>
                     <select id="CMB_searchtype" class="select1" onchange=""></select>
                 </div>
                 <div class="selectbox">
                     <label class="label1">船型筛选</label>
-                    </br>
+                    <br>
                     <select id="CMB_shiptypefilter" class="select1" onchange=""></select>
                 </div>
                 <div class="selectbox">
                     <label class="label1">星级筛选</label>
-                    </br>
+                    <br>
                     <select id="CMB_shipstars" class="select1" onchange=""></select>
                 </div>
                 <div class="selectbox selectbox2">
                     <label class="label1">  </label>
-                    </br>
+                    <br>
                     <input id="searchinput" type="text" class="input1 "/>
                 </div>
                 <div class="selectbox">
@@ -42,11 +42,183 @@
                 </div>
             </div>
             <div style="clear:both" class="calbox"  id="searchbox">
-
-
             </div>
         </div>
-        <div class="calbox calbox2">
+        <div class="calbox calbox2" id="shiplistbox">
+            <hr>
+            <div style="width:50px;" class="shiplistbox_div">
+                <label class="label1">序号</label>
+            </div>
+            <div style="width:114px;" class="shiplistbox_div">
+                <label class="label1">船名</label>
+            </div>
+            <div style="width:50px;" class="shiplistbox_div">
+                <label class="label1">类型</label>
+            </div>
+            <div style="width:30px;" class="shiplistbox_div">
+                <label class="label1" >星级</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">强化1</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">强化2</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">强化3</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">强化4</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">强化5</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">强化6</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">主动技</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">被动1</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <div style="width:100px;" class="shiplistbox_div">
+                <label class="label1">被动2</label><br>
+                <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
+            </div>
+            <br>
+            <div style="clear:both;border:none;" class="shiplistbox">
+                <div style="width:50px;" class="shiplistbox_div">
+                    <label class="label1">序号</label>
+                </div>
+                <div style="width:114px;" class="shiplistbox_div">
+                    <label class="label1">船名</label>
+                </div>
+                <div style="width:50px;" class="shiplistbox_div">
+                    <label class="label1">类型</label>
+                </div>
+                <div style="width:30px;" class="shiplistbox_div">
+                    <label class="label1" >星级</label>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化1</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化2</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化3</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化4</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化5</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化6</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_actskill">
+                    <label class="label1">主动技</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
+                    <label class="label1">被动1</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
+                    <label class="label1">被动2</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:60px;" class="shiplistbox_div">
+                    <button class="button button3" onclick="" id="searchbtn">移除</button>
+                </div>
+            </div>
+            <div style="clear:both;border:none;" class="shiplistbox">
+                <div style="width:50px;" class="shiplistbox_div">
+                    <label class="label1">序号</label>
+                </div>
+                <div style="width:114px;" class="shiplistbox_div">
+                    <label class="label1">船名</label>
+                </div>
+                <div style="width:50px;" class="shiplistbox_div">
+                    <label class="label1">类型</label>
+                </div>
+                <div style="width:30px;" class="shiplistbox_div">
+                    <label class="label1" >星级</label>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化1</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化2</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化3</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化4</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化5</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
+                    <label class="label1">强化6</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_actskill">
+                    <label class="label1">主动技</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
+                    <label class="label1">被动1</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
+                    <label class="label1">被动2</label><br>
+                    <select style="width: 40px;"><option>10</option></select>
+                    <select style="width: 40px;"><option>10</option></select>
+                </div>
+                <div   style="width:60px;" class="shiplistbox_div">
+                    <button class="button button3" onclick="" id="searchbtn">移除</button>
+                </div>
+            </div>
 
         </div>
     </div>

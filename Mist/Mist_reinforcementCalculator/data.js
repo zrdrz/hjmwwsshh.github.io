@@ -1,5 +1,5 @@
 var searchtype = {
-    id: "ID",
+    id: "序号",
     name: "名字",
 };
 var searchcache = {

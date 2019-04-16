@@ -9,14 +9,14 @@ body {
     color:#FAFAFA;
 }
 .titlebox {
-    width: 1200px;
+    width: 1660px;
     height: 82px;
     margin: auto;
     padding: 5px 10px 5px 10px;
     background-color:#81BEF7;
 }
 .titleboxleft {
-    width: 1000px;
+    width: 1460px;
     float:left;
 }
 .titleboxright {
@@ -24,7 +24,7 @@ body {
     float:left;
 }
 .content {
-    width: 1200px;
+    width: 1660px;
     height : auto ;
     margin: auto;
     background: white;
@@ -45,7 +45,7 @@ body {
     text-align:right; 
 }
 .calbox {
-    width: 412px;
+    width: 392px;
     margin: 5px;
     padding: 5px;
     height: auto;
@@ -58,7 +58,7 @@ body {
     display:inline-block
 }
 .calbox2 {
-    width: 744px;
+    width: 1224px;
     vertical-align: top;
 }
 .calbox3 {
@@ -89,10 +89,11 @@ body {
 }
 .label2 {
     font-size: 12px;
+    display: inline-block;
 }
 .label3 {
-    font-size: 16px;
-    background-color: #FFF;
+    font-size: 15px;
+    background-color: rgba(0,0,0,0);
     font-weight: bold;
 }
 .label_star5{
@@ -113,11 +114,11 @@ body {
     float: left;
 }
 .selectbox2 {
-    width: 120px;
+    width: 100px;
     padding: 0px 5px 0px 5px;
 }
 .input1{
-    width:120px;
+    width:100px;
     height: 18px;
     padding: 0px;
 }
@@ -133,44 +134,76 @@ body {
     text-align:center;
 }
 .button {
-    background-color: #555;
-    width: 100%;
-    height: 32px;
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
     color: white;
-    padding: 3px 0px;
+    padding: 3px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border-bottom: 1px solid #111;
     cursor: pointer;
     -webkit-transition-duration: 0.2s;
     transition-duration: 0.2s;
 }
 .button:hover {
-    background-color: #1CA050;
+    background-color: #3e8e41;
     color: white;
 }
 .button2 {
-    background-color: #555;
-    width: 50px;
-    height: 32px;
-    color: white;
-    padding: 5px 0px;
     margin-left: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 14px;
-    border-bottom: 1px solid #111;
-    cursor: pointer;
-    -webkit-transition-duration: 0.2s;
-    transition-duration: 0.2s;
 }
-.button2:hover {
-    background-color: #1CA050;
-    color: white;
+.button3 {
+    margin-left: 5px;
+    font-size: 14px;
+    padding: 3px 5px;
 }
 .btn_search {
     margin: 25px 0px 0px 0px;
+}
+.searchbox {
+    float:left;
+    border: 1px solid #555;
+    padding: 5px;
+    margin-right: 5px;
+    margin-top: 4px;
+    margin-bottom: 4px; 
+    border-radius:5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.searchbox:hover {
+    background-color: #FFFFAA;
+}
+.shiplistbox {
+    border: 1px solid #555;
+    height: 60px;
+    line-height:24px;
+    padding: 0px;
+    margin-right: 0px;
+    margin-top: 4px;
+    margin-bottom: 10px; 
+    border-radius:5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    align-items: center;
+}
+.shiplistbox:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.shiplistbox_div {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    line-height:24px;
+    float: left;
+    text-align:center;
+}
+.shiplistbox_div_reinforce {
+    background-color: #CEE3F6;
+}
+.shiplistbox_div_actskill {
+    background-color: #F6CECE;
+}
+.shiplistbox_div_passiveskill {
+    background-color: #CEF6E3;
 }
