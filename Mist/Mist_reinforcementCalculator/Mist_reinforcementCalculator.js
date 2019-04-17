@@ -8,10 +8,20 @@ var shipfilters = {
     shipstars : { 0: '无', 2: '2星', 3: '3星', 4: '4星', 5: '5星', },
 };
 var shipbindclass = {
-    2: 'label_star2',
-    3: 'label_star3',
-    4: 'label_star4',
-    5: 'label_star5',
+    shipstars:{
+        2: 'label_star2',
+        3: 'label_star3',
+        4: 'label_star4',
+        5: 'label_star5',
+    },
+};
+var shipReinforcementGroupsID = {
+    //$shipid: {
+    //    1: { labelID: "",currentlevelID:"", finallevelID: "",}, 强化组标签id,当前等级对应的下拉框的id,最终等级对应的下拉框的id
+    //    2: { ... },
+    //};
+};
+var shipSkillGroupsID = {
 };
 var searchResultBox_template = { //存放模板
     mainbox: {  //主框架
@@ -26,10 +36,7 @@ var searchResultBox_template = { //存放模板
     childElements: { //子元素
         element1: { 
             type: "label",
-            attributes: {
-                class: "label1 label3",
-                style: "padding-left:0px;"
-            },
+            attributes: { class: "label1 label3", style: "padding-left:0px;" },
             innerHTMLPre: "[",
             innerHTMLPost: "]",
             bindData: "id", //绑定shipdata里的数据
@@ -37,10 +44,7 @@ var searchResultBox_template = { //存放模板
         },
         element2: { 
             type: "label",
-            attributes: {
-                class: "label1 label3",
-                style: "padding-left:0px;"
-            },
+            attributes: { class: "label1 label3", style: "padding-left:0px;" },
             innerHTMLPre: "[",
             innerHTMLPost: "]",
             bindData: "shiptypename", 
@@ -48,10 +52,7 @@ var searchResultBox_template = { //存放模板
         },
         element3: { 
             type: "label",
-            attributes: {
-                class: "label1 label3",
-                style: "padding-left:5px;padding-right:5px;"
-            },
+            attributes: { class: "label1 label3", style: "padding-left:5px;padding-right:5px;" },
             innerHTMLPre: "",
             innerHTMLPost: "",
             bindData: "name",
@@ -62,8 +63,7 @@ var searchResultBox_template = { //存放模板
             id: "btn_add",
             attributes: {
                 class: "button button2",
-                onclick: "createShiplistBox(this.getAttribute('shipid'));removeSearchBox(getParentNodeId(this.id))",
-                templatename: "searchbox1",
+                onclick: "createShiplistBox(this.getAttribute('shipid'),getParentNodeId(this.id));",
             },
             innerHTML: "添加",
         },
@@ -84,11 +84,8 @@ var shiplistBox_template = {
     childElements: { //子元素
         element1: { 
             type: "div", //第一层子元素为div
-            id: "shiplistbox_child_div1_",
-            attributes: {
-                class: "shiplistbox_div",
-                style: "width:50px;"
-            },
+            id: "_div1",
+            attributes: { class: "shiplistbox_div", style: "width:50px;" },
             childElements:{
                 element1: {
                     type: "label",
@@ -102,7 +99,7 @@ var shiplistBox_template = {
         },
         element2: { 
             type: "div", 
-            id: "shiplistbox_child_div2_",
+            id: "_div2",
             attributes: { class: "shiplistbox_div", style: "width:114px;" },
             childElements:{
                 element1: {
@@ -117,7 +114,7 @@ var shiplistBox_template = {
         },
         element3: { 
             type: "div", 
-            id: "shiplistbox_child_div3_",
+            id: "_div3",
             attributes: { class: "shiplistbox_div", style: "width:50px;" },
             childElements:{
                 element1: {
@@ -132,7 +129,7 @@ var shiplistBox_template = {
         },
         element4: { 
             type: "div", 
-            id: "shiplistbox_child_div4_",
+            id: "_div4",
             attributes: { class: "shiplistbox_div", style: "width:30px;" },
             childElements:{
                 element1: {
@@ -147,9 +144,352 @@ var shiplistBox_template = {
         },
         element5: { 
             type: "div", 
-            id: "shiplistbox_child_div5_",
+            id: "_reinforceGroup1",
             attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
             childElements:{
+                element1: {
+                    id: "_label",
+                    type: "reinGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 1,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 1,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 1,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element6: { 
+            type: "div", 
+            id: "_reinforceGroup2",
+            attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "reinGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 2,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 2,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 2,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element7: { 
+            type: "div", 
+            id: "_reinforceGroup3",
+            attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "reinGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 3,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 3,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 3,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element8: { 
+            type: "div", 
+            id: "_reinforceGroup4",
+            attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "reinGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 4,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 4,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 4,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element9: { 
+            type: "div", 
+            id: "_reinforceGroup5",
+            attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "reinGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 5,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 5,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 5,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element10: { 
+            type: "div", 
+            id: "_reinforceGroup6",
+            attributes: { class: "shiplistbox_div shiplistbox_div_reinforce", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "reinGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 6,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 6,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "reinGroupselect",
+                    bindData: "reinforcementGroups",
+                    bindDataID: 6,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element11: { 
+            type: "div", 
+            id: "_skillGroup1",
+            attributes: { class: "shiplistbox_div shiplistbox_div_actskill", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "skillGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "skills",
+                    bindDataID: 1,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "skillGroupselect",
+                    bindData: "skills",
+                    bindDataID: 1,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "skillGroupselect",
+                    bindData: "skills",
+                    bindDataID: 1,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element12: { 
+            type: "div", 
+            id: "_skillGroup2",
+            attributes: { class: "shiplistbox_div shiplistbox_div_passiveskill", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "skillGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "skills",
+                    bindDataID: 2,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "skillGroupselect",
+                    bindData: "skills",
+                    bindDataID: 2,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "skillGroupselect",
+                    bindData: "skills",
+                    bindDataID: 2,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element13: { 
+            type: "div", 
+            id: "_skillGroup3",
+            attributes: { class: "shiplistbox_div shiplistbox_div_passiveskill", style: "width:100px;" },
+            childElements:{
+                element1: {
+                    id: "_label",
+                    type: "skillGrouplabel",
+                    attributes: { class: "label1", },
+                    innerHTMLPre: "",
+                    innerHTMLPost: "",
+                    bindData: "skills",
+                    bindDataID: 3,
+                    bindClass: "",
+                    bindID: "labelID",
+                },
+                element2: { type: "br", },
+                element3: {
+                    id: "_select1",
+                    type: "skillGroupselect",
+                    bindData: "skills",
+                    bindDataID: 3,
+                    bindID: "currentlevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+                element4: {
+                    id: "_select2",
+                    type: "skillGroupselect",
+                    bindData: "skills",
+                    bindDataID: 3,
+                    bindID: "finallevelID",
+                    attributes: { class: "select4", },
+                    options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+                },
+            },
+        },
+        element14: { 
+            type: "div", 
+            id: "_div5",
+            attributes: { class: "shiplistbox_div ", style: "width:60px;" },
+            childElements:{
+                element1: {
+                    id: "_btn",
+                    type: "deleteButton",
+                    id: "btn_remove",
+                    attributes: {
+                        class: "button button3",
+                        onclick: "removeShiplistBox(this.value)",
+                    },
+                    innerHTML: "移除",
+                },
             },
         },
         box_count: 1,
@@ -161,23 +501,34 @@ loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
 loadshipdataintocache();
 ////////
-function createShiplistBox(shipid){ //创建强化组box
-    //alert(shipid);
-    var count = shiplistBox_template.box_count;  //获取box的id的计数
-    var mainboxid = shiplistBox_template.mainbox.id + count; //确定id
-    createShiplistBox_Mainbox(shipid,mainboxid,shiplistBox_template);    //生成的主div
-    createShiplistBox_Child(mainboxid,shipid,shiplistBox_template);    //生成子元素//第一层子元素为div
-    count = Number(count) + 1;
-    shiplistBox_template.box_count = count; //box计数加1
+function setSimpleAttr(elemt,attrs){
+    for ( attr in attrs ) {
+        elemt.setAttribute(attr,attrs[attr]);
+    };
+    return elemt;
+};
+function createShiplistBox(shipid,elementid){ //创建强化组box,若创建成功则移除对应的searchbox
+    if ( typeof shipReinforcementGroupsID[shipid] != 'undefined' ){
+        alert("已存在!");
+    }else{
+        var count = shiplistBox_template.box_count;  //获取box的id的计数
+        var mainboxid = shiplistBox_template.mainbox.id + count; //确定id
+        createShiplistBox_Mainbox(shipid,mainboxid,shiplistBox_template);    //生成的主div
+        createShiplistBox_Child(mainboxid,shipid,shiplistBox_template);    //生成子元素//第一层子元素为div
+        count = Number(count) + 1;
+        shiplistBox_template.box_count = count; //box计数加1
+        removeSearchBox(elementid); //创建成功后移除对应的searchbox
+    };
 };
 function createShiplistBox_Mainbox(shipid,parentid,obj){ //创建强化组的mainbox
     var mainbox = document.createElement(obj.mainbox.type); //生成mainbox
     var container = document.getElementById(obj.mainbox.parentid); //确定父元素
     container.appendChild(mainbox); //添加mainbox
     mainbox.setAttribute("id",parentid); //设置属性
-    for ( attr in obj.mainbox.attributes ){//设置属性
-        mainbox.setAttribute(attr,obj.mainbox.attributes[attr]); 
-    };
+    mainbox.setAttribute("shipid",shipid); //设置属性
+    shipReinforcementGroupsID[shipid] = {}; //存放强化组数据
+    shipSkillGroupsID[shipid] = {}; //存放技能组数据
+    mainbox = setSimpleAttr(mainbox,obj.mainbox.attributes); //设置属性
 };
 function createShiplistBox_Child(parentid,shipid,obj){ 
     var childtype = "";  //子元素类型
@@ -186,27 +537,51 @@ function createShiplistBox_Child(parentid,shipid,obj){
         childtype = obj.childElements[childname].type; //确定子元素类型
         switch (childtype){ //根据子元素类型创建子元素
             case 'div':
-                var childid = obj.childElements[childname].id + obj.box_count;  //确定子元素id
+                childid = parentid + obj.childElements[childname].id;  //确定子元素id
                 createDiv(parentid,childid,obj.childElements[childname]);
                 createShiplistBox_Child(childid,shipid,obj.childElements[childname])
                 break;
             case 'label':
                 createLabel(parentid,shipid,obj.childElements[childname]);
                 break;
+            case 'reinGrouplabel':
+                createReinGrouplabel(parentid,shipid,obj.childElements[childname]);
+                logReinGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                break;
+            case 'reinGroupselect':
+                createReinGroupSelect(parentid,shipid,obj.childElements[childname]);
+                logReinGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                break;
+            case 'skillGrouplabel':
+                createReinGrouplabel(parentid,shipid,obj.childElements[childname]);
+                logSkillGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                break;
+            case 'skillGroupselect':
+                createReinGroupSelect(parentid,shipid,obj.childElements[childname]);
+                logSkillGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                break;
+            case 'br':
+                createBR(parentid);
+                break;
+            case 'deleteButton':
+                createDeleteButton(parentid,obj.childElements[childname]);
+                break;
         };
     };
 };
-function createDiv(parentid,childid,obj){ //创建div类元素
-    var newchild = document.createElement('div');
-    var container = document.getElementById(parentid);
-    newchild.setAttribute("id", childid);
-    container.appendChild(newchild);
-    for ( attr in obj.attributes ){  //遍历赋值元素的属性
-        var attrValue = obj.attributes[attr];
-        newchild.setAttribute(attr,attrValue);
-    };
-};
 ////////
+function logReinGroupID(shipid,type,value,index){ //记录某船的某个强化组的label和下拉框的元素id
+    if ( typeof shipReinforcementGroupsID[shipid][index] == 'undefined' ){
+        shipReinforcementGroupsID[shipid][index] = {};
+    };
+    shipReinforcementGroupsID[shipid][index][type] = value;
+};
+function logSkillGroupID(shipid,type,value,index){ //记录某船的某个强化组的label和下拉框的元素id
+    if ( typeof shipSkillGroupsID[shipid][index] == 'undefined' ){
+        shipSkillGroupsID[shipid][index] = {};
+    };
+    shipSkillGroupsID[shipid][index][type] = value;
+};
 function createSearchBox(shipid,obj){
     var count = obj.box_count;  //获取box的id的计数
     var mainboxid = obj.mainbox.id + count; //确定id
@@ -221,9 +596,7 @@ function createSearchBox_Mainbox(obj){
     var container = document.getElementById(obj.mainbox.parentid); //确定父元素
     container.appendChild(mainbox); //添加mainbox
     mainbox.setAttribute("id",mainboxid); //设置属性
-    for ( attr in obj.mainbox.attributes ){//设置属性
-        mainbox.setAttribute(attr,obj.mainbox.attributes[attr]); 
-    };
+    mainbox = setSimpleAttr(mainbox,obj.mainbox.attributes);
 };
 function createSearchBox_Child(shipid,obj){  //创建子元素
     var childtype = "";  //子元素类型
@@ -243,9 +616,63 @@ function createSearchBox_Child(shipid,obj){  //创建子元素
     };
 };
 ////////
+function createDiv(parentid,childid,obj){ //创建div类元素
+    var newchild = document.createElement('div');
+    var container = document.getElementById(parentid);
+    newchild.setAttribute("id", childid);
+    container.appendChild(newchild);
+    newchild = setSimpleAttr(newchild,obj.attributes);
+};
+function createReinGroupSelect(parentid,shipid,obj){
+    if ( typeof shipdata[shipid][obj.bindData][obj.bindDataID] != 'undefined' ) { //若shipdata里没有对应序号的强化组,则不创建
+        var newchild = document.createElement('select');
+        var container = document.getElementById(parentid);
+        var childid = parentid + obj.id;
+        newchild.setAttribute("id", childid);
+        container.appendChild(newchild);
+        setSimpleAttr(newchild,obj.attributes);
+        for ( optname in obj.options ) { //select类元素遍历增加下拉框
+            var getData = obj.options[optname];
+            document.getElementById(childid).options.add(new Option(getData,optname));
+        };
+    };
+};
+function createReinGrouplabel(parentid,shipid,obj){ //创建强化组的label类元素
+    if ( typeof shipdata[shipid][obj.bindData][obj.bindDataID] != 'undefined' ) {
+        var newchild = document.createElement('label');
+        var container = document.getElementById(parentid);
+        newchild.innerHTML = obj.innerHTMLPre + shipdata[shipid][obj.bindData][obj.bindDataID].name + obj.innerHTMLPost //设置元素的innerHTML,一般为文字
+        newchild.setAttribute("id", parentid + obj.id); //给label设置id
+        container.appendChild(newchild);
+        for ( attr in obj.attributes ){  //遍历赋值元素的属性
+            //绑定额外的css样式的代码
+            var attrValue = obj.attributes[attr];
+            if ( attr == 'class' & obj.bindClass != '' ){
+                var classid = shipdata[shipid][obj.bindClass];
+                var bindclassname = shipbindclass[obj.bindClass][classid];
+                attrValue = attrValue + ' ' + bindclassname;
+            }; //绑定额外的css样式的代码
+            newchild.setAttribute(attr,attrValue);
+        };
+    };
+};
+function createDeleteButton(parentid,obj){
+    var newchild = document.createElement('button');
+    var container = document.getElementById(parentid);
+    var mainboxid = getParentNodeId(parentid);
+    newchild.setAttribute("id", parentid + obj.id);
+    newchild.setAttribute("value", mainboxid); //button类元素需增加value属性
+    newchild.innerHTML = obj.innerHTML
+    container.appendChild(newchild);
+    newchild = setSimpleAttr(newchild,obj.attributes);
+};
+function createBR(parentid) { //创建<br>
+    var newchild = document.createElement("br");
+    var container = document.getElementById(parentid);
+    container.appendChild(newchild);
+};
 function createLabel(parentid,shipid,obj){ //创建label类元素
     var newchild = document.createElement('label');
-    search_shiptypeid = shipid;
     var container = document.getElementById(parentid);
     newchild.innerHTML = obj.innerHTMLPre + shipdata[shipid][obj.bindData] + obj.innerHTMLPost //设置元素的innerHTML,一般为文字
     container.appendChild(newchild);
@@ -254,7 +681,7 @@ function createLabel(parentid,shipid,obj){ //创建label类元素
         var attrValue = obj.attributes[attr];
         if ( attr == 'class' & obj.bindClass != '' ){
             var classid = shipdata[shipid][obj.bindClass];
-            var bindclassname = shipbindclass[classid];
+            var bindclassname = shipbindclass[obj.bindClass][classid];
             attrValue = attrValue + ' ' + bindclassname;
         }; //绑定额外的css样式的代码
         newchild.setAttribute(attr,attrValue);
@@ -268,9 +695,7 @@ function createButton(childid,shipid,parentid,obj){
     newchild.setAttribute("value", parentid); //button类元素需增加value属性
     newchild.innerHTML = obj.innerHTML
     container.appendChild(newchild);
-    for ( attr in obj.attributes ){
-        newchild.setAttribute(attr,obj.attributes[attr]);
-    };
+    newchild = setSimpleAttr(newchild,obj.attributes);
 };
 ////////
 function loadselectbox(elementid,obj){ //通过一个obj里的内容来加载下拉框,key值对应元素的value,value值对应元素显示的文字
@@ -343,4 +768,11 @@ function getParentNodeId(childid) {
 function removeSearchBox(elementid) {
     var childelement = document.getElementById(elementid);
     childelement.remove(); //删除div
+};
+function removeShiplistBox(elementid) {
+    var childelement = document.getElementById(elementid);
+    var shipid = childelement.getAttribute("shipid");
+    childelement.remove(); //删除div
+    //后续需增加删除相应数据结构的代码
+    delete shipReinforcementGroupsID[shipid];
 };
