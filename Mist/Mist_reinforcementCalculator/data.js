@@ -12,8 +12,8 @@ var searchcache = {
     //    shipdata[id2].method2 : { id : shipdata[id2].id},
     //}
 };
-var shipdata = {};
 
+var shipdata = {};
 var skilltypeid = {
     1: { typetext: '主动技能' , cost: 'crystal' },
     2: { typetext: '被动技能' , cost: 'NP'},

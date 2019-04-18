@@ -15,6 +15,9 @@ var shipbindclass = {
         5: 'label_star5',
     },
 };
+var shiplistbox_mainboxID = {}; //存放mainbox的id,用于删除元素
+var searchbox_mainboxID = {};
+
 var shipReinforcementGroupsID = {
     //$shipid: {
     //    1: { labelID: "",currentlevelID:"", finallevelID: "",}, 强化组标签id,当前等级对应的下拉框的id,最终等级对应的下拉框的id
@@ -60,10 +63,10 @@ var searchResultBox_template = { //存放模板
         },
         element4: { 
             type: "button",
-            id: "btn_add",
+            id: "_btnAdd",
             attributes: {
                 class: "button button2",
-                onclick: "createShiplistBox(this.getAttribute('shipid'),getParentNodeId(this.id));",
+                onclick: "createShiplistBox(this.getAttribute('shipid'));",
             },
             innerHTML: "添加",
         },
@@ -165,7 +168,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 1,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -174,7 +177,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 1,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -202,7 +205,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 2,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -211,7 +214,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 2,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -239,7 +242,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 3,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -248,7 +251,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 3,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -276,7 +279,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 4,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -285,7 +288,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 4,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -313,7 +316,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 5,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -322,7 +325,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 5,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -350,7 +353,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 6,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -359,7 +362,7 @@ var shiplistBox_template = {
                     bindData: "reinforcementGroups",
                     bindDataID: 6,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_reinGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -387,7 +390,7 @@ var shiplistBox_template = {
                     bindData: "skills",
                     bindDataID: 1,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -396,7 +399,7 @@ var shiplistBox_template = {
                     bindData: "skills",
                     bindDataID: 1,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -424,7 +427,7 @@ var shiplistBox_template = {
                     bindData: "skills",
                     bindDataID: 2,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -433,7 +436,7 @@ var shiplistBox_template = {
                     bindData: "skills",
                     bindDataID: 2,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -461,7 +464,7 @@ var shiplistBox_template = {
                     bindData: "skills",
                     bindDataID: 3,
                     bindID: "currentlevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
                 element4: {
@@ -470,7 +473,7 @@ var shiplistBox_template = {
                     bindData: "skills",
                     bindDataID: 3,
                     bindID: "finallevelID",
-                    attributes: { class: "select4", },
+                    attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
                 },
             },
@@ -478,15 +481,14 @@ var shiplistBox_template = {
         element14: { 
             type: "div", 
             id: "_div5",
-            attributes: { class: "shiplistbox_div ", style: "width:60px;" },
+            attributes: { class: "shiplistbox_div ", style: "width:80px;" },
             childElements:{
                 element1: {
-                    id: "_btn",
+                    id: "_btnRemove",
                     type: "deleteButton",
-                    id: "btn_remove",
                     attributes: {
                         class: "button button3",
-                        onclick: "removeShiplistBox(this.value)",
+                        onclick: "removeShiplistBox(this.getAttribute('shipid'));",
                     },
                     innerHTML: "移除",
                 },
@@ -500,35 +502,41 @@ loadselectbox('CMB_searchtype',searchtype); //加载搜索方法的下拉框
 loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
 loadshipdataintocache();
-////////
+////////////////////////////////////
+//界面创建相关//开始
 function setSimpleAttr(elemt,attrs){
     for ( attr in attrs ) {
         elemt.setAttribute(attr,attrs[attr]);
     };
     return elemt;
 };
-function createShiplistBox(shipid,elementid){ //创建强化组box,若创建成功则移除对应的searchbox
+function createShiplistBox(shipid){ //创建强化组box,若创建成功则移除对应的searchbox
     if ( typeof shipReinforcementGroupsID[shipid] != 'undefined' ){
         alert("已存在!");
     }else{
         var count = shiplistBox_template.box_count;  //获取box的id的计数
         var mainboxid = shiplistBox_template.mainbox.id + count; //确定id
-        createShiplistBox_Mainbox(shipid,mainboxid,shiplistBox_template);    //生成的主div
+        createShiplistBox_Mainbox(mainboxid,shipid,shiplistBox_template);    //生成的主div
         createShiplistBox_Child(mainboxid,shipid,shiplistBox_template);    //生成子元素//第一层子元素为div
         count = Number(count) + 1;
         shiplistBox_template.box_count = count; //box计数加1
-        removeSearchBox(elementid); //创建成功后移除对应的searchbox
+        removeSearchBox(shipid); //创建成功后移除对应的searchbox
+        for ( groupid in shipReinforcementGroupsID[shipid] ){ //初始化强化组label文字
+            shiplistbox_selectboxChanged_reinGroup(shipid,groupid);
+        };
     };
 };
-function createShiplistBox_Mainbox(shipid,parentid,obj){ //创建强化组的mainbox
+function createShiplistBox_Mainbox(mainboxid,shipid,obj){ //创建强化组的mainbox
     var mainbox = document.createElement(obj.mainbox.type); //生成mainbox
     var container = document.getElementById(obj.mainbox.parentid); //确定父元素
     container.appendChild(mainbox); //添加mainbox
-    mainbox.setAttribute("id",parentid); //设置属性
-    mainbox.setAttribute("shipid",shipid); //设置属性
+    mainbox.setAttribute("id",mainboxid); //设置属性
+    //mainbox.setAttribute("shipid",shipid); //设置属性
+    shiplistbox_mainboxID[shipid] = mainboxid; //存放mainbox的id
     shipReinforcementGroupsID[shipid] = {}; //存放强化组数据
     shipSkillGroupsID[shipid] = {}; //存放技能组数据
     mainbox = setSimpleAttr(mainbox,obj.mainbox.attributes); //设置属性
+
 };
 function createShiplistBox_Child(parentid,shipid,obj){ 
     var childtype = "";  //子元素类型
@@ -564,53 +572,40 @@ function createShiplistBox_Child(parentid,shipid,obj){
                 createBR(parentid);
                 break;
             case 'deleteButton':
-                createDeleteButton(parentid,obj.childElements[childname]);
+                createButton(parentid,shipid,obj.childElements[childname]);
                 break;
         };
     };
 };
 ////////
-function logReinGroupID(shipid,type,value,index){ //记录某船的某个强化组的label和下拉框的元素id
-    if ( typeof shipReinforcementGroupsID[shipid][index] == 'undefined' ){
-        shipReinforcementGroupsID[shipid][index] = {};
-    };
-    shipReinforcementGroupsID[shipid][index][type] = value;
-};
-function logSkillGroupID(shipid,type,value,index){ //记录某船的某个强化组的label和下拉框的元素id
-    if ( typeof shipSkillGroupsID[shipid][index] == 'undefined' ){
-        shipSkillGroupsID[shipid][index] = {};
-    };
-    shipSkillGroupsID[shipid][index][type] = value;
-};
 function createSearchBox(shipid,obj){
     var count = obj.box_count;  //获取box的id的计数
     var mainboxid = obj.mainbox.id + count; //确定id
-    createSearchBox_Mainbox(obj);    //生成的主div
-    createSearchBox_Child(shipid,obj);    //生成子元素
+    createSearchBox_Mainbox(mainboxid,shipid,obj);    //生成的主div
+    createSearchBox_Child(mainboxid,shipid,obj);    //生成子元素
     count = Number(count) + 1;
     obj.box_count = count; //box计数加1
 };
-function createSearchBox_Mainbox(obj){
+function createSearchBox_Mainbox(mainboxid,shipid,obj){
     var mainbox = document.createElement(obj.mainbox.type); //生成mainbox
-    var mainboxid = obj.mainbox.id + obj.box_count; //确定id
     var container = document.getElementById(obj.mainbox.parentid); //确定父元素
     container.appendChild(mainbox); //添加mainbox
     mainbox.setAttribute("id",mainboxid); //设置属性
     mainbox = setSimpleAttr(mainbox,obj.mainbox.attributes);
+    searchbox_mainboxID[shipid] = mainboxid;
 };
-function createSearchBox_Child(shipid,obj){  //创建子元素
+function createSearchBox_Child(parentid,shipid,obj){  //创建子元素
     var childtype = "";  //子元素类型
     var childid = "";    //子元素id
-    var mainboxid = obj.mainbox.id + obj.box_count; //bufferbox的mainbox的id
     for ( childname in obj.childElements ){  //遍历模板里的childElements对象
         childtype = obj.childElements[childname].type; //确定子元素类型
         childid = obj.childElements[childname].id + obj.box_count;  //确定子元素id
         switch (childtype){ //根据子元素类型创建子元素
             case 'label':
-                createLabel(mainboxid,shipid,obj.childElements[childname]);
+                createLabel(parentid,shipid,obj.childElements[childname]);
                 break;
             case 'button':
-                createButton(childid,shipid,mainboxid,obj.childElements[childname]);
+                createButton(parentid,shipid,obj.childElements[childname]);
                 break;
         };
     };
@@ -623,18 +618,17 @@ function createDiv(parentid,childid,obj){ //创建div类元素
     container.appendChild(newchild);
     newchild = setSimpleAttr(newchild,obj.attributes);
 };
-function createReinGroupSelect(parentid,shipid,obj){
+function createReinGroupSelect(parentid,shipid,obj){ //创建强化组的下拉框
     if ( typeof shipdata[shipid][obj.bindData][obj.bindDataID] != 'undefined' ) { //若shipdata里没有对应序号的强化组,则不创建
         var newchild = document.createElement('select');
         var container = document.getElementById(parentid);
         var childid = parentid + obj.id;
         newchild.setAttribute("id", childid);
+        newchild.setAttribute("shipid", shipid);
+        newchild.setAttribute("groupid",obj.bindDataID);
         container.appendChild(newchild);
         setSimpleAttr(newchild,obj.attributes);
-        for ( optname in obj.options ) { //select类元素遍历增加下拉框
-            var getData = obj.options[optname];
-            document.getElementById(childid).options.add(new Option(getData,optname));
-        };
+        loadselectbox(childid,obj.options); //加载下拉框
     };
 };
 function createReinGrouplabel(parentid,shipid,obj){ //创建强化组的label类元素
@@ -655,16 +649,6 @@ function createReinGrouplabel(parentid,shipid,obj){ //创建强化组的label类
             newchild.setAttribute(attr,attrValue);
         };
     };
-};
-function createDeleteButton(parentid,obj){
-    var newchild = document.createElement('button');
-    var container = document.getElementById(parentid);
-    var mainboxid = getParentNodeId(parentid);
-    newchild.setAttribute("id", parentid + obj.id);
-    newchild.setAttribute("value", mainboxid); //button类元素需增加value属性
-    newchild.innerHTML = obj.innerHTML
-    container.appendChild(newchild);
-    newchild = setSimpleAttr(newchild,obj.attributes);
 };
 function createBR(parentid) { //创建<br>
     var newchild = document.createElement("br");
@@ -687,23 +671,24 @@ function createLabel(parentid,shipid,obj){ //创建label类元素
         newchild.setAttribute(attr,attrValue);
     };
 };
-function createButton(childid,shipid,parentid,obj){
+function createButton(parentid,shipid,obj){
     var newchild = document.createElement('button');
     var container = document.getElementById(parentid);
-    newchild.setAttribute("id", childid);
+    newchild.setAttribute("id", parentid + obj.id);
     newchild.setAttribute("shipid", shipid);
-    newchild.setAttribute("value", parentid); //button类元素需增加value属性
     newchild.innerHTML = obj.innerHTML
     container.appendChild(newchild);
     newchild = setSimpleAttr(newchild,obj.attributes);
 };
-////////
 function loadselectbox(elementid,obj){ //通过一个obj里的内容来加载下拉框,key值对应元素的value,value值对应元素显示的文字
     for ( keys in obj ){
         var value = obj[keys];
         document.getElementById(elementid).options.add(new Option(value,keys));
     }
 };
+//界面创建相关//结束
+//////////////////////////////////
+//缓存相关
 function loadshipdataintocache(){
     for ( methods in searchtype ){ 
         searchcache[methods] = {}; //初始化searchcache[methods]为空对象
@@ -713,6 +698,8 @@ function loadshipdataintocache(){
         };
     };
 };
+///////////////
+//搜索相关
 function getSearchVars(){ //获取搜索方式
     for ( keys in searchmethod ) {
         var elementid = searchmethod[keys].elementid;
@@ -746,7 +733,6 @@ function search(){
         createSearchBox(searchresult[i],searchResultBox_template);
     };
 };
-
 function filter(shipid) { //过滤器,接收ship的id作为参数
     var result = 1;
     for ( filters in shipfilters ){ //根据定义的过滤器对shipid进行筛选
@@ -760,19 +746,56 @@ function filter(shipid) { //过滤器,接收ship的id作为参数
     };
     return result; //返回结果值,0为不通过,1为通过
 };
-
+////////////////
+//记录元素id相关
+function logReinGroupID(shipid,type,value,index){ //记录某船的某个强化组的label和下拉框的元素id
+    if ( typeof shipReinforcementGroupsID[shipid][index] == 'undefined' ){
+        shipReinforcementGroupsID[shipid][index] = {};
+    };
+    shipReinforcementGroupsID[shipid][index][type] = value;
+};
+function logSkillGroupID(shipid,type,value,index){ //记录某船的某个技能组的label和下拉框的元素id
+    if ( typeof shipSkillGroupsID[shipid][index] == 'undefined' ){
+        shipSkillGroupsID[shipid][index] = {};
+    };
+    shipSkillGroupsID[shipid][index][type] = value;
+};
+///////////////
 function getParentNodeId(childid) {
     var parentid = document.getElementById(childid).parentNode.id;
     return parentid;
 };
-function removeSearchBox(elementid) {
-    var childelement = document.getElementById(elementid);
+///////////////
+//移除元素相关
+function removeSearchBox(shipid) {
+    var childelement = document.getElementById(searchbox_mainboxID[shipid]);
     childelement.remove(); //删除div
+    delete searchbox_mainboxID[shipid];
 };
-function removeShiplistBox(elementid) {
-    var childelement = document.getElementById(elementid);
-    var shipid = childelement.getAttribute("shipid");
+function removeShiplistBox(shipid) {
+    var childelement = document.getElementById(shiplistbox_mainboxID[shipid]);
     childelement.remove(); //删除div
     //后续需增加删除相应数据结构的代码
     delete shipReinforcementGroupsID[shipid];
+    delete shipSkillGroupsID[shipid];
+    delete shiplistbox_mainboxID[shipid];
+};
+///////////////
+
+function shiplistbox_selectboxChanged_reinGroup(shipid,groupid) {  //强化组下拉框变动后
+    var currentlevel = document.getElementById(shipReinforcementGroupsID[shipid][groupid].currentlevelID).value; //当前等级
+    var finallevel = document.getElementById(shipReinforcementGroupsID[shipid][groupid].finallevelID).value;  //目标等级
+    var level = Math.max(currentlevel,finallevel);  //取等级的最大值
+    var initvalue = shipdata[shipid].reinforcementGroups[groupid].initvalue; //拿到初始值
+    var str = shipdata[shipid].reinforcementGroups[groupid].name + ": +" + initvalue * level; //计算并显示最终值
+    var elementid = shipReinforcementGroupsID[shipid][groupid].labelID;
+    document.getElementById(elementid).innerHTML = str;
+}
+function shiplistbox_selectboxChanged_skillGroup(shipid,groupid) {  //技能组下拉框变动后
+    //var currentlevel = document.getElementById(shipSkillGroupsID[shipid][groupid].currentlevelID).value;
+    //var finallevel = document.getElementById(shipSkillGroupsID[shipid][groupid].finallevelID).value;
+}
+
+function calConsumption(){
+    
 };

@@ -45,7 +45,54 @@
             </div>
         </div>
         <div class="calbox calbox2" id="shiplistbox">
-            <hr>
+            <div id="haveitems" style=" text-align:center;    display: flex;">
+                <div class="itemsbox_div">
+                    <label class="itembox_label">现有素材</label><br>
+                    <label class="itembox_label color_reingroup">元件1</label><br>
+                    <label class="itembox_label color_reingroup">元件2</label><br>
+                    <label class="itembox_label color_reingroup">元件3</label><br>
+                    <label class="itembox_label color_reingroup">元件4</label><br>
+                    <label class="itembox_label color_reingroup">元件5</label><br>
+                    <label class="itembox_label color_reingroup">元件6</label><br>
+                    <label class="itembox_label color_skillgroup1">回路1</label><br>
+                    <label class="itembox_label color_skillgroup1">回路2</label><br>
+                    <label class="itembox_label color_skillgroup1">回路3</label><br>
+                    <label class="itembox_label color_skillgroup1">回路4</label><br>
+                    <label class="itembox_label color_skillgroup2">结晶</label><br>
+                    <label class="itembox_label color_np">N.P</label><br>
+                </div>
+                <div class="itemsbox_div" style="width:80px;">
+                    <label class="itembox_label">S级</label><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup2_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_np2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                </div>
+                <div class="itemsbox_div" style="width:80px;">
+                    <label class="itembox_label">A级</label><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_reingroup2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup1_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_skillgroup2_2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                    <input class="itembox_label itembox_input color_np2" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                </div>
+            </div>
+            <hr style="color: #aaa;margin-top: 3px;margin-bottom:3px;">
             <div style="width:50px;" class="shiplistbox_div">
                 <label class="label1">序号</label>
             </div>
@@ -94,132 +141,10 @@
                 <label class="label1">被动2</label><br>
                 <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
             </div>
+            <div style="width:80px;" class="shiplistbox_div">
+                <button class="button " style="height:40px;" onclick="calConsumption();" id="btn_calculate">计算</button>
+            </div>
             <br>
-            <div style="clear:both;border:none;" class="shiplistbox">
-                <div style="width:50px;" class="shiplistbox_div">
-                    <label class="label1">序号</label>
-                </div>
-                <div style="width:114px;" class="shiplistbox_div">
-                    <label class="label1">船名</label>
-                </div>
-                <div style="width:50px;" class="shiplistbox_div">
-                    <label class="label1">类型</label>
-                </div>
-                <div style="width:30px;" class="shiplistbox_div">
-                    <label class="label1" >星级</label>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化1</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化2</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化3</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化4</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化5</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化6</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_actskill">
-                    <label class="label1">主动技</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
-                    <label class="label1">被动1</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
-                    <label class="label1">被动2</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:60px;" class="shiplistbox_div">
-                    <button class="button button3" onclick="" id="searchbtn">移除</button>
-                </div>
-            </div>
-            <div style="clear:both;border:none;" class="shiplistbox">
-                <div style="width:50px;" class="shiplistbox_div">
-                    <label class="label1">序号</label>
-                </div>
-                <div style="width:114px;" class="shiplistbox_div">
-                    <label class="label1">船名</label>
-                </div>
-                <div style="width:50px;" class="shiplistbox_div">
-                    <label class="label1">类型</label>
-                </div>
-                <div style="width:30px;" class="shiplistbox_div">
-                    <label class="label1" >星级</label>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化1</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化2</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化3</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化4</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化5</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
-                    <label class="label1">强化6</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_actskill">
-                    <label class="label1">主动技</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
-                    <label class="label1">被动1</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div style="width:100px;" class="shiplistbox_div shiplistbox_div_passiveskill">
-                    <label class="label1">被动2</label><br>
-                    <select style="width: 40px;"><option>10</option></select>
-                    <select style="width: 40px;"><option>10</option></select>
-                </div>
-                <div   style="width:60px;" class="shiplistbox_div">
-                    <button class="button button3" onclick="" id="searchbtn">移除</button>
-                </div>
-            </div>
-
         </div>
     </div>
     <script src="data.js"></script>
