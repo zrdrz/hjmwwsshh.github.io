@@ -25,6 +25,234 @@ var shipReinforcementGroupsID = {
     //};
 };
 var shipSkillGroupsID = {
+    //$shipid:{
+    //    activeSkills:{},
+    //    passiveSkills:{},
+    //},
+};
+var labelIDNamesMap = {
+    reinforcementGroups:{ 1: '火力元件', 2: '索敌元件', 3: '动力元件', 4: '扩张元件', 5: '防御元件', 6: '装填元件', },
+    activeSkills: { 1: '结晶', },
+    passiveSkills: { 1: '驱逐回路', 2: '巡洋回路', 3: '战列回路', 4: '航母回路', },
+    common: { 1: 'N.P', },
+};
+var titlelabelID = {
+    reinforcementGroups:{
+        1: [ 'reinG1_title1', 'reinG1_title2',],
+        2: [ 'reinG2_title1', 'reinG2_title2',],
+        3: [ 'reinG3_title1', 'reinG3_title2',],
+        4: [ 'reinG4_title1', 'reinG4_title2',],
+        5: [ 'reinG5_title1', 'reinG5_title2',],
+        6: [ 'reinG6_title1', 'reinG6_title2',],
+    },
+    activeSkills: {
+        1: [ 'actSkill_title1', 'actSkill_title2',],
+    },
+    passiveSkills: {
+        1: [ 'passSkillG1_title1', 'passSkillG1_title2'],
+        2: [ 'passSkillG2_title1', 'passSkillG2_title2'],
+        3: [ 'passSkillG3_title1', 'passSkillG3_title2'],
+        4: [ 'passSkillG4_title1', 'passSkillG4_title2'],
+    },
+    common: {
+        1: [ 'commonconsumption1_1', 'commonconsumption1_2',],
+    },
+};
+var outputboxID = {
+    reinforcementGroups:{
+        1: {
+            rankS: 'Output_reinG1_S',
+            rankA: 'Output_reinG1_A',
+            rankB: 'Output_reinG1_B',
+            rankC: 'Output_reinG1_C',
+            rankD: 'Output_reinG1_D',
+        }, 
+        2: { 
+            rankS: 'Output_reinG2_S',
+            rankA: 'Output_reinG2_A',
+            rankB: 'Output_reinG2_B',
+            rankC: 'Output_reinG2_C',
+            rankD: 'Output_reinG2_D',
+        }, 
+        3: {   
+            rankS: 'Output_reinG3_S',
+            rankA: 'Output_reinG3_A',
+            rankB: 'Output_reinG3_B',
+            rankC: 'Output_reinG3_C',
+            rankD: 'Output_reinG3_D',
+        }, 
+        4: { 
+            rankS: 'Output_reinG4_S',
+            rankA: 'Output_reinG4_A',
+            rankB: 'Output_reinG4_B',
+            rankC: 'Output_reinG4_C',
+            rankD: 'Output_reinG4_D',
+        }, 
+        5: { 
+            rankS: 'Output_reinG5_S',
+            rankA: 'Output_reinG5_A',
+            rankB: 'Output_reinG5_B',
+            rankC: 'Output_reinG5_C',
+            rankD: 'Output_reinG5_D',
+        }, 
+        6: { 
+            rankS: 'Output_reinG6_S',
+            rankA: 'Output_reinG6_A',
+            rankB: 'Output_reinG6_B',
+            rankC: 'Output_reinG6_C',
+            rankD: 'Output_reinG6_D',
+        },
+    },
+    activeSkills: {
+        1: {
+            rankS: 'Output_actSkill_S',
+            rankA: 'Output_actSkill_A',
+            rankB: 'Output_actSkill_B',
+            rankC: 'Output_actSkill_C',
+        },
+    },
+    passiveSkills: {
+        1: {
+            rankS: 'Output_passSkillG1_S',
+            rankA: 'Output_passSkillG1_A',
+            rankB: 'Output_passSkillG1_B',
+            rankC: 'Output_passSkillG1_C',
+            rankD: 'Output_passSkillG1_D',
+        },
+        2: {
+            rankS: 'Output_passSkillG2_S',
+            rankA: 'Output_passSkillG2_A',
+            rankB: 'Output_passSkillG2_B',
+            rankC: 'Output_passSkillG2_C',
+            rankD: 'Output_passSkillG2_D',
+        },
+        3: {
+            rankS: 'Output_passSkillG3_S',
+            rankA: 'Output_passSkillG3_A',
+            rankB: 'Output_passSkillG3_B',
+            rankC: 'Output_passSkillG3_C',
+            rankD: 'Output_passSkillG3_D',
+        },
+        4: {
+            rankS: 'Output_passSkillG4_S',
+            rankA: 'Output_passSkillG4_A',
+            rankB: 'Output_passSkillG4_B',
+            rankC: 'Output_passSkillG4_C',
+            rankD: 'Output_passSkillG4_D',
+        },
+    },
+    common: {
+        1: { normal: 'Output_np', },
+    },
+};
+var inputboxsID = {
+    reinforcementGroups:{
+        1: {
+            rankS: 'Input_reinG1_S',
+            rankA: 'Input_reinG1_A',
+            rankB: 'Input_reinG1_B',
+            rankC: 'Input_reinG1_C',
+            rankD: 'Input_reinG1_D',
+        },
+        2: {
+            rankS: 'Input_reinG2_S',
+            rankA: 'Input_reinG2_A',
+            rankB: 'Input_reinG2_B',
+            rankC: 'Input_reinG2_C',
+            rankD: 'Input_reinG2_D',
+        },
+        3: {
+            rankS: 'Input_reinG3_S',
+            rankA: 'Input_reinG3_A',
+            rankB: 'Input_reinG3_B',
+            rankC: 'Input_reinG3_C',
+            rankD: 'Input_reinG3_D',
+        },
+        4: {
+            rankS: 'Input_reinG4_S',
+            rankA: 'Input_reinG4_A',
+            rankB: 'Input_reinG4_B',
+            rankC: 'Input_reinG4_C',
+            rankD: 'Input_reinG4_D',
+        },
+        5: {
+            rankS: 'Input_reinG5_S',
+            rankA: 'Input_reinG5_A',
+            rankB: 'Input_reinG5_B',
+            rankC: 'Input_reinG5_C',
+            rankD: 'Input_reinG5_D',
+        },
+        6: {
+            rankS: 'Input_reinG6_S',
+            rankA: 'Input_reinG6_A',
+            rankB: 'Input_reinG6_B',
+            rankC: 'Input_reinG6_C',
+            rankD: 'Input_reinG6_D',
+        },
+    },
+    activeSkills: {
+        1: {
+            rankS: 'Input_actSkill_S',
+            rankA: 'Input_actSkill_A',
+            rankB: 'Input_actSkill_B',
+            rankC: 'Input_actSkill_C',
+        },
+    },
+    passiveSkills: {
+        1: {
+            rankS: 'Input_passSkillG1_S',
+            rankA: 'Input_passSkillG1_A',
+            rankB: 'Input_passSkillG1_B',
+            rankC: 'Input_passSkillG1_C',
+            rankD: 'Input_passSkillG1_D',
+        },
+        2: {
+            rankS: 'Input_passSkillG2_S',
+            rankA: 'Input_passSkillG2_A',
+            rankB: 'Input_passSkillG2_B',
+            rankC: 'Input_passSkillG2_C',
+            rankD: 'Input_passSkillG2_D',
+        },
+        3: {
+            rankS: 'Input_passSkillG3_S',
+            rankA: 'Input_passSkillG3_A',
+            rankB: 'Input_passSkillG3_B',
+            rankC: 'Input_passSkillG3_C',
+            rankD: 'Input_passSkillG3_D',
+        },
+        4: {
+            rankS: 'Input_passSkillG4_S',
+            rankA: 'Input_passSkillG4_A',
+            rankB: 'Input_passSkillG4_B',
+            rankC: 'Input_passSkillG4_C',
+            rankD: 'Input_passSkillG4_D',
+        },
+    },
+    common: {
+        1: { normal: 'Input_np', },
+    },
+};
+var calResult = {
+    reinforcementGroups:{
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, 
+        2: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, 
+        3: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, 
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, 
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, 
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, },
+    },
+    activeSkills: {
+        1: {  rankS: 0, rankA: 0, rankB: 0, rankC: 0, },
+    },
+    passiveSkills: {
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, },
+        2: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, },
+        3: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, },
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, },
+    },
+    common: {
+        1: { normal: 0, },
+    },
 };
 var searchResultBox_template = { //存放模板
     mainbox: {  //主框架
@@ -378,7 +606,7 @@ var shiplistBox_template = {
                     attributes: { class: "label1", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
-                    bindData: "skills",
+                    bindData: "activeSkills",
                     bindDataID: 1,
                     bindClass: "",
                     bindID: "labelID",
@@ -387,7 +615,7 @@ var shiplistBox_template = {
                 element3: {
                     id: "_select1",
                     type: "skillGroupselect",
-                    bindData: "skills",
+                    bindData: "activeSkills",
                     bindDataID: 1,
                     bindID: "currentlevelID",
                     attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
@@ -396,7 +624,7 @@ var shiplistBox_template = {
                 element4: {
                     id: "_select2",
                     type: "skillGroupselect",
-                    bindData: "skills",
+                    bindData: "activeSkills",
                     bindDataID: 1,
                     bindID: "finallevelID",
                     attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
@@ -415,8 +643,8 @@ var shiplistBox_template = {
                     attributes: { class: "label1", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
-                    bindData: "skills",
-                    bindDataID: 2,
+                    bindData: "passiveSkills",
+                    bindDataID: 1,
                     bindClass: "",
                     bindID: "labelID",
                 },
@@ -424,8 +652,8 @@ var shiplistBox_template = {
                 element3: {
                     id: "_select1",
                     type: "skillGroupselect",
-                    bindData: "skills",
-                    bindDataID: 2,
+                    bindData: "passiveSkills",
+                    bindDataID: 1,
                     bindID: "currentlevelID",
                     attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
@@ -433,8 +661,8 @@ var shiplistBox_template = {
                 element4: {
                     id: "_select2",
                     type: "skillGroupselect",
-                    bindData: "skills",
-                    bindDataID: 2,
+                    bindData: "passiveSkills",
+                    bindDataID: 1,
                     bindID: "finallevelID",
                     attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
@@ -452,8 +680,8 @@ var shiplistBox_template = {
                     attributes: { class: "label1", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
-                    bindData: "skills",
-                    bindDataID: 3,
+                    bindData: "passiveSkills",
+                    bindDataID: 2,
                     bindClass: "",
                     bindID: "labelID",
                 },
@@ -461,8 +689,8 @@ var shiplistBox_template = {
                 element3: {
                     id: "_select1",
                     type: "skillGroupselect",
-                    bindData: "skills",
-                    bindDataID: 3,
+                    bindData: "passiveSkills",
+                    bindDataID: 2,
                     bindID: "currentlevelID",
                     attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
@@ -470,8 +698,8 @@ var shiplistBox_template = {
                 element4: {
                     id: "_select2",
                     type: "skillGroupselect",
-                    bindData: "skills",
-                    bindDataID: 3,
+                    bindData: "passiveSkills",
+                    bindDataID: 2,
                     bindID: "finallevelID",
                     attributes: { class: "select4", onchange:"shiplistbox_selectboxChanged_skillGroup(this.getAttribute('shipid'),this.getAttribute('groupid'));" },
                     options: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
@@ -501,7 +729,55 @@ var shiplistBox_template = {
 loadselectbox('CMB_searchtype',searchtype); //加载搜索方法的下拉框
 loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
-loadshipdataintocache();
+loadshipdataintocache();//加载素材title的文本
+loadItemsTitleLabels();
+setShiplistBoxDefaultValue(0,outputboxID); //设置默认值
+setShiplistBoxDefaultValue(0,inputboxsID);
+
+
+function loadItemsTitleLabels(obj){ //加载素材title的文本
+    for ( lbltypes in titlelabelID ) {
+        for ( lbls in titlelabelID[lbltypes] ) {
+            for ( var i=0,len=titlelabelID[lbltypes][lbls].length;i<len;i++ ) {
+                labelID = titlelabelID[lbltypes][lbls][i];
+                document.getElementById(labelID).innerHTML = labelIDNamesMap[lbltypes][lbls];
+            };
+        };
+    };
+};
+function setShiplistBoxDefaultValue(defaultValue,obj){ //设置默认值
+    for ( things in obj ){
+        if ( typeof obj[things] == 'object' ){
+            setShiplistBoxDefaultValue(defaultValue,obj[things]);  //递归,直到不是object,找到elementid
+        }else{
+            setInputBoxValue(defaultValue,obj[things]);
+        };
+    };
+};
+function setInputBoxValue(value,elementid){
+    document.getElementById(elementid).value = value;
+};
+function readInputValue() { //从页面上的input元素读取现有素材
+    for ( types in inputboxsID ){
+        for ( groups in inputboxsID[types] ) {
+            for ( rank in inputboxsID[types][groups] ){
+                var value = document.getElementById(inputboxsID[types][groups][rank]).value;
+                calResult[types][groups][rank] = value;
+            };
+        };
+    };
+};
+function showResult() { //输出计算结果
+    for ( types in outputboxID ){
+        for ( groups in outputboxID[types] ) {
+            for ( rank in outputboxID[types][groups] ){
+                var value = calResult[types][groups][rank];
+                var elementid = outputboxID[types][groups][rank];
+                setInputBoxValue(value,elementid);
+            };
+        };
+    };
+};
 ////////////////////////////////////
 //界面创建相关//开始
 function setSimpleAttr(elemt,attrs){
@@ -562,11 +838,11 @@ function createShiplistBox_Child(parentid,shipid,obj){
                 break;
             case 'skillGrouplabel':
                 createReinGrouplabel(parentid,shipid,obj.childElements[childname]);
-                logSkillGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                logSkillGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID,obj.childElements[childname].bindData);
                 break;
             case 'skillGroupselect':
                 createReinGroupSelect(parentid,shipid,obj.childElements[childname]);
-                logSkillGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                logSkillGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID,obj.childElements[childname].bindData);
                 break;
             case 'br':
                 createBR(parentid);
@@ -748,17 +1024,20 @@ function filter(shipid) { //过滤器,接收ship的id作为参数
 };
 ////////////////
 //记录元素id相关
-function logReinGroupID(shipid,type,value,index){ //记录某船的某个强化组的label和下拉框的元素id
+function logReinGroupID(shipid,elementType,value,index){ //记录某船的某个强化组的label和下拉框的元素id
     if ( typeof shipReinforcementGroupsID[shipid][index] == 'undefined' ){
         shipReinforcementGroupsID[shipid][index] = {};
     };
-    shipReinforcementGroupsID[shipid][index][type] = value;
+    shipReinforcementGroupsID[shipid][index][elementType] = value;
 };
-function logSkillGroupID(shipid,type,value,index){ //记录某船的某个技能组的label和下拉框的元素id
-    if ( typeof shipSkillGroupsID[shipid][index] == 'undefined' ){
-        shipSkillGroupsID[shipid][index] = {};
+function logSkillGroupID(shipid,elementType,value,index,dataType){ //记录某船的某个技能组的label和下拉框的元素id
+    if ( typeof shipSkillGroupsID[shipid][dataType] == 'undefined' ){
+        shipSkillGroupsID[shipid][dataType] = {};
     };
-    shipSkillGroupsID[shipid][index][type] = value;
+    if ( typeof shipSkillGroupsID[shipid][dataType][index] == 'undefined' ) {
+        shipSkillGroupsID[shipid][dataType][index] = {};
+    };
+    shipSkillGroupsID[shipid][dataType][index][elementType] = value;
 };
 ///////////////
 function getParentNodeId(childid) {
@@ -783,11 +1062,9 @@ function removeShiplistBox(shipid) {
 ///////////////
 
 function shiplistbox_selectboxChanged_reinGroup(shipid,groupid) {  //强化组下拉框变动后
-    var currentlevel = document.getElementById(shipReinforcementGroupsID[shipid][groupid].currentlevelID).value; //当前等级
     var finallevel = document.getElementById(shipReinforcementGroupsID[shipid][groupid].finallevelID).value;  //目标等级
-    var level = Math.max(currentlevel,finallevel);  //取等级的最大值
     var initvalue = shipdata[shipid].reinforcementGroups[groupid].initvalue; //拿到初始值
-    var str = shipdata[shipid].reinforcementGroups[groupid].name + ": +" + initvalue * level; //计算并显示最终值
+    var str = shipdata[shipid].reinforcementGroups[groupid].name + ": +" + initvalue * finallevel; //计算并显示最终值
     var elementid = shipReinforcementGroupsID[shipid][groupid].labelID;
     document.getElementById(elementid).innerHTML = str;
 }
@@ -797,5 +1074,47 @@ function shiplistbox_selectboxChanged_skillGroup(shipid,groupid) {  //技能组�
 }
 
 function calConsumption(){
-    
+    if ( isEmptyObject(shiplistbox_mainboxID) ==false ){
+        //alert('开始计算')
+        readInputValue(); //读取现有素材
+        //
+        ////////读取并计算强化组消耗
+        for ( shipid in shipReinforcementGroupsID ){ 
+            for ( groups in shipReinforcementGroupsID[shipid] ){
+                var clevel = document.getElementById(shipReinforcementGroupsID[shipid][groups].currentlevelID).value; //获取当前等级
+                var flevel = document.getElementById(shipReinforcementGroupsID[shipid][groups].finallevelID).value; //获取目标等级
+                var consumptionID = shipdata[shipid].reinforcementGroups[groups].consumptionID; //获取强化组的消耗计算id
+                //alert('groups: ' + groups + " clevel: " + clevel + " flevel: " + flevel + ' calid: ' + consumptionID);
+                if ( clevel >= flevel ){ clevel = 0;flevel = 0;}; //如果目标等级小于等于起始等级,则按0处理
+                for ( fgroups in consumptionItemList.reinforcementGroups[consumptionID][flevel] ) { //
+                    for ( rank in consumptionItemList.reinforcementGroups[consumptionID][flevel][fgroups] ){
+                        var consumptions = consumptionItemList.reinforcementGroups[consumptionID][flevel][fgroups][rank]; //消耗元件的量
+                        var currentValue = calResult.reinforcementGroups[fgroups][rank]; //当前元件的量
+                        var result = Number(currentValue) - Number(consumptions); //相减
+                        calResult.reinforcementGroups[fgroups][rank] = result;
+                    };
+                };
+                for ( fgroups in consumptionItemList.common[consumptionID][flevel] ) { //
+                    for ( rank in consumptionItemList.common[consumptionID][flevel][fgroups] ){
+                        var consumptions = consumptionItemList.common[consumptionID][flevel][fgroups][rank]; //消耗NP的量
+                        var currentValue = calResult.common[fgroups][rank]; //当前NP的量
+                        var result = Number(currentValue) - Number(consumptions); //相减
+                        calResult.common[fgroups][rank] = result;
+                    };
+                };
+            };
+        };
+        //
+        ////////读取并计算技能组消耗
+        showResult();
+    }else{
+        readInputValue();
+        showResult();
+    };
+};
+function isEmptyObject(obj){
+    for(var key in obj){
+        return false;
+    };
+    return true;
 };
