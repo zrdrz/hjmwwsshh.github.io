@@ -761,7 +761,7 @@ function readInputValue() { //从页面上的input元素读取现有素材
     for ( types in inputboxsID ){
         for ( groups in inputboxsID[types] ) {
             for ( rank in inputboxsID[types][groups] ){
-                var value = document.getElementById(inputboxsID[types][groups][rank]).value;
+                var value = getElementValue(inputboxsID[types][groups][rank]);
                 calResult[types][groups][rank] = value;
             };
         };
@@ -979,13 +979,13 @@ function loadshipdataintocache(){
 function getSearchVars(){ //获取搜索方式
     for ( keys in searchmethod ) {
         var elementid = searchmethod[keys].elementid;
-        searchmethod[keys].value = document.getElementById(elementid).value;
+        searchmethod[keys].value = getElementValue(elementid);
     };
 };
 function search(){
     getSearchVars();
     document.getElementById('searchbox').innerText="";
-    var searchinputs = document.getElementById('searchinput').value;
+    var searchinputs = getElementValue('searchinput');
     var searchtype = searchmethod.searchtype.value;
     var searchresult = []; //暂存结果
     var i = 0;
@@ -1062,7 +1062,7 @@ function removeShiplistBox(shipid) {
 ///////////////
 
 function shiplistbox_selectboxChanged_reinGroup(shipid,groupid) {  //强化组下拉框变动后
-    var finallevel = document.getElementById(shipReinforcementGroupsID[shipid][groupid].finallevelID).value;  //目标等级
+    var finallevel = getElementValue(shipReinforcementGroupsID[shipid][groupid].finallevelID);  //目标等级
     var initvalue = shipdata[shipid].reinforcementGroups[groupid].initvalue; //拿到初始值
     var str = shipdata[shipid].reinforcementGroups[groupid].name + ": +" + initvalue * finallevel; //计算并显示最终值
     var elementid = shipReinforcementGroupsID[shipid][groupid].labelID;
@@ -1081,22 +1081,25 @@ function calConsumption(){
         ////////读取并计算强化组消耗
         for ( shipid in shipReinforcementGroupsID ){ 
             for ( groups in shipReinforcementGroupsID[shipid] ){
-                var clevel = document.getElementById(shipReinforcementGroupsID[shipid][groups].currentlevelID).value; //获取当前等级
-                var flevel = document.getElementById(shipReinforcementGroupsID[shipid][groups].finallevelID).value; //获取目标等级
+                var clevel = getElementValue(shipReinforcementGroupsID[shipid][groups].currentlevelID); //获取当前等级
+                var flevel = getElementValue(shipReinforcementGroupsID[shipid][groups].finallevelID); //获取目标等级
+                if ( Number(clevel) >= Number(flevel) ){ continue; }; //如果目标等级小于等于起始等级,则按0处理,直接跳过
                 var consumptionID = shipdata[shipid].reinforcementGroups[groups].consumptionID; //获取强化组的消耗计算id
-                //alert('groups: ' + groups + " clevel: " + clevel + " flevel: " + flevel + ' calid: ' + consumptionID);
-                if ( clevel >= flevel ){ clevel = 0;flevel = 0;}; //如果目标等级小于等于起始等级,则按0处理
                 for ( fgroups in consumptionItemList.reinforcementGroups[consumptionID][flevel] ) { //
                     for ( rank in consumptionItemList.reinforcementGroups[consumptionID][flevel][fgroups] ){
-                        var consumptions = consumptionItemList.reinforcementGroups[consumptionID][flevel][fgroups][rank]; //消耗元件的量
-                        var currentValue = calResult.reinforcementGroups[fgroups][rank]; //当前元件的量
+                        var fconsumptions = consumptionItemList.reinforcementGroups[consumptionID][flevel][fgroups][rank]; //目标消耗元件的量
+                        var cconsumptions = consumptionItemList.reinforcementGroups[consumptionID][clevel][fgroups][rank]; //当前消耗元件的量
+                        var consumptions = Number(fconsumptions) - Number(cconsumptions);
+                        var currentValue = calResult.reinforcementGroups[fgroups][rank]; //当前库存元件的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.reinforcementGroups[fgroups][rank] = result;
                     };
                 };
                 for ( fgroups in consumptionItemList.common[consumptionID][flevel] ) { //
                     for ( rank in consumptionItemList.common[consumptionID][flevel][fgroups] ){
-                        var consumptions = consumptionItemList.common[consumptionID][flevel][fgroups][rank]; //消耗NP的量
+                        var fconsumptions = consumptionItemList.common[consumptionID][flevel][fgroups][rank]; //目标消耗NP的量
+                        var cconsumptions = consumptionItemList.common[consumptionID][clevel][fgroups][rank]; //当前消耗NP的量
+                        var consumptions = Number(fconsumptions) - Number(cconsumptions);
                         var currentValue = calResult.common[fgroups][rank]; //当前NP的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.common[fgroups][rank] = result;
@@ -1106,7 +1109,37 @@ function calConsumption(){
         };
         //
         ////////读取并计算技能组消耗
-        showResult();
+        for ( shipid in shipSkillGroupsID ){
+            for ( skilltype in shipSkillGroupsID[shipid] ){
+                for ( skillid in shipSkillGroupsID[shipid][skilltype] ) {
+                    var clevel = getElementValue(shipSkillGroupsID[shipid][skilltype][skillid].currentlevelID); //获取当前等级
+                    var flevel = getElementValue(shipSkillGroupsID[shipid][skilltype][skillid].finallevelID); //获取目标等级
+                    if ( Number(clevel) >= Number(flevel) ){ continue; }; 
+                    var consumptionID = shipdata[shipid][skilltype][skillid].consumptionID; //获取消耗计算id
+                    for ( sgroups in consumptionItemList[skilltype][consumptionID][flevel] ){ //计算结晶/回路消耗
+                        for ( rank in consumptionItemList[skilltype][consumptionID][flevel][sgroups] ){
+                            var fconsumptions = consumptionItemList[skilltype][consumptionID][flevel][sgroups][rank]; //目标消耗的量
+                            var cconsumptions = consumptionItemList[skilltype][consumptionID][clevel][sgroups][rank]; //当前消耗的量
+                            var consumptions = Number(fconsumptions) - Number(cconsumptions);
+                            var currentValue = calResult[skilltype][sgroups][rank]; //当前的量
+                            var result = Number(currentValue) - Number(consumptions); //相减
+                            calResult[skilltype][sgroups][rank] = result;
+                        };
+                    };
+                    for ( sgroups in consumptionItemList.common[consumptionID][flevel] ){ //计算NP消耗
+                        for ( rank in consumptionItemList.common[consumptionID][flevel][sgroups] ){
+                            var fconsumptions = consumptionItemList.common[consumptionID][flevel][sgroups][rank]; //目标消耗NP的量
+                            var cconsumptions = consumptionItemList.common[consumptionID][clevel][sgroups][rank]; //当前消耗NP的量
+                            var consumptions = Number(fconsumptions) - Number(cconsumptions);
+                            var currentValue = calResult.common[sgroups][rank]; //当前的量
+                            var result = Number(currentValue) - Number(consumptions); //相减
+                            calResult.common[sgroups][rank] = result;
+                        };
+                    };
+                };
+            };
+        };
+        showResult(); //显示结果
     }else{
         readInputValue();
         showResult();
@@ -1117,4 +1150,7 @@ function isEmptyObject(obj){
         return false;
     };
     return true;
+};
+function getElementValue(elementid){ //获取input或select元素的value
+    return document.getElementById(elementid).value;
 };
