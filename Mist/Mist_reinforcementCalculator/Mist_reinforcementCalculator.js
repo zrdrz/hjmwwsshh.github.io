@@ -731,9 +731,9 @@ loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
 loadshipdataintocache();//加载素材title的文本
 loadItemsTitleLabels();
-setShiplistBoxDefaultValue(0,outputboxID); //设置默认值
-setShiplistBoxDefaultValue(0,inputboxsID);
-
+setShiplistBoxDefaultValue(0,inputboxsID);//设置默认值
+readInputValue();
+showResult();
 
 function loadItemsTitleLabels(obj){ //加载素材title的文本
     for ( lbltypes in titlelabelID ) {
@@ -771,11 +771,24 @@ function showResult() { //输出计算结果
     for ( types in outputboxID ){
         for ( groups in outputboxID[types] ) {
             for ( rank in outputboxID[types][groups] ){
-                var value = calResult[types][groups][rank];
+                var value1 = getElementValue(inputboxsID[types][groups][rank]); //现有数量
+                var value2 = calResult[types][groups][rank]; //剩余数量
                 var elementid = outputboxID[types][groups][rank];
-                setInputBoxValue(value,elementid);
+                var consume = Number(value1) - Number(value2); //计算消耗数量
+                var str = value2.toString() + '(' + consume.toString() + ')'; //剩余(消耗)
+                setInputBoxValue(str,elementid);
+                setOutputBoxFontColorByValue(value2,elementid);
             };
         };
+    };
+};
+function setOutputBoxFontColorByValue(value,elementid){
+    if ( Number(value)> 0 ) {
+        document.getElementById(elementid).setAttribute('style','color:#000');
+    }else if ( Number(value) == 0 ) {
+        document.getElementById(elementid).setAttribute('style','color:#CD6600');
+    }else if ( Number(value) < 0 ) {
+        document.getElementById(elementid).setAttribute('style','color:#FF3030');
     };
 };
 ////////////////////////////////////
