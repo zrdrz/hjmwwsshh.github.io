@@ -270,52 +270,252 @@ consumptionItemList['common']['Common_NP_star2'] = {//二星船强化组/被动�
 //元件消耗
 consumptionItemList['reinforcementGroups']['rein_health_star5'] = { //五星船耐久强化消耗元件
     0:{ //等级0
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        4: { rankA: 0, rankD: 0, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件 
     }, //填入的数值为累加值
     1:{ //等级1
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        4: { rankA: 0, rankD: 0, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //防御元件 
     },
     2:{ //等级2
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 0, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //防御元件 
     },
     3:{ //等级3
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 0, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 40, }, //防御元件 
     },
     4:{ //等级4
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 0, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 0, rankC: 30, rankD: 70, }, //防御元件 
     },
     5:{ //等级5
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 0, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 15, rankC: 50, rankD: 105, }, //防御元件 
     },
     6:{ //等级6
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 0, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 0, rankB: 30, rankC: 70, rankD: 145, }, //防御元件 
     },
     7:{ //等级7
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 0, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 15, rankB: 45, rankC: 95, rankD: 145, }, //防御元件 
     },
     8:{ //等级8
-        4: { rankS: 0, rankA: 15, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: {rankA: 15, rankD: 20, }, //扩张元件
         5: { rankS: 0, rankA: 15, rankB: 65, rankC: 120, rankD: 145, }, //防御元件 
     },
     9:{ //等级9
-        4: { rankS: 0, rankA: 15, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 15, rankD: 20, }, //扩张元件
         5: { rankS: 15, rankA: 30, rankB: 85, rankC: 120, rankD: 145, }, //防御元件 
     },
     10:{ //等级10
-        4: { rankS: 0, rankA: 35, rankB: 0, rankC: 0, rankD: 20, }, //扩张元件
+        4: { rankA: 35, rankD: 20, }, //扩张元件
         5: { rankS: 30, rankA: 30, rankB: 105, rankC: 120, rankD: 145, }, //防御元件 
     },
 };
+consumptionItemList['reinforcementGroups']['rein_health_star4'] = { //四星船耐久强化消耗元件
+    0:{ //等级0
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件 
+    }, //填入的数值为累加值
+    1:{ //等级1
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 10, }, //防御元件 
+    },
+    2:{ //等级2
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 25, }, //防御元件 
+    },
+    3:{ //等级3
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, rankD: 45, }, //防御元件 
+    },
+    4:{ //等级4
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 20, rankD: 70, }, //防御元件 
+    },
+    5:{ //等级5
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 10, rankC: 35, rankD: 100, }, //防御元件 
+    },
+    6:{ //等级6
+        4: { rankC: 15, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 20, rankC: 35, rankD: 135, }, //防御元件 
+    },
+    7:{ //等级7
+        4: { rankC: 15, }, //扩张元件
+        5: { rankS: 0, rankA: 10, rankB: 30, rankC: 55, rankD: 135, }, //防御元件 
+    },
+    8:{ //等级8
+        4: { rankC: 15, }, //扩张元件
+        5: { rankS: 0, rankA: 20, rankB: 45, rankC: 75, rankD: 135, }, //防御元件 
+    },
+    9:{ //等级9
+        4: { rankC: 15, }, //扩张元件
+        5: { rankS: 10, rankA: 30, rankB: 65, rankC: 75, rankD: 135, }, //防御元件 
+    },
+    10:{ //等级10
+        4: { rankC: 15, }, //扩张元件
+        5: { rankS: 20, rankA: 45, rankB: 75, rankC: 75, rankD: 135, }, //防御元件 
+    },
+};
+consumptionItemList['reinforcementGroups']['rein_health_star3'] = { //三星船耐久强化消耗元件
+    0:{ //等级0
+        4: { rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件 
+    }, //填入的数值为累加值
+    1:{ //等级1
+        4: { rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 5, }, //防御元件 
+    },
+    2:{ //等级2
+        4: { rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //防御元件 
+    },
+    3:{ //等级3
+        4: { rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 5, rankD: 30, }, //防御元件 
+    },
+    4:{ //等级4
+        4: { rankC: 5, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 5, rankD: 50, }, //防御元件 
+    },
+    5:{ //等级5
+        4: { rankC: 15, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 5, rankC: 5, rankD: 75, }, //防御元件 
+    },
+    6:{ //等级6
+        4: { rankC: 15, rankD: 30, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 10, rankC: 15, rankD: 75, }, //防御元件 
+    },
+    7:{ //等级7
+        4: { rankC: 15, rankD: 30, }, //扩张元件
+        5: { rankS: 0, rankA: 5, rankB: 15, rankC: 30, rankD: 75, }, //防御元件 
+    },
+    8:{ //等级8
+        4: { rankC: 15, rankD: 30, }, //扩张元件
+        5: { rankS: 0, rankA: 10, rankB: 25, rankC: 45, rankD: 75, }, //防御元件 
+    },
+    9:{ //等级9
+        4: { rankC: 15, rankD: 30, }, //扩张元件
+        5: { rankS: 5, rankA: 15, rankB: 35, rankC: 45, rankD: 75, }, //防御元件 
+    },
+    10:{ //等级10
+        4: { rankC: 15, rankD: 30, }, //扩张元件
+        5: { rankS: 10, rankA: 25, rankB: 45, rankC: 45, rankD: 75, }, //防御元件 
+    },
+};
+consumptionItemList['reinforcementGroups']['rein_health_star2'] = { //二星船耐久强化消耗元件
+    0:{ //等级0
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件 
+    }, //填入的数值为累加值
+    1:{ //等级1
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 1, }, //防御元件 
+    },
+    2:{ //等级2
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 6, }, //防御元件 
+    },
+    3:{ //等级3
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 1, rankD: 16, }, //防御元件 
+    },
+    4:{ //等级4
+        4: { rankC: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 2, rankD: 31, }, //防御元件 
+    },
+    5:{ //等级5
+        4: { rankC: 5, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 1, rankC: 2, rankD: 51, }, //防御元件 
+    },
+    6:{ //等级6
+        4: { rankC: 5, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 2, rankC: 7, rankD: 76, }, //防御元件 
+    },
+    7:{ //等级7
+        4: { rankC: 5, }, //扩张元件
+        5: { rankS: 0, rankA: 1, rankB: 3, rankC: 17, rankD: 76, }, //防御元件 
+    },
+    8:{ //等级8
+        4: { rankC: 5, }, //扩张元件
+        5: { rankS: 0, rankA: 2, rankB: 8, rankC: 27, rankD: 76, }, //防御元件 
+    },
+    9:{ //等级9
+        4: { rankC: 5, }, //扩张元件
+        5: { rankS: 1, rankA: 3, rankB: 13, rankC: 27, rankD: 76, }, //防御元件 
+    },
+    10:{ //等级10
+        4: { rankC: 5, }, //扩张元件
+        5: { rankS: 2, rankA: 8, rankB: 18, rankC: 27, rankD: 76, }, //防御元件 
+    },
+};
+
+consumptionItemList['reinforcementGroups']['rein_gunfirepower_star5'] = { //五星船炮击强化消耗元件
+    0:{ //等级0
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //装填元件
+    }, //填入的数值为累加值
+    1:{ //等级1
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //装填元件
+    },
+    2:{ //等级2
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //装填元件
+    },
+    3:{ //等级3
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 40, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 0, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //装填元件
+    },
+    4:{ //等级4
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 40, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 30, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //装填元件
+    },
+    5:{ //等级5
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 35, rankD: 75, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 30, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 15, rankC: 0, rankD: 20, }, //装填元件
+    },
+    6:{ //等级6
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 35, rankD: 115, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 15, rankC: 15, rankD: 30, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 15, rankC: 20, rankD: 20, }, //装填元件
+    },
+    7:{ //等级7
+        1: { rankS: 0, rankA: 15, rankB: 15, rankC: 35, rankD: 115, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 15, rankC: 40, rankD: 30, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 15, rankC: 20, rankD: 20, }, //装填元件
+    },
+    8:{ //等级8
+        1: { rankS: 0, rankA: 30, rankB: 35, rankC: 35, rankD: 115, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 15 rankC: 65, rankD: 30, }, //扩张元件
+        6: { rankS: 0, rankA: 0, rankB: 15, rankC: 20, rankD: 20, }, //装填元件
+    },
+    9:{ //等级9
+        1: { rankS: 0, rankA: 45, rankB: 35, rankC: 35, rankD: 115, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 15, rankC: 65, rankD: 30, }, //扩张元件
+        6: { rankS: 15, rankA: 0, rankB: 35, rankC: 20, rankD: 20, }, //装填元件
+    },
+    10:{ //等级10
+        1: { rankS: 0, rankA: 65, rankB: 35, rankC: 35, rankD: 115, }, //火力元件
+        4: { rankS: 15, rankA: 0, rankB: 35, rankC: 65, rankD: 30, }, //扩张元件
+        6: { rankS: 15, rankA: 0, rankB: 35, rankC: 20, rankD: 20, }, //装填元件
+    },
+};
 //NP消耗
-consumptionItemList['common']['rein_health_star5'] = consumptionItemList['common']['Common_NP_star5'] //五星船耐久强化消耗NP
+consumptionItemList['common']['rein_health_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船耐久强化消耗NP
+consumptionItemList['common']['rein_health_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船耐久强化消耗NP
+consumptionItemList['common']['rein_health_star3'] = consumptionItemList['common']['Common_NP_star3']; //四星船耐久强化消耗NP
+consumptionItemList['common']['rein_health_star2'] = consumptionItemList['common']['Common_NP_star2']; //四星船耐久强化消耗NP
+consumptionItemList['common']['rein_gunfirepower_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船炮击强化消耗NP
 ////强化组消耗
 
 ////主动技能消耗
@@ -333,45 +533,10 @@ consumptionItemList['activeSkills']['act_star5'] = { //五星船主动技能消�
     9:{ 1:{ rankS: 25, }, },
     10:{ 1:{ rankS: 30, }, },
 };
-consumptionItemList['activeSkills']['act_star4'] = { //四星船主动技能消耗
-    0:{ 1:{ rankA: 0, }, },
-    1:{ 1:{ rankA: 1, }, },
-    2:{ 1:{ rankA: 2, }, },
-    3:{ 1:{ rankA: 4, }, },
-    4:{ 1:{ rankA: 6, }, },
-    5:{ 1:{ rankA: 9, }, },
-    6:{ 1:{ rankA: 12, }, },
-    7:{ 1:{ rankA: 16, }, },
-    8:{ 1:{ rankA: 20, }, },
-    9:{ 1:{ rankA: 25, }, },
-    10:{ 1:{ rankA: 30, }, },
-};
-consumptionItemList['activeSkills']['act_star3'] = { //三星船主动技能消耗
-    0:{ 1:{ rankB: 0, }, },
-    1:{ 1:{ rankB: 1, }, },
-    2:{ 1:{ rankB: 2, }, },
-    3:{ 1:{ rankB: 4, }, },
-    4:{ 1:{ rankB: 6, }, },
-    5:{ 1:{ rankB: 9, }, },
-    6:{ 1:{ rankB: 12, }, },
-    7:{ 1:{ rankB: 16, }, },
-    8:{ 1:{ rankB: 20, }, },
-    9:{ 1:{ rankB: 25, }, },
-    10:{ 1:{ rankB: 30, }, },
-};
-consumptionItemList['activeSkills']['act_star2'] = { //二星船主动技能消耗
-    0:{ 1:{ rankC: 0, }, },
-    1:{ 1:{ rankC: 1, }, },
-    2:{ 1:{ rankC: 2, }, },
-    3:{ 1:{ rankC: 4, }, },
-    4:{ 1:{ rankC: 6, }, },
-    5:{ 1:{ rankC: 9, }, },
-    6:{ 1:{ rankC: 12, }, },
-    7:{ 1:{ rankC: 16, }, },
-    8:{ 1:{ rankC: 20, }, },
-    9:{ 1:{ rankC: 25, }, },
-    10:{ 1:{ rankC: 30, }, },
-};
+consumptionItemList['activeSkills']['act_star4'] = consumptionItemList['activeSkills']['act_star5']; //四星船主动技能消耗
+consumptionItemList['activeSkills']['act_star3'] = consumptionItemList['activeSkills']['act_star5']; //三星船主动技能消耗
+consumptionItemList['activeSkills']['act_star2'] = consumptionItemList['activeSkills']['act_star5']; //二星船主动技能消耗
+
 //NP消耗//主动技能NP消耗为0
 consumptionItemList['common']['act_star5'] = consumptionItemList['common']['0'];
 consumptionItemList['common']['act_star4'] = consumptionItemList['common']['0'];
