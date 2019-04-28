@@ -918,135 +918,324 @@ consumptionItemList['reinforcementGroups']['rein_torpedofirepower_star2'] = { //
 
 consumptionItemList['reinforcementGroups']['rein_aa_star5'] = { //五星船对空强化消耗元件
     0:{ //等级0
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        1: { rankS: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
     }, //填入的数值为累加值
     1:{ //等级1
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        1: { rankS: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
     },
     2:{ //等级2
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        1: { rankS: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
     },
     3:{ //等级3
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 0, }, //火力元件
+        1: { rankS: 0, rankB: 0, rankC: 15, rankD: 0, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 40, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
     },
     4:{ //等级4
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 30, rankD: 30, }, //火力元件
+        1: { rankS: 0, rankB: 0, rankC: 30, rankD: 30, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 40, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
     },
     5:{ //等级5
-        1: { rankS: 0, rankA: 0, rankB: 15, rankC: 50, rankD: 30, }, //火力元件
+        1: { rankS: 0, rankB: 15, rankC: 50, rankD: 30, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 75, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
     },
     6:{ //等级6
-        1: { rankS: 0, rankA: 0, rankB: 30, rankC: 50, rankD: 70, }, //火力元件
+        1: { rankS: 0, rankB: 30, rankC: 50, rankD: 70, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 75, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 20, rankD: 20, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 20, rankD: 20, }, //防御元件
     },
     7:{ //等级7
-        1: { rankS: 0, rankA: 0, rankB: 45, rankC: 50, rankD: 70, }, //火力元件
+        1: { rankS: 0, rankB: 45, rankC: 50, rankD: 70, }, //火力元件
         4: { rankS: 0, rankA: 15, rankB: 0, rankC: 0, rankD: 75, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 45, rankD: 20, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 45, rankD: 20, }, //防御元件
     },
     8:{ //等级8
-        1: { rankS: 0, rankA: 0, rankB: 45, rankC: 50, rankD: 70, }, //火力元件
+        1: { rankS: 0, rankB: 45, rankC: 50, rankD: 70, }, //火力元件
         4: { rankS: 0, rankA: 15, rankB: 0, rankC: 25, rankD: 75, }, //扩张元件
-        5: { rankS: 0, rankA: 15, rankB: 20, rankC: 45, rankD: 20, }, //防御元件
+        5: { rankA: 15, rankB: 20, rankC: 45, rankD: 20, }, //防御元件
     },
     9:{ //等级9
-        1: { rankS: 15, rankA: 0, rankB: 65, rankC: 50, rankD: 70, }, //火力元件
+        1: { rankS: 15, rankB: 65, rankC: 50, rankD: 70, }, //火力元件
         4: { rankS: 0, rankA: 15, rankB: 0, rankC: 25, rankD: 75, }, //扩张元件
-        5: { rankS: 0, rankA: 30, rankB: 20, rankC: 45, rankD: 20, }, //防御元件
+        5: { rankA: 30, rankB: 20, rankC: 45, rankD: 20, }, //防御元件
     },
     10:{ //等级10
-        1: { rankS: 15, rankA: 0, rankB: 65, rankC: 50, rankD: 70, }, //火力元件
+        1: { rankS: 15, rankB: 65, rankC: 50, rankD: 70, }, //火力元件
         4: { rankS: 15, rankA: 15, rankB: 20, rankC: 25, rankD: 75, }, //扩张元件
-        5: { rankS: 0, rankA: 50, rankB: 20, rankC: 45, rankD: 20, }, //防御元件
+        5: { rankA: 50, rankB: 20, rankC: 45, rankD: 20, }, //防御元件
     },
 };
 consumptionItemList['reinforcementGroups']['rein_aa_star4'] = { //四星船对空强化消耗元件
     0:{ //等级0
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
         4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+    }, //填入的数值为累加值
+    1:{ //等级1
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 10, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+    },
+    2:{ //等级2
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 25, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+    },
+    3:{ //等级3
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 25, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, rankD: 0, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 20, }, //防御元件
+    },
+    4:{ //等级4
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 50, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, rankD: 0, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 10, rankD: 20, }, //防御元件
+    },
+    5:{ //等级5
+        1: { rankA: 0, rankB: 10, rankC: 15, rankD: 50, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, rankD: 30, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 10, rankD: 20, }, //防御元件
+    },
+    6:{ //等级6
+        1: { rankA: 0, rankB: 10, rankC: 30, rankD: 50, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, rankD: 65, }, //扩张元件
+        5: { rankA: 0, rankB: 10, rankC: 10, rankD: 20, }, //防御元件
+    },
+    7:{ //等级7
+        1: { rankA: 0, rankB: 10, rankC: 30, rankD: 50, }, //火力元件
+        4: { rankS: 0, rankA: 10, rankB: 10, rankC: 10, rankD: 65, }, //扩张元件
+        5: { rankA: 0, rankB: 10, rankC: 30, rankD: 20, }, //防御元件
+    },
+    8:{ //等级8
+        1: { rankA: 0, rankB: 10, rankC: 30, rankD: 50, }, //火力元件
+        4: { rankS: 0, rankA: 10, rankB: 10, rankC: 30, rankD: 65, }, //扩张元件
+        5: { rankA: 10, rankB: 25, rankC: 30, rankD: 20, }, //防御元件
+    },
+    9:{ //等级9
+        1: { rankA: 10, rankB: 25, rankC: 30, rankD: 50, }, //火力元件
+        4: { rankS: 10, rankA: 10, rankB: 10, rankC: 30, rankD: 65, }, //扩张元件
+        5: { rankA: 10, rankB: 25, rankC: 30, rankD: 20, }, //防御元件
+    },
+    10:{ //等级10
+        1: { rankA: 25, rankB: 25, rankC: 30, rankD: 50, }, //火力元件
+        4: { rankS: 20, rankA: 10, rankB: 25, rankC: 30, rankD: 65, }, //扩张元件
+        5: { rankA: 10, rankB: 25, rankC: 30, rankD: 20, }, //防御元件
+    },
+};
+consumptionItemList['reinforcementGroups']['rein_aa_star3'] = { //三星船对空强化消耗元件
+    0:{ //等级0
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, }, //防御元件
+    }, //填入的数值为累加值
+    1:{ //等级1
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 5, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 0, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, }, //防御元件
+    },
+    2:{ //等级2
+        1: { rankA: 0, rankB: 0, rankC: 0, rankD: 5, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, }, //防御元件
+    },
+    3:{ //等级3
+        1: { rankA: 0, rankB: 0, rankC: 5, rankD: 20, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, }, //防御元件
+    },
+    4:{ //等级4
+        1: { rankA: 0, rankB: 0, rankC: 10, rankD: 40, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, }, //防御元件
+    },
+    5:{ //等级5
+        1: { rankA: 0, rankB: 5, rankC: 10, rankD: 65, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, }, //防御元件
+    },
+    6:{ //等级6
+        1: { rankA: 0, rankB: 5, rankC: 20, rankD: 95, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 5, rankC: 10, }, //防御元件
+    },
+    7:{ //等级7
+        1: { rankA: 5, rankB: 10, rankC: 35, rankD: 95, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 0, rankB: 5, rankC: 10, }, //防御元件
+    },
+    8:{ //等级8
+        1: { rankA: 5, rankB: 10, rankC: 50, rankD: 95, }, //火力元件
+        4: { rankS: 0, rankA: 0, rankB: 0, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 5, rankB: 15, rankC: 10, }, //防御元件
+    },
+    9:{ //等级9
+        1: { rankA: 5, rankB: 10, rankC: 50, rankD: 95, }, //火力元件
+        4: { rankS: 5, rankA: 5, rankB: 10, rankD: 10, }, //扩张元件
+        5: { rankS: 0, rankA: 5, rankB: 15, rankC: 10, }, //防御元件
+    },
+    10:{ //等级10
+        1: { rankA: 5, rankB: 10, rankC: 50, rankD: 95, }, //火力元件
+        4: { rankS: 5, rankA: 15, rankB: 10, rankD: 10, }, //扩张元件
+        5: { rankS: 5, rankA: 5, rankB: 25, rankC: 10, }, //防御元件
+    },
+};
+consumptionItemList['reinforcementGroups']['rein_aa_star2'] = { //二星船对空强化消耗元件
+    0:{ //等级0
+        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
+        4: { rankS: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
     }, //填入的数值为累加值
     1:{ //等级1
         1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        4: { rankS: 0, rankB: 0, rankC: 0, rankD: 1, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
     },
     2:{ //等级2
         1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        4: { rankS: 0, rankB: 0, rankC: 0, rankD: 6, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
     },
     3:{ //等级3
         1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        4: { rankS: 0, rankB: 0, rankC: 0, rankD: 6, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 1, rankD: 10, }, //防御元件
     },
     4:{ //等级4
         1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        4: { rankS: 0, rankB: 0, rankC: 1, rankD: 21, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 1, rankD: 10, }, //防御元件
     },
     5:{ //等级5
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        1: { rankS: 0, rankA: 0, rankB: 1, rankC: 0, rankD: 20, }, //火力元件
+        4: { rankS: 0, rankB: 0, rankC: 1, rankD: 21, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 6, rankD: 10, }, //防御元件
     },
     6:{ //等级6
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        1: { rankS: 0, rankA: 0, rankB: 2, rankC: 5, rankD: 20, }, //火力元件
+        4: { rankS: 0, rankB: 0, rankC: 1, rankD: 21, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 6, rankD: 35, }, //防御元件
     },
     7:{ //等级7
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        1: { rankS: 0, rankA: 1, rankB: 3, rankC: 5, rankD: 20, }, //火力元件
+        4: { rankS: 0, rankB: 0, rankC: 11, rankD: 21, }, //扩张元件
+        5: { rankA: 0, rankB: 0, rankC: 6, rankD: 35, }, //防御元件
     },
     8:{ //等级8
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        1: { rankS: 0, rankA: 1, rankB: 3, rankC: 5, rankD: 20, }, //火力元件
+        4: { rankS: 0, rankB: 0, rankC: 11, rankD: 21, }, //扩张元件
+        5: { rankA: 1, rankB: 5, rankC: 16, rankD: 35, }, //防御元件
     },
     9:{ //等级9
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        1: { rankS: 0, rankA: 1, rankB: 3, rankC: 5, rankD: 20, }, //火力元件
+        4: { rankS: 1, rankB: 5, rankC: 11, rankD: 21, }, //扩张元件
+        5: { rankA: 2, rankB: 5, rankC: 16, rankD: 35, }, //防御元件
     },
     10:{ //等级10
-        1: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //火力元件
-        4: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
-        5: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //防御元件
+        1: { rankS: 1, rankA: 6, rankB: 8, rankC: 5, rankD: 20, }, //火力元件
+        4: { rankS: 1, rankB: 5, rankC: 11, rankD: 21, }, //扩张元件
+        5: { rankA: 2, rankB: 5, rankC: 16, rankD: 35, }, //防御元件
+    },
+};
+
+consumptionItemList['reinforcementGroups']['rein_atkspeed_star5'] = { //五星船攻速强化消耗元件
+    0:{ //等级0
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //装填元件
+    }, //填入的数值为累加值
+    1:{ //等级1
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 15, }, //装填元件
+    },
+    2:{ //等级2
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 35, }, //装填元件
+    },
+    3:{ //等级3
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 15, rankD: 60, }, //装填元件
+    },
+    4:{ //等级4
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 30, rankD: 90, }, //装填元件
+    },
+    5:{ //等级5
+        6: { rankS: 0, rankA: 0, rankB: 15, rankC: 50, rankD: 125, }, //装填元件
+    },
+    6:{ //等级6
+        6: { rankS: 0, rankA: 0, rankB: 30, rankC: 70, rankD: 165, }, //装填元件
+    },
+    7:{ //等级7
+        6: { rankS: 0, rankA: 15, rankB: 45, rankC: 95, rankD: 165, }, //装填元件
+    },
+    8:{ //等级8
+        6: { rankS: 0, rankA: 30, rankB: 65, rankC: 120, rankD: 165, }, //装填元件
+    },
+    9:{ //等级9
+        6: { rankS: 15, rankA: 45, rankB: 85, rankC: 120, rankD: 165, }, //装填元件
+    },
+    10:{ //等级10
+        6: { rankS: 30, rankA: 65, rankB: 105, rankC: 120, rankD: 165, }, //装填元件
+    },
+};
+consumptionItemList['reinforcementGroups']['rein_atkspeed_star4'] = { //四星船攻速强化消耗元件
+    0:{ //等级0
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //装填元件
+    }, //填入的数值为累加值
+    1:{ //等级1
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 10, }, //装填元件
+    },
+    2:{ //等级2
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 25, }, //装填元件
+    },
+    3:{ //等级3
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 10, rankD: 45, }, //装填元件
+    },
+    4:{ //等级4
+        6: { rankS: 0, rankA: 0, rankB: 0, rankC: 20, rankD: 70, }, //装填元件
+    },
+    5:{ //等级5
+        6: { rankS: 0, rankA: 0, rankB: 10, rankC: 35, rankD: 100, }, //装填元件
+    },
+    6:{ //等级6
+        6: { rankS: 0, rankA: 0, rankB: 20, rankC: 50, rankD: 135, }, //装填元件
+    },
+    7:{ //等级7
+        6: { rankS: 0, rankA: 10, rankB: 30, rankC: 70, rankD: 135, }, //装填元件
+    },
+    8:{ //等级8
+        6: { rankS: 0, rankA: 20, rankB: 45, rankC: 90, rankD: 135, }, //装填元件
+    },
+    9:{ //等级9
+        6: { rankS: 10, rankA: 30, rankB: 60, rankC: 90, rankD: 135, }, //装填元件
+    },
+    10:{ //等级10
+        6: { rankS: 20, rankA: 45, rankB: 75, rankC: 90, rankD: 135, }, //装填元件
     },
 };
 
 //NP消耗
 consumptionItemList['common']['rein_health_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船耐久强化消耗NP
 consumptionItemList['common']['rein_health_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船耐久强化消耗NP
-consumptionItemList['common']['rein_health_star3'] = consumptionItemList['common']['Common_NP_star3']; //四星船耐久强化消耗NP
-consumptionItemList['common']['rein_health_star2'] = consumptionItemList['common']['Common_NP_star2']; //四星船耐久强化消耗NP
+consumptionItemList['common']['rein_health_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船耐久强化消耗NP
+consumptionItemList['common']['rein_health_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船耐久强化消耗NP
 consumptionItemList['common']['rein_gunfirepower_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船炮击舰爆强化消耗NP
 consumptionItemList['common']['rein_gunfirepower_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船炮击舰爆强化消耗NP
 consumptionItemList['common']['rein_gunfirepower_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船炮击舰爆强化消耗NP
 consumptionItemList['common']['rein_gunfirepower_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船炮击舰爆强化消耗NP
 consumptionItemList['common']['rein_torpedofirepower_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船鱼雷舰攻强化消耗NP
 consumptionItemList['common']['rein_torpedofirepower_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船鱼雷舰攻强化消耗NP
-consumptionItemList['common']['rein_torpedofirepower_star3'] = consumptionItemList['common']['Common_NP_star3']; //五星船鱼雷舰攻强化消耗NP
-consumptionItemList['common']['rein_torpedofirepower_star2'] = consumptionItemList['common']['Common_NP_star2']; //四星船鱼雷舰攻强化消耗NP
+consumptionItemList['common']['rein_torpedofirepower_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船鱼雷舰攻强化消耗NP
+consumptionItemList['common']['rein_torpedofirepower_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船鱼雷舰攻强化消耗NP
 consumptionItemList['common']['rein_aa_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船对空强化消耗NP
 consumptionItemList['common']['rein_aa_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船对空强化消耗NP
-
+consumptionItemList['common']['rein_aa_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船对空强化消耗NP
+consumptionItemList['common']['rein_aa_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船对空强化消耗NP
+consumptionItemList['common']['rein_atkspeed_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船攻速强化消耗NP
+consumptionItemList['common']['rein_atkspeed_star4'] = consumptionItemList['common']['Common_NP_star4']; //五星船攻速强化消耗NP
+rein_atkspeed_star4
 
 ////强化组消耗
 
@@ -1322,7 +1511,7 @@ shipdata[51] = {
         reinforcementGroupNum: 6,
         reinforcementGroups: {
             1: { name: '索敌', initvalue: 11, consumptionID: '0',},
-            2: { name: '对空', initvalue: 26, consumptionID: '0',},
+            2: { name: '对空', initvalue: 26, consumptionID: 'rein_aa_star5',},
             3: { name: '闪避', initvalue: 10, consumptionID: '0',},
             4: { name: '炮击', initvalue: 9, consumptionID: 'rein_gunfirepower_star5',},
             5: { name: '攻速', initvalue: 10, consumptionID: '0',},
