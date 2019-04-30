@@ -1092,6 +1092,7 @@ function calConsumption(){
         readInputValue(); //读取现有素材
         //
         ////////读取并计算强化组消耗
+        var caltimes = 0;
         for ( shipid in shipReinforcementGroupsID ){ 
             for ( groups in shipReinforcementGroupsID[shipid] ){
                 var clevel = getElementValue(shipReinforcementGroupsID[shipid][groups].currentlevelID); //获取当前等级
@@ -1106,6 +1107,7 @@ function calConsumption(){
                         var currentValue = calResult.reinforcementGroups[fgroups][rank]; //当前库存元件的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.reinforcementGroups[fgroups][rank] = result;
+                        caltimes = caltimes + 1;
                     };
                 };
                 for ( fgroups in consumptionItemList.common[consumptionID][flevel] ) { //
@@ -1116,6 +1118,7 @@ function calConsumption(){
                         var currentValue = calResult.common[fgroups][rank]; //当前NP的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.common[fgroups][rank] = result;
+                        caltimes = caltimes + 1;
                     };
                 };
             };
@@ -1137,6 +1140,7 @@ function calConsumption(){
                             var currentValue = calResult[skilltype][sgroups][rank]; //当前的量
                             var result = Number(currentValue) - Number(consumptions); //相减
                             calResult[skilltype][sgroups][rank] = result;
+                            caltimes = caltimes + 1;
                         };
                     };
                     for ( sgroups in consumptionItemList.common[consumptionID][flevel] ){ //计算NP消耗
@@ -1147,12 +1151,14 @@ function calConsumption(){
                             var currentValue = calResult.common[sgroups][rank]; //当前的量
                             var result = Number(currentValue) - Number(consumptions); //相减
                             calResult.common[sgroups][rank] = result;
+                            caltimes = caltimes + 1;
                         };
                     };
                 };
             };
         };
         showResult(); //显示结果
+        alert(caltimes);
     }else{
         readInputValue();
         showResult();
