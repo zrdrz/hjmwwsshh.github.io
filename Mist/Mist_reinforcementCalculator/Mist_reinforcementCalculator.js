@@ -843,11 +843,11 @@ function createShiplistBox_Child(parentid,shipid,obj){
                 break;
             case 'reinGrouplabel':
                 createReinGrouplabel(parentid,shipid,obj.childElements[childname]);
-                logReinGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                logReinGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID,obj.childElements[childname].bindData);
                 break;
             case 'reinGroupselect':
                 createReinGroupSelect(parentid,shipid,obj.childElements[childname]);
-                logReinGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID);
+                logReinGroupID(shipid,obj.childElements[childname].bindID,parentid + obj.childElements[childname].id,obj.childElements[childname].bindDataID,obj.childElements[childname].bindData);
                 break;
             case 'skillGrouplabel':
                 createReinGrouplabel(parentid,shipid,obj.childElements[childname]);
@@ -1037,20 +1037,24 @@ function filter(shipid) { //过滤器,接收ship的id作为参数
 };
 ////////////////
 //记录元素id相关
-function logReinGroupID(shipid,elementType,value,index){ //记录某船的某个强化组的label和下拉框的元素id
-    if ( typeof shipReinforcementGroupsID[shipid][index] == 'undefined' ){
-        shipReinforcementGroupsID[shipid][index] = {};
+function logReinGroupID(shipid,elementType,value,index,dataType){ //记录某船的某个强化组的label和下拉框的元素id
+    if ( typeof shipdata[shipid][dataType][index] != 'undefined' ){ //若shipdata里没有对应序号的强化组,则不创建
+        if ( typeof shipReinforcementGroupsID[shipid][index] == 'undefined' ){
+            shipReinforcementGroupsID[shipid][index] = {};
+        };
+        shipReinforcementGroupsID[shipid][index][elementType] = value;
     };
-    shipReinforcementGroupsID[shipid][index][elementType] = value;
 };
 function logSkillGroupID(shipid,elementType,value,index,dataType){ //记录某船的某个技能组的label和下拉框的元素id
-    if ( typeof shipSkillGroupsID[shipid][dataType] == 'undefined' ){
-        shipSkillGroupsID[shipid][dataType] = {};
+    if ( typeof shipdata[shipid][dataType][index] != 'undefined' ){ //若shipdata里没有对应序号的强化组,则不创建
+        if ( typeof shipSkillGroupsID[shipid][dataType] == 'undefined' ){
+            shipSkillGroupsID[shipid][dataType] = {};
+        };
+        if ( typeof shipSkillGroupsID[shipid][dataType][index] == 'undefined' ) {
+            shipSkillGroupsID[shipid][dataType][index] = {};
+        };
+        shipSkillGroupsID[shipid][dataType][index][elementType] = value;
     };
-    if ( typeof shipSkillGroupsID[shipid][dataType][index] == 'undefined' ) {
-        shipSkillGroupsID[shipid][dataType][index] = {};
-    };
-    shipSkillGroupsID[shipid][dataType][index][elementType] = value;
 };
 ///////////////
 function getParentNodeId(childid) {
@@ -1158,7 +1162,7 @@ function calConsumption(){
             };
         };
         showResult(); //显示结果
-        alert(caltimes);
+        alert('遍历次数:' + caltimes);
     }else{
         readInputValue();
         showResult();
