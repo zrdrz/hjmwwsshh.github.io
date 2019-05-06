@@ -1177,3 +1177,65 @@ function isEmptyObject(obj){
 function getElementValue(elementid){ //获取input或select元素的value
     return document.getElementById(elementid).value;
 };
+function saveConfig(){
+    var cshipid = 0;
+    var str = "";
+    for ( shipid in shipReinforcementGroupsID ){
+        cshipid = shipid;
+        str = str + cshipid + ',';
+        for ( reingroupid in shipReinforcementGroupsID[cshipid] ){
+            var cvalueid = shipReinforcementGroupsID[cshipid][reingroupid].currentlevelID;
+            var fvalueid = shipReinforcementGroupsID[cshipid][reingroupid].finallevelID;
+            var cvalue = getElementValue(cvalueid);
+            var fvalue = getElementValue(fvalueid);
+            str = str + cvalue + ',' + fvalue + ',';
+        };
+        for ( skillgrouptype in shipSkillGroupsID[cshipid] ) {
+            for ( skillgroupid in shipSkillGroupsID[cshipid][skillgrouptype] ){
+                var cvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].currentlevelID;
+                var fvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].finallevelID;
+                var cvalue = getElementValue(cvalueid);
+                var fvalue = getElementValue(fvalueid);
+                str = str + cvalue + ',' + fvalue + ',';
+            };
+        };
+        str = str.substring(0, str.length -1 )
+        str = str + '|';
+    };
+    str = str.substring(0, str.length -1 )
+    alert(str);
+};
+function readConfig(){
+    var str=prompt("粘贴之前导出的配置文本","");
+    if ( str!=null && str!="" ){
+        alert(str);
+    };
+};
+//String.prototype.endWith = function(s) {
+//    if (s == null || s == "" || this.length == 0 || s.length > this.length)
+//        return false;
+//    if (this.substring(this.length - s.length) == s)
+//        return true;
+//    else
+//        return false;
+//    //return true;
+//}
+//String.prototype.startWith = function(s) {
+//    if (s == null || s == "" || this.length == 0 || s.length > this.length)
+//        return false;
+//    if (this.substr(0, s.length) == s)
+//        return true;
+//    else
+//        return false;
+//    //return true;
+//}
+//function openwin() {
+//    OpenWindow=window.open("", "newwin", "height=250, width=250,toolbar=no,scrollbars="+scroll+",menubar=no");
+//    OpenWindow.document.write("<TITLE>例子</TITLE>")
+//    OpenWindow.document.write("<BODY BGCOLOR=#ffffff>")
+//    OpenWindow.document.write("<h1>Hello!</h1>")
+//    OpenWindow.document.write("New window opened!")
+//    OpenWindow.document.write("</BODY>")
+//    OpenWindow.document.write("</HTML>")
+//    OpenWindow.document.close()   
+//};
