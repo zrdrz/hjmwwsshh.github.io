@@ -1222,6 +1222,7 @@ function readConfig(){
                 var fvalue = configarr[j+1];
                 setInputBoxValue(cvalue,cvalueid);
                 setInputBoxValue(fvalue,fvalueid);
+                shiplistbox_selectboxChanged_reinGroup(shipid,reingroupid);
                 j = j + 2;
             };
             for ( skillgrouptype in shipSkillGroupsID[shipid] ) { //读取技能组等级取值
