@@ -294,7 +294,7 @@ var searchResultBox_template = { //存放模板
             id: "_btnAdd",
             attributes: {
                 class: "button button2",
-                onclick: "createShiplistBox(this.getAttribute('shipid'));",
+                onclick: "createShiplistBox(this.getAttribute('shipid'),1);",
             },
             innerHTML: "添加",
         },
@@ -754,7 +754,7 @@ function setShiplistBoxDefaultValue(defaultValue,obj){ //设置默认值
         };
     };
 };
-function setInputBoxValue(value,elementid){
+function setInputBoxValue(value,elementid){ //设置label,select元素的value
     document.getElementById(elementid).value = value;
 };
 function readInputValue() { //从页面上的input元素读取现有素材
@@ -799,7 +799,7 @@ function setSimpleAttr(elemt,attrs){
     };
     return elemt;
 };
-function createShiplistBox(shipid){ //创建强化组box,若创建成功则移除对应的searchbox
+function createShiplistBox(shipid,isremovesearchbox){ //创建强化组box,若创建成功则移除对应的searchbox
     if ( typeof shipReinforcementGroupsID[shipid] != 'undefined' ){
         alert("已存在!");
     }else{
@@ -809,7 +809,7 @@ function createShiplistBox(shipid){ //创建强化组box,若创建成功则移�
         createShiplistBox_Child(mainboxid,shipid,shiplistBox_template);    //生成子元素//第一层子元素为div
         count = Number(count) + 1;
         shiplistBox_template.box_count = count; //box计数加1
-        removeSearchBox(shipid); //创建成功后移除对应的searchbox
+        if ( isremovesearchbox == 1){ removeSearchBox(shipid); }; //创建成功后移除对应的searchbox
         for ( groupid in shipReinforcementGroupsID[shipid] ){ //初始化强化组label文字
             shiplistbox_selectboxChanged_reinGroup(shipid,groupid);
         };
@@ -1177,20 +1177,20 @@ function isEmptyObject(obj){
 function getElementValue(elementid){ //获取input或select元素的value
     return document.getElementById(elementid).value;
 };
-function saveConfig(){
+function saveConfig(){  //保存的格式为: shipid,强化组1当前等级,强化组1目标等级,强化组2当前等级,强化组2目标等级...强化组6目标等级,主动技当前等级,主动技目标等级,被动技1当前等级,被动技1目标等级,被动技2当前等级,被动技2目标等级|shipid,.....
     var cshipid = 0;
     var str = "";
     for ( shipid in shipReinforcementGroupsID ){
-        cshipid = shipid;
+        cshipid = shipid; //当前shipid
         str = str + cshipid + ',';
-        for ( reingroupid in shipReinforcementGroupsID[cshipid] ){
+        for ( reingroupid in shipReinforcementGroupsID[cshipid] ){ //读取强化组等级取值
             var cvalueid = shipReinforcementGroupsID[cshipid][reingroupid].currentlevelID;
             var fvalueid = shipReinforcementGroupsID[cshipid][reingroupid].finallevelID;
             var cvalue = getElementValue(cvalueid);
             var fvalue = getElementValue(fvalueid);
             str = str + cvalue + ',' + fvalue + ',';
         };
-        for ( skillgrouptype in shipSkillGroupsID[cshipid] ) {
+        for ( skillgrouptype in shipSkillGroupsID[cshipid] ) { //读取技能组等级取值
             for ( skillgroupid in shipSkillGroupsID[cshipid][skillgrouptype] ){
                 var cvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].currentlevelID;
                 var fvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].finallevelID;
@@ -1199,43 +1199,55 @@ function saveConfig(){
                 str = str + cvalue + ',' + fvalue + ',';
             };
         };
-        str = str.substring(0, str.length -1 )
+        str = str.substring(0, str.length -1 );//去掉末尾的逗号','
         str = str + '|';
     };
-    str = str.substring(0, str.length -1 )
-    alert(str);
+    str = str.substring(0, str.length -1 );//去掉末尾的分隔符'|'
+    saveText(str, 'MistReinforcementConfig.txt');
 };
 function readConfig(){
-    var str=prompt("粘贴之前导出的配置文本","");
+    var str=prompt("在下方的文本框粘贴导出的配置文本","");
     if ( str!=null && str!="" ){
-        alert(str);
+        var allconfigarr = str.split("|"); //将整一串文本通过'|'符号分割开来
+        for ( var i=0, len=allconfigarr.length;i<len;i++ ){ //循环遍历每一艘船的记录
+            var configarr = allconfigarr[i].split(","); //根据逗号分隔数字
+            var shipid = configarr[0]; //shipid即为第一个数字
+            createShiplistBox(shipid,0); //创建强化组的box
+            //setInputBoxValue(value,elementid)
+            var j = 1;
+            for ( reingroupid in shipReinforcementGroupsID[shipid] ){ //读取强化组等级取值
+                var cvalueid = shipReinforcementGroupsID[shipid][reingroupid].currentlevelID;
+                var fvalueid = shipReinforcementGroupsID[shipid][reingroupid].finallevelID;
+                var cvalue = configarr[j];
+                var fvalue = configarr[j+1];
+                setInputBoxValue(cvalue,cvalueid);
+                setInputBoxValue(fvalue,fvalueid);
+                j = j + 2;
+            };
+            for ( skillgrouptype in shipSkillGroupsID[shipid] ) { //读取技能组等级取值
+                for ( skillgroupid in shipSkillGroupsID[shipid][skillgrouptype] ){
+                    var cvalueid = shipSkillGroupsID[shipid][skillgrouptype][skillgroupid].currentlevelID;
+                    var fvalueid = shipSkillGroupsID[shipid][skillgrouptype][skillgroupid].finallevelID;
+                    var cvalue = configarr[j];
+                    var fvalue = configarr[j+1];
+                    setInputBoxValue(cvalue,cvalueid);
+                    setInputBoxValue(fvalue,fvalueid);
+                    j = j + 2;
+                };
+            };
+        };
+        calConsumption();
     };
 };
-//String.prototype.endWith = function(s) {
-//    if (s == null || s == "" || this.length == 0 || s.length > this.length)
-//        return false;
-//    if (this.substring(this.length - s.length) == s)
-//        return true;
-//    else
-//        return false;
-//    //return true;
-//}
-//String.prototype.startWith = function(s) {
-//    if (s == null || s == "" || this.length == 0 || s.length > this.length)
-//        return false;
-//    if (this.substr(0, s.length) == s)
-//        return true;
-//    else
-//        return false;
-//    //return true;
-//}
-//function openwin() {
-//    OpenWindow=window.open("", "newwin", "height=250, width=250,toolbar=no,scrollbars="+scroll+",menubar=no");
-//    OpenWindow.document.write("<TITLE>例子</TITLE>")
-//    OpenWindow.document.write("<BODY BGCOLOR=#ffffff>")
-//    OpenWindow.document.write("<h1>Hello!</h1>")
-//    OpenWindow.document.write("New window opened!")
-//    OpenWindow.document.write("</BODY>")
-//    OpenWindow.document.write("</HTML>")
-//    OpenWindow.document.close()   
-//};
+function saveText(str, fileName) {
+    let downLink = document.createElement('a')
+    downLink.download = fileName
+    //字符内容转换为blod地址
+    let blob = new Blob([str])
+    downLink.href = URL.createObjectURL(blob)
+    // 链接插入到页面
+    document.body.appendChild(downLink)
+    downLink.click()
+    // 移除下载链接
+    document.body.removeChild(downLink)
+}

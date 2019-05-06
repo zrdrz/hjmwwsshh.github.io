@@ -2624,7 +2624,7 @@ consumptionItemList['reinforcementGroups']['rein_movespeed_star2'] = { //二星�
         4: { rankB: 6, rankC: 1, }, //扩张元件
     },
 };
-consumptionItemList['reinforcementGroups']['rein_enemysearch_star5'] = { //五星船索敌增强消耗元件
+consumptionItemList['reinforcementGroups']['rein_scouting_star5'] = { //五星船索敌增强消耗元件
     0:{ //等级0
         2: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //索敌元件
         4: { rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
@@ -2670,7 +2670,7 @@ consumptionItemList['reinforcementGroups']['rein_enemysearch_star5'] = { //五�
         4: { rankA: 15, rankB: 15, rankC: 20, rankD: 20, }, //扩张元件
     },
 };
-consumptionItemList['reinforcementGroups']['rein_enemysearch_star4'] = { //四星船索敌增强消耗元件
+consumptionItemList['reinforcementGroups']['rein_scouting_star4'] = { //四星船索敌增强消耗元件
     0:{ //等级0
         2: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //索敌元件
         4: { rankC: 0, rankD: 0, }, //扩张元件
@@ -2716,7 +2716,7 @@ consumptionItemList['reinforcementGroups']['rein_enemysearch_star4'] = { //四�
         4: { rankC: 20, rankD: 35, }, //扩张元件
     },
 };
-consumptionItemList['reinforcementGroups']['rein_enemysearch_star3'] = { //三星船索敌增强消耗元件
+consumptionItemList['reinforcementGroups']['rein_scouting_star3'] = { //三星船索敌增强消耗元件
     0:{ //等级0
         2: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //索敌元件
         4: { rankB: 0, rankC: 0, }, //扩张元件
@@ -2762,7 +2762,7 @@ consumptionItemList['reinforcementGroups']['rein_enemysearch_star3'] = { //三�
         4: { rankB: 20, rankC: 10, }, //扩张元件
     },
 };
-consumptionItemList['reinforcementGroups']['rein_enemysearch_star2'] = { //二星船索敌增强消耗元件
+consumptionItemList['reinforcementGroups']['rein_scouting_star2'] = { //二星船索敌增强消耗元件
     0:{ //等级0
         2: { rankS: 0, rankA: 0, rankB: 0, rankC: 0, rankD: 0, }, //索敌元件
         4: { rankB: 0, rankC: 0, rankD: 0, }, //扩张元件
@@ -2998,10 +2998,10 @@ consumptionItemList['common']['rein_movespeed_star5'] = consumptionItemList['com
 consumptionItemList['common']['rein_movespeed_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船移速增强消耗NP
 consumptionItemList['common']['rein_movespeed_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船移速增强消耗NP
 consumptionItemList['common']['rein_movespeed_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船移速增强消耗NP
-consumptionItemList['common']['rein_enemysearch_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船索敌增强消耗NP
-consumptionItemList['common']['rein_enemysearch_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船索敌增强消耗NP
-consumptionItemList['common']['rein_enemysearch_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船索敌增强消耗NP
-consumptionItemList['common']['rein_enemysearch_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船索敌增强消耗NP
+consumptionItemList['common']['rein_scouting_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船索敌增强消耗NP
+consumptionItemList['common']['rein_scouting_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船索敌增强消耗NP
+consumptionItemList['common']['rein_scouting_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船索敌增强消耗NP
+consumptionItemList['common']['rein_scouting_star2'] = consumptionItemList['common']['Common_NP_star2']; //二星船索敌增强消耗NP
 consumptionItemList['common']['rein_costup_star5'] = consumptionItemList['common']['Common_NP_star5']; //五星船负重COST上限消耗NP
 consumptionItemList['common']['rein_costup_star4'] = consumptionItemList['common']['Common_NP_star4']; //四星船负重COST上限消耗NP
 consumptionItemList['common']['rein_costup_star3'] = consumptionItemList['common']['Common_NP_star3']; //三星船负重COST上限消耗NP
@@ -3323,7 +3323,7 @@ shipdata[1] = {
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 25, consumptionID: 'rein_torpedofirepower_star4',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star4',},
-            3: { name: '索敌', initvalue: 6, consumptionID: 'rein_enemysearch_star4',},
+            3: { name: '索敌', initvalue: 6, consumptionID: 'rein_scouting_star4',},
             4: { name: '耐久', initvalue: 47, consumptionID: 'rein_health_star4',},
             5: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star4',},
         },
@@ -3331,8 +3331,8 @@ shipdata[1] = {
             1: { name: '散射雷击', consumptionID: 'act_star4', },
         },
         passiveSkills: {
-            1: { name: '鱼雷再装填', consumptionID: 'passive_clca_star4', },
-            2: { name: '一心一意', consumptionID: 'passive_clca_star4', },
+            1: { name: '鱼雷再装填', consumptionID: 'passive_dd_star4', },
+            2: { name: '一心一意', consumptionID: 'passive_dd_star4', },
         },
 };
 shipdata[2] = {
@@ -3345,7 +3345,7 @@ shipdata[2] = {
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 28, consumptionID: 'rein_torpedofirepower_star5',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star5',},
-            3: { name: '索敌', initvalue: 8, consumptionID: 'rein_enemysearch_star5',},
+            3: { name: '索敌', initvalue: 8, consumptionID: 'rein_scouting_star5',},
             4: { name: '耐久', initvalue: 50, consumptionID: 'rein_health_star5',},
             5: { name: '移速', initvalue: 30, consumptionID: 'rein_movespeed_star5',},
             6: { name: '负重', initvalue: 1, consumptionID: 'rein_costup_star5',},
@@ -3354,8 +3354,8 @@ shipdata[2] = {
             1: { name: '集中雷击-连发', consumptionID: 'act_star5', },
         },
         passiveSkills: {
-            1: { name: '萬朶山樱', consumptionID: 'passive_clca_star5', },
-            2: { name: '最强驱逐舰', consumptionID: 'passive_clca_star5', },
+            1: { name: '萬朶山樱', consumptionID: 'passive_dd_star5', },
+            2: { name: '最强驱逐舰', consumptionID: 'passive_dd_star5', },
         },
 };
 shipdata[3] = {
@@ -3368,7 +3368,7 @@ shipdata[3] = {
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 25, consumptionID: 'rein_torpedofirepower_star4',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star4',},
-            3: { name: '索敌', initvalue: 6, consumptionID: 'rein_enemysearch_star4',},
+            3: { name: '索敌', initvalue: 6, consumptionID: 'rein_scouting_star4',},
             4: { name: '耐久', initvalue: 47, consumptionID: 'rein_health_star4',},
             5: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star4',},
         },
@@ -3376,8 +3376,8 @@ shipdata[3] = {
             1: { name: '集中雷击', consumptionID: 'act_star4', },
         },
         passiveSkills: {
-            1: { name: '友军支援优先', consumptionID: 'passive_clca_star4', },
-            2: { name: '宛若风暴', consumptionID: 'passive_clca_star4', },
+            1: { name: '友军支援优先', consumptionID: 'passive_dd_star4', },
+            2: { name: '宛若风暴', consumptionID: 'passive_dd_star4', },
         },
 };
 shipdata[4] = {
@@ -3390,15 +3390,15 @@ shipdata[4] = {
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 23, consumptionID: 'rein_torpedofirepower_star3',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star3',},
-            3: { name: '索敌', initvalue: 4, consumptionID: 'rein_enemysearch_star3',},
+            3: { name: '索敌', initvalue: 4, consumptionID: 'rein_scouting_star3',},
             4: { name: '耐久', initvalue: 43, consumptionID: 'rein_health_star3',},
         },
         activeSkills: {
             1: { name: '集中雷击', consumptionID: 'act_star3', },
         },
         passiveSkills: {
-            1: { name: '次发装填', consumptionID: 'passive_clca_star3', },
-            2: { name: '雷击强化', consumptionID: 'passive_clca_star3', },
+            1: { name: '次发装填', consumptionID: 'passive_dd_star3', },
+            2: { name: '雷击强化', consumptionID: 'passive_dd_star3', },
         },
 };
 shipdata[5] = {
@@ -3411,15 +3411,15 @@ shipdata[5] = {
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 23, consumptionID: 'rein_torpedofirepower_star3',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star3',},
-            3: { name: '索敌', initvalue: 4, consumptionID: 'rein_enemysearch_star3',},
+            3: { name: '索敌', initvalue: 4, consumptionID: 'rein_scouting_star3',},
             4: { name: '耐久', initvalue: 43, consumptionID: 'rein_health_star3',},
         },
         activeSkills: {
             1: { name: '集中雷击', consumptionID: 'act_star3', },
         },
         passiveSkills: {
-            1: { name: '雷击强化', consumptionID: 'passive_clca_star3', },
-            2: { name: '敏感的青春期', consumptionID: 'passive_clca_star3', },
+            1: { name: '雷击强化', consumptionID: 'passive_dd_star3', },
+            2: { name: '敏感的青春期', consumptionID: 'passive_dd_star3', },
         },
 };
 shipdata[6] = {
@@ -3432,16 +3432,16 @@ shipdata[6] = {
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 25, consumptionID: 'rein_torpedofirepower_star4',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star4',},
-            3: { name: '索敌', initvalue: 6, consumptionID: 'rein_enemysearch_star4',},
+            3: { name: '索敌', initvalue: 6, consumptionID: 'rein_scouting_star4',},
             4: { name: '耐久', initvalue: 46, consumptionID: 'rein_health_star4',},
-            5: { name: '炮击', initvalue: 7, consumptionID: 'rein_health_star4',},
+            5: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star4',},
         },
         activeSkills: {
             1: { name: '散射雷击-乱射', consumptionID: 'act_star4', },
         },
         passiveSkills: {
-            1: { name: '所罗门的斗犬', consumptionID: 'passive_clca_star4', },
-            2: { name: '野生直觉', consumptionID: 'passive_clca_star4', },
+            1: { name: '所罗门的斗犬', consumptionID: 'passive_dd_star4', },
+            2: { name: '野生直觉', consumptionID: 'passive_dd_star4', },
         },
 };
 shipdata[51] = {
@@ -3452,7 +3452,7 @@ shipdata[51] = {
         shipstars: 5,
         reinforcementGroupNum: 6,
         reinforcementGroups: {
-            1: { name: '索敌', initvalue: 11, consumptionID: 'rein_enemysearch_star5',},
+            1: { name: '索敌', initvalue: 11, consumptionID: 'rein_scouting_star5',},
             2: { name: '对空', initvalue: 26, consumptionID: 'rein_aa_star5',},
             3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star5',},
             4: { name: '炮击', initvalue: 9, consumptionID: 'rein_gunfirepower_star5',},
