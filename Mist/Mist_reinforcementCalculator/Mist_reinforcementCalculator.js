@@ -1096,7 +1096,7 @@ function calConsumption(){
         readInputValue(); //读取现有素材
         //
         ////////读取并计算强化组消耗
-        var caltimes = 0;
+        //var caltimes = 0;
         for ( shipid in shipReinforcementGroupsID ){ 
             for ( groups in shipReinforcementGroupsID[shipid] ){
                 var clevel = getElementValue(shipReinforcementGroupsID[shipid][groups].currentlevelID); //获取当前等级
@@ -1111,7 +1111,7 @@ function calConsumption(){
                         var currentValue = calResult.reinforcementGroups[fgroups][rank]; //当前库存元件的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.reinforcementGroups[fgroups][rank] = result;
-                        caltimes = caltimes + 1;
+                        //caltimes = caltimes + 1;
                     };
                 };
                 for ( fgroups in consumptionItemList.common[consumptionID][flevel] ) { //
@@ -1122,7 +1122,7 @@ function calConsumption(){
                         var currentValue = calResult.common[fgroups][rank]; //当前NP的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.common[fgroups][rank] = result;
-                        caltimes = caltimes + 1;
+                        //caltimes = caltimes + 1;
                     };
                 };
             };
@@ -1144,7 +1144,7 @@ function calConsumption(){
                             var currentValue = calResult[skilltype][sgroups][rank]; //当前的量
                             var result = Number(currentValue) - Number(consumptions); //相减
                             calResult[skilltype][sgroups][rank] = result;
-                            caltimes = caltimes + 1;
+                            //caltimes = caltimes + 1;
                         };
                     };
                     for ( sgroups in consumptionItemList.common[consumptionID][flevel] ){ //计算NP消耗
@@ -1155,20 +1155,20 @@ function calConsumption(){
                             var currentValue = calResult.common[sgroups][rank]; //当前的量
                             var result = Number(currentValue) - Number(consumptions); //相减
                             calResult.common[sgroups][rank] = result;
-                            caltimes = caltimes + 1;
+                            //caltimes = caltimes + 1;
                         };
                     };
                 };
             };
         };
         showResult(); //显示结果
-        alert('遍历次数:' + caltimes);
+        //alert('遍历次数:' + caltimes);
     }else{
         readInputValue();
         showResult();
     };
 };
-function isEmptyObject(obj){
+function isEmptyObject(obj){ //判定一个对象是否为空对象的方法
     for(var key in obj){
         return false;
     };
@@ -1220,9 +1220,9 @@ function readConfig(){
                 var fvalueid = shipReinforcementGroupsID[shipid][reingroupid].finallevelID;
                 var cvalue = configarr[j];
                 var fvalue = configarr[j+1];
-                setInputBoxValue(cvalue,cvalueid);
+                setInputBoxValue(cvalue,cvalueid); //给对应强化组的下拉框赋值
                 setInputBoxValue(fvalue,fvalueid);
-                shiplistbox_selectboxChanged_reinGroup(shipid,reingroupid);
+                shiplistbox_selectboxChanged_reinGroup(shipid,reingroupid); //给对应强化组的label元素设置文字
                 j = j + 2;
             };
             for ( skillgrouptype in shipSkillGroupsID[shipid] ) { //读取技能组等级取值
@@ -1237,18 +1237,15 @@ function readConfig(){
                 };
             };
         };
-        calConsumption();
+        calConsumption(); //加载完配置后自动计算结果
     };
 };
 function saveText(str, fileName) {
-    let downLink = document.createElement('a')
-    downLink.download = fileName
-    //字符内容转换为blod地址
-    let blob = new Blob([str])
-    downLink.href = URL.createObjectURL(blob)
-    // 链接插入到页面
-    document.body.appendChild(downLink)
-    downLink.click()
-    // 移除下载链接
-    document.body.removeChild(downLink)
-}
+    let downLink = document.createElement('a');
+    downLink.download = fileName;
+    let blob = new Blob([str]); //字符内容转换为blod地址
+    downLink.href = URL.createObjectURL(blob);
+    document.body.appendChild(downLink); // 链接插入到页面
+    downLink.click();
+    document.body.removeChild(downLink); // 移除下载链接
+};
