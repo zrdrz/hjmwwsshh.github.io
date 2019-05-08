@@ -3428,7 +3428,7 @@ shipdata[6] = {
         shiptypeid: 1,
         shiptypename: '驱逐',
         shipstars: 4,
-        reinforcementGroupNum: 4,
+        reinforcementGroupNum: 5,
         reinforcementGroups: {
             1: { name: '雷击', initvalue: 25, consumptionID: 'rein_torpedofirepower_star4',},
             2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star4',},

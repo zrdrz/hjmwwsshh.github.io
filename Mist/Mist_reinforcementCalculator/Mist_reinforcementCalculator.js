@@ -8,12 +8,7 @@ var shipfilters = {
     shipstars : { 0: '无', 2: '2星', 3: '3星', 4: '4星', 5: '5星', },
 };
 var shipbindclass = {
-    shipstars:{
-        2: 'label_star2',
-        3: 'label_star3',
-        4: 'label_star4',
-        5: 'label_star5',
-    },
+    shipstars:{ 2: 'label_star2', 3: 'label_star3', 4: 'label_star4', 5: 'label_star5', },
 };
 var shiplistbox_mainboxID = {}; //存放mainbox的id,用于删除元素
 var searchbox_mainboxID = {};
@@ -60,86 +55,21 @@ var titlelabelID = {
 };
 var outputboxID = {
     reinforcementGroups:{
-        1: {
-            rankS: 'Output_reinG1_S',
-            rankA: 'Output_reinG1_A',
-            rankB: 'Output_reinG1_B',
-            rankC: 'Output_reinG1_C',
-            rankD: 'Output_reinG1_D',
-        }, 
-        2: { 
-            rankS: 'Output_reinG2_S',
-            rankA: 'Output_reinG2_A',
-            rankB: 'Output_reinG2_B',
-            rankC: 'Output_reinG2_C',
-            rankD: 'Output_reinG2_D',
-        }, 
-        3: {   
-            rankS: 'Output_reinG3_S',
-            rankA: 'Output_reinG3_A',
-            rankB: 'Output_reinG3_B',
-            rankC: 'Output_reinG3_C',
-            rankD: 'Output_reinG3_D',
-        }, 
-        4: { 
-            rankS: 'Output_reinG4_S',
-            rankA: 'Output_reinG4_A',
-            rankB: 'Output_reinG4_B',
-            rankC: 'Output_reinG4_C',
-            rankD: 'Output_reinG4_D',
-        }, 
-        5: { 
-            rankS: 'Output_reinG5_S',
-            rankA: 'Output_reinG5_A',
-            rankB: 'Output_reinG5_B',
-            rankC: 'Output_reinG5_C',
-            rankD: 'Output_reinG5_D',
-        }, 
-        6: { 
-            rankS: 'Output_reinG6_S',
-            rankA: 'Output_reinG6_A',
-            rankB: 'Output_reinG6_B',
-            rankC: 'Output_reinG6_C',
-            rankD: 'Output_reinG6_D',
-        },
+        1: { rankS: 'Output_reinG1_S', rankA: 'Output_reinG1_A', rankB: 'Output_reinG1_B', rankC: 'Output_reinG1_C', rankD: 'Output_reinG1_D', }, 
+        2: { rankS: 'Output_reinG2_S', rankA: 'Output_reinG2_A', rankB: 'Output_reinG2_B', rankC: 'Output_reinG2_C', rankD: 'Output_reinG2_D', }, 
+        3: { rankS: 'Output_reinG3_S', rankA: 'Output_reinG3_A', rankB: 'Output_reinG3_B', rankC: 'Output_reinG3_C', rankD: 'Output_reinG3_D', }, 
+        4: { rankS: 'Output_reinG4_S', rankA: 'Output_reinG4_A', rankB: 'Output_reinG4_B', rankC: 'Output_reinG4_C', rankD: 'Output_reinG4_D', }, 
+        5: { rankS: 'Output_reinG5_S', rankA: 'Output_reinG5_A', rankB: 'Output_reinG5_B', rankC: 'Output_reinG5_C', rankD: 'Output_reinG5_D', }, 
+        6: { rankS: 'Output_reinG6_S', rankA: 'Output_reinG6_A', rankB: 'Output_reinG6_B', rankC: 'Output_reinG6_C', rankD: 'Output_reinG6_D', },
     },
     activeSkills: {
-        1: {
-            rankS: 'Output_actSkill_S',
-            rankA: 'Output_actSkill_A',
-            rankB: 'Output_actSkill_B',
-            rankC: 'Output_actSkill_C',
-        },
+        1: { rankS: 'Output_actSkill_S', rankA: 'Output_actSkill_A', rankB: 'Output_actSkill_B', rankC: 'Output_actSkill_C', },
     },
     passiveSkills: {
-        1: {
-            rankS: 'Output_passSkillG1_S',
-            rankA: 'Output_passSkillG1_A',
-            rankB: 'Output_passSkillG1_B',
-            rankC: 'Output_passSkillG1_C',
-            rankD: 'Output_passSkillG1_D',
-        },
-        2: {
-            rankS: 'Output_passSkillG2_S',
-            rankA: 'Output_passSkillG2_A',
-            rankB: 'Output_passSkillG2_B',
-            rankC: 'Output_passSkillG2_C',
-            rankD: 'Output_passSkillG2_D',
-        },
-        3: {
-            rankS: 'Output_passSkillG3_S',
-            rankA: 'Output_passSkillG3_A',
-            rankB: 'Output_passSkillG3_B',
-            rankC: 'Output_passSkillG3_C',
-            rankD: 'Output_passSkillG3_D',
-        },
-        4: {
-            rankS: 'Output_passSkillG4_S',
-            rankA: 'Output_passSkillG4_A',
-            rankB: 'Output_passSkillG4_B',
-            rankC: 'Output_passSkillG4_C',
-            rankD: 'Output_passSkillG4_D',
-        },
+        1: { rankS: 'Output_passSkillG1_S', rankA: 'Output_passSkillG1_A', rankB: 'Output_passSkillG1_B', rankC: 'Output_passSkillG1_C', rankD: 'Output_passSkillG1_D', },
+        2: { rankS: 'Output_passSkillG2_S', rankA: 'Output_passSkillG2_A', rankB: 'Output_passSkillG2_B', rankC: 'Output_passSkillG2_C', rankD: 'Output_passSkillG2_D', },
+        3: { rankS: 'Output_passSkillG3_S', rankA: 'Output_passSkillG3_A', rankB: 'Output_passSkillG3_B', rankC: 'Output_passSkillG3_C', rankD: 'Output_passSkillG3_D', },
+        4: { rankS: 'Output_passSkillG4_S', rankA: 'Output_passSkillG4_A', rankB: 'Output_passSkillG4_B', rankC: 'Output_passSkillG4_C', rankD: 'Output_passSkillG4_D', },
     },
     common: {
         1: { normal: 'Output_np', },
@@ -147,86 +77,21 @@ var outputboxID = {
 };
 var inputboxsID = {
     reinforcementGroups:{
-        1: {
-            rankS: 'Input_reinG1_S',
-            rankA: 'Input_reinG1_A',
-            rankB: 'Input_reinG1_B',
-            rankC: 'Input_reinG1_C',
-            rankD: 'Input_reinG1_D',
-        },
-        2: {
-            rankS: 'Input_reinG2_S',
-            rankA: 'Input_reinG2_A',
-            rankB: 'Input_reinG2_B',
-            rankC: 'Input_reinG2_C',
-            rankD: 'Input_reinG2_D',
-        },
-        3: {
-            rankS: 'Input_reinG3_S',
-            rankA: 'Input_reinG3_A',
-            rankB: 'Input_reinG3_B',
-            rankC: 'Input_reinG3_C',
-            rankD: 'Input_reinG3_D',
-        },
-        4: {
-            rankS: 'Input_reinG4_S',
-            rankA: 'Input_reinG4_A',
-            rankB: 'Input_reinG4_B',
-            rankC: 'Input_reinG4_C',
-            rankD: 'Input_reinG4_D',
-        },
-        5: {
-            rankS: 'Input_reinG5_S',
-            rankA: 'Input_reinG5_A',
-            rankB: 'Input_reinG5_B',
-            rankC: 'Input_reinG5_C',
-            rankD: 'Input_reinG5_D',
-        },
-        6: {
-            rankS: 'Input_reinG6_S',
-            rankA: 'Input_reinG6_A',
-            rankB: 'Input_reinG6_B',
-            rankC: 'Input_reinG6_C',
-            rankD: 'Input_reinG6_D',
-        },
+        1: { rankS: 'Input_reinG1_S', rankA: 'Input_reinG1_A', rankB: 'Input_reinG1_B', rankC: 'Input_reinG1_C', rankD: 'Input_reinG1_D', },
+        2: { rankS: 'Input_reinG2_S', rankA: 'Input_reinG2_A', rankB: 'Input_reinG2_B', rankC: 'Input_reinG2_C', rankD: 'Input_reinG2_D', },
+        3: { rankS: 'Input_reinG3_S', rankA: 'Input_reinG3_A', rankB: 'Input_reinG3_B', rankC: 'Input_reinG3_C', rankD: 'Input_reinG3_D', },
+        4: { rankS: 'Input_reinG4_S', rankA: 'Input_reinG4_A', rankB: 'Input_reinG4_B', rankC: 'Input_reinG4_C', rankD: 'Input_reinG4_D', },
+        5: { rankS: 'Input_reinG5_S', rankA: 'Input_reinG5_A', rankB: 'Input_reinG5_B', rankC: 'Input_reinG5_C', rankD: 'Input_reinG5_D', },
+        6: { rankS: 'Input_reinG6_S', rankA: 'Input_reinG6_A', rankB: 'Input_reinG6_B', rankC: 'Input_reinG6_C', rankD: 'Input_reinG6_D', },
     },
     activeSkills: {
-        1: {
-            rankS: 'Input_actSkill_S',
-            rankA: 'Input_actSkill_A',
-            rankB: 'Input_actSkill_B',
-            rankC: 'Input_actSkill_C',
-        },
+        1: { rankS: 'Input_actSkill_S', rankA: 'Input_actSkill_A', rankB: 'Input_actSkill_B', rankC: 'Input_actSkill_C', },
     },
     passiveSkills: {
-        1: {
-            rankS: 'Input_passSkillG1_S',
-            rankA: 'Input_passSkillG1_A',
-            rankB: 'Input_passSkillG1_B',
-            rankC: 'Input_passSkillG1_C',
-            rankD: 'Input_passSkillG1_D',
-        },
-        2: {
-            rankS: 'Input_passSkillG2_S',
-            rankA: 'Input_passSkillG2_A',
-            rankB: 'Input_passSkillG2_B',
-            rankC: 'Input_passSkillG2_C',
-            rankD: 'Input_passSkillG2_D',
-        },
-        3: {
-            rankS: 'Input_passSkillG3_S',
-            rankA: 'Input_passSkillG3_A',
-            rankB: 'Input_passSkillG3_B',
-            rankC: 'Input_passSkillG3_C',
-            rankD: 'Input_passSkillG3_D',
-        },
-        4: {
-            rankS: 'Input_passSkillG4_S',
-            rankA: 'Input_passSkillG4_A',
-            rankB: 'Input_passSkillG4_B',
-            rankC: 'Input_passSkillG4_C',
-            rankD: 'Input_passSkillG4_D',
-        },
+        1: { rankS: 'Input_passSkillG1_S', rankA: 'Input_passSkillG1_A', rankB: 'Input_passSkillG1_B', rankC: 'Input_passSkillG1_C', rankD: 'Input_passSkillG1_D', },
+        2: { rankS: 'Input_passSkillG2_S', rankA: 'Input_passSkillG2_A', rankB: 'Input_passSkillG2_B', rankC: 'Input_passSkillG2_C', rankD: 'Input_passSkillG2_D', },
+        3: { rankS: 'Input_passSkillG3_S', rankA: 'Input_passSkillG3_A', rankB: 'Input_passSkillG3_B', rankC: 'Input_passSkillG3_C', rankD: 'Input_passSkillG3_D', },
+        4: { rankS: 'Input_passSkillG4_S', rankA: 'Input_passSkillG4_A', rankB: 'Input_passSkillG4_B', rankC: 'Input_passSkillG4_C', rankD: 'Input_passSkillG4_D', },
     },
     common: {
         1: { normal: 'Input_np', },
@@ -729,8 +594,8 @@ var shiplistBox_template = {
 loadselectbox('CMB_searchtype',searchtype); //加载搜索方法的下拉框
 loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
-loadshipdataintocache();//加载素材title的文本
-loadItemsTitleLabels();
+loadshipdataintocache();
+loadItemsTitleLabels(); //加载素材title的文本
 setShiplistBoxDefaultValue(0,inputboxsID);//设置默认值
 readInputValue();
 showResult();
@@ -820,7 +685,6 @@ function createShiplistBox_Mainbox(mainboxid,shipid,obj){ //创建强化组的ma
     var container = document.getElementById(obj.mainbox.parentid); //确定父元素
     container.appendChild(mainbox); //添加mainbox
     mainbox.setAttribute("id",mainboxid); //设置属性
-    //mainbox.setAttribute("shipid",shipid); //设置属性
     shiplistbox_mainboxID[shipid] = mainboxid; //存放mainbox的id
     shipReinforcementGroupsID[shipid] = {}; //存放强化组数据
     shipSkillGroupsID[shipid] = {}; //存放技能组数据
@@ -997,7 +861,7 @@ function getSearchVars(){ //获取搜索方式
 };
 function search(){
     getSearchVars();
-    document.getElementById('searchbox').innerText="";
+    document.getElementById('searchbox').innerText=""; //清空上一次搜索创建的div
     var searchinputs = getElementValue('searchinput');
     var searchtype = searchmethod.searchtype.value;
     var searchresult = []; //暂存结果
@@ -1019,7 +883,7 @@ function search(){
     };
     searchresult.sort(function(a,b){return a-b}); //结果升序排序
     for ( var i=0,len = searchresult.length;i<len;i++ ){
-        createSearchBox(searchresult[i],searchResultBox_template);
+        createSearchBox(searchresult[i],searchResultBox_template); //展示搜索结果
     };
 };
 function filter(shipid) { //过滤器,接收ship的id作为参数
@@ -1092,11 +956,8 @@ function shiplistbox_selectboxChanged_skillGroup(shipid,groupid) {  //技能组�
 
 function calConsumption(){
     if ( isEmptyObject(shiplistbox_mainboxID) ==false ){
-        //alert('开始计算')
         readInputValue(); //读取现有素材
-        //
         ////////读取并计算强化组消耗
-        //var caltimes = 0;
         for ( shipid in shipReinforcementGroupsID ){ 
             for ( groups in shipReinforcementGroupsID[shipid] ){
                 var clevel = getElementValue(shipReinforcementGroupsID[shipid][groups].currentlevelID); //获取当前等级
@@ -1111,7 +972,6 @@ function calConsumption(){
                         var currentValue = calResult.reinforcementGroups[fgroups][rank]; //当前库存元件的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.reinforcementGroups[fgroups][rank] = result;
-                        //caltimes = caltimes + 1;
                     };
                 };
                 for ( fgroups in consumptionItemList.common[consumptionID][flevel] ) { //
@@ -1122,7 +982,6 @@ function calConsumption(){
                         var currentValue = calResult.common[fgroups][rank]; //当前NP的量
                         var result = Number(currentValue) - Number(consumptions); //相减
                         calResult.common[fgroups][rank] = result;
-                        //caltimes = caltimes + 1;
                     };
                 };
             };
@@ -1144,7 +1003,6 @@ function calConsumption(){
                             var currentValue = calResult[skilltype][sgroups][rank]; //当前的量
                             var result = Number(currentValue) - Number(consumptions); //相减
                             calResult[skilltype][sgroups][rank] = result;
-                            //caltimes = caltimes + 1;
                         };
                     };
                     for ( sgroups in consumptionItemList.common[consumptionID][flevel] ){ //计算NP消耗
@@ -1155,14 +1013,12 @@ function calConsumption(){
                             var currentValue = calResult.common[sgroups][rank]; //当前的量
                             var result = Number(currentValue) - Number(consumptions); //相减
                             calResult.common[sgroups][rank] = result;
-                            //caltimes = caltimes + 1;
                         };
                     };
                 };
             };
         };
         showResult(); //显示结果
-        //alert('遍历次数:' + caltimes);
     }else{
         readInputValue();
         showResult();
@@ -1213,7 +1069,6 @@ function readConfig(){
             var configarr = allconfigarr[i].split(","); //根据逗号分隔数字
             var shipid = configarr[0]; //shipid即为第一个数字
             createShiplistBox(shipid,0); //创建强化组的box
-            //setInputBoxValue(value,elementid)
             var j = 1;
             for ( reingroupid in shipReinforcementGroupsID[shipid] ){ //读取强化组等级取值
                 var cvalueid = shipReinforcementGroupsID[shipid][reingroupid].currentlevelID;
