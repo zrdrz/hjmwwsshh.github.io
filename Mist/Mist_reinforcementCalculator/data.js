@@ -3558,11 +3558,12 @@ shipdata[22] = {
     shiptypeid: 1,
     shiptypename: '驱逐',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '雷击', initvalue: 19, consumptionID: 'rein_torpedofirepower_star2',},
         2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
         3: { name: '索敌', initvalue: 2, consumptionID: 'rein_scouting_star2',},
+        4: { name: '炮击', initvalue: 6, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '集中雷击', consumptionID: 'act_star2', },
@@ -3578,11 +3579,12 @@ shipdata[23] = {
     shiptypeid: 1,
     shiptypename: '驱逐',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '雷击', initvalue: 19, consumptionID: 'rein_torpedofirepower_star2',},
         2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
         3: { name: '索敌', initvalue: 2, consumptionID: 'rein_scouting_star2',},
+        4: { name: '炮击', initvalue: 6, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '集中雷击', consumptionID: 'act_star2', },
@@ -3598,11 +3600,12 @@ shipdata[24] = {
     shiptypeid: 1,
     shiptypename: '驱逐',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '雷击', initvalue: 19, consumptionID: 'rein_torpedofirepower_star2',},
         2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
         3: { name: '索敌', initvalue: 2, consumptionID: 'rein_scouting_star2',},
+        4: { name: '炮击', initvalue: 6, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '集中雷击', consumptionID: 'act_star2', },
@@ -3681,11 +3684,12 @@ shipdata[30] = {
     shiptypeid: 1,
     shiptypename: '驱逐',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '雷击', initvalue: 20, consumptionID: 'rein_torpedofirepower_star2',},
         2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
         3: { name: '索敌', initvalue: 2, consumptionID: 'rein_scouting_star2',},
+        4: { name: '耐久', initvalue: 41, consumptionID: 'rein_health_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击', consumptionID: 'act_star2', },
@@ -3701,11 +3705,12 @@ shipdata[32] = {
     shiptypeid: 1,
     shiptypename: '驱逐',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '雷击', initvalue: 20, consumptionID: 'rein_torpedofirepower_star2',},
         2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
         3: { name: '索敌', initvalue: 2, consumptionID: 'rein_scouting_star2',},
+        4: { name: '耐久', initvalue: 41, consumptionID: 'rein_health_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击', consumptionID: 'act_star2', },
@@ -3831,11 +3836,12 @@ shipdata[48] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 19, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击', consumptionID: 'act_star2', },
@@ -3851,11 +3857,12 @@ shipdata[49] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 19, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击', consumptionID: 'act_star2', },
@@ -4022,11 +4029,12 @@ shipdata[60] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 21, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '集中雷击?机炮扫射', consumptionID: 'act_star2', },
@@ -4042,11 +4050,12 @@ shipdata[62] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 21, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击?穿甲乱射', consumptionID: 'act_star2', },
@@ -4104,11 +4113,12 @@ shipdata[71] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 20, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击?穿甲乱射', consumptionID: 'act_star2', },
@@ -4124,11 +4134,12 @@ shipdata[72] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 20, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击?穿甲乱射', consumptionID: 'act_star2', },
@@ -4144,11 +4155,12 @@ shipdata[73] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 20, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击?穿甲乱射', consumptionID: 'act_star2', },
@@ -4186,11 +4198,12 @@ shipdata[77] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 21, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '集中雷击?机炮扫射', consumptionID: 'act_star2', },
@@ -4229,11 +4242,12 @@ shipdata[83] = {
     shiptypeid: 2,
     shiptypename: '轻巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '索敌', initvalue: 5, consumptionID: 'rein_scouting_star2',},
         2: { name: '对空', initvalue: 20, consumptionID: 'rein_aa_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '散射雷击?穿甲乱射', consumptionID: 'act_star2', },
@@ -4376,11 +4390,12 @@ shipdata[96] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 65, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 10, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 17, consumptionID: 'rein_aa_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '齐射?散射雷击', consumptionID: 'act_star2', },
@@ -4396,11 +4411,12 @@ shipdata[97] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 65, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 10, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 17, consumptionID: 'rein_aa_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '高速扫射?散射雷击', consumptionID: 'act_star2', },
@@ -4416,11 +4432,12 @@ shipdata[98] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 64, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 10, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 17, consumptionID: 'rein_aa_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '齐射?散射雷击', consumptionID: 'act_star2', },
@@ -4436,11 +4453,12 @@ shipdata[99] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 64, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 10, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 17, consumptionID: 'rein_aa_star2',},
+        4: { name: '雷击', initvalue: 10, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '高速扫射?散射雷击', consumptionID: 'act_star2', },
@@ -4545,11 +4563,12 @@ shipdata[113] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 65, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 10, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 18, consumptionID: 'rein_aa_star2',},
+        4: { name: '攻速', initvalue: 10, consumptionID: 'rein_atkspeed_star2',},
     },
     activeSkills: {
         1:{ name: '高速扫射', consumptionID: 'act_star2', },
@@ -4587,11 +4606,12 @@ shipdata[118] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 64, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 9, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 19, consumptionID: 'rein_aa_star2',},
+        4: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
     },
     activeSkills: {
         1:{ name: '穿甲速射?集中雷击', consumptionID: 'act_star2', },
@@ -4607,11 +4627,12 @@ shipdata[119] = {
     shiptypeid: 3,
     shiptypename: '重巡',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 63, consumptionID: 'rein_health_star2',},
         2: { name: '炮击', initvalue: 9, consumptionID: 'rein_gunfirepower_star2',},
         3: { name: '对空', initvalue: 19, consumptionID: 'rein_aa_star2',},
+        4: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
     },
     activeSkills: {
         1:{ name: '穿甲速射?集中雷击', consumptionID: 'act_star2', },
@@ -5253,11 +5274,12 @@ shipdata[184] = {
     shiptypeid: 6,
     shiptypename: '航母',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 55, consumptionID: 'rein_health_star2',},
         2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '舰攻', initvalue: 19, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '地毯式雷击', consumptionID: 'act_star2', },
@@ -5273,11 +5295,12 @@ shipdata[186] = {
     shiptypeid: 6,
     shiptypename: '航母',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 57, consumptionID: 'rein_health_star2',},
         2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '舰爆', initvalue: 19, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '地毯式轰炸', consumptionID: 'act_star2', },
@@ -5293,11 +5316,12 @@ shipdata[188] = {
     shiptypeid: 6,
     shiptypename: '航母',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 54, consumptionID: 'rein_health_star2',},
         2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '舰爆', initvalue: 19, consumptionID: 'rein_gunfirepower_star2',},
     },
     activeSkills: {
         1:{ name: '地毯式轰炸', consumptionID: 'act_star2', },
@@ -5334,11 +5358,12 @@ shipdata[192] = {
     shiptypeid: 6,
     shiptypename: '航母',
     shipstars: 2,
-    reinforcementGroupNum: 3,
+    reinforcementGroupNum: 4,
     reinforcementGroups: {
         1: { name: '耐久', initvalue: 53, consumptionID: 'rein_health_star2',},
         2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star2',},
         3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star2',},
+        4: { name: '舰攻', initvalue: 19, consumptionID: 'rein_torpedofirepower_star2',},
     },
     activeSkills: {
         1:{ name: '集束雷击', consumptionID: 'act_star2', },

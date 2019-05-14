@@ -246,7 +246,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "reinGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "reinforcementGroups",
@@ -283,7 +283,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "reinGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "reinforcementGroups",
@@ -320,7 +320,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "reinGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "reinforcementGroups",
@@ -357,7 +357,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "reinGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "reinforcementGroups",
@@ -394,7 +394,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "reinGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "reinforcementGroups",
@@ -431,7 +431,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "reinGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "reinforcementGroups",
@@ -468,7 +468,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "skillGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "activeSkills",
@@ -505,7 +505,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "skillGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "passiveSkills",
@@ -542,7 +542,7 @@ var shiplistBox_template = {
                 element1: {
                     id: "_label",
                     type: "skillGrouplabel",
-                    attributes: { class: "label1", },
+                    attributes: { class: "label1 label4 line-limit-length", },
                     innerHTMLPre: "",
                     innerHTMLPost: "",
                     bindData: "passiveSkills",
@@ -788,8 +788,10 @@ function createReinGrouplabel(parentid,shipid,obj){ //创建强化组的label类
     if ( typeof shipdata[shipid][obj.bindData][obj.bindDataID] != 'undefined' ) {
         var newchild = document.createElement('label');
         var container = document.getElementById(parentid);
-        newchild.innerHTML = obj.innerHTMLPre + shipdata[shipid][obj.bindData][obj.bindDataID].name + obj.innerHTMLPost //设置元素的innerHTML,一般为文字
+        var str = obj.innerHTMLPre + shipdata[shipid][obj.bindData][obj.bindDataID].name + obj.innerHTMLPost //设置元素的innerHTML,一般为文字
+        newchild.innerHTML = str
         newchild.setAttribute("id", parentid + obj.id); //给label设置id
+        newchild.setAttribute("title", str); //设置title属性
         container.appendChild(newchild);
         for ( attr in obj.attributes ){  //遍历赋值元素的属性
             //绑定额外的css样式的代码
