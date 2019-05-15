@@ -173,7 +173,7 @@ var shiplistBox_template = {
         id: "shiplistbox_child",
         attributes: {  //元素的属性
             class: "shiplistbox",
-            style: "clear:both;border:none;",
+            style: "clear:both;",
             //onclick: "alert(this.id)",
         },
     },
@@ -619,7 +619,7 @@ function setShiplistBoxDefaultValue(defaultValue,obj){ //设置默认值
         };
     };
 };
-function setElementValue(value,elementid){ //设置label,select元素的value
+function setElementValue(value,elementid){ //设置input,select元素的value
     document.getElementById(elementid).value = value;
 };
 function getElementValue(elementid){ //获取input或select元素的value
@@ -863,7 +863,7 @@ function getSearchVars(){ //获取搜索方式
         var elementid = searchmethod[keys].elementid;
         searchmethod[keys].value = getElementValue(elementid);
     };
-};
+}; 
 function search(){
     getSearchVars();
     document.getElementById('searchbox').innerText=""; //清空上一次搜索创建的div
