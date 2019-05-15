@@ -630,6 +630,10 @@ function readInputValue() { //从页面上的input元素读取现有素材
         for ( groups in inputboxsID[types] ) {
             for ( rank in inputboxsID[types][groups] ){
                 var value = getElementValue(inputboxsID[types][groups][rank]);
+                if ( value == "" ){ //如果从input元素读取到的值为空(""),则用0代替,并回写到页面的input元素上
+                    value = 0;
+                    setElementValue(value,inputboxsID[types][groups][rank]);
+                };
                 calResult[types][groups][rank] = value;
             };
         };
