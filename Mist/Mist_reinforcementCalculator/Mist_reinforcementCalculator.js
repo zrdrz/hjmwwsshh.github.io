@@ -615,12 +615,15 @@ function setShiplistBoxDefaultValue(defaultValue,obj){ //设置默认值
         if ( typeof obj[things] == 'object' ){
             setShiplistBoxDefaultValue(defaultValue,obj[things]);  //递归,直到不是object,找到elementid
         }else{
-            setInputBoxValue(defaultValue,obj[things]);
+            setElementValue(defaultValue,obj[things]);
         };
     };
 };
-function setInputBoxValue(value,elementid){ //设置label,select元素的value
+function setElementValue(value,elementid){ //设置label,select元素的value
     document.getElementById(elementid).value = value;
+};
+function getElementValue(elementid){ //获取input或select元素的value
+    return document.getElementById(elementid).value;
 };
 function readInputValue() { //从页面上的input元素读取现有素材
     for ( types in inputboxsID ){
@@ -641,7 +644,7 @@ function showResult() { //输出计算结果
                 var elementid = outputboxID[types][groups][rank];
                 var consume = Number(value1) - Number(value2); //计算消耗数量
                 var str = value2.toString() + '(' + consume.toString() + ')'; //剩余(消耗)
-                setInputBoxValue(str,elementid);
+                setElementValue(str,elementid);
                 setOutputBoxFontColorByValue(value2,elementid);
             };
         };
@@ -1032,9 +1035,7 @@ function isEmptyObject(obj){ //判定一个对象是否为空对象的方法
     };
     return true;
 };
-function getElementValue(elementid){ //获取input或select元素的value
-    return document.getElementById(elementid).value;
-};
+
 function saveConfig(){  //保存的格式为: shipid,强化组1当前等级,强化组1目标等级,强化组2当前等级,强化组2目标等级...强化组6目标等级,主动技当前等级,主动技目标等级,被动技1当前等级,被动技1目标等级,被动技2当前等级,被动技2目标等级|shipid,.....
     var cshipid = 0;
     var str = "";
@@ -1077,8 +1078,8 @@ function readConfig(){
                 var fvalueid = shipReinforcementGroupsID[shipid][reingroupid].finallevelID;
                 var cvalue = configarr[j];
                 var fvalue = configarr[j+1];
-                setInputBoxValue(cvalue,cvalueid); //给对应强化组的下拉框赋值
-                setInputBoxValue(fvalue,fvalueid);
+                setElementValue(cvalue,cvalueid); //给对应强化组的下拉框赋值
+                setElementValue(fvalue,fvalueid);
                 shiplistbox_selectboxChanged_reinGroup(shipid,reingroupid); //给对应强化组的label元素设置文字
                 j = j + 2;
             };
@@ -1088,8 +1089,8 @@ function readConfig(){
                     var fvalueid = shipSkillGroupsID[shipid][skillgrouptype][skillgroupid].finallevelID;
                     var cvalue = configarr[j];
                     var fvalue = configarr[j+1];
-                    setInputBoxValue(cvalue,cvalueid);
-                    setInputBoxValue(fvalue,fvalueid);
+                    setElementValue(cvalue,cvalueid);
+                    setElementValue(fvalue,fvalueid);
                     j = j + 2;
                 };
             };
