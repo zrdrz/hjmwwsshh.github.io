@@ -36,32 +36,32 @@ var result = { //计算结果存放处
     singledmg_overpene: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
-        vsHeavyArmor: 0.00
+        vsHeavyArmor: 0.00,
     },
     singledmg_moderate: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
-        vsHeavyArmor: 0.00
+        vsHeavyArmor: 0.00,
     },
     singledmg: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
-        vsHeavyArmor: 0.00
+        vsHeavyArmor: 0.00,
     },
     singledmgcrit: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
-        vsHeavyArmor: 0.00
+        vsHeavyArmor: 0.00,
     },
     dpm: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
-        vsHeavyArmor: 0.0
+        vsHeavyArmor: 0.00,
     },
     dpmcrit: {
         vsLightArmor: 0.00,
         vsMediumArmor: 0.00,
-        vsHeavyArmor: 0.0
+        vsHeavyArmor: 0.00,
     },
 };
 //
@@ -84,7 +84,7 @@ const Dict_var_element_bind_inputbox_readwrite = {
 const Dict_var_element_bind_selectbox = {
     barrels: "CMB_barrels",
     shiptype: "CMB_ship_type",
-    weapontype: "CMB_weapon_type"
+    weapontype: "CMB_weapon_type",
 };
 ////
 var bufferbox_template = { //存放bufferbox的模板
@@ -214,7 +214,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50, //半伤系数
             overpene_dmg: 0.25, //过穿伤害系数
         },
-        barrels: [ "2","3" ], //可用的联装数
+        barrels: [ "2","3", ], //可用的联装数
         specialDamage: { //特殊伤害
             name: "无", 
             type: "none", 
@@ -230,7 +230,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "2","3" ], 
+        barrels: [ "2","3", ], 
         specialDamage: { 
             name: "无", 
             type: "none", 
@@ -246,7 +246,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2","3" ],
+        barrels: [ "1","2","3", ],
         specialDamage: { 
             name: "无", 
             type: "none", 
@@ -262,7 +262,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2" ], 
+        barrels: [ "1","2", ], 
         specialDamage: { 
             name: "无", 
             type: "none", 
@@ -278,7 +278,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "2","3" ], 
+        barrels: [ "2","3", ], 
         specialDamage: { 
             name: "起火伤害", 
             type: "firedmg", 
@@ -294,7 +294,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "2","3" ],
+        barrels: [ "2","3", ],
         specialDamage: { 
             name: "起火伤害", 
             type: "firedmg", 
@@ -310,7 +310,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2","3" ], 
+        barrels: [ "1","2","3", ], 
         specialDamage: { 
             name: "起火伤害", 
             type: "firedmg", 
@@ -326,7 +326,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2" ], 
+        barrels: [ "1","2", ], 
         specialDamage: { 
             name: "起火伤害", 
             type: "firedmg", 
@@ -342,7 +342,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "1","2","3" ], 
+        barrels: [ "1","2","3", ], 
         specialDamage: { 
             name: "进水伤害", 
             type: "flooddmg", 
@@ -358,7 +358,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.67,
             overpene_dmg: 0.25,
         },
-        barrels: [ "3" ], 
+        barrels: [ "3", ], 
         specialDamage: { 
             name: "起火伤害", 
             type: "firedmg", 
@@ -374,7 +374,7 @@ const Dict_weapon_data = { //weapon数据
             moderate_dmg: 0.50,
             overpene_dmg: 0.25,
         },
-        barrels: [ "3" ], 
+        barrels: [ "3", ], 
         specialDamage: { 
             name: "进水伤害", 
             type: "flooddmg", 
@@ -384,38 +384,38 @@ const Dict_weapon_data = { //weapon数据
 const Dict_shiptype_data = {  //ship数据
     dd: {
         name: "驱逐舰", //显示名
-        can_use_weapon: [ "AP_Small","HE_Small","Torpedo" ],  //可用weapon
+        can_use_weapon: [ "AP_Small","HE_Small","Torpedo", ],  //可用weapon
         weapon_type_efficiency: { //使用各项weapon的效率
             AP_Small: 1.20,
             HE_Small: 1.20,
-            Torpedo: 0.20
-        }
+            Torpedo: 0.20,
+        },
     },
     cl: {
         name: "轻巡",
-        can_use_weapon: [ "AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
+        can_use_weapon: [ "AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo", ],
         weapon_type_efficiency: {
             AP_Medium: 1.20,
             HE_Medium: 1.20,
             AP_Small: 0.80,
             HE_Small: 0.80,
-            Torpedo: 0.25
-        }
+            Torpedo: 0.25,
+        },
     },
     ca: {
         name: "重巡",
-        can_use_weapon: [ "AP_Big","HE_Big","AP_Small","HE_Small","Torpedo" ],
+        can_use_weapon: [ "AP_Big","HE_Big","AP_Small","HE_Small","Torpedo", ],
         weapon_type_efficiency: {
             AP_Big: 1.00,
             HE_Big: 1.00,
             AP_Small: 0.40,
             HE_Small: 0.40,
-            Torpedo: 0.20
-        }
+            Torpedo: 0.20,
+        },
     },
     bc: {
         name: "战巡",
-        can_use_weapon: [ "AP_ExBig","HE_ExBig","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
+        can_use_weapon: [ "AP_ExBig","HE_ExBig","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo", ],
         weapon_type_efficiency: {
             AP_ExBig: 1.00,
             HE_ExBig: 1.00,
@@ -423,12 +423,12 @@ const Dict_shiptype_data = {  //ship数据
             HE_Medium: 0.10,
             AP_Small: 0.08,
             HE_Small: 0.08,
-            Torpedo: 0.20
-        }
+            Torpedo: 0.20,
+        },
     },
     bb: {
         name: "战列",
-        can_use_weapon: [ "AP_ExBig","HE_ExBig","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo" ],
+        can_use_weapon: [ "AP_ExBig","HE_ExBig","AP_Medium","HE_Medium","AP_Small","HE_Small","Torpedo", ],
         weapon_type_efficiency: {
             AP_ExBig: 1.00,
             HE_ExBig: 1.00,
@@ -436,17 +436,17 @@ const Dict_shiptype_data = {  //ship数据
             HE_Medium: 0.10,
             AP_Small: 0.08,
             HE_Small: 0.08,
-            Torpedo: 0.20
-        }
+            Torpedo: 0.20,
+        },
     },
     cv: {
         name: "航母",
-        can_use_weapon: [ "DiveBomber","TorpedoBomber" ],
+        can_use_weapon: [ "DiveBomber","TorpedoBomber", ],
         weapon_type_efficiency: {
             DiveBomber: 0.25,
             TorpedoBomber: 0.25,
-        }
-    }
+        },
+    },
 };
 
 //存放要调用的计算的函数名:
@@ -489,7 +489,7 @@ function printSeparateline(num,separator) { //插入一行指定数量和字符�
     for ( var i=0;i<num;i++ ){
         str = str + separator;
     }
-    str = str + '\n'
+    str = str + '\n';
     return str;
 };
 function printTextline(strings){  //插入一行文字
@@ -559,7 +559,7 @@ function dmgcal_dpm(is_buffed) {
         var base = (global.firepower * (global.fp_correction / 100) * global[varname] * global.equipmentefficiency * 12);
         var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100) * ((100 + Number(global_buff.additional_reloadspeed) * is_buffed) / 100);
         result.dpm[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed));
-        str = str + result.dpm[varname] + '\t\t'
+        str = str + result.dpm[varname] + '\t\t';
     };
     str = str + '\n';
     return str;
@@ -571,7 +571,7 @@ function dmgcal_dpm_crit(is_buffed) {
         var buff = (100 + Number(global_buff.additional_firepower)) / 100 * (global_buff.additional_damage / 100) * ((100 + Number(global_buff.additional_reloadspeed) * is_buffed) / 100);
         var crit = ((global.critdmg_base * 100 + Number(global_buff.additional_crit) * is_buffed) / 100);
         result.dpmcrit[varname] = Math.ceil(base * (buff * is_buffed + 1 * !is_buffed) * crit);
-        str = str + result.dpmcrit[varname] + '\t\t'
+        str = str + result.dpmcrit[varname] + '\t\t';
     };
     str = str + '\n';
     return str;
@@ -629,10 +629,10 @@ function readbufferbox1(templateName) { //从模板创建的bufferbox中读取�
             var childid = obj_readfrom[boxname].childElements[child].id;
             switch (childtype) {
                 case 'select':  //从select元素读取buff类型数据
-                    obj_writeinto[boxname].buffer_type = document.getElementById(childid).value
+                    obj_writeinto[boxname].buffer_type = document.getElementById(childid).value;
                     break;
                 case 'input':  //从input元素读取数值数据
-                    obj_writeinto[boxname].buffer_value = document.getElementById(childid).value
+                    obj_writeinto[boxname].buffer_value = document.getElementById(childid).value;
                     break;
             };
         };
@@ -717,7 +717,7 @@ function createChild(obj){  //创建子元素
 function createLabel(parentid,obj){ //创建label类元素
     var newchild = document.createElement('label');
     var container = document.getElementById(parentid);
-    newchild.innerHTML = obj.innerHTML  //设置元素的innerHTML,一般为文字
+    newchild.innerHTML = obj.innerHTML;  //设置元素的innerHTML,一般为文字
     container.appendChild(newchild);
     for ( attr in obj.attributes ){  //遍历赋值元素的属性
         newchild.setAttribute(attr,obj.attributes[attr]);
@@ -740,7 +740,7 @@ function createInput(childid,parentid,obj){
     var newchild = document.createElement('input');
     var container = document.getElementById(parentid);
     newchild.setAttribute("id", childid);
-    newchild.innerHTML = obj.innerHTML
+    newchild.innerHTML = obj.innerHTML;
     container.appendChild(newchild);
     for ( attr in obj.attributes ){
         newchild.setAttribute(attr,obj.attributes[attr]);
@@ -751,7 +751,7 @@ function createButton(childid,parentid,obj){
     var container = document.getElementById(parentid);
     newchild.setAttribute("id", childid);
     newchild.setAttribute("value", parentid); //button类元素需增加value属性
-    newchild.innerHTML = obj.innerHTML
+    newchild.innerHTML = obj.innerHTML;
     container.appendChild(newchild);
     for ( attr in obj.attributes ){
         newchild.setAttribute(attr,obj.attributes[attr]);

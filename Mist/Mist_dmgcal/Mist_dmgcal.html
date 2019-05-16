@@ -19,86 +19,86 @@
             <div class="calbox">
                 <div class="selectbox">
                     <label class="label1">1.选择舰船类型</label>
-                    </br>
+                    <br>
                     <select id="CMB_ship_type" class="select1" onchange="shiptype_change(this.value,Dict_var_element_bind_selectbox.weapontype)"></select>
                 </div>
                 <div class="selectbox">
                     <label class="label1">2.选择武器类型</label>
-                    </br>
+                    <br>
                     <select id="CMB_weapon_type" class="select1" onchange="weapontype_change(this.value)"></select>
                 </div>
                 <div class="selectbox ">
                     <label class="label1">3.面板火力</label>
-                    </br>
+                    <br>
                     <input id="firepower" type="text" class="input1"  oninput = "value=value.replace(/[^\d.]/g,'')"/>
                 </div>
                 <div class="selectbox ">
                     <label class="label1">4.装备火力补正(%)</label>
-                    </br>
+                    <br>
                     <input id="fp_correction" type="text" class="input1"  oninput = "value=value.replace(/[^\d]/g,'')"/>
                 </div>
                 <div class="selectbox ">
                     <label class="label1">5.装备装填时间(s)</label>
-                    </br>
+                    <br>
                     <input id="reload_time" type="text" class="input1"  oninput = "value=value.replace(/[^\d.]/g,'')"/>
                 </div>
                 <div class="selectbox ">
                     <label class="label1">6.联装数</label>
-                    </br>
+                    <br>
                     <select id="CMB_barrels" class="select1 " onchange=""></select>
                 </div>
             </div>
             <div style="clear:both" class="calbox"  id="bufferbox">
                 <button class="button" onclick="addbuffdiv()" id="createbuffdiv">添加buff</button>
-                </br>
+                <br>
                 <hr style="clear:both;">
             </div>
         </div>
         <div class="calbox calbox2">
             <div style="width: 195px;" class="calbox3">
                 <label class="label1">武器效率</label>
-                </br>
+                <br>
                 <div class="outputbox1">
                     <label class="label1 label2">轻甲:</label>
-                    </br>
+                    <br>
                     <input id="WeaponvsLightArmor" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
                 <div class="outputbox1">
                     <label class="label1 label2">中甲:</label>
-                    </br>
+                    <br>
                     <input id="WeaponvsMediumArmor" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
                 <div class="outputbox1">
                     <label class="label1 label2">重甲:</label>
-                    </br>
+                    <br>
                     <input id="WeaponvsHeavyArmor" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
             </div>
             <div style="width: 195px;" class="calbox3">
                 <label class="label1">伤害系数</label>
-                </br>
+                <br>
                 <div class="outputbox1">
                     <label class="label1 label2">过穿:</label>
-                    </br>
+                    <br>
                     <input id="overpene_dmg" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
                 <div class="outputbox1">
                     <label class="label1 label2">半伤:</label>
-                    </br>
+                    <br>
                     <input id="moderate_dmg" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
                 <div class="outputbox1">
                     <label class="label1 label2">基础暴伤:</label>
-                    </br>
+                    <br>
                     <input id="critdmg_base" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
             </div>
             <div style="width: 70px;" class="calbox3">
                 <label class="label1">舰船效率</label>
-                </br>
+                <br>
                 <div class="outputbox1">
                     <label class="label1 label2">装备效率:</label>
-                    </br>
+                    <br>
                     <input id="equipmentefficiency" type="text" class="input1 input2" readonly="readonly"/>
                 </div>
             </div>

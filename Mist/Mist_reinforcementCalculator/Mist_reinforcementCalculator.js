@@ -1,7 +1,7 @@
 var searchmethod = { //搜索方法对应的页面元素的id,和值
-    searchtype: { elementid: 'CMB_searchtype', value: ''},
-    shiptypeid: { elementid: 'CMB_shiptypefilter', value: ''},
-    shipstars: { elementid: 'CMB_shipstars', value: ''},
+    searchtype: { elementid: 'CMB_searchtype', value: '',},
+    shiptypeid: { elementid: 'CMB_shiptypefilter', value: '',},
+    shipstars: { elementid: 'CMB_shipstars', value: '',},
 };
 var shipfilters = {
     shiptypeid : { 0: '无', 1: '驱逐', 2: '轻巡', 3: '重巡', 4: '战巡', 5: '战列', 6: '航母', },
@@ -126,7 +126,6 @@ var searchResultBox_template = { //存放模板
         id: "searchbox_child",
         attributes: {  //元素的属性
             class: "searchbox",
-            //onclick: "alert(this.id)",
         },
     },
     childElements: { //子元素
@@ -174,7 +173,6 @@ var shiplistBox_template = {
         attributes: {  //元素的属性
             class: "shiplistbox",
             style: "clear:both;",
-            //onclick: "alert(this.id)",
         },
     },
     childElements: { //子元素
@@ -696,7 +694,6 @@ function createShiplistBox_Mainbox(mainboxid,shipid,obj){ //创建强化组的ma
     shipReinforcementGroupsID[shipid] = {}; //存放强化组数据
     shipSkillGroupsID[shipid] = {}; //存放技能组数据
     mainbox = setSimpleAttr(mainbox,obj.mainbox.attributes); //设置属性
-
 };
 function createShiplistBox_Child(parentid,shipid,obj){ 
     var childtype = "";  //子元素类型
@@ -707,7 +704,7 @@ function createShiplistBox_Child(parentid,shipid,obj){
             case 'div':
                 childid = parentid + obj.childElements[childname].id;  //确定子元素id
                 createDiv(parentid,childid,obj.childElements[childname]);
-                createShiplistBox_Child(childid,shipid,obj.childElements[childname])
+                createShiplistBox_Child(childid,shipid,obj.childElements[childname]);
                 break;
             case 'label':
                 createLabel(parentid,shipid,obj.childElements[childname]);
@@ -795,8 +792,8 @@ function createReinGrouplabel(parentid,shipid,obj){ //创建强化组的label类
     if ( typeof shipdata[shipid][obj.bindData][obj.bindDataID] != 'undefined' ) {
         var newchild = document.createElement('label');
         var container = document.getElementById(parentid);
-        var str = obj.innerHTMLPre + shipdata[shipid][obj.bindData][obj.bindDataID].name + obj.innerHTMLPost //设置元素的innerHTML,一般为文字
-        newchild.innerHTML = str
+        var str = obj.innerHTMLPre + shipdata[shipid][obj.bindData][obj.bindDataID].name + obj.innerHTMLPost; //设置元素的innerHTML,一般为文字
+        newchild.innerHTML = str;
         newchild.setAttribute("id", parentid + obj.id); //给label设置id
         newchild.setAttribute("title", str); //设置title属性
         container.appendChild(newchild);
@@ -820,7 +817,7 @@ function createBR(parentid) { //创建<br>
 function createLabel(parentid,shipid,obj){ //创建label类元素
     var newchild = document.createElement('label');
     var container = document.getElementById(parentid);
-    newchild.innerHTML = obj.innerHTMLPre + shipdata[shipid][obj.bindData] + obj.innerHTMLPost //设置元素的innerHTML,一般为文字
+    newchild.innerHTML = obj.innerHTMLPre + shipdata[shipid][obj.bindData] + obj.innerHTMLPost; //设置元素的innerHTML,一般为文字
     container.appendChild(newchild);
     for ( attr in obj.attributes ){  //遍历赋值元素的属性
         //绑定额外的css样式的代码
@@ -838,7 +835,7 @@ function createButton(parentid,shipid,obj){
     var container = document.getElementById(parentid);
     newchild.setAttribute("id", parentid + obj.id);
     newchild.setAttribute("shipid", shipid);
-    newchild.innerHTML = obj.innerHTML
+    newchild.innerHTML = obj.innerHTML;
     container.appendChild(newchild);
     newchild = setSimpleAttr(newchild,obj.attributes);
 };
@@ -846,7 +843,7 @@ function loadselectbox(elementid,obj){ //通过一个obj里的内容来加载下
     for ( keys in obj ){
         var value = obj[keys];
         document.getElementById(elementid).options.add(new Option(value,keys));
-    }
+    };
 };
 //界面创建相关//结束
 //////////////////////////////////
@@ -876,7 +873,7 @@ function search(){
     var searchresult = []; //暂存结果
     var i = 0;
     if ( searchinputs == "" ) { //如果未输入任何字符
-        searchinputs=/[\s\S]*/i //则用正则表达式匹配任意字符
+        searchinputs=/[\s\S]*/i; //则用正则表达式匹配任意字符
     };
     for ( keys in searchcache[searchtype] ){
         var str = keys;
@@ -957,11 +954,11 @@ function shiplistbox_selectboxChanged_reinGroup(shipid,groupid) {  //强化组�
     var str = shipdata[shipid].reinforcementGroups[groupid].name + ": +" + initvalue * finallevel; //计算并显示最终值
     var elementid = shipReinforcementGroupsID[shipid][groupid].labelID;
     document.getElementById(elementid).innerHTML = str;
-}
+};
 function shiplistbox_selectboxChanged_skillGroup(shipid,groupid) {  //技能组下拉框变动后
     //var currentlevel = document.getElementById(shipSkillGroupsID[shipid][groupid].currentlevelID).value;
     //var finallevel = document.getElementById(shipSkillGroupsID[shipid][groupid].finallevelID).value;
-}
+};
 
 function calConsumption(){
     if ( isEmptyObject(shiplistbox_mainboxID) ==false ){
@@ -1069,8 +1066,8 @@ function saveConfig(){  //保存的格式为: shipid,强化组1当前等级,强�
     saveText(str, 'MistReinforcementConfig.txt');
 };
 function readConfig(){
-    var str=prompt("在下方的文本框粘贴导出的配置文本","");
-    if ( str!=null && str!="" ){
+    var str = prompt("在下方的文本框粘贴导出的配置文本","");
+    if ( str != null && str != "" ){
         var allconfigarr = str.split("|"); //将整一串文本通过'|'符号分割开来
         for ( var i=0, len=allconfigarr.length;i<len;i++ ){ //循环遍历每一艘船的记录
             var configarr = allconfigarr[i].split(","); //根据逗号分隔数字
