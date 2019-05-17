@@ -158,7 +158,7 @@ var searchResultBox_template = { //存放模板
             id: "_btnAdd",
             attributes: {
                 class: "button button2",
-                onclick: "createShiplistBox(this.getAttribute('shipid'),1);",
+                onclick: "createShiplistBox(this.getAttribute('shipid'),1,1);",
             },
             innerHTML: "添加",
         },
@@ -669,9 +669,9 @@ function setSimpleAttr(elemt,attrs){
     };
     return elemt;
 };
-function createShiplistBox(shipid,isremovesearchbox){ //创建强化组box,若创建成功则移除对应的searchbox
+function createShiplistBox(shipid,isremovesearchbox,isalert){ //创建强化组box,若创建成功则移除对应的searchbox
     if ( typeof shipReinforcementGroupsID[shipid] != 'undefined' ){
-        alert("已存在!");
+        if ( isalert == 1 ){alert("已存在!");};
     }else{
         var count = shiplistBox_template.box_count;  //获取box的id的计数
         var mainboxid = shiplistBox_template.mainbox.id + count; //确定id
@@ -905,6 +905,13 @@ function filter(shipid) { //过滤器,接收ship的id作为参数
     };
     return result; //返回结果值,0为不通过,1为通过
 };
+function addallships(){ //全部添加搜索结果里的船进行计算
+    if ( isEmptyObject(searchbox_mainboxID) ==false ){
+        for ( shipid in searchbox_mainboxID ){
+            createShiplistBox(shipid,1,0);
+        };
+    };
+};
 ////////////////
 //记录元素id相关
 function logReinGroupID(shipid,elementType,value,index,dataType){ //记录某船的某个强化组的label和下拉框的元素id
@@ -961,7 +968,7 @@ function shiplistbox_selectboxChanged_skillGroup(shipid,groupid) {  //技能组�
 };
 
 function calConsumption(){
-    if ( isEmptyObject(shiplistbox_mainboxID) ==false ){
+    if ( isEmptyObject(shiplistbox_mainboxID) == false ){
         readInputValue(); //读取现有素材
         ////////读取并计算强化组消耗
         for ( shipid in shipReinforcementGroupsID ){ 
@@ -1037,42 +1044,47 @@ function isEmptyObject(obj){ //判定一个对象是否为空对象的方法
     return true;
 };
 
-function saveConfig(){  //保存的格式为: shipid,强化组1当前等级,强化组1目标等级,强化组2当前等级,强化组2目标等级...强化组6目标等级,主动技当前等级,主动技目标等级,被动技1当前等级,被动技1目标等级,被动技2当前等级,被动技2目标等级|shipid,.....
-    var cshipid = 0;
-    var str = "";
-    for ( shipid in shipReinforcementGroupsID ){
-        cshipid = shipid; //当前shipid
-        str = str + cshipid + ',';
-        for ( reingroupid in shipReinforcementGroupsID[cshipid] ){ //读取强化组等级取值
-            var cvalueid = shipReinforcementGroupsID[cshipid][reingroupid].currentlevelID;
-            var fvalueid = shipReinforcementGroupsID[cshipid][reingroupid].finallevelID;
-            var cvalue = getElementValue(cvalueid);
-            var fvalue = getElementValue(fvalueid);
-            str = str + cvalue + ',' + fvalue + ',';
-        };
-        for ( skillgrouptype in shipSkillGroupsID[cshipid] ) { //读取技能组等级取值
-            for ( skillgroupid in shipSkillGroupsID[cshipid][skillgrouptype] ){
-                var cvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].currentlevelID;
-                var fvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].finallevelID;
+function saveReinConfig(){  //保存的格式为: shipid,强化组1当前等级,强化组1目标等级,强化组2当前等级,强化组2目标等级...强化组6目标等级,主动技当前等级,主动技目标等级,被动技1当前等级,被动技1目标等级,被动技2当前等级,被动技2目标等级|shipid,.....
+    if ( isEmptyObject(shiplistbox_mainboxID) == false ){
+        var cshipid = 0;
+        var str = "";
+        for ( shipid in shipReinforcementGroupsID ){
+            cshipid = shipid; //当前shipid
+            str = str + cshipid + ',';
+            for ( reingroupid in shipReinforcementGroupsID[cshipid] ){ //读取强化组等级取值
+                var cvalueid = shipReinforcementGroupsID[cshipid][reingroupid].currentlevelID;
+                var fvalueid = shipReinforcementGroupsID[cshipid][reingroupid].finallevelID;
                 var cvalue = getElementValue(cvalueid);
                 var fvalue = getElementValue(fvalueid);
                 str = str + cvalue + ',' + fvalue + ',';
             };
+            for ( skillgrouptype in shipSkillGroupsID[cshipid] ) { //读取技能组等级取值
+                for ( skillgroupid in shipSkillGroupsID[cshipid][skillgrouptype] ){
+                    var cvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].currentlevelID;
+                    var fvalueid = shipSkillGroupsID[cshipid][skillgrouptype][skillgroupid].finallevelID;
+                    var cvalue = getElementValue(cvalueid);
+                    var fvalue = getElementValue(fvalueid);
+                    str = str + cvalue + ',' + fvalue + ',';
+                };
+            };
+            str = str.substring(0, str.length -1 );//去掉末尾的逗号','
+            str = str + ';';
         };
-        str = str.substring(0, str.length -1 );//去掉末尾的逗号','
-        str = str + '|';
+        str = str.substring(0, str.length -1 );//去掉末尾的分隔符';'
+        saveText(str, 'MistReinforcementConfig.txt');
+    } else {
+        alert("当前没有舰船在进行强化");
     };
-    str = str.substring(0, str.length -1 );//去掉末尾的分隔符'|'
-    saveText(str, 'MistReinforcementConfig.txt');
 };
-function readConfig(){
-    var str = prompt("在下方的文本框粘贴导出的配置文本","");
+function readReinConfig(){ 
+    var str = prompt("在下方的文本框粘贴导出的强化配置的文本","");
     if ( str != null && str != "" ){
-        var allconfigarr = str.split("|"); //将整一串文本通过'|'符号分割开来
+        var allconfigarr = str.split(";"); //将整一串文本通过';'符号分割开来
         for ( var i=0, len=allconfigarr.length;i<len;i++ ){ //循环遍历每一艘船的记录
             var configarr = allconfigarr[i].split(","); //根据逗号分隔数字
             var shipid = configarr[0]; //shipid即为第一个数字
-            createShiplistBox(shipid,0); //创建强化组的box
+            createShiplistBox(shipid,0,0); //创建强化组的box 
+            //若计算组中已有相同的shipid存在,则不会创建shiplistbox(且不会有弹窗提示已存在,在createShiplistBox中实现),但会把对应的强化等级覆盖(即走完下面的流程)
             var j = 1;
             for ( reingroupid in shipReinforcementGroupsID[shipid] ){ //读取强化组等级取值
                 var cvalueid = shipReinforcementGroupsID[shipid][reingroupid].currentlevelID;
@@ -1097,6 +1109,41 @@ function readConfig(){
             };
         };
         calConsumption(); //加载完配置后自动计算结果
+    };
+};
+function saveItemsConfig(){
+    var str = "";
+    for ( types in inputboxsID ){
+        for ( groups in inputboxsID[types] ) {
+            for ( rank in inputboxsID[types][groups] ){
+                var value = getElementValue(inputboxsID[types][groups][rank]);
+                if ( value == "" ){ //如果从input元素读取到的值为空(""),则用0代替,并回写到页面的input元素上
+                    value = 0;
+                    setElementValue(value,inputboxsID[types][groups][rank]);
+                };
+                str = str + value + ',';
+            };
+        };
+    };
+    str = str.substring(0, str.length -1 );//去掉末尾的逗号','
+    saveText(str, 'MistItemsConfig.txt');
+};
+function readItemsConfig(){
+    var str = prompt("在下方的文本框粘贴导出的现有素材的文本","");
+    if ( str != null && str != "" ){
+        var configarr = str.split(",");
+        var i = 0;
+        for ( types in inputboxsID ){
+            for ( groups in inputboxsID[types] ) {
+                for ( rank in inputboxsID[types][groups] ){
+                    if ( typeof configarr[i] == 'undefined' ){
+                        configarr[i] = 0;
+                    };
+                    setElementValue(configarr[i],inputboxsID[types][groups][rank]);
+                    i = i + 1;
+                };
+            };
+        };
     };
 };
 function saveText(str, fileName) {

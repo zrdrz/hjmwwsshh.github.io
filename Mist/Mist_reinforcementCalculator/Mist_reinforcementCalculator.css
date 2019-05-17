@@ -144,9 +144,9 @@ body {
     text-align:center;
 }
 .button {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
+    background-color: #C3BED4; 
+    border: 1px solid #6B6575;
+    color: black;
     padding: 3px 10px;
     text-align: center;
     text-decoration: none;
@@ -157,8 +157,24 @@ body {
     transition-duration: 0.2s;
 }
 .button:hover {
-    background-color: #3e8e41;
+    background-color: #6B6575;
     color: white;
+}
+.button_blue {
+    background-color: #4CB4E7;
+    border: 1px solid #4F94CD;
+    color: white;
+}
+.button_blue:hover {
+    background-color: #4F94CD;
+}
+.button_blue2 {
+    background-color: #7890A8;
+    border: 1px solid #434664;
+    color: white;
+}
+.button_blue2:hover {
+    background-color: #7878A8;
 }
 .button2 {
     margin-left: 0px;
@@ -166,6 +182,7 @@ body {
     font-size: 14px;
 }
 .button3 {
+    color: white;
     font-size: 14px;
     padding: 3px 5px;
     background-color: #f44336;
@@ -175,6 +192,7 @@ body {
     background-color: #B40404;
 }
 .btn_search {
+    width: 100%;
     margin: 25px 0px 0px 0px;
 }
 .searchbox {

@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>MiST舰船强化计算器</title>
+    <title>MiST舰船强化消耗计算器</title>
     <link rel="stylesheet" href="Mist_reinforcementCalculator.css" type="text/css" />
 </head>
 <body>
     <div class="titlebox">
         <div class="titleboxleft">
-            <h1 class="h1">强化计算器</h1>
+            <h1 class="h1">强化消耗计算器</h1>
         </div>
         <div class="titleboxright">
             <h1 class="h1 h1_right"><a class="a" href="../../index.html">返回首页</a></h1>
@@ -40,9 +40,14 @@
                 <div class="selectbox">
                     <button class="button btn_search" onclick="search()" id="searchbtn">搜索</button>
                 </div>
-                <div style="clear:both; padding:5px 5px 0px 5px;">
-                    <button class="button" style="width: 48%;" onclick="saveConfig()" id="">保存强化配置</button>
-                    <button class="button" style="width: 48%;" onclick="readConfig()" id="">加载强化配置</button>
+                <div class="selectbox" style="width:120px;">
+                    <button class="button btn_search" onclick="addallships()" title="添加所有搜索结果进行计算">全部添加</button>
+                </div>
+                <div style="clear:both; padding:5px 5px 0px 5px; display: flex;justify-content: space-between;">
+                    <button class="button button_blue" style="width: 23%;" onclick="saveReinConfig()" id="">保存强化配置</button>
+                    <button class="button button_blue" style="width: 23%;" onclick="readReinConfig()" id="">加载强化配置</button>
+                    <button class="button button_blue2" style="width: 23%;" onclick="saveItemsConfig()" id="">保存现有素材</button>
+                    <button class="button button_blue2" style="width: 23%;" onclick="readItemsConfig()" id="">加载现有素材</button>
                 </div>
             </div>
 
@@ -50,7 +55,7 @@
             </div>
         </div>
         <div class="calbox calbox2" id="shiplistbox">
-            <div id="haveitems" style=" text-align:center;    display: flex;">
+            <div id="haveitems" style="text-align:center;display: flex;">
                 <div class="itemsbox_div" style="width:100px;">
                     <label class="itembox_label">现有素材</label><br>
                     <label class="itembox_label color_reingroup" id="reinG1_title1"></label><br>
@@ -64,7 +69,6 @@
                     <label class="itembox_label color_skillgroup1" id="passSkillG3_title1"></label><br>
                     <label class="itembox_label color_skillgroup1" id="passSkillG4_title1"></label><br>
                     <label class="itembox_label color_skillgroup2" id="actSkill_title1"></label><br>
-                    <label class="itembox_label color_np" id="commonconsumption1_1"></label><br>
                 </div>
                 <div class="itemsbox_div" style="width:100px;">
                     <label class="itembox_label">S级</label><br>
@@ -79,7 +83,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG3_S" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG4_S" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Input_actSkill_S" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
-                    <input class="itembox_label itembox_input color_np2" id="Input_np" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                 </div>
                 <div class="itemsbox_div" style="width:90px;">
                     <label class="itembox_label">A级</label><br>
@@ -94,7 +97,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG3_A" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG4_A" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Input_actSkill_A" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:90px;">
                     <label class="itembox_label">B级</label><br>
@@ -109,7 +111,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG3_B" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG4_B" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Input_actSkill_B" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:90px;">
                     <label class="itembox_label">C级</label><br>
@@ -124,7 +125,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG3_C" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG4_C" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Input_actSkill_C" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:90px;">
                     <label class="itembox_label">D级</label><br>
@@ -139,7 +139,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG3_D" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Input_passSkillG4_D" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
                     <DIV class="itembox_label itembox_input color_skillgroup2_2" >/</div><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:100px;">
                     <label class="itembox_label">剩余(消耗)素材</label><br>
@@ -154,7 +153,6 @@
                     <label class="itembox_label color_skillgroup1" id="passSkillG3_title2"></label><br>
                     <label class="itembox_label color_skillgroup1" id="passSkillG4_title2"></label><br>
                     <label class="itembox_label color_skillgroup2" id="actSkill_title2"></label><br>
-                    <label class="itembox_label color_np" id="commonconsumption1_2"></label><br>
                 </div>
                 <div class="itemsbox_div" style="width:110px;">
                     <label class="itembox_label">S级</label><br>
@@ -169,7 +167,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG3_S" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG4_S" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Output_actSkill_S" readonly="readonly"/><br>
-                    <input class="itembox_label itembox_input color_np2" id="Output_np"/ readonly="readonly"><br>
                 </div>
                 <div class="itemsbox_div" style="width:110px;">
                     <label class="itembox_label">A级</label><br>
@@ -184,7 +181,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG3_A" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG4_A" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Output_actSkill_A" readonly="readonly"/><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:110px;">
                     <label class="itembox_label">B级</label><br>
@@ -199,7 +195,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG3_B" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG4_B" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Output_actSkill_B" readonly="readonly"/><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:110px;">
                     <label class="itembox_label">C级</label><br>
@@ -214,7 +209,6 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG3_C" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG4_C" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup2_2" id="Output_actSkill_C" readonly="readonly"/><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
                 </div>
                 <div class="itemsbox_div" style="width:110px;">
                     <label class="itembox_label">D级</label><br>
@@ -229,7 +223,20 @@
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG3_D" readonly="readonly"/><br>
                     <input class="itembox_label itembox_input color_skillgroup1_2" id="Output_passSkillG4_D" readonly="readonly"/><br>
                     <div class="itembox_label itembox_input color_skillgroup2_2" >/</div><br>
-                    <div class="itembox_label itembox_input color_np2" >/</div><br>
+                </div>
+            </div>
+            <div id="haveitems_np" style="text-align:center;display: flex;">
+                <div class="itemsbox_div" style="width:100px;">
+                    <label class="itembox_label color_np" id="commonconsumption1_1"></label><br>
+                </div>
+                <div class="itemsbox_div" style="width:464px;">
+                    <input class="itembox_label itembox_input color_np2" id="Input_np" oninput = "value=value.replace(/[^\d]/g,'')"/><br>
+                </div>
+                <div class="itemsbox_div" style="width:100px;">
+                    <label class="itembox_label color_np" id="commonconsumption1_2"></label><br>
+                </div>
+                <div class="itemsbox_div" style="width:554px;">
+                    <input class="itembox_label itembox_input color_np2" id="Output_np" readonly="readonly"/><br>
                 </div>
             </div>
             <hr style="color: #aaa;margin-top: 3px;margin-bottom:3px;">
@@ -245,7 +252,7 @@
             <div style="width:30px;" class="shiplistbox_div">
                 <label class="label1" >星级</label>
             </div>
-            <div style="width:100px;margin-bottom:10px;" class="shiplistbox_div shiplistbox_div_reinforce">
+            <div style="width:100px;" class="shiplistbox_div shiplistbox_div_reinforce">
                 <label class="label1">强化1</label><br>
                 <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
             </div>
@@ -282,7 +289,7 @@
                 <label class="label2" style="width: 50px;">当前</label><label class="label2" style="width: 50px;">目标</label>
             </div>
             <div style="width:80px;" class="shiplistbox_div">
-                <button class="button " style="height:40px;" onclick="calConsumption();" id="btn_calculate">计算</button>
+                <button class="button " style="height:48px;" onclick="calConsumption();" id="btn_calculate">计算</button>
             </div>
             <br>
         </div>
