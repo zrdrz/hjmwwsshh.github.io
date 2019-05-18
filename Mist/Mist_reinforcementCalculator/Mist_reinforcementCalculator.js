@@ -3,6 +3,20 @@ var searchmethod = { //搜索方法对应的页面元素的id,和值
     shiptypeid: { elementid: 'CMB_shiptypefilter', value: '',},
     shipstars: { elementid: 'CMB_shipstars', value: '',},
 };
+var searchtype = {
+    id: "序号",
+    name: "名字",
+};
+var searchcache = {
+    //method1: {
+    //    shipdata[id1].method1 : { id : shipdata[id1].id},
+    //    shipdata[id2].method1 : { id : shipdata[id2].id},
+    //}
+    //method2: {
+    //    shipdata[id1].method2 : { id : shipdata[id1].id},
+    //    shipdata[id2].method2 : { id : shipdata[id2].id},
+    //}
+};
 var shipfilters = {
     shiptypeid : { 0: '无', 1: '驱逐', 2: '轻巡', 3: '重巡', 4: '战巡', 5: '战列', 6: '航母', },
     shipstars : { 0: '无', 2: '2星', 3: '3星', 4: '4星', 5: '5星', },
@@ -10,6 +24,8 @@ var shipfilters = {
 var shipbindclass = {
     shipstars:{ 2: 'label_star2', 3: 'label_star3', 4: 'label_star4', 5: 'label_star5', },
 };
+
+
 var shiplistbox_mainboxID = {}; //存放mainbox的id,用于删除元素
 var searchbox_mainboxID = {};
 
