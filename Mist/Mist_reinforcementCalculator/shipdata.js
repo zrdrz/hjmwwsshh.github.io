@@ -175,6 +175,28 @@ shipdata[8] = {
         2: { name: '特型驱逐舰', consumptionID: 'passive_dd_star3',},
     },
 };
+shipdata[13] = {
+    id: 13,
+    name: '奥班农',
+    shiptypeid: 1,
+    shiptypename: '驱逐',
+    shipstars: 4,
+    reinforcementGroupNum: 5,
+    reinforcementGroups: {
+        1: { name: '雷击', initvalue: 23, consumptionID: 'rein_torpedofirepower_star4',},
+        2: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star4',},
+        3: { name: '索敌', initvalue: 6, consumptionID: 'rein_scouting_star4',},
+        4: { name: '炮击', initvalue: 7, consumptionID: 'rein_gunfirepower_star4',},
+        5: { name: '对空', initvalue: 9, consumptionID: 'rein_aa_star4',},
+    },
+    activeSkills: {
+        1:{ name: '集中雷击', consumptionID: 'act_star4', },
+    },
+    passiveSkills: {
+        1: { name: '土豆公主', consumptionID: 'passive_dd_star4',},
+        2: { name: '明日“紫”心', consumptionID: 'passive_dd_star4',},
+    },
+};
 shipdata[14] = {
     id: 14,
     name: '西格斯比',
@@ -1202,6 +1224,28 @@ shipdata[102] = {
         2: { name: '为大家献上祝福', consumptionID: 'passive_clca_star4',},
     },
 };
+shipdata[103] = {
+    id: 103,
+    name: '威奇塔',
+    shiptypeid: 3,
+    shiptypename: '重巡',
+    shipstars: 4,
+    reinforcementGroupNum: 5,
+    reinforcementGroups: {
+        1: { name: '耐久', initvalue: 76, consumptionID: 'rein_health_star4',},
+        2: { name: '炮击', initvalue: 12, consumptionID: 'rein_gunfirepower_star4',},
+        3: { name: '对空', initvalue: 21, consumptionID: 'rein_aa_star4',},
+        4: { name: '攻速', initvalue: 10, consumptionID: 'rein_atkspeed_star4',},
+        5: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star4',},
+    },
+    activeSkills: {
+        1:{ name: '榴弹速射', consumptionID: 'act_star4', },
+    },
+    passiveSkills: {
+        1: { name: '自由荣耀', consumptionID: 'passive_clca_star4',},
+        2: { name: '旗帜鲜明', consumptionID: 'passive_clca_star4',},
+    },
+};
 shipdata[106] = {
     id: 106,
     name: '旧金山',
@@ -2108,6 +2152,29 @@ shipdata[195] = {
         2: { name: '奇思妙想', consumptionID: 'passive_cv_star5',},
     },
 };
+shipdata[196] = {
+    id: 196,
+    name: '珊瑚海',
+    shiptypeid: 6,
+    shiptypename: '航母',
+    shipstars: 5,
+    reinforcementGroupNum: 6,
+    reinforcementGroups: {
+        1: { name: '耐久', initvalue: 64, consumptionID: 'rein_health_star5',},
+        2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star5',},
+        3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star5',},
+        4: { name: '舰爆', initvalue: 25, consumptionID: 'rein_gunfirepower_star5',},
+        5: { name: '暴击', initvalue: 10, consumptionID: 'rein_critcorrection_star5',},
+        6: { name: '韧性', initvalue: 10, consumptionID: 'rein_critdef_star5',},
+    },
+    activeSkills: {
+        1:{ name: '远距机群突袭?极', consumptionID: 'act_star5', },
+    },
+    passiveSkills: {
+        1: { name: 'Ageless Warrior', consumptionID: 'passive_cv_star5',},
+        2: { name: '海的守护者', consumptionID: 'passive_cv_star5',},
+    },
+};
 shipdata[199] = {
     id: 199,
     name: '赤城',
@@ -2459,6 +2526,29 @@ shipdata[223] = {
     passiveSkills: {
         1: { name: '红色蔷薇', consumptionID: 'passive_clca_star4',},
         2: { name: 'Your Maid', consumptionID: 'passive_clca_star4',},
+    },
+};
+shipdata[229] = {
+    id: 229,
+    name: '鹰',
+    shiptypeid: 6,
+    shiptypename: '航母',
+    shipstars: 5,
+    reinforcementGroupNum: 6,
+    reinforcementGroups: {
+        1: { name: '耐久', initvalue: 68, consumptionID: 'rein_health_star5',},
+        2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star5',},
+        3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star5',},
+        4: { name: '舰攻', initvalue: 25, consumptionID: 'rein_torpedofirepower_star5',},
+        5: { name: '暴击', initvalue: 10, consumptionID: 'rein_critcorrection_star5',},
+        6: { name: '韧性', initvalue: 10, consumptionID: 'rein_critdef_star5',},
+    },
+    activeSkills: {
+        1:{ name: '远距集束雷击', consumptionID: 'act_star5', },
+    },
+    passiveSkills: {
+        1: { name: '鹰击长空', consumptionID: 'passive_cv_star5',},
+        2: { name: '俯瞰思考', consumptionID: 'passive_cv_star5',},
     },
 };
 shipdata[240] = {
