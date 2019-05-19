@@ -2329,28 +2329,6 @@ shipdata[208] = {
         2: { name: '航空战术先驱者', consumptionID: 'passive_cv_star4',},
     },
 };
-shipdata[209] = {
-    id: 209,
-    name: '萨拉托加',
-    shiptypeid: 6,
-    shiptypename: '航母',
-    shipstars: 4,
-    reinforcementGroupNum: 5,
-    reinforcementGroups: {
-        1: { name: '耐久', initvalue: 63, consumptionID: 'rein_health_star4',},
-        2: { name: '命中', initvalue: 10, consumptionID: 'rein_accuracycorrection_star4',},
-        3: { name: '闪避', initvalue: 10, consumptionID: 'rein_evdcorrection_star4',},
-        4: { name: '舰爆', initvalue: 22, consumptionID: 'rein_gunfirepower_star4',},
-        5: { name: '暴击', initvalue: 10, consumptionID: 'rein_critcorrection_star4',},
-    },
-    activeSkills: {
-        1:{ name: '远距地毯式轰炸', consumptionID: 'act_star4', },
-    },
-    passiveSkills: {
-        1: { name: '航空战术先驱者', consumptionID: 'passive_cv_star4',},
-        2: { name: 'Sister Sara', consumptionID: 'passive_cv_star4',},
-    },
-};
 shipdata[212] = {
     id: 212,
     name: '贝亚恩',

@@ -24,7 +24,11 @@ var shipfilters = {
 var shipbindclass = {
     shipstars:{ 2: 'label_star2', 3: 'label_star3', 4: 'label_star4', 5: 'label_star5', },
 };
-
+var levels = {
+    reinLevels: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+    actskillLevels: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+    passskillLevels: { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6", 7: "7", 8: "8", 9: "9", 10: "10",},
+};
 
 var shiplistbox_mainboxID = {}; //存放mainbox的id,用于删除元素
 var searchbox_mainboxID = {};
@@ -608,6 +612,13 @@ var shiplistBox_template = {
 loadselectbox('CMB_searchtype',searchtype); //加载搜索方法的下拉框
 loadselectbox('CMB_shiptypefilter',shipfilters.shiptypeid);
 loadselectbox('CMB_shipstars',shipfilters.shipstars);
+loadselectbox('CMB_rein_clevel',levels.reinLevels); //加载一键设置全部等级的下拉框
+loadselectbox('CMB_rein_flevel',levels.reinLevels);
+loadselectbox('CMB_actskill_clevel',levels.actskillLevels);
+loadselectbox('CMB_actskill_flevel',levels.actskillLevels);
+loadselectbox('CMB_passskill_clevel',levels.passskillLevels);
+loadselectbox('CMB_passskill_flevel',levels.passskillLevels);
+
 loadshipdataintocache();
 loadItemsTitleLabels(); //加载素材title的文本
 setShiplistBoxDefaultValue(0,inputboxsID);//设置默认值
@@ -884,6 +895,7 @@ function getSearchVars(){ //获取搜索方式
 function search(){
     getSearchVars();
     document.getElementById('searchbox').innerText=""; //清空上一次搜索创建的div
+    searchbox_mainboxID = {}; //清空上一次搜索存放的searchbox的id
     var searchinputs = getElementValue('searchinput');
     var searchtype = searchmethod.searchtype.value;
     var searchresult = []; //暂存结果
@@ -970,6 +982,33 @@ function removeShiplistBox(shipid) {
     delete shiplistbox_mainboxID[shipid];
 };
 ///////////////
+function setAllLevels(){ //一键设置全部等级
+    if ( isEmptyObject(shiplistbox_mainboxID) == false ){
+        var rein_clevel = getElementValue('CMB_rein_clevel');
+        var rein_flevel = getElementValue('CMB_rein_flevel');
+        var act_clevel = getElementValue('CMB_actskill_clevel');
+        var act_flevel = getElementValue('CMB_actskill_flevel');
+        var pass_clevel = getElementValue('CMB_passskill_clevel');
+        var pass_flevel = getElementValue('CMB_passskill_flevel');
+        for ( shipid in shipReinforcementGroupsID ){
+            for ( reingroupid in shipReinforcementGroupsID[shipid] ){
+                setElementValue(rein_clevel,shipReinforcementGroupsID[shipid][reingroupid].currentlevelID);
+                setElementValue(rein_flevel,shipReinforcementGroupsID[shipid][reingroupid].finallevelID);
+                shiplistbox_selectboxChanged_reinGroup(shipid,reingroupid);
+            };
+        };
+        for ( shipid in shipSkillGroupsID ){
+            for ( skillid in shipSkillGroupsID[shipid].activeSkills ) {
+                setElementValue(act_clevel,shipSkillGroupsID[shipid].activeSkills[skillid].currentlevelID);
+                setElementValue(act_flevel,shipSkillGroupsID[shipid].activeSkills[skillid].finallevelID);
+            };
+            for ( skillid in shipSkillGroupsID[shipid].passiveSkills ) {
+                setElementValue(pass_clevel,shipSkillGroupsID[shipid].passiveSkills[skillid].currentlevelID);
+                setElementValue(pass_flevel,shipSkillGroupsID[shipid].passiveSkills[skillid].finallevelID);
+            };
+        };
+    };
+};
 
 function shiplistbox_selectboxChanged_reinGroup(shipid,groupid) {  //强化组下拉框变动后
     var finallevel = getElementValue(shipReinforcementGroupsID[shipid][groupid].finallevelID);  //目标等级

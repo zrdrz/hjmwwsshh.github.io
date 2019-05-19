@@ -37,7 +37,7 @@
                     <br>
                     <input id="searchinput" type="text" class="input1 "/>
                 </div>
-                <div class="selectbox">
+                <div class="selectbox" style="width:120px;">
                     <button class="button btn_search" onclick="search()" id="searchbtn">搜索</button>
                 </div>
                 <div class="selectbox" style="width:120px;">
@@ -240,7 +240,28 @@
                 </div>
             </div>
             <hr style="color: #aaa;margin-top: 3px;margin-bottom:3px;">
-            <div style="width:50px;margin-bottom:10px;" class="shiplistbox_div ">
+            <div style="width:100%;overflow:auto;">
+                <div class="shiplistbox_div" style="width:244px;height:48px;">
+                    <label style="display:block;line-height:48px;">一键设置全部等级</label>
+                </div>
+                <div class="shiplistbox_div shiplistbox_div_reinforce" style="width:300px;">
+                    <label class="label1">强化组等级</label></br>
+                    <label class="label2" style="width: 70px;">当前等级</label><select id="CMB_rein_clevel" class="select1" onchange=""></select><label class="label2" style="width: 70px;">目标等级</label><select id="CMB_rein_flevel" class="select1" onchange=""></select>
+                </div>
+                <div class="shiplistbox_div shiplistbox_div_actskill" style="width:300px;">
+                    <label class="label1">主动技等级</label></br>
+                    <label class="label2" style="width: 70px;">当前等级</label><select id="CMB_actskill_clevel" class="select1" onchange=""></select><label class="label2" style="width: 70px;">目标等级</label><select id="CMB_actskill_flevel" class="select1" onchange=""></select>
+                </div>
+                <div class="shiplistbox_div shiplistbox_div_passiveskill" style="width:300px;">
+                    <label class="label1">被动技等级</label></br>
+                    <label class="label2" style="width: 70px;">当前等级</label><select id="CMB_passskill_clevel" class="select1" onchange=""></select><label class="label2" style="width: 70px;">目标等级</label><select id="CMB_passskill_flevel" class="select1" onchange=""></select>
+                </div>
+            <div style="width:80px;" class="shiplistbox_div">
+                <button class="button " style="height:48px;" onclick="setAllLevels()" >设置</button>
+            </div>
+            </div>
+            <hr style="color: #aaa;margin-top: 3px;margin-bottom:3px;">
+            <div style="width:50px;" class="shiplistbox_div ">
                 <label class="label1">序号</label>
             </div>
             <div style="width:114px;" class="shiplistbox_div">
@@ -294,7 +315,7 @@
             <br>
         </div>
     </div>
-    <script src="consumptiondata.js.js"></script>
+    <script src="consumptiondata.js"></script>
     <script src="shipdata.js"></script>
     <script src="Mist_reinforcementCalculator.js"></script>
     <script type="text/javascript">
