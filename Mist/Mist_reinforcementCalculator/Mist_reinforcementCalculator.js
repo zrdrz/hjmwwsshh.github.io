@@ -1199,6 +1199,7 @@ function readItemsConfig(){
                 };
             };
         };
+        calConsumption(); //加载完配置后自动计算结果
     };
 };
 function saveText(str, fileName) {
