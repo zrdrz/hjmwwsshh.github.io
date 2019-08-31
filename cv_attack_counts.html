@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>航空战攻击目标数期望计算器</title>
+
+</head>
+<body>
+    <label>rounds:</label><input id="input1" type="text" class=""  oninput = "value=value.replace(/[^\d.]/g,'')"/></br>
+    <label>targets:</label><input id="input2" type="text" class=""  oninput = "value=value.replace(/[^\d.]/g,'')"/></br>
+	<label>attackers:</label><input id="input3" type="text" class=""  oninput = "value=value.replace(/[^\d.]/g,'')"/>
+	<button class="" onclick="start()">start</button></br>
+	 <textarea id="RTBox_result" style="width:1000px;height:400px;word-wrap:normal; font-family:宋体;font-size:12px;" readonly="readonly"></textarea>
+<script type="text/javascript">
+    var result=[]; //sotre results;result[num] means that we have result[num] rounds that attackers select (num+1) targets to hit;
+	//for example:
+	//result=[10,50,120] means that in total 180 rounds, 
+	//we have 10 rounds that select 1 target, 50 rounds that select 2 targets and 120 rounds that select 3 targets;
+	var target_is_hit=[]; //target[num] means a target,target[num]=1 means this target has been selected to attack by at least one attacker;
+    function gene_random() { //generate a random number defined by input value from  input2;
+	    var m =  document.getElementById("input2").value;
+		var n = 1;
+        var random_number=Math.floor(Math.random() * (m- n + 1)) + n;
+		return random_number;
+	};
+	function init_result(){ //init result array; the length of this array is defined by value from  input2;
+	    result = [];
+	    var j =  Number(document.getElementById("input2").value);
+	    for ( var i=0;i<j;i++ ) {
+		    result[i]=0;    
+		};
+	};
+	function init_target_is_hit(){ //init target_is_hit array; the length of this array is defined by value from  input2;
+	    target_is_hit = [];
+	    var j =  Number(document.getElementById("input2").value);
+	    for ( var i=0;i<j;i++ ) {
+		    target_is_hit[i]=0;    
+		};
+	};
+	function start(){
+	    var str = "";
+	    init_result();
+		init_target_is_hit();
+	    var rounds = document.getElementById("input1").value; //how many rounds to run;
+		var attackers = document.getElementById("input3").value; //how many attackers to select a target in one round;
+		for ( var i=0;i<rounds;i++ ){ //single round begin
+			for ( var m=0;m<attackers;m++ ){ //single attacker begin
+		        var j = gene_random() - 1;	//generate a random number;the attack will select the target defined by target[number] to attack;
+			    target_is_hit[j]=1; //
+			};//single attacker end
+			var count = 0; //how many targets had been select to hit in this round;
+			for ( index in target_is_hit ){ //calculate how many target had been select to hit in this round;
+			    if ( target_is_hit[index] == 1 ){
+				    count = Number(count) + 1;
+				};
+			};
+			result[count-1] = Number(result[count-1]) + 1; //
+			init_target_is_hit();
+		};//single round end
+		str = "rounds:" + '\t' + rounds + '\t' + "targets:" + '\t' + document.getElementById("input2").value + '\t' + "attackers:" + '\t' + attackers + '\n';
+		str = str + "--" + '\n';
+		str = str + "targets selected:";
+		for ( var index in result ) {
+		    var num = Number(index) + 1;
+		    str = str + '\t' + '\t' + num;
+		};
+		str = str + '\n';
+		str = str + "rounds:" + '\t' + '\t';
+		for ( var index in result ) {
+		    str = str + '\t' + '\t' + result[index];
+		};
+		str = str + '\n';
+		str = str + "probability:" + '\t' ;
+		for ( var index in result ) {
+		    var percent=Number(result[index] / rounds * 100).toPrecision(2);
+		    str = str + '\t' + '\t' + percent + '%';
+		};
+		document.getElementById("RTBox_result").value = str;
+	};
+
+</script>
+</body>
+</html>
