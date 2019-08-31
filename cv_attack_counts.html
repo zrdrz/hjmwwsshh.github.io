@@ -75,6 +75,13 @@
 		    var percent=Number(result[index] / rounds * 100).toPrecision(2);
 		    str = str + '\t' + '\t' + percent + '%';
 		};
+		str = str + '\n';
+		str = str + "expectation:" + '\t' ;
+		var expectation = 0;
+		for ( var index in result ) {
+		    expectation = Number(expectation) + Number(result[index] / rounds  * (Number(index) + Number(1)));
+		};
+		str = str + expectation.toPrecision(4);
 		document.getElementById("RTBox_result").value = str;
 	};
 
